@@ -1,1 +1,0 @@
-# Rozvrh.SPSE.Jecna
