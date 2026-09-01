@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="cs" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,28 +14,33 @@
             --accent-blue: #0d6efd;
             --border-soft: #e9ecef;
             --border-split: #dee2e6;
-            --supl-bg: #fff8e1;
-            --supl-text: #b78103;
-            --odpadla-bg: #f8f9fa;
-            --odpadla-text: #adb5bd;
-            --skupina-bg: transparent;
+            
+            /* ODPADLO */
+            --odpadla-bg: rgba(220, 53, 69, 0.08);
+            --odpadla-text: #dc3545; /* Sytá červená */
+            
+            /* SUPLOVÁNÍ */
+            --supl-bg: rgba(255, 193, 7, 0.15);
+            --supl-text: #c07c00; /* Tmavší žlutá/oranžová pro dobrou čitelnost na bílém */
         }
 
-        /* Tmavý režim (automatický) */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-body: #121212;
-                --bg-card: #1e1e1e;
-                --text-main: #e0e0e0;
-                --text-light: #9e9e9e;
-                --accent-blue: #64b5f6;
-                --border-soft: #2d2d2d;
-                --border-split: #404040;
-                --supl-bg: #3e2700;
-                --supl-text: #ffca28;
-                --odpadla-bg: #121212;
-                --odpadla-text: #555555;
-            }
+        [data-theme="dark"] {
+            /* Tmavý režim */
+            --bg-body: #121212;
+            --bg-card: #1e1e1e;
+            --text-main: #e0e0e0;
+            --text-light: #9e9e9e;
+            --accent-blue: #64b5f6;
+            --border-soft: #2d2d2d;
+            --border-split: #404040;
+            
+            /* ODPADLO */
+            --odpadla-bg: rgba(220, 53, 69, 0.15);
+            --odpadla-text: #ff5252; /* Svítivá červená */
+            
+            /* SUPLOVÁNÍ */
+            --supl-bg: rgba(255, 193, 7, 0.12);
+            --supl-text: #ffd54f; /* Svítivá žlutá */
         }
 
         body { 
@@ -47,9 +52,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
+        /* Hlavička s přepínačem režimů */
         .header {
+            position: relative;
             width: 100%;
             background: var(--bg-card);
             padding: 16px 0;
@@ -57,9 +65,33 @@
             border-top: 4px solid var(--accent-blue);
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             margin-bottom: 25px;
+            transition: background-color 0.3s ease;
         }
         .header h1 { margin: 0; font-size: 1.3rem; font-weight: 600; color: var(--text-main); }
         .header p { margin: 4px 0 0; font-size: 0.8rem; color: var(--text-light); }
+
+        /* Tlačítko pro tmavý/světlý režim */
+        .theme-toggle {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: 1px solid var(--border-soft);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .theme-toggle:hover {
+            background: var(--border-soft);
+        }
+        .theme-toggle svg { width: 20px; height: 20px; fill: currentColor; }
 
         .container { 
             width: 98%; 
@@ -130,13 +162,13 @@
             z-index: 2;
         }
 
-        /* Layout uvnitř hodiny podle Bakalářů */
+        /* Layout uvnitř hodiny */
         .hodina { 
             position: relative;
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            height: 70px; /* Vyšší hodnota pro širší obdélník */
+            height: 70px; /* Širší obdélník */
             min-width: 100px;
             padding: 4px;
             box-sizing: border-box;
@@ -149,73 +181,53 @@
         }
         
         /* Absolutní pozicování rohů */
-        .ucitel { 
-            position: absolute; 
-            top: 4px; 
-            left: 6px; 
-            font-size: 0.75em; 
-            color: var(--text-light); 
-        }
-        
-        .ucebna { 
-            position: absolute; 
-            top: 4px; 
-            right: 6px; 
-            font-size: 0.75em; 
-            font-weight: 600; 
-            color: var(--accent-blue); 
-        }
-
-        .skupina { 
-            position: absolute; 
-            bottom: 4px; 
-            right: 6px; 
-            font-size: 0.7em; 
-            color: var(--text-light); 
-            font-weight: 500;
-        }
+        .ucitel { position: absolute; top: 4px; left: 6px; font-size: 0.75em; color: var(--text-light); }
+        .ucebna { position: absolute; top: 4px; right: 6px; font-size: 0.75em; font-weight: 600; color: var(--accent-blue); }
+        .skupina { position: absolute; bottom: 4px; right: 6px; font-size: 0.7em; color: var(--text-light); font-weight: 500; }
         
         /* Rozdělené hodiny */
-        .split { 
-            display: flex; 
-            flex-direction: column; 
-            width: 100%; 
-            height: 100%;
-        }
-        .split .hodina { 
-            height: 40px; 
-            min-height: 40px;
-        }
-        .split-divider { 
-            width: 100%; 
-            height: 1px; 
-            background-color: var(--border-split); 
-        }
+        .split { display: flex; flex-direction: column; width: 100%; height: 100%; }
+        .split .hodina { height: 40px; min-height: 40px; }
+        .split-divider { width: 100%; height: 1px; background-color: var(--border-split); }
         
-        /* Odpadlá hodina */
-        td.odpadla { background-color: var(--odpadla-bg); border: 1px dashed var(--border-soft); }
+        /* ODPADLÁ HODINA */
+        td.odpadla { 
+            background-color: var(--odpadla-bg); 
+            border: 1px dashed var(--odpadla-text); 
+        }
         td.odpadla:hover { transform: none; box-shadow: none; cursor: default; }
-        td.odpadla .hodina, td.odpadla .split { opacity: 0.2; filter: grayscale(100%); }
+        td.odpadla .hodina, td.odpadla .split { opacity: 0.15; }
         td.odpadla::after { 
-            content: "Odpadá"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            color: var(--odpadla-text); font-size: 0.9rem; font-weight: 600; text-transform: uppercase;
+            content: "ODPADLO"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            color: var(--odpadla-text); font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
         }
 
-        /* Odpadlá polovina */
-        .odpadla-polovina { opacity: 0.2; filter: grayscale(100%); transition: all 0.3s ease; }
+        /* ODPADLÁ POLOVINA */
+        .odpadla-polovina { 
+            background-color: var(--odpadla-bg); 
+            position: relative;
+        }
+        .odpadla-polovina > * { opacity: 0.15; }
         .odpadla-polovina::after {
-            content: "Odpadá"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            color: var(--text-main); font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+            content: "ODPADLO"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: var(--odpadla-text); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
         }
 
-        /* Suplování */
+        /* SUPLOVÁNÍ */
         @keyframes pulseSoft { 
-            0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.15); } 
+            0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.2); } 
             70% { box-shadow: 0 0 0 6px rgba(255, 193, 7, 0); } 
             100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); } 
         }
-        td.supl { background-color: var(--supl-bg); animation: pulseSoft 2.5s infinite; border: 1px solid #ffe69c; }
-        .supl-badge { position: absolute; top: 4px; left: 4px; width: 6px; height: 6px; background: var(--supl-text); border-radius: 50%; }
+        td.supl { 
+            background-color: var(--supl-bg); 
+            animation: pulseSoft 2.5s infinite; 
+            border: 1px solid var(--supl-text); 
+        }
+        /* Sytý žlutý text pro suplování */
+        td.supl .predmet, td.supl .ucitel, td.supl .ucebna {
+            color: var(--supl-text);
+        }
 
         td:empty { background: transparent; border: none; }
     </style>
@@ -225,6 +237,14 @@
 <div class="header">
     <h1>Rozvrh C1a</h1>
     <p>SPŠE Ječná</p>
+    
+    <!-- Tlačítko pro změnu režimu -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Přepnout tmavý/světlý režim">
+        <!-- Ikona se mění dynamicky -->
+        <svg id="themeIcon" viewBox="0 0 24 24">
+            <path d="M12 21a9 9 0 1 1 9-9 9.01 9.01 0 0 1-9 9zm0-16.5a7.5 7.5 0 1 0 7.5 7.5A7.51 7.51 0 0 0 12 4.5z"/>
+        </svg>
+    </button>
 </div>
 
 <div class="container">
@@ -354,6 +374,33 @@
 </div>
 
 <script>
+// --- LOGIKA PRO PŘEPÍNÁNÍ REŽIMU ---
+const themeToggle = document.getElementById('themeToggle');
+const rootElement = document.documentElement;
+const themeIcon = document.getElementById('themeIcon');
+
+// Ikony pro světlý/tmavý režim
+const sunIcon = '<path d="M12 3v2M12 19v2M5.636 5.636l1.414 1.414M16.95 16.95l1.414 1.414M3 12h2M19 12h2M5.636 18.364l1.414-1.414M16.95 7.05l1.414-1.414M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>';
+const moonIcon = '<path d="M12 21a9 9 0 1 1 9-9 9.01 9.01 0 0 1-9 9zm0-16.5a7.5 7.5 0 1 0 7.5 7.5A7.51 7.51 0 0 0 12 4.5z"/>';
+
+// Načtení uloženého režimu nebo zjištění systémového
+const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+rootElement.setAttribute('data-theme', savedTheme);
+themeIcon.innerHTML = savedTheme === 'dark' ? sunIcon : moonIcon;
+
+// Event listener pro přepínání
+themeToggle.addEventListener('click', () => {
+    const currentTheme = rootElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    rootElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    
+    // Změna ikonky
+    themeIcon.innerHTML = newTheme === 'dark' ? sunIcon : moonIcon;
+});
+
+// --- LOGIKA PRO SUPLOVÁNÍ ---
 fetch('suplovani.json')
     .then(response => response.json())
     .then(zmeny => {
@@ -377,7 +424,6 @@ fetch('suplovani.json')
                 } else if (zmena.typ === 'supl') {
                     bunka.className = 'supl';
                     bunka.innerHTML = `
-                        <div class="supl-badge"></div>
                         <div class="hodina">
                             <span class="ucitel">${zmena.ucitel || '?'}</span>
                             <span class="ucebna">${zmena.ucebna || '?'}</span>
