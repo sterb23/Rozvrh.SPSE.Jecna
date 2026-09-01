@@ -29,7 +29,6 @@
             align-items: center;
         }
 
-        /* Bakaláři style hlavička */
         .top-bar {
             background-color: var(--blue-header);
             color: white;
@@ -48,19 +47,18 @@
             margin-bottom: 40px;
         }
 
-        /* Responzivní obal pro tabulku */
         .table-wrapper {
             width: 100%;
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch; /* Plynulý scroll na iOS */
+            -webkit-overflow-scrolling: touch; 
             padding-bottom: 15px;
         }
 
         table { 
             border-collapse: separate; 
-            border-spacing: 8px; /* Mezery mezi kartami */
+            border-spacing: 8px; 
             width: 100%;
-            min-width: 900px; /* Vynutí scroll na mobilu místo zmačkání */
+            min-width: 900px; 
         }
 
         th, td { 
@@ -74,7 +72,6 @@
             position: relative;
         }
 
-        /* Ukotvení dnů při scrollování na mobilu */
         th:first-child, td:first-child {
             position: sticky;
             left: 0;
@@ -88,7 +85,6 @@
         
         .day { font-weight: bold; color: var(--blue-header); font-size: 1.2em; border-left: 4px solid var(--blue-header); }
         
-        /* Animace a efekty */
         td:not(.day):not(:empty):hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 16px rgba(9, 30, 66, 0.1);
@@ -111,22 +107,41 @@
         .ucitel { font-size: 0.85em; color: var(--text-muted); }
         .ucebna { font-size: 0.85em; font-weight: bold; color: var(--blue-header); background: #e6effc; padding: 2px 6px; border-radius: 4px; margin-top: 4px; }
         
-        /* Skupiny 1/2 a 2/2 */
         .split { display: flex; flex-direction: column; gap: 6px; width: 100%; }
         .split-divider { width: 80%; height: 1px; background-color: #dfe1e6; margin: 0 auto; }
         .skupina { font-size: 0.65em; color: white; background: #8792a2; padding: 2px 5px; border-radius: 10px; font-weight: bold; margin-bottom: 2px; display: inline-block;}
         
-        /* Odpadlé hodiny */
+        /* Odpadlá celá hodina */
         td.odpadla { background-color: var(--odpadla-bg); opacity: 0.7; }
         td.odpadla .hodina, td.odpadla .split { text-decoration: line-through; filter: grayscale(100%); }
         td.odpadla::after { content: "ODPADÁ"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg); color: var(--odpadla-text); font-size: 1.1em; font-weight: 900; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 6px; border: 2px solid var(--odpadla-text); }
+
+        /* Poloviční odpadlá hodina */
+        .odpadla-polovina {
+            text-decoration: line-through;
+            filter: grayscale(100%);
+            opacity: 0.5;
+            position: relative;
+        }
+        .odpadla-polovina::after {
+            content: "ODPADÁ";
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) rotate(-10deg);
+            color: var(--odpadla-text);
+            font-size: 0.7em;
+            font-weight: 900;
+            background: rgba(255,255,255,0.9);
+            padding: 2px 4px;
+            border-radius: 4px;
+            border: 1px solid var(--odpadla-text);
+        }
 
         /* Suplování */
         @keyframes pulseSupl { 0% { box-shadow: 0 0 0 0 rgba(255, 139, 0, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(255, 139, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 139, 0, 0); } }
         td.supl { background-color: var(--supl-bg); border: 2px solid var(--supl-text); animation: pulseSupl 2s infinite; }
         .supl-badge { position: absolute; top: -8px; right: -8px; background: var(--supl-text); color: white; font-size: 0.7em; font-weight: bold; padding: 4px 8px; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
 
-        /* Prázdné buňky skryjeme, ať to na mobilu nedělá zbytečné místo */
         td:empty { background: transparent; box-shadow: none; }
     </style>
 </head>
@@ -263,17 +278,31 @@ fetch('suplovani.json')
             let bunka = document.getElementById(`${zmena.den}-${zmena.hodina}`);
             if (!bunka) return;
 
-            if (zmena.typ === 'odpadla') {
-                bunka.className = 'odpadla';
-            } else if (zmena.typ === 'supl') {
-                bunka.className = 'supl';
-                bunka.innerHTML = `
-                    <div class="supl-badge">SUPL</div>
-                    <div class="hodina">
-                        <span class="predmet">${zmena.predmet || '?'}</span>
-                        <span class="ucitel">${zmena.ucitel || '?'}</span>
-                        <span class="ucebna" style="background:#ffd966; color:#b05a00;">${zmena.ucebna || '?'}</span>
-                    </div>`;
+            // Pokud se změna týká jen jedné skupiny (rozpůlená hodina)
+            if (zmena.skupina) {
+                let poloviny = bunka.querySelectorAll('.hodina');
+                poloviny.forEach(polovina => {
+                    let span = polovina.querySelector('.skupina');
+                    if (span && span.textContent.includes(zmena.skupina)) {
+                        if (zmena.typ === 'odpadla') {
+                            polovina.classList.add('odpadla-polovina');
+                        }
+                    }
+                });
+            } else {
+                // Změna se týká celé třídy (buňky)
+                if (zmena.typ === 'odpadla') {
+                    bunka.className = 'odpadla';
+                } else if (zmena.typ === 'supl') {
+                    bunka.className = 'supl';
+                    bunka.innerHTML = `
+                        <div class="supl-badge">SUPL</div>
+                        <div class="hodina">
+                            <span class="predmet">${zmena.predmet || '?'}</span>
+                            <span class="ucitel">${zmena.ucitel || '?'}</span>
+                            <span class="ucebna" style="background:#ffd966; color:#b05a00;">${zmena.ucebna || '?'}</span>
+                        </div>`;
+                }
             }
         });
     })
