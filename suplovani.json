@@ -1,0 +1,4 @@
+[
+  { "den": "Po", "hodina": 1, "typ": "odpadla" },
+  { "den": "Út", "hodina": 3, "typ": "supl", "ucitel": "Xy", "ucebna": "10", "predmet": "TV" }
+]
