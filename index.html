@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rozvrh C1a - SPŠE Ječná</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: fixed; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; font-size: 0.9em; }
+        .day { font-weight: bold; background-color: #dbeafe; }
+        .hodina { display: flex; flex-direction: column; font-size: 0.9em; height: 100%; justify-content: center; }
+        .predmet { font-weight: bold; font-size: 1.2em; }
+        .ucitel, .ucebna { font-size: 0.8em; color: #666; }
+        .skupina { font-size: 0.7em; color: #888;}
+        
+        /* Nové styly pro automatické změny */
+        .odpadla { text-decoration: line-through; color: #bbb; background-color: #f9f9f9; opacity: 0.6; }
+        .supl { background-color: #fff3cd; border: 2px solid #ffeeba; }
+        .supl-text { color: #856404; font-weight: bold; font-size: 0.8em; margin-bottom: 2px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Rozvrh C1a (Automatická aktualizace)</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Den</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="day">Po</td>
+                <td id="Po-1"><div class="hodina"><span class="predmet">F</span><span class="ucitel">Rk</span><span class="ucebna">15</span></div></td>
+                <td id="Po-2"><div class="hodina"><span class="predmet">C</span><span class="ucitel">Su</span><span class="ucebna">15</span></div></td>
+                <td id="Po-3"><div class="hodina"><span class="predmet">M</span><span class="ucitel">Ng</span><span class="ucebna">15</span></div></td>
+                <td id="Po-4"><div class="hodina"><span class="predmet">D</span><span class="ucitel">Su</span><span class="ucebna">15</span></div></td>
+                <td id="Po-5"><div class="hodina"><span class="predmet">ZSV</span><span class="ucitel">Ja</span><span class="ucebna">15</span></div></td>
+                <td id="Po-6"><div class="hodina"><span class="predmet">Ele</span><span class="ucitel">Jk</span><span class="ucebna">15</span></div></td>
+                <td id="Po-7"><div class="hodina"><span class="skupina">1/2</span><span class="predmet">A</span><span class="ucitel">Bu</span></div></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="day">Út</td>
+                <td id="Út-1"><div class="hodina"><span class="predmet">HW</span><span class="ucitel">Ku</span><span class="ucebna">15</span></div></td>
+                <td id="Út-2"><div class="hodina"><span class="predmet">IT</span><span class="ucitel">Me</span><span class="ucebna">15</span></div></td>
+                <td id="Út-3"><div class="hodina"><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
+                <td id="Út-4"><div class="hodina"><span class="predmet">M</span><span class="ucitel">Ng</span><span class="ucebna">15</span></div></td>
+                <td></td>
+                <td id="Út-6"><div class="hodina"><span class="predmet">IT</span><span class="ucitel">Ha/Me</span></div></td>
+                <td id="Út-7"><div class="hodina"><span class="predmet">IT</span><span class="ucitel">Ha/Me</span></div></td>
+                <td id="Út-8"><div class="hodina"><span class="predmet">ZSV</span><span class="ucitel">Ja</span><span class="ucebna">15</span></div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+// Automatické stažení změn při načtení stránky
+fetch('suplovani.json')
+    .then(response => response.json())
+    .then(zmeny => {
+        zmeny.forEach(zmena => {
+            let bunka = document.getElementById(`${zmena.den}-${zmena.hodina}`);
+            if (!bunka) return;
+
+            if (zmena.typ === 'odpadla') {
+                bunka.classList.add('odpadla');
+            } else if (zmena.typ === 'supl') {
+                bunka.classList.add('supl');
+                bunka.innerHTML = `<div class="hodina">
+                    <span class="supl-text">SUPLOVÁNÍ</span>
+                    <span class="predmet">${zmena.predmet || '?'}</span>
+                    <span class="ucitel">${zmena.ucitel || '?'}</span>
+                    <span class="ucebna">${zmena.ucebna || '?'}</span>
+                </div>`;
+            }
+        });
+    })
+    .catch(err => console.log('Chyba načítání suplování:', err));
+</script>
+</body>
+</html>
