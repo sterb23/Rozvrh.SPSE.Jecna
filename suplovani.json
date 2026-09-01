@@ -1,4 +1,5 @@
 [
-  { "den": "Po", "hodina": 1, "typ": "odpadla" },
-  { "den": "Út", "hodina": 3, "typ": "supl", "ucitel": "Xy", "ucebna": "10", "predmet": "TV" }
+  { "den": "St", "hodina": 1, "typ": "odpadla" },
+  { "den": "St", "hodina": 5, "typ": "odpadla" },
+  { "den": "St", "hodina": 6, "typ": "odpadla" }
 ]
