@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rozvrh C1a - SPŠE Ječná</title>
+    <title>Rozvrh C1a</title>
     <style>
         :root {
-            --bg-main: #f0f4f8;
-            --blue-header: #0052cc;
-            --card-bg: #ffffff;
-            --text-dark: #172b4d;
-            --text-muted: #5e6c84;
-            --border-radius: 12px;
-            --supl-bg: #fff0b3;
-            --supl-text: #ff8b00;
-            --odpadla-bg: #f4f5f7;
-            --odpadla-text: #bf2600;
+            --bg-body: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-main: #212529;
+            --text-light: #6c757d;
+            --accent-blue: #0d6efd;
+            --border-soft: #e9ecef;
+            --supl-bg: #fff8e1;
+            --supl-text: #b78103;
+            --odpadla-bg: #f8f9fa;
+            --odpadla-text: #adb5bd;
         }
 
         body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            background-color: var(--bg-main); 
-            color: var(--text-dark); 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+            background-color: var(--bg-body); 
+            color: var(--text-main); 
             margin: 0; 
             padding: 0; 
             display: flex;
@@ -29,127 +29,130 @@
             align-items: center;
         }
 
-        .top-bar {
-            background-color: var(--blue-header);
-            color: white;
+        /* Minimalistická hlavička */
+        .header {
             width: 100%;
+            background: var(--bg-card);
             padding: 20px 0;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--accent-blue);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
             margin-bottom: 30px;
         }
-        .top-bar h1 { margin: 0; font-size: 1.5rem; letter-spacing: 0.5px; }
-        .top-bar p { margin: 5px 0 0 0; opacity: 0.8; font-size: 0.9rem; }
+        .header h1 { margin: 0; font-size: 1.4rem; font-weight: 600; color: var(--text-main); }
+        .header p { margin: 4px 0 0; font-size: 0.85rem; color: var(--text-light); }
 
         .container { 
-            width: 95%; 
+            width: 96%; 
             max-width: 1200px; 
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .table-wrapper {
             width: 100%;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch; 
-            padding-bottom: 15px;
+            padding-bottom: 20px;
         }
 
         table { 
             border-collapse: separate; 
-            border-spacing: 8px; 
+            border-spacing: 6px; 
             width: 100%;
-            min-width: 900px; 
+            min-width: 850px; 
         }
 
+        /* Společné styly buněk s animacemi */
         th, td { 
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 12px; 
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 10px; 
             text-align: center; 
             vertical-align: middle;
-            box-shadow: 0 2px 4px rgba(9, 30, 66, 0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            position: relative;
+            border: 1px solid transparent;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
+        /* Ukotvený sloupec s dny */
         th:first-child, td:first-child {
             position: sticky;
             left: 0;
             z-index: 10;
-            background: var(--card-bg);
-            box-shadow: 4px 0 8px rgba(0,0,0,0.05);
+            background: var(--bg-card);
+            box-shadow: 2px 0 5px rgba(0,0,0,0.02);
+            border-right: 1px solid var(--border-soft);
         }
 
-        th { background-color: transparent; box-shadow: none; padding: 5px; font-size: 0.9em; color: var(--text-muted); }
-        th small { display: block; font-weight: normal; font-size: 0.8em; margin-top: 2px; }
+        th { background: transparent; color: var(--text-light); font-weight: 500; font-size: 0.85em; padding-bottom: 15px; }
+        th small { display: block; font-size: 0.8em; margin-top: 3px; opacity: 0.7; }
         
-        .day { font-weight: bold; color: var(--blue-header); font-size: 1.2em; border-left: 4px solid var(--blue-header); }
-        
-        td:not(.day):not(:empty):hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(9, 30, 66, 0.1);
-            cursor: pointer;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        .day { font-weight: 600; color: var(--accent-blue); font-size: 1.1em; }
+
+        /* Kaskádová animace načtení (Vlna) */
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        tr { animation: fadeIn 0.4s ease-out forwards; opacity: 0; }
-        tr:nth-child(1) { animation-delay: 0.1s; }
-        tr:nth-child(2) { animation-delay: 0.2s; }
-        tr:nth-child(3) { animation-delay: 0.3s; }
-        tr:nth-child(4) { animation-delay: 0.4s; }
-        tr:nth-child(5) { animation-delay: 0.5s; }
+        tr { opacity: 0; animation: slideUpFade 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        tr:nth-child(1) { animation-delay: 0.05s; }
+        tr:nth-child(2) { animation-delay: 0.1s; }
+        tr:nth-child(3) { animation-delay: 0.15s; }
+        tr:nth-child(4) { animation-delay: 0.2s; }
+        tr:nth-child(5) { animation-delay: 0.25s; }
 
-        .hodina { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 70px; }
-        .predmet { font-weight: 800; font-size: 1.4em; color: var(--text-dark); margin-bottom: 4px; }
-        .ucitel { font-size: 0.85em; color: var(--text-muted); }
-        .ucebna { font-size: 0.85em; font-weight: bold; color: var(--blue-header); background: #e6effc; padding: 2px 6px; border-radius: 4px; margin-top: 4px; }
-        
-        .split { display: flex; flex-direction: column; gap: 6px; width: 100%; }
-        .split-divider { width: 80%; height: 1px; background-color: #dfe1e6; margin: 0 auto; }
-        .skupina { font-size: 0.65em; color: white; background: #8792a2; padding: 2px 5px; border-radius: 10px; font-weight: bold; margin-bottom: 2px; display: inline-block;}
-        
-        /* Odpadlá celá hodina */
-        td.odpadla { background-color: var(--odpadla-bg); opacity: 0.7; }
-        td.odpadla .hodina, td.odpadla .split { text-decoration: line-through; filter: grayscale(100%); }
-        td.odpadla::after { content: "ODPADÁ"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg); color: var(--odpadla-text); font-size: 1.1em; font-weight: 900; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 6px; border: 2px solid var(--odpadla-text); }
-
-        /* Poloviční odpadlá hodina */
-        .odpadla-polovina {
-            text-decoration: line-through;
-            filter: grayscale(100%);
-            opacity: 0.5;
-            position: relative;
+        /* Hover efekty pro hodiny */
+        td:not(.day):not(:empty):hover {
+            transform: scale(1.03) translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+            border-color: var(--border-soft);
+            z-index: 2;
         }
+
+        /* Vnitřek buněk */
+        .hodina { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px; }
+        .predmet { font-weight: 700; font-size: 1.3em; margin-bottom: 3px; color: var(--text-main); }
+        .ucitel { font-size: 0.8em; color: var(--text-light); }
+        .ucebna { font-size: 0.75em; font-weight: 600; color: var(--accent-blue); margin-top: 3px; }
+        
+        /* Rozdělené hodiny */
+        .split { display: flex; flex-direction: column; gap: 4px; width: 100%; }
+        .split-divider { width: 60%; height: 1px; background-color: var(--border-soft); margin: 2px auto; }
+        .skupina { font-size: 0.65em; color: var(--text-light); background: var(--bg-body); padding: 2px 6px; border-radius: 4px; font-weight: 600; margin-bottom: 2px; display: inline-block;}
+        
+        /* ODPADLÁ HODINA (Minimalistická) */
+        td.odpadla { background-color: var(--odpadla-bg); box-shadow: none; border: 1px dashed var(--border-soft); }
+        td.odpadla:hover { transform: none; box-shadow: none; cursor: default; }
+        td.odpadla .hodina, td.odpadla .split { opacity: 0.3; filter: grayscale(100%); }
+        td.odpadla::after { 
+            content: "Odpadá"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            color: var(--odpadla-text); font-size: 1rem; font-weight: 600; letter-spacing: 1px;
+        }
+
+        /* ODPADLÁ POLOVINA */
+        .odpadla-polovina { position: relative; opacity: 0.3; filter: grayscale(100%); transition: all 0.3s ease; }
         .odpadla-polovina::after {
-            content: "ODPADÁ";
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%) rotate(-10deg);
-            color: var(--odpadla-text);
-            font-size: 0.7em;
-            font-weight: 900;
-            background: rgba(255,255,255,0.9);
-            padding: 2px 4px;
-            border-radius: 4px;
-            border: 1px solid var(--odpadla-text);
+            content: "Odpadá"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: var(--text-main); font-size: 0.75rem; font-weight: 600; background: rgba(255,255,255,0.8);
+            padding: 2px 6px; border-radius: 4px; backdrop-filter: blur(2px);
         }
 
-        /* Suplování */
-        @keyframes pulseSupl { 0% { box-shadow: 0 0 0 0 rgba(255, 139, 0, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(255, 139, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 139, 0, 0); } }
-        td.supl { background-color: var(--supl-bg); border: 2px solid var(--supl-text); animation: pulseSupl 2s infinite; }
-        .supl-badge { position: absolute; top: -8px; right: -8px; background: var(--supl-text); color: white; font-size: 0.7em; font-weight: bold; padding: 4px 8px; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        /* SUPLOVÁNÍ (Pulzující čistý vzhled) */
+        @keyframes pulseSoft { 
+            0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.2); } 
+            70% { box-shadow: 0 0 0 8px rgba(255, 193, 7, 0); } 
+            100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); } 
+        }
+        td.supl { background-color: var(--supl-bg); animation: pulseSoft 2.5s infinite; border: 1px solid #ffe69c; }
+        .supl-badge { position: absolute; top: 6px; right: 6px; width: 6px; height: 6px; background: var(--supl-text); border-radius: 50%; }
 
         td:empty { background: transparent; box-shadow: none; }
     </style>
 </head>
 <body>
 
-<div class="top-bar">
+<div class="header">
     <h1>Rozvrh C1a</h1>
-    <p>SPŠE Ječná • Aktualizováno automaticky</p>
+    <p>SPŠE Ječná</p>
 </div>
 
 <div class="container">
@@ -180,9 +183,9 @@
                     <td id="Po-6"><div class="hodina"><span class="predmet">Ele</span><span class="ucitel">Jk</span><span class="ucebna">15</span></div></td>
                     <td id="Po-7">
                         <div class="split">
-                            <div class="hodina" style="min-height: 45px;"><span class="skupina">1/2</span><span class="predmet" style="font-size:1.1em;">A</span><span class="ucitel">Bu</span></div>
+                            <div class="hodina" style="min-height: 40px;"><span class="skupina">1/2</span><span class="predmet" style="font-size:1.1em;">A</span><span class="ucitel">Bu</span></div>
                             <div class="split-divider"></div>
-                            <div class="hodina" style="min-height: 45px;"><span class="skupina">2/2</span><span class="predmet" style="font-size:1.1em;">A</span><span class="ucitel">Ir</span></div>
+                            <div class="hodina" style="min-height: 40px;"><span class="skupina">2/2</span><span class="predmet" style="font-size:1.1em;">A</span><span class="ucitel">Ir</span></div>
                         </div>
                     </td>
                     <td></td>
@@ -197,16 +200,16 @@
                     <td></td>
                     <td id="Út-6">
                         <div class="split">
-                            <div class="hodina" style="min-height: 45px;"><span class="skupina">2/2</span><span class="predmet" style="font-size:1.1em;">IT</span><span class="ucitel">Ha</span></div>
+                            <div class="hodina" style="min-height: 40px;"><span class="skupina">2/2</span><span class="predmet" style="font-size:1.1em;">IT</span><span class="ucitel">Ha</span></div>
                             <div class="split-divider"></div>
-                            <div class="hodina" style="min-height: 45px;"><span class="skupina">1/2</span><span class="predmet" style="font-size:1.1em;">IT</span><span class="ucitel">Me</span></div>
+                            <div class="hodina" style="min-height: 40px;"><span class="skupina">1/2</span><span class="predmet" style="font-size:1.1em;">IT</span><span class="ucitel">Me</span></div>
                         </div>
                     </td>
                     <td id="Út-7">
                         <div class="split">
-                            <div class="hodina" style="min-height: 45px;"><span class="skupina">2/2</span><span class="predmet" style="font-size:1.1em;">IT</span><span class="ucitel">Ha</span></div>
+                            <div class="hodina" style="min-height: 40px;"><span class="skupina">2/2</span><span class="predmet" style="font-size:1.1em;">IT</span><span class="ucitel">Ha</span></div>
                             <div class="split-divider"></div>
-                            <div class="hodina" style="min-height: 45px;"><span class="skupina">1/2</span><span class="predmet" style="font-size:1.1em;">IT</span><span class="ucitel">Me</span></div>
+                            <div class="hodina" style="min-height: 40px;"><span class="skupina">1/2</span><span class="predmet" style="font-size:1.1em;">IT</span><span class="ucitel">Me</span></div>
                         </div>
                     </td>
                     <td id="Út-8"><div class="hodina"><span class="predmet">ZSV</span><span class="ucitel">Ja</span><span class="ucebna">15</span></div></td>
@@ -216,15 +219,15 @@
                     <td class="day">St</td>
                     <td id="St-1">
                         <div class="split">
-                            <div class="hodina" style="min-height: 45px;"><span class="skupina">1/2</span><span class="predmet" style="font-size:1.1em;">A</span><span class="ucitel">Bu</span></div>
+                            <div class="hodina" style="min-height: 40px;"><span class="skupina">1/2</span><span class="predmet" style="font-size:1.1em;">A</span><span class="ucitel">Bu</span></div>
                             <div class="split-divider"></div>
-                            <div class="hodina" style="min-height: 45px;"><span class="skupina">2/2</span><span class="predmet" style="font-size:1.1em;">TD</span><span class="ucitel">Pr</span></div>
+                            <div class="hodina" style="min-height: 40px;"><span class="skupina">2/2</span><span class="predmet" style="font-size:1.1em;">TD</span><span class="ucitel">Pr</span></div>
                         </div>
                     </td>
                     <td id="St-2"><div class="hodina"><span class="predmet">HW</span><span class="ucitel">Ku</span><span class="ucebna">15</span></div></td>
                     <td id="St-3"><div class="hodina"><span class="predmet">TD</span><span class="ucitel">Pr</span><span class="ucebna">15</span></div></td>
                     <td id="St-4"><div class="hodina"><span class="predmet">M</span><span class="ucitel">Ng</span><span class="ucebna">15</span></div></td>
-                    <td id="St-5"><div class="hodina"><span class="skupina" style="background:#4299e1;">2/2</span><span class="predmet">A</span><span class="ucitel">Ir</span><span class="ucebna">5a</span></div></td>
+                    <td id="St-5"><div class="hodina"><span class="skupina">2/2</span><span class="predmet">A</span><span class="ucitel">Ir</span><span class="ucebna">5a</span></div></td>
                     <td id="St-6"><div class="hodina"><span class="predmet">ZSV</span><span class="ucitel">Ja</span><span class="ucebna">15</span></div></td>
                     <td></td>
                     <td></td>
@@ -232,15 +235,15 @@
                 <!-- ČTVRTEK -->
                 <tr>
                     <td class="day">Čt</td>
-                    <td id="Čt-1"><div class="hodina"><span class="skupina" style="background:#4299e1;">1/2</span><span class="predmet">TD</span><span class="ucitel">Pr</span><span class="ucebna">19a</span></div></td>
+                    <td id="Čt-1"><div class="hodina"><span class="skupina">1/2</span><span class="predmet">TD</span><span class="ucitel">Pr</span><span class="ucebna">19a</span></div></td>
                     <td id="Čt-2"><div class="hodina"><span class="predmet">C</span><span class="ucitel">Su</span><span class="ucebna">15</span></div></td>
                     <td id="Čt-3"><div class="hodina"><span class="predmet">M</span><span class="ucitel">Ng</span><span class="ucebna">15</span></div></td>
                     <td id="Čt-4"><div class="hodina"><span class="predmet">TD</span><span class="ucitel">Pr</span><span class="ucebna">15</span></div></td>
                     <td id="Čt-5">
                         <div class="split">
-                            <div class="hodina" style="min-height: 45px;"><span class="skupina">1/2</span><span class="predmet" style="font-size:1.1em;">A</span><span class="ucitel">Bu</span></div>
+                            <div class="hodina" style="min-height: 40px;"><span class="skupina">1/2</span><span class="predmet" style="font-size:1.1em;">A</span><span class="ucitel">Bu</span></div>
                             <div class="split-divider"></div>
-                            <div class="hodina" style="min-height: 45px;"><span class="skupina">2/2</span><span class="predmet" style="font-size:1.1em;">A</span><span class="ucitel">Ir</span></div>
+                            <div class="hodina" style="min-height: 40px;"><span class="skupina">2/2</span><span class="predmet" style="font-size:1.1em;">A</span><span class="ucitel">Ir</span></div>
                         </div>
                     </td>
                     <td id="Čt-6"><div class="hodina"><span class="predmet">D</span><span class="ucitel">Su</span><span class="ucebna">15</span></div></td>
@@ -254,9 +257,9 @@
                     <td id="Pá-2"><div class="hodina"><span class="predmet">Ele</span><span class="ucitel">Jk</span><span class="ucebna">15</span></div></td>
                     <td id="Pá-3">
                         <div class="split">
-                            <div class="hodina" style="min-height: 45px;"><span class="skupina">1/2</span><span class="predmet" style="font-size:1.1em;">A</span><span class="ucitel">Bu</span></div>
+                            <div class="hodina" style="min-height: 40px;"><span class="skupina">1/2</span><span class="predmet" style="font-size:1.1em;">A</span><span class="ucitel">Bu</span></div>
                             <div class="split-divider"></div>
-                            <div class="hodina" style="min-height: 45px;"><span class="skupina">2/2</span><span class="predmet" style="font-size:1.1em;">A</span><span class="ucitel">Ir</span></div>
+                            <div class="hodina" style="min-height: 40px;"><span class="skupina">2/2</span><span class="predmet" style="font-size:1.1em;">A</span><span class="ucitel">Ir</span></div>
                         </div>
                     </td>
                     <td id="Pá-4"><div class="hodina"><span class="predmet">C</span><span class="ucitel">Su</span><span class="ucebna">15</span></div></td>
@@ -278,7 +281,6 @@ fetch('suplovani.json')
             let bunka = document.getElementById(`${zmena.den}-${zmena.hodina}`);
             if (!bunka) return;
 
-            // Pokud se změna týká jen jedné skupiny (rozpůlená hodina)
             if (zmena.skupina) {
                 let poloviny = bunka.querySelectorAll('.hodina');
                 poloviny.forEach(polovina => {
@@ -290,23 +292,22 @@ fetch('suplovani.json')
                     }
                 });
             } else {
-                // Změna se týká celé třídy (buňky)
                 if (zmena.typ === 'odpadla') {
                     bunka.className = 'odpadla';
                 } else if (zmena.typ === 'supl') {
                     bunka.className = 'supl';
                     bunka.innerHTML = `
-                        <div class="supl-badge">SUPL</div>
+                        <div class="supl-badge"></div>
                         <div class="hodina">
                             <span class="predmet">${zmena.predmet || '?'}</span>
                             <span class="ucitel">${zmena.ucitel || '?'}</span>
-                            <span class="ucebna" style="background:#ffd966; color:#b05a00;">${zmena.ucebna || '?'}</span>
+                            <span class="ucebna">${zmena.ucebna || '?'}</span>
                         </div>`;
                 }
             }
         });
     })
-    .catch(err => console.log('Zatím žádné suplování nenačteno.'));
+    .catch(err => console.log('Zatím žádné suplování.'));
 </script>
 
 </body>
