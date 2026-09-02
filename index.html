@@ -10,35 +10,43 @@
     
     <style>
         :root {
-            /* Světlý režim - Elegantní paleta */
+            /* Světlý režim */
             --bg-body: #f4f6f8;
             --bg-card: #ffffff;
             --text-main: #1d1d1f;
             --text-light: #86868b;
             --accent-blue: #007aff;
-            --accent-hover: #0056b3;
             --border-soft: #e5e5ea;
             --border-split: #f2f2f7;
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
             --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.08);
+            
+            /* Statusy hodin - Světlý */
+            --past-bg: rgba(255, 255, 255, 0.8);
+            --current-bg: rgba(255, 215, 0, 0.25);
+            --current-border: rgba(255, 193, 7, 0.8);
         }
 
         [data-theme="dark"] {
-            /* Tmavý režim - Hluboké tóny */
+            /* Tmavý režim */
             --bg-body: #000000;
             --bg-card: #1c1c1e;
             --text-main: #f5f5f7;
             --text-light: #98989d;
             --accent-blue: #0a84ff;
-            --accent-hover: #409cff;
             --border-soft: #38383a;
             --border-split: #2c2c2e;
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
             --shadow-hover: 0 10px 20px rgba(255, 255, 255, 0.05);
+            
+            /* Statusy hodin - Tmavý */
+            --past-bg: rgba(0, 0, 0, 0.5);
+            --current-bg: rgba(255, 215, 0, 0.15);
+            --current-border: rgba(255, 204, 0, 0.6);
         }
 
         body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+            font-family: 'Inter', -apple-system, sans-serif; 
             background-color: var(--bg-body); 
             color: var(--text-main); 
             margin: 0; 
@@ -50,7 +58,7 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* --- HLAVIČKA A OVLÁDÁNÍ --- */
+        /* --- HLAVIČKA A INFO PANEL --- */
         .header {
             width: 100%;
             background: var(--bg-card);
@@ -59,7 +67,6 @@
             border-bottom: 1px solid var(--border-soft);
             box-shadow: var(--shadow-sm);
             margin-bottom: 35px;
-            transition: background-color 0.4s ease, border-color 0.4s ease;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
@@ -67,222 +74,90 @@
             gap: 16px;
         }
         
-        .header-title h1 { 
-            margin: 0; 
-            font-size: 1.75rem; 
-            font-weight: 700; 
-            letter-spacing: -0.5px;
-        }
-        .header-title p { 
-            margin: 4px 0 0; 
-            font-size: 0.95rem; 
-            color: var(--text-light); 
-            font-weight: 500;
-        }
+        .header-title h1 { margin: 0; font-size: 1.75rem; font-weight: 700; letter-spacing: -0.5px; }
+        .header-title p { margin: 4px 0 0; font-size: 0.95rem; color: var(--text-light); font-weight: 500; }
 
-        .controls {
+        .info-bar {
             display: flex;
-            gap: 16px;
-            align-items: center;
+            gap: 24px;
             flex-wrap: wrap;
             justify-content: center;
+            background: var(--bg-body);
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 1px solid var(--border-soft);
         }
-
-        /* Stylování tlačítek v hlavičce */
-        .btn-action {
+        
+        .info-item {
             display: flex;
             align-items: center;
             gap: 8px;
-            background: transparent;
-            border: 1px solid var(--border-soft);
-            color: var(--text-main);
-            padding: 10px 20px;
-            border-radius: 30px;
-            cursor: pointer;
             font-size: 0.9rem;
             font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            font-family: inherit;
-        }
-        .btn-action:hover {
-            border-color: var(--accent-blue);
             color: var(--accent-blue);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
         }
+        .info-item svg { width: 18px; height: 18px; fill: currentColor; }
+
+        .controls { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; justify-content: center; margin-top: 5px; }
+        .btn-action {
+            display: flex; align-items: center; gap: 8px; background: transparent;
+            border: 1px solid var(--border-soft); color: var(--text-main);
+            padding: 10px 20px; border-radius: 30px; cursor: pointer;
+            font-size: 0.9rem; font-weight: 600; text-decoration: none;
+            transition: all 0.3s ease; font-family: inherit;
+        }
+        .btn-action:hover { border-color: var(--accent-blue); color: var(--accent-blue); transform: translateY(-2px); }
         .btn-action svg { width: 18px; height: 18px; fill: currentColor; }
-        
-        /* Tlačítko pro Excel (speciální zvýraznění) */
-        .btn-excel {
-            background-color: #107c41; /* Excel zelená */
-            color: white;
-            border: none;
-        }
-        .btn-excel:hover {
-            background-color: #0b5e31;
-            color: white;
-            border-color: transparent;
-        }
+        .btn-excel { background-color: #107c41; color: white; border: none; }
+        .btn-excel:hover { background-color: #0b5e31; color: white; border-color: transparent; }
 
         /* --- ROZVRH --- */
-        .container { 
-            width: 98%; 
-            max-width: 1400px; 
-            margin-bottom: 50px;
-            padding: 0 10px;
-            box-sizing: border-box;
-        }
-
-        .table-wrapper {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch; 
-            padding-bottom: 30px;
-        }
-
-        table { 
-            border-collapse: separate; 
-            border-spacing: 6px; /* Větší mezery pro elegantnější vzhled */
-            width: 100%;
-            min-width: 1100px; 
-        }
-
+        .container { width: 98%; max-width: 1400px; margin-bottom: 50px; padding: 0 10px; box-sizing: border-box; }
+        .table-wrapper { width: 100%; overflow-x: auto; padding-bottom: 30px; }
+        table { border-collapse: separate; border-spacing: 6px; width: 100%; min-width: 1100px; }
+        
         th, td { 
-            background: var(--bg-card);
-            border-radius: 12px; /* Kulatější rohy */
-            text-align: center; 
-            vertical-align: middle;
-            border: 1px solid var(--border-soft);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            background: var(--bg-card); border-radius: 12px; text-align: center; 
+            vertical-align: middle; border: 1px solid var(--border-soft); transition: all 0.3s ease; 
         }
+        th:first-child, td:first-child { position: sticky; left: 0; z-index: 10; border-right: 2px solid var(--border-soft); }
+        th { border: none; color: var(--text-light); font-weight: 600; font-size: 0.9em; padding: 12px 5px; }
+        th small { display: block; font-size: 0.8em; margin-top: 4px; font-weight: 500; }
+        .day { font-weight: 700; color: var(--accent-blue); font-size: 1.1em; padding: 0 20px; }
 
-        /* Sticky sloupec pro dny */
-        th:first-child, td:first-child {
-            position: sticky;
-            left: 0;
-            z-index: 10;
-            background: var(--bg-card);
-            border-right: 2px solid var(--border-soft);
-        }
-
-        th { 
-            background: transparent; 
-            border: none;
-            color: var(--text-light); 
-            font-weight: 600; 
-            font-size: 0.9em; 
-            padding: 12px 5px; 
-        }
-        th small { 
-            display: block; 
-            font-size: 0.8em; 
-            margin-top: 4px; 
-            font-weight: 500;
-        }
-        
-        .day { 
-            font-weight: 700; 
-            color: var(--accent-blue); 
-            font-size: 1.1em; 
-            padding: 0 20px; 
-        }
-
-        /* Animace postupného načtení řádků */
-        @keyframes fadeInScale {
-            from { opacity: 0; transform: translateY(20px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
+        @keyframes fadeInScale { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
         tr { opacity: 0; animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        tr:nth-child(1) { animation-delay: 0.1s; }
-        tr:nth-child(2) { animation-delay: 0.2s; }
-        tr:nth-child(3) { animation-delay: 0.3s; }
-        tr:nth-child(4) { animation-delay: 0.4s; }
-        tr:nth-child(5) { animation-delay: 0.5s; }
+        tr:nth-child(1) { animation-delay: 0.1s; } tr:nth-child(2) { animation-delay: 0.2s; }
+        tr:nth-child(3) { animation-delay: 0.3s; } tr:nth-child(4) { animation-delay: 0.4s; } tr:nth-child(5) { animation-delay: 0.5s; }
 
-        /* Hover efekty na buňky s předměty */
-        td:not(.day):not(:empty) {
-            cursor: default;
-        }
-        td:not(.day):not(:empty):hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--accent-blue);
-            z-index: 2;
+        td:not(.day):not(:empty):not(.past-lesson):not(.current-lesson):hover {
+            transform: translateY(-4px) scale(1.02); box-shadow: var(--shadow-hover); border-color: var(--accent-blue); z-index: 2;
         }
 
-        /* Vnitřní struktura buňky */
-        .hodina { 
-            position: relative;
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            height: 80px; /* Vyšší buňky = více prostoru */
-            min-width: 110px;
-            padding: 8px;
-            box-sizing: border-box;
-            border-radius: 12px;
+        /* DYNAMICKÉ STATUSY HODIN */
+        .past-lesson {
+            background-color: var(--past-bg) !important;
+            opacity: 0.4;
+            filter: grayscale(80%);
         }
+        .current-lesson {
+            background-color: var(--current-bg) !important;
+            border: 2px solid var(--current-border) !important;
+            transform: scale(1.02);
+            box-shadow: var(--shadow-sm);
+            z-index: 5;
+        }
+
+        .hodina { position: relative; display: flex; align-items: center; justify-content: center; height: 80px; min-width: 110px; padding: 8px; box-sizing: border-box; border-radius: 12px; }
+        .predmet { font-weight: 700; font-size: 1.5em; color: var(--text-main); letter-spacing: -0.5px; }
+        .ucitel { position: absolute; top: 6px; left: 8px; font-size: 0.75em; font-weight: 600; color: var(--text-light); }
+        .ucebna { position: absolute; top: 6px; right: 8px; font-size: 0.75em; font-weight: 700; color: var(--accent-blue); background: rgba(0, 122, 255, 0.1); padding: 2px 6px; border-radius: 4px; }
+        .skupina { position: absolute; bottom: 6px; right: 8px; font-size: 0.7em; color: var(--text-light); font-weight: 600; }
         
-        .predmet { 
-            font-weight: 700; 
-            font-size: 1.5em; 
-            color: var(--text-main); 
-            letter-spacing: -0.5px;
-        }
-        .ucitel { 
-            position: absolute; 
-            top: 6px; 
-            left: 8px; 
-            font-size: 0.75em; 
-            font-weight: 600;
-            color: var(--text-light); 
-        }
-        .ucebna { 
-            position: absolute; 
-            top: 6px; 
-            right: 8px; 
-            font-size: 0.75em; 
-            font-weight: 700; 
-            color: var(--accent-blue); 
-            background: rgba(0, 122, 255, 0.1);
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-        .skupina { 
-            position: absolute; 
-            bottom: 6px; 
-            right: 8px; 
-            font-size: 0.7em; 
-            color: var(--text-light); 
-            font-weight: 600; 
-        }
-        
-        /* Rozdělené buňky pro skupiny (1/2, 2/2) */
-        .split { 
-            display: flex; 
-            flex-direction: column; 
-            width: 100%; 
-            height: 100%; 
-            border-radius: 12px;
-            overflow: hidden;
-        }
-        .split .hodina { 
-            height: 40px; 
-            min-height: 40px; 
-            border-radius: 0; /* Vnitřní rohy ostré, obal zajistí zakulacení */
-        }
-        .split-divider { 
-            width: 100%; 
-            height: 1px; 
-            background-color: var(--border-split); 
-        }
-
-        td:empty, .hodina:empty { 
-            background: transparent; 
-            border: none; 
-            box-shadow: none;
-        }
+        .split { display: flex; flex-direction: column; width: 100%; height: 100%; border-radius: 12px; overflow: hidden; }
+        .split .hodina { height: 40px; min-height: 40px; border-radius: 0; }
+        .split-divider { width: 100%; height: 1px; background-color: var(--border-split); }
+        td:empty, .hodina:empty { background: transparent; border: none; box-shadow: none; }
     </style>
 </head>
 <body>
@@ -292,19 +167,26 @@
         <h1>Rozvrh C1a</h1>
         <p>SPŠE Ječná</p>
     </div>
+
+    <!-- INFORMAČNÍ PANEL: Svátek a Odpočet -->
+    <div class="info-bar">
+        <div class="info-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+            <span id="countdownText">Začátek školy: Počítám...</span>
+        </div>
+        <div class="info-item">
+            <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+            <span id="nameDayText">Svátek: Načítám...</span>
+        </div>
+    </div>
     
     <div class="controls">
         <a href="ODKAZ_NA_TVUJ_EXCEL" target="_blank" class="btn-action btn-excel">
-            <svg viewBox="0 0 24 24">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM13 3.5L18.5 9H13V3.5zM10.8 17.7l-1.3-2.6-1.3 2.6H6l2.3-3.9-2.1-3.6h2.2l1.1 2.2 1.1-2.2h2.2l-2.1 3.6 2.3 3.9h-2.2z"/>
-            </svg>
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM13 3.5L18.5 9H13V3.5zM10.8 17.7l-1.3-2.6-1.3 2.6H6l2.3-3.9-2.1-3.6h2.2l1.1 2.2 1.1-2.2h2.2l-2.1 3.6 2.3 3.9h-2.2z"/></svg>
             Tabulka Excel
         </a>
-
         <button class="btn-action" id="themeToggle" aria-label="Přepnout režim">
-            <svg id="themeIcon" viewBox="0 0 24 24">
-                <path d="M12 21a9 9 0 1 1 9-9 9.01 9.01 0 0 1-9 9zm0-16.5a7.5 7.5 0 1 0 7.5 7.5A7.51 7.51 0 0 0 12 4.5z"/>
-            </svg>
+            <svg id="themeIcon" viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 1 9-9 9.01 9.01 0 0 1-9 9zm0-16.5a7.5 7.5 0 1 0 7.5 7.5A7.51 7.51 0 0 0 12 4.5z"/></svg>
             <span id="themeText">Dark mode</span>
         </button>
     </div>
@@ -327,7 +209,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr id="day-1">
                     <td class="day">Po</td>
                     <td><div class="hodina"><span class="ucitel">Rk</span><span class="ucebna">15</span><span class="predmet">F</span></div></td>
                     <td><div class="hodina"><span class="ucitel">Su</span><span class="ucebna">15</span><span class="predmet">C</span></div></td>
@@ -344,7 +226,7 @@
                     </td>
                     <td></td>
                 </tr>
-                <tr>
+                <tr id="day-2">
                     <td class="day">Út</td>
                     <td><div class="hodina"><span class="ucitel">Ku</span><span class="ucebna">15</span><span class="predmet">HW</span></div></td>
                     <td><div class="hodina"><span class="ucitel">Me</span><span class="ucebna">15</span><span class="predmet">IT</span></div></td>
@@ -367,7 +249,7 @@
                     </td>
                     <td><div class="hodina"><span class="ucitel">Ja</span><span class="ucebna">15</span><span class="predmet">ZSV</span></div></td>
                 </tr>
-                <tr>
+                <tr id="day-3">
                     <td class="day">St</td>
                     <td style="padding: 0;">
                         <div class="split">
@@ -390,7 +272,7 @@
                     <td></td>
                     <td></td>
                 </tr>
-                <tr>
+                <tr id="day-4">
                     <td class="day">Čt</td>
                     <td style="padding: 0;">
                         <div class="split">
@@ -413,7 +295,7 @@
                     <td><div class="hodina"><span class="ucitel">Jk</span><span class="ucebna">15</span><span class="predmet">Ele</span></div></td>
                     <td></td>
                 </tr>
-                <tr>
+                <tr id="day-5">
                     <td class="day">Pá</td>
                     <td><div class="hodina"><span class="ucitel">Lc</span><span class="ucebna">TV</span><span class="predmet">TV</span></div></td>
                     <td><div class="hodina"><span class="ucitel">Jk</span><span class="ucebna">15</span><span class="predmet">Ele</span></div></td>
@@ -436,38 +318,107 @@
 </div>
 
 <script>
-// --- PŘEPÍNÁNÍ REŽIMU (Tmavý / Světlý) ---
+// --- TÉMA (DARK/LIGHT) ---
 const themeToggle = document.getElementById('themeToggle');
 const rootElement = document.documentElement;
 const themeIcon = document.getElementById('themeIcon');
 const themeText = document.getElementById('themeText');
-
-// Ikony pro tlačítko
 const sunIcon = '<path d="M12 3v2M12 19v2M5.636 5.636l1.414 1.414M16.95 16.95l1.414 1.414M3 12h2M19 12h2M5.636 18.364l1.414-1.414M16.95 7.05l1.414-1.414M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>';
 const moonIcon = '<path d="M12 21a9 9 0 1 1 9-9 9.01 9.01 0 0 1-9 9zm0-16.5a7.5 7.5 0 1 0 7.5 7.5A7.51 7.51 0 0 0 12 4.5z"/>';
 
-// Inicializace podle uloženého nastavení nebo systému
 const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 rootElement.setAttribute('data-theme', savedTheme);
 updateThemeUI(savedTheme);
 
 themeToggle.addEventListener('click', () => {
-    const currentTheme = rootElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    const newTheme = rootElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     rootElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateThemeUI(newTheme);
 });
 
 function updateThemeUI(theme) {
-    if (theme === 'dark') {
-        themeIcon.innerHTML = sunIcon;
-        themeText.textContent = 'Light mode';
+    if (theme === 'dark') { themeIcon.innerHTML = sunIcon; themeText.textContent = 'Light mode'; } 
+    else { themeIcon.innerHTML = moonIcon; themeText.textContent = 'Dark mode'; }
+}
+
+// --- SVÁTEK ---
+fetch('https://svatkyapi.cz/api/day')
+    .then(res => res.json())
+    .then(data => { document.getElementById('nameDayText').innerText = `Dnes má svátek: ${data.name}`; })
+    .catch(() => { document.getElementById('nameDayText').innerText = `Svátek: Nelze načíst`; });
+
+// --- ČASOVAČ DO ŠKOLY A ZVÝRAZNĚNÍ HODIN ---
+const times = [
+    { start: "07:30", end: "08:15" }, { start: "08:25", end: "09:10" },
+    { start: "09:20", end: "10:05" }, { start: "10:20", end: "11:05" },
+    { start: "11:15", end: "12:00" }, { start: "12:10", end: "12:55" },
+    { start: "13:05", end: "13:50" }, { start: "14:00", end: "14:45" }
+];
+
+function updateTimers() {
+    const now = new Date();
+    const day = now.getDay();
+    const currentMins = now.getHours() * 60 + now.getMinutes();
+    
+    // 1. Logika pro odpočet do začátku školy
+    let target = new Date(now);
+    target.setHours(7, 30, 0, 0);
+
+    if (day === 6) { // Sobota -> Pondělí
+        target.setDate(target.getDate() + 2);
+    } else if (day === 0) { // Neděle -> Pondělí
+        target.setDate(target.getDate() + 1);
+    } else if (now > target) { // Po - Pá, ale už je po 7:30
+        if (day === 5) { // Pátek po 7:30 -> Pondělí
+            target.setDate(target.getDate() + 3);
+        } else { // Jiný den v týdnu po 7:30 -> Zítřek
+            target.setDate(target.getDate() + 1);
+        }
+    }
+
+    const diff = target - now;
+    if (diff > 0) {
+        const h = Math.floor(diff / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+        document.getElementById('countdownText').innerText = `Začátek školy: ${h}h ${m}m ${s}s`;
     } else {
-        themeIcon.innerHTML = moonIcon;
-        themeText.textContent = 'Dark mode';
+        document.getElementById('countdownText').innerText = `Škola právě probíhá`;
+    }
+
+    // 2. Logika pro zvýraznění aktuální a uplynulých hodin
+    document.querySelectorAll('.current-lesson, .past-lesson').forEach(el => {
+        el.classList.remove('current-lesson', 'past-lesson');
+    });
+
+    if (day >= 1 && day <= 5) { // Pouze ve všední dny
+        const tr = document.getElementById(`day-${day}`);
+        if (!tr) return;
+        const tds = tr.querySelectorAll('td:not(.day)');
+        
+        times.forEach((t, index) => {
+            if (index >= tds.length) return;
+            
+            const [sh, sm] = t.start.split(':').map(Number);
+            const [eh, em] = t.end.split(':').map(Number);
+            const startMins = sh * 60 + sm;
+            const endMins = eh * 60 + em;
+            
+            const cell = tds[index];
+            if (!cell.innerHTML.trim() || cell.innerHTML === " ") return; // přeskočí prázdné buňky
+            
+            if (currentMins >= startMins && currentMins <= endMins) {
+                cell.classList.add('current-lesson');
+            } else if (currentMins > endMins) {
+                cell.classList.add('past-lesson');
+            }
+        });
     }
 }
+
+setInterval(updateTimers, 1000);
+updateTimers(); // Spustit ihned po načtení
 </script>
 
 </body>
