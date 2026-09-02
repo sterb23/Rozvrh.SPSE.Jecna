@@ -25,6 +25,8 @@
             --past-bg: rgba(245, 245, 247, 0.8);
             --current-bg: rgba(255, 215, 0, 0.25);
             --current-border: rgba(255, 193, 7, 0.8);
+            --next-bg: rgba(0, 122, 255, 0.15);
+            --next-border: rgba(0, 122, 255, 0.6);
         }
 
         [data-theme="dark"] {
@@ -43,6 +45,8 @@
             --past-bg: rgba(28, 28, 30, 0.6);
             --current-bg: rgba(255, 215, 0, 0.15);
             --current-border: rgba(255, 204, 0, 0.6);
+            --next-bg: rgba(10, 132, 255, 0.2);
+            --next-border: rgba(10, 132, 255, 0.7);
         }
 
         body { 
@@ -132,8 +136,15 @@
         tr:nth-child(1) { animation-delay: 0.1s; } tr:nth-child(2) { animation-delay: 0.2s; }
         tr:nth-child(3) { animation-delay: 0.3s; } tr:nth-child(4) { animation-delay: 0.4s; } tr:nth-child(5) { animation-delay: 0.5s; }
 
-        td:not(.day):not(:empty):not(.past-lesson):not(.current-lesson):hover {
+        td:not(.day):not(:empty):not(.past-lesson):not(.current-lesson):not(.next-lesson):hover {
             transform: translateY(-4px) scale(1.02); box-shadow: var(--shadow-hover); border-color: var(--accent-blue); z-index: 2;
+        }
+
+        /* --- ANIMACE A STYLY PRO HODINY --- */
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.6); transform: scale(1.02); }
+            50% { box-shadow: 0 0 15px 5px rgba(255, 193, 7, 0.2); transform: scale(1.04); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); transform: scale(1.02); }
         }
 
         .past-lesson {
@@ -141,12 +152,21 @@
             opacity: 0.65;
             filter: grayscale(40%);
         }
+        
         .current-lesson {
             background-color: var(--current-bg) !important;
             border: 2px solid var(--current-border) !important;
+            z-index: 5;
+            position: relative;
+            animation: pulse-glow 2.5s infinite ease-in-out;
+        }
+
+        .next-lesson {
+            background-color: var(--next-bg) !important;
+            border: 2px solid var(--next-border) !important;
             transform: scale(1.02);
             box-shadow: var(--shadow-sm);
-            z-index: 5;
+            z-index: 4;
             position: relative;
         }
 
@@ -396,14 +416,17 @@ function updateTimers() {
         document.getElementById('countdownText').innerText = `Škola právě probíhá`;
     }
 
-    document.querySelectorAll('.current-lesson, .past-lesson').forEach(el => {
-        el.classList.remove('current-lesson', 'past-lesson');
+    // Odstranění všech tříd pro zvýraznění
+    document.querySelectorAll('.current-lesson, .past-lesson, .next-lesson').forEach(el => {
+        el.classList.remove('current-lesson', 'past-lesson', 'next-lesson');
     });
 
     if (day >= 1 && day <= 5) { 
         const tr = document.getElementById(`day-${day}`);
         if (!tr) return;
         const tds = tr.querySelectorAll('td:not(.day)');
+        
+        let foundNext = false;
         
         times.forEach((t, index) => {
             if (index >= tds.length) return;
@@ -420,6 +443,10 @@ function updateTimers() {
                 cell.classList.add('current-lesson');
             } else if (currentMins > endMins) {
                 cell.classList.add('past-lesson');
+            } else if (currentMins < startMins && !foundNext) {
+                // Přidá třídu pro následující hodinu pouze první budoucí nalezené buňce
+                cell.classList.add('next-lesson');
+                foundNext = true;
             }
         });
     }
