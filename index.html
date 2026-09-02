@@ -99,6 +99,7 @@
         .info-item svg { width: 18px; height: 18px; fill: currentColor; }
 
         .controls { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; justify-content: center; margin-top: 5px; }
+        
         .btn-action {
             display: flex; align-items: center; gap: 8px; background: transparent;
             border: 1px solid var(--border-soft); color: var(--text-main);
@@ -108,8 +109,6 @@
         }
         .btn-action:hover { border-color: var(--accent-blue); color: var(--accent-blue); transform: translateY(-2px); }
         .btn-action svg { width: 18px; height: 18px; fill: currentColor; }
-        .btn-excel { background-color: #107c41; color: white; border: none; }
-        .btn-excel:hover { background-color: #0b5e31; color: white; border-color: transparent; }
 
         /* --- ROZVRH --- */
         .container { width: 98%; max-width: 1400px; margin-bottom: 50px; padding: 0 10px; box-sizing: border-box; }
@@ -181,10 +180,15 @@
     </div>
     
     <div class="controls">
-        <a href="ODKAZ_NA_TVUJ_EXCEL" target="_blank" class="btn-action btn-excel">
-            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM13 3.5L18.5 9H13V3.5zM10.8 17.7l-1.3-2.6-1.3 2.6H6l2.3-3.9-2.1-3.6h2.2l1.1 2.2 1.1-2.2h2.2l-2.1 3.6 2.3 3.9h-2.2z"/></svg>
-            Tabulka Excel
+        <!-- TLAČÍTKO NA SUPLOVÁNÍ JEČNÁ -->
+        <a href="https://www.spsejecna.cz/suplovani" target="_blank" class="btn-action">
+            <svg viewBox="0 0 24 24">
+                <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z"/>
+            </svg>
+            Suplování Ječná
         </a>
+        
+        <!-- PŘEPÍNAČ REŽIMU -->
         <button class="btn-action" id="themeToggle" aria-label="Přepnout režim">
             <svg id="themeIcon" viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 1 9-9 9.01 9.01 0 0 1-9 9zm0-16.5a7.5 7.5 0 1 0 7.5 7.5A7.51 7.51 0 0 0 12 4.5z"/></svg>
             <span id="themeText">Dark mode</span>
@@ -255,171 +259,6 @@
                         <div class="split">
                             <div class="hodina"><span class="ucitel">Bu</span><span class="ucebna">5a</span><span class="predmet" style="font-size:1.2em;">A</span><span class="skupina">1/2</span></div>
                             <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucitel">Pr</span><span class="ucebna">17a</span><span class="predmet" style="font-size:1.2em;">TD</span><span class="skupina">2/2</span></div>
-                        </div>
-                    </td>
-                    <td><div class="hodina"><span class="ucitel">Ku</span><span class="ucebna">15</span><span class="predmet">HW</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Pr</span><span class="ucebna">15</span><span class="predmet">TD</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Ng</span><span class="ucebna">15</span><span class="predmet">M</span></div></td>
-                    <td style="padding: 0;">
-                        <div class="split">
-                            <div class="hodina"></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucitel">Ir</span><span class="ucebna">5a</span><span class="predmet" style="font-size:1.2em;">A</span><span class="skupina">2/2</span></div>
-                        </div>
-                    </td>
-                    <td><div class="hodina"><span class="ucitel">Ja</span><span class="ucebna">15</span><span class="predmet">ZSV</span></div></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr id="day-4">
-                    <td class="day">Čt</td>
-                    <td style="padding: 0;">
-                        <div class="split">
-                            <div class="hodina"><span class="ucitel">Pr</span><span class="ucebna">19a</span><span class="predmet" style="font-size:1.2em;">TD</span><span class="skupina">1/2</span></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"></div>
-                        </div>
-                    </td>
-                    <td><div class="hodina"><span class="ucitel">Su</span><span class="ucebna">15</span><span class="predmet">C</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Ng</span><span class="ucebna">15</span><span class="predmet">M</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Pr</span><span class="ucebna">15</span><span class="predmet">TD</span></div></td>
-                    <td style="padding: 0;">
-                        <div class="split">
-                            <div class="hodina"><span class="ucitel">Bu</span><span class="ucebna">5a</span><span class="predmet" style="font-size:1.2em;">A</span><span class="skupina">1/2</span></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucitel">Ir</span><span class="ucebna">15</span><span class="predmet" style="font-size:1.2em;">A</span><span class="skupina">2/2</span></div>
-                        </div>
-                    </td>
-                    <td><div class="hodina"><span class="ucitel">Su</span><span class="ucebna">15</span><span class="predmet">D</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Jk</span><span class="ucebna">15</span><span class="predmet">Ele</span></div></td>
-                    <td></td>
-                </tr>
-                <tr id="day-5">
-                    <td class="day">Pá</td>
-                    <td><div class="hodina"><span class="ucitel">Lc</span><span class="ucebna">TV</span><span class="predmet">TV</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Jk</span><span class="ucebna">15</span><span class="predmet">Ele</span></div></td>
-                    <td style="padding: 0;">
-                        <div class="split">
-                            <div class="hodina"><span class="ucitel">Bu</span><span class="ucebna">5b</span><span class="predmet" style="font-size:1.2em;">A</span><span class="skupina">1/2</span></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucitel">Ir</span><span class="ucebna">15</span><span class="predmet" style="font-size:1.2em;">A</span><span class="skupina">2/2</span></div>
-                        </div>
-                    </td>
-                    <td><div class="hodina"><span class="ucitel">Su</span><span class="ucebna">15</span><span class="predmet">C</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Rk</span><span class="ucebna">8</span><span class="predmet">F</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Ng</span><span class="ucebna">15</span><span class="predmet">M</span></div></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+                            <div class="hodina"><span class="ucitel">Pr</span><span class="ucebna">5bKterý konkrétní kód mám do tohoto HTML souboru vložit?
 
-<script>
-// --- TÉMA (DARK/LIGHT) ---
-const themeToggle = document.getElementById('themeToggle');
-const rootElement = document.documentElement;
-const themeIcon = document.getElementById('themeIcon');
-const themeText = document.getElementById('themeText');
-const sunIcon = '<path d="M12 3v2M12 19v2M5.636 5.636l1.414 1.414M16.95 16.95l1.414 1.414M3 12h2M19 12h2M5.636 18.364l1.414-1.414M16.95 7.05l1.414-1.414M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>';
-const moonIcon = '<path d="M12 21a9 9 0 1 1 9-9 9.01 9.01 0 0 1-9 9zm0-16.5a7.5 7.5 0 1 0 7.5 7.5A7.51 7.51 0 0 0 12 4.5z"/>';
-
-const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-rootElement.setAttribute('data-theme', savedTheme);
-updateThemeUI(savedTheme);
-
-themeToggle.addEventListener('click', () => {
-    const newTheme = rootElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    rootElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateThemeUI(newTheme);
-});
-
-function updateThemeUI(theme) {
-    if (theme === 'dark') { themeIcon.innerHTML = sunIcon; themeText.textContent = 'Light mode'; } 
-    else { themeIcon.innerHTML = moonIcon; themeText.textContent = 'Dark mode'; }
-}
-
-// --- SVÁTEK ---
-fetch('https://svatkyapi.cz/api/day')
-    .then(res => res.json())
-    .then(data => { document.getElementById('nameDayText').innerText = `Dnes má svátek: ${data.name}`; })
-    .catch(() => { document.getElementById('nameDayText').innerText = `Svátek: Nelze načíst`; });
-
-// --- ČASOVAČ DO ŠKOLY A ZVÝRAZNĚNÍ HODIN ---
-const times = [
-    { start: "07:30", end: "08:15" }, { start: "08:25", end: "09:10" },
-    { start: "09:20", end: "10:05" }, { start: "10:20", end: "11:05" },
-    { start: "11:15", end: "12:00" }, { start: "12:10", end: "12:55" },
-    { start: "13:05", end: "13:50" }, { start: "14:00", end: "14:45" }
-];
-
-function updateTimers() {
-    const now = new Date();
-    const day = now.getDay();
-    const currentMins = now.getHours() * 60 + now.getMinutes();
-    
-    // 1. Logika pro odpočet do začátku školy
-    let target = new Date(now);
-    target.setHours(7, 30, 0, 0);
-
-    if (day === 6) { // Sobota -> Pondělí
-        target.setDate(target.getDate() + 2);
-    } else if (day === 0) { // Neděle -> Pondělí
-        target.setDate(target.getDate() + 1);
-    } else if (now > target) { // Po - Pá, ale už je po 7:30
-        if (day === 5) { // Pátek po 7:30 -> Pondělí
-            target.setDate(target.getDate() + 3);
-        } else { // Jiný den v týdnu po 7:30 -> Zítřek
-            target.setDate(target.getDate() + 1);
-        }
-    }
-
-    const diff = target - now;
-    if (diff > 0) {
-        const h = Math.floor(diff / (1000 * 60 * 60));
-        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((diff % (1000 * 60)) / 1000);
-        document.getElementById('countdownText').innerText = `Začátek školy: ${h}h ${m}m ${s}s`;
-    } else {
-        document.getElementById('countdownText').innerText = `Škola právě probíhá`;
-    }
-
-    // 2. Logika pro zvýraznění aktuální a uplynulých hodin
-    document.querySelectorAll('.current-lesson, .past-lesson').forEach(el => {
-        el.classList.remove('current-lesson', 'past-lesson');
-    });
-
-    if (day >= 1 && day <= 5) { // Pouze ve všední dny
-        const tr = document.getElementById(`day-${day}`);
-        if (!tr) return;
-        const tds = tr.querySelectorAll('td:not(.day)');
-        
-        times.forEach((t, index) => {
-            if (index >= tds.length) return;
-            
-            const [sh, sm] = t.start.split(':').map(Number);
-            const [eh, em] = t.end.split(':').map(Number);
-            const startMins = sh * 60 + sm;
-            const endMins = eh * 60 + em;
-            
-            const cell = tds[index];
-            if (!cell.innerHTML.trim() || cell.innerHTML === " ") return; // přeskočí prázdné buňky
-            
-            if (currentMins >= startMins && currentMins <= endMins) {
-                cell.classList.add('current-lesson');
-            } else if (currentMins > endMins) {
-                cell.classList.add('past-lesson');
-            }
-        });
-    }
-}
-
-setInterval(updateTimers, 1000);
-updateTimers(); // Spustit ihned po načtení
-</script>
-
-</body>
-</html>
+Upřesni mi, zda se jedná o školní systém edunext, web pro herní obchod, textovou hru, nebo mi sem chybějící kód rovnou zkopíruj. Jakmile mi dáš vědět, sjednotím veškeré HTML, CSS a JavaScript do jednoho funkčního souboru.
