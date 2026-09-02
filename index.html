@@ -394,26 +394,56 @@ function updateTimers() {
     let target = new Date(now);
     target.setHours(7, 30, 0, 0);
 
+    // Dynamické zjištění konce vyučování podle aktuálního dne
+    let endOfSchoolMins = 14 * 60 + 45; // Výchozí nejpozdější čas
+    if (day >= 1 && day <= 5) {
+        const tr = document.getElementById(`day-${day}`);
+        if (tr) {
+            const tds = tr.querySelectorAll('td:not(.day)');
+            let lastLessonIndex = -1;
+            
+            tds.forEach((td, index) => {
+                // Pokud buňka obsahuje text (není prázdná), zaznamená si její index
+                if (td.textContent.trim() !== '') {
+                    lastLessonIndex = index;
+                }
+            });
+            
+            // Nastavení konce školy podle konce poslední nalezené hodiny
+            if (lastLessonIndex !== -1 && lastLessonIndex < times.length) {
+                const [eh, em] = times[lastLessonIndex].end.split(':').map(Number);
+                endOfSchoolMins = eh * 60 + em;
+            }
+        }
+    }
+
+    let endOfSchool = new Date(now);
+    endOfSchool.setHours(Math.floor(endOfSchoolMins / 60), endOfSchoolMins % 60, 0, 0);
+
+    // Logika resetu času na další den
     if (day === 6) { 
-        target.setDate(target.getDate() + 2);
+        target.setDate(target.getDate() + 2); // Ze soboty na pondělí
     } else if (day === 0) { 
-        target.setDate(target.getDate() + 1);
-    } else if (now > target) { 
+        target.setDate(target.getDate() + 1); // Z neděle na pondělí
+    } else if (now > endOfSchool) { 
+        // Posun odpočtu na zítřek až po SKUTEČNÉM konci dnešní výuky
         if (day === 5) { 
-            target.setDate(target.getDate() + 3);
+            target.setDate(target.getDate() + 3); // Z pátku na pondělí
         } else { 
-            target.setDate(target.getDate() + 1);
+            target.setDate(target.getDate() + 1); 
         }
     }
 
     const diff = target - now;
-    if (diff > 0) {
+    
+    // Zobrazení textu během školního dne (mezi 7:30 a tvou poslední hodinou)
+    if (now >= target && now <= endOfSchool && day >= 1 && day <= 5) {
+        document.getElementById('countdownText').innerText = `Škola právě probíhá`;
+    } else {
         const h = Math.floor(diff / (1000 * 60 * 60));
         const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const s = Math.floor((diff % (1000 * 60)) / 1000);
         document.getElementById('countdownText').innerText = `Začátek školy: ${h}h ${m}m ${s}s`;
-    } else {
-        document.getElementById('countdownText').innerText = `Škola právě probíhá`;
     }
 
     // Odstranění všech tříd pro zvýraznění
@@ -444,7 +474,6 @@ function updateTimers() {
             } else if (currentMins > endMins) {
                 cell.classList.add('past-lesson');
             } else if (currentMins < startMins && !foundNext) {
-                // Přidá třídu pro následující hodinu pouze první budoucí nalezené buňce
                 cell.classList.add('next-lesson');
                 foundNext = true;
             }
