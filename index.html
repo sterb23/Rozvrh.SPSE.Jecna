@@ -3,54 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rozvrh C1a</title>
+    <title>Rozvrh C1a - EduPage styl</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* Světlý režim */
-            --bg-body: #f4f6f8;
+            /* Světlý režim - EduPage styl */
+            --bg-body: #e9ecef;
             --bg-card: #ffffff;
-            --text-main: #1d1d1f;
-            --text-light: #86868b;
-            --accent-blue: #007aff;
-            --border-soft: #e5e5ea;
-            --border-split: #f2f2f7;
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-            --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.08);
+            --text-main: #212529;
+            --text-light: #6c757d;
+            --accent-main: #3aa655; /* EduPage zelená */
+            --accent-hover: #2d8a44;
+            --border-soft: #dee2e6;
+            --border-dark: #ced4da;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
             
             /* Statusy hodin - Světlý */
-            --past-bg: rgba(245, 245, 247, 0.8);
-            --current-bg: rgba(255, 215, 0, 0.25);
-            --current-border: rgba(255, 193, 7, 0.8);
-            --next-bg: rgba(0, 122, 255, 0.15);
-            --next-border: rgba(0, 122, 255, 0.6);
+            --past-bg: #f8f9fa;
+            --current-bg: #e8f5e9;
+            --current-border: #3aa655;
+            --next-bg: #e3f2fd;
+            --next-border: #2196f3;
         }
 
         [data-theme="dark"] {
             /* Tmavý režim */
-            --bg-body: #000000;
-            --bg-card: #1c1c1e;
-            --text-main: #f5f5f7;
-            --text-light: #98989d;
-            --accent-blue: #0a84ff;
-            --border-soft: #38383a;
-            --border-split: #2c2c2e;
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-            --shadow-hover: 0 10px 20px rgba(255, 255, 255, 0.05);
+            --bg-body: #121212;
+            --bg-card: #1e1e1e;
+            --text-main: #e0e0e0;
+            --text-light: #a0a0a0;
+            --accent-main: #4caf50;
+            --accent-hover: #388e3c;
+            --border-soft: #333333;
+            --border-dark: #444444;
+            --shadow-sm: 0 1px 5px rgba(0, 0, 0, 0.3);
             
             /* Statusy hodin - Tmavý */
-            --past-bg: rgba(28, 28, 30, 0.6);
-            --current-bg: rgba(255, 215, 0, 0.15);
-            --current-border: rgba(255, 204, 0, 0.6);
-            --next-bg: rgba(10, 132, 255, 0.2);
-            --next-border: rgba(10, 132, 255, 0.7);
+            --past-bg: #1a1a1a;
+            --current-bg: rgba(76, 175, 80, 0.15);
+            --current-border: #4caf50;
+            --next-bg: rgba(33, 150, 243, 0.15);
+            --next-border: #2196f3;
         }
 
         body { 
-            font-family: 'Inter', -apple-system, sans-serif; 
+            font-family: 'Roboto', Arial, sans-serif; 
             background-color: var(--bg-body); 
             color: var(--text-main); 
             margin: 0; 
@@ -59,140 +59,171 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            transition: background-color 0.4s ease, color 0.4s ease;
+            border-top: 5px solid var(--accent-main);
         }
 
         /* --- HLAVIČKA A INFO PANEL --- */
         .header {
             width: 100%;
             background: var(--bg-card);
-            padding: 24px 20px;
-            text-align: center;
+            padding: 15px 30px;
             border-bottom: 1px solid var(--border-soft);
             box-shadow: var(--shadow-sm);
-            margin-bottom: 35px;
+            margin-bottom: 25px;
             box-sizing: border-box;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            justify-content: space-between;
             align-items: center;
-            gap: 16px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
         
-        .header-title h1 { margin: 0; font-size: 1.75rem; font-weight: 700; letter-spacing: -0.5px; }
-        .header-title p { margin: 4px 0 0; font-size: 0.95rem; color: var(--text-light); font-weight: 500; }
+        .header-title h1 { margin: 0; font-size: 1.5rem; font-weight: 700; color: var(--accent-main); }
+        .header-title p { margin: 2px 0 0; font-size: 0.9rem; color: var(--text-light); }
 
         .info-bar {
             display: flex;
-            gap: 24px;
+            gap: 20px;
             flex-wrap: wrap;
-            justify-content: center;
-            background: var(--bg-body);
-            padding: 10px 20px;
-            border-radius: 20px;
-            border: 1px solid var(--border-soft);
+            align-items: center;
         }
         
         .info-item {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--accent-blue);
+            color: var(--text-main);
+            background: var(--bg-body);
+            padding: 6px 12px;
+            border-radius: 4px;
+            border: 1px solid var(--border-soft);
         }
-        .info-item svg { width: 18px; height: 18px; fill: currentColor; }
+        .info-item svg { width: 16px; height: 16px; fill: var(--text-light); }
 
-        .controls { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; justify-content: center; margin-top: 5px; }
+        .controls { display: flex; gap: 10px; align-items: center; }
         .btn-action {
-            display: flex; align-items: center; gap: 8px; background: transparent;
-            border: 1px solid var(--border-soft); color: var(--text-main);
-            padding: 10px 20px; border-radius: 30px; cursor: pointer;
-            font-size: 0.9rem; font-weight: 600; text-decoration: none;
-            transition: all 0.3s ease; font-family: inherit;
+            display: flex; align-items: center; gap: 6px; background: var(--bg-body);
+            border: 1px solid var(--border-dark); color: var(--text-main);
+            padding: 8px 16px; border-radius: 4px; cursor: pointer;
+            font-size: 0.85rem; font-weight: 500; text-decoration: none;
+            transition: background 0.2s; font-family: inherit;
         }
-        .btn-action:hover { border-color: var(--accent-blue); color: var(--accent-blue); transform: translateY(-2px); }
-        .btn-action svg { width: 18px; height: 18px; fill: currentColor; }
+        .btn-action:hover { background: var(--border-soft); }
+        .btn-action svg { width: 16px; height: 16px; fill: currentColor; }
         
-        /* Nové styly pro tlačítko Suplování */
-        .btn-suplovani { background-color: var(--accent-blue); color: white; border: none; }
-        .btn-suplovani:hover { filter: brightness(0.85); color: white; border-color: transparent; }
+        .btn-suplovani { background-color: var(--accent-main); color: white; border: 1px solid var(--accent-hover); }
+        .btn-suplovani:hover { background-color: var(--accent-hover); color: white; }
 
-        /* --- ROZVRH --- */
-        .container { width: 98%; max-width: 1400px; margin-bottom: 50px; padding: 0 10px; box-sizing: border-box; }
-        .table-wrapper { width: 100%; overflow-x: auto; padding-bottom: 30px; }
-        table { border-collapse: separate; border-spacing: 6px; width: 100%; min-width: 1100px; }
+        /* --- ROZVRH (EduPage mřížka) --- */
+        .container { 
+            width: 98%; max-width: 1400px; 
+            margin-bottom: 50px; 
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            box-shadow: var(--shadow-sm);
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+        
+        .table-wrapper { width: 100%; overflow-x: auto; }
+        table { border-collapse: collapse; width: 100%; min-width: 1100px; }
         
         th, td { 
-            background: var(--bg-card); border-radius: 12px; text-align: center; 
-            vertical-align: middle; border: 1px solid var(--border-soft); transition: all 0.3s ease; 
+            text-align: center; 
+            vertical-align: middle; 
+            border: 1px solid var(--border-dark); 
+            padding: 0;
+            position: relative;
         }
-        th:first-child, td:first-child { position: sticky; left: 0; z-index: 10; border-right: 2px solid var(--border-soft); }
-        th { border: none; color: var(--text-light); font-weight: 600; font-size: 0.9em; padding: 12px 5px; }
-        th small { display: block; font-size: 0.8em; margin-top: 4px; font-weight: 500; }
-        .day { font-weight: 700; color: var(--accent-blue); font-size: 1.1em; padding: 0 20px; }
-
-        @keyframes fadeInScale { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-        tr { opacity: 0; animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        tr:nth-child(1) { animation-delay: 0.1s; } tr:nth-child(2) { animation-delay: 0.2s; }
-        tr:nth-child(3) { animation-delay: 0.3s; } tr:nth-child(4) { animation-delay: 0.4s; } tr:nth-child(5) { animation-delay: 0.5s; }
-
-        td:not(.day):not(:empty):not(.past-lesson):not(.current-lesson):not(.next-lesson):hover {
-            transform: translateY(-4px) scale(1.02); box-shadow: var(--shadow-hover); border-color: var(--accent-blue); z-index: 2;
+        
+        th { 
+            background: var(--bg-body); 
+            color: var(--text-main); 
+            font-weight: 700; 
+            font-size: 0.9em; 
+            padding: 10px 5px; 
+        }
+        th small { display: block; font-size: 0.8em; margin-top: 2px; font-weight: 400; color: var(--text-light); }
+        
+        .day { 
+            background: var(--bg-body);
+            font-weight: 700; 
+            color: var(--text-main); 
+            font-size: 1em; 
+            padding: 0 15px; 
+            width: 40px;
         }
 
-        /* --- ANIMACE A STYLY PRO HODINY --- */
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.6); transform: scale(1.02); }
-            50% { box-shadow: 0 0 15px 5px rgba(255, 193, 7, 0.2); transform: scale(1.04); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); transform: scale(1.02); }
+        td:not(.day):hover {
+            background-color: rgba(0,0,0,0.02);
+        }
+        [data-theme="dark"] td:not(.day):hover {
+            background-color: rgba(255,255,255,0.02);
         }
 
+        /* --- STYLY PRO HODINY --- */
         .past-lesson {
             background-color: var(--past-bg) !important;
-            opacity: 0.65;
-            filter: grayscale(40%);
+            color: var(--text-light);
+        }
+        .past-lesson .predmet, .past-lesson .ucebna, .past-lesson .ucitel, .past-lesson .skupina {
+            color: var(--text-light) !important;
         }
         
         .current-lesson {
             background-color: var(--current-bg) !important;
-            border: 2px solid var(--current-border) !important;
+            outline: 2px solid var(--current-border);
+            outline-offset: -2px;
             z-index: 5;
-            position: relative;
-            animation: pulse-glow 2.5s infinite ease-in-out;
         }
 
         .next-lesson {
             background-color: var(--next-bg) !important;
-            border: 2px solid var(--next-border) !important;
-            transform: scale(1.02);
-            box-shadow: var(--shadow-sm);
+            outline: 2px solid var(--next-border);
+            outline-offset: -2px;
             z-index: 4;
-            position: relative;
         }
 
-        .hodina { position: relative; display: flex; align-items: center; justify-content: center; height: 80px; min-width: 110px; padding: 8px; box-sizing: border-box; border-radius: 12px; }
-        .predmet { font-weight: 700; font-size: 1.5em; color: var(--text-main); letter-spacing: -0.5px; }
-        .ucitel { position: absolute; top: 6px; left: 8px; font-size: 0.75em; font-weight: 600; color: var(--text-light); }
-        .ucebna { position: absolute; top: 6px; right: 8px; font-size: 0.75em; font-weight: 700; color: var(--accent-blue); background: rgba(0, 122, 255, 0.1); padding: 2px 6px; border-radius: 4px; }
-        .skupina { position: absolute; bottom: 6px; right: 8px; font-size: 0.7em; color: var(--text-light); font-weight: 600; }
+        .hodina { 
+            position: relative; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            height: 75px; 
+            min-width: 110px; 
+            box-sizing: border-box; 
+        }
         
-        .split { display: flex; flex-direction: column; width: 100%; height: 100%; border-radius: 12px; overflow: hidden; }
-        .split .hodina { height: 40px; min-height: 40px; border-radius: 0; }
-        .split-divider { width: 100%; height: 1px; background-color: var(--border-split); }
-        td:empty, .hodina:empty { background: transparent; border: none; box-shadow: none; }
+        .predmet { font-weight: 700; font-size: 1.4em; color: var(--text-main); }
+        .ucitel { position: absolute; bottom: 4px; right: 6px; font-size: 0.75em; color: var(--text-light); }
+        .ucebna { position: absolute; top: 4px; right: 6px; font-size: 0.8em; font-weight: 700; color: var(--text-main); }
+        .skupina { position: absolute; bottom: 4px; left: 6px; font-size: 0.75em; color: var(--text-light); font-weight: 500; }
+        
+        /* Dělené hodiny */
+        .split { display: flex; flex-direction: column; width: 100%; height: 100%; }
+        .split .hodina { height: 50%; min-height: 37px; }
+        .split-divider { width: 100%; height: 1px; background-color: var(--border-dark); }
+        
+        /* Modifikace velikosti textu v dělených hodinách */
+        .split .predmet { font-size: 1.1em !important; }
+        .split .ucitel, .split .skupina, .split .ucebna { font-size: 0.7em; }
+        
     </style>
 </head>
 <body>
 
 <div class="header">
     <div class="header-title">
-        <h1>Rozvrh C1a</h1>
-        <p>SPŠE Ječná</p>
+        <h1>Rozvrh hodin</h1>
+        <p>Třída: C1a | SPŠE Ječná</p>
     </div>
 
     <div class="info-bar">
         <div class="info-item">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
             <span id="countdownText">Začátek školy: Počítám...</span>
         </div>
         <div class="info-item">
@@ -203,12 +234,11 @@
     
     <div class="controls">
         <a href="https://www.spsejecna.cz/suplovani" target="_blank" class="btn-action btn-suplovani">
-            <svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.41l-9.59 9.59-1.41-1.41L17.59 5H14V3zM5 5h6V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6h-2v6H5V5z"/></svg>
             Suplování
         </a>
         <button class="btn-action" id="themeToggle" aria-label="Přepnout režim">
             <svg id="themeIcon" viewBox="0 0 24 24"></svg>
-            <span id="themeText">Dark mode</span>
+            <span id="themeText">Tmavý režim</span>
         </button>
     </div>
 </div>
@@ -218,7 +248,7 @@
         <table>
             <thead>
                 <tr>
-                    <th style="width: 50px;"></th>
+                    <th style="width: 40px;"></th>
                     <th>1<small>7:30 - 8:15</small></th>
                     <th>2<small>8:25 - 9:10</small></th>
                     <th>3<small>9:20 - 10:05</small></th>
@@ -232,104 +262,104 @@
             <tbody>
                 <tr id="day-1">
                     <td class="day">Po</td>
-                    <td><div class="hodina"><span class="ucitel">Rk</span><span class="ucebna">15</span><span class="predmet">F</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Su</span><span class="ucebna">15</span><span class="predmet">C</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Ng</span><span class="ucebna">15</span><span class="predmet">M</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Su</span><span class="ucebna">15</span><span class="predmet">D</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Ja</span><span class="ucebna">15</span><span class="predmet">ZSV</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Jk</span><span class="ucebna">15</span><span class="predmet">Ele</span></div></td>
-                    <td style="padding: 0;">
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">F</span><span class="ucitel">Rk</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">C</span><span class="ucitel">Su</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">D</span><span class="ucitel">Su</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">Ele</span><span class="ucitel">Jk</span></div></td>
+                    <td>
                         <div class="split">
-                            <div class="hodina"><span class="ucitel">Bu</span><span class="ucebna">15</span><span class="predmet" style="font-size:1.2em;">A</span><span class="skupina">1/2</span></div>
+                            <div class="hodina"><span class="ucebna">15</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
                             <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucitel">Ir</span><span class="ucebna">5b</span><span class="predmet" style="font-size:1.2em;">A</span><span class="skupina">2/2</span></div>
+                            <div class="hodina"><span class="ucebna">5b</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
                         </div>
                     </td>
                     <td></td>
                 </tr>
                 <tr id="day-2">
                     <td class="day">Út</td>
-                    <td><div class="hodina"><span class="ucitel">Ku</span><span class="ucebna">15</span><span class="predmet">HW</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Me</span><span class="ucebna">15</span><span class="predmet">IT</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Lc</span><span class="ucebna">TV</span><span class="predmet">TV</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Ng</span><span class="ucebna">15</span><span class="predmet">M</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">HW</span><span class="ucitel">Ku</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">IT</span><span class="ucitel">Me</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">TV</span><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
                     <td></td>
-                    <td style="padding: 0;">
+                    <td>
                         <div class="split">
-                            <div class="hodina"><span class="ucitel">Ha</span><span class="ucebna">18a</span><span class="predmet" style="font-size:1.2em;">IT</span><span class="skupina">2/2</span></div>
+                            <div class="hodina"><span class="ucebna">18a</span><span class="predmet">IT</span><span class="skupina">2/2</span><span class="ucitel">Ha</span></div>
                             <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucitel">Me</span><span class="ucebna">18b</span><span class="predmet" style="font-size:1.2em;">IT</span><span class="skupina">1/2</span></div>
+                            <div class="hodina"><span class="ucebna">18b</span><span class="predmet">IT</span><span class="skupina">1/2</span><span class="ucitel">Me</span></div>
                         </div>
                     </td>
-                    <td style="padding: 0;">
+                    <td>
                         <div class="split">
-                            <div class="hodina"><span class="ucitel">Ha</span><span class="ucebna">18a</span><span class="predmet" style="font-size:1.2em;">IT</span><span class="skupina">2/2</span></div>
+                            <div class="hodina"><span class="ucebna">18a</span><span class="predmet">IT</span><span class="skupina">2/2</span><span class="ucitel">Ha</span></div>
                             <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucitel">Me</span><span class="ucebna">18b</span><span class="predmet" style="font-size:1.2em;">IT</span><span class="skupina">1/2</span></div>
+                            <div class="hodina"><span class="ucebna">18b</span><span class="predmet">IT</span><span class="skupina">1/2</span><span class="ucitel">Me</span></div>
                         </div>
                     </td>
-                    <td><div class="hodina"><span class="ucitel">Ja</span><span class="ucebna">15</span><span class="predmet">ZSV</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
                 </tr>
                 <tr id="day-3">
                     <td class="day">St</td>
-                    <td style="padding: 0;">
+                    <td>
                         <div class="split">
-                            <div class="hodina"><span class="ucitel">Bu</span><span class="ucebna">5a</span><span class="predmet" style="font-size:1.2em;">A</span><span class="skupina">1/2</span></div>
+                            <div class="hodina"><span class="ucebna">5a</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
                             <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucitel">Pr</span><span class="ucebna">17a</span><span class="predmet" style="font-size:1.2em;">TD</span><span class="skupina">2/2</span></div>
+                            <div class="hodina"><span class="ucebna">17a</span><span class="predmet">TD</span><span class="skupina">2/2</span><span class="ucitel">Pr</span></div>
                         </div>
                     </td>
-                    <td><div class="hodina"><span class="ucitel">Ku</span><span class="ucebna">15</span><span class="predmet">HW</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Pr</span><span class="ucebna">15</span><span class="predmet">TD</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Ng</span><span class="ucebna">15</span><span class="predmet">M</span></div></td>
-                    <td style="padding: 0;">
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">HW</span><span class="ucitel">Ku</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">TD</span><span class="ucitel">Pr</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
+                    <td>
                         <div class="split">
                             <div class="hodina"></div>
                             <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucitel">Ir</span><span class="ucebna">5a</span><span class="predmet" style="font-size:1.2em;">A</span><span class="skupina">2/2</span></div>
+                            <div class="hodina"><span class="ucebna">5a</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
                         </div>
                     </td>
-                    <td><div class="hodina"><span class="ucitel">Ja</span><span class="ucebna">15</span><span class="predmet">ZSV</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr id="day-4">
                     <td class="day">Čt</td>
-                    <td style="padding: 0;">
+                    <td>
                         <div class="split">
-                            <div class="hodina"><span class="ucitel">Pr</span><span class="ucebna">19a</span><span class="predmet" style="font-size:1.2em;">TD</span><span class="skupina">1/2</span></div>
+                            <div class="hodina"><span class="ucebna">19a</span><span class="predmet">TD</span><span class="skupina">1/2</span><span class="ucitel">Pr</span></div>
                             <div class="split-divider"></div>
                             <div class="hodina"></div>
                         </div>
                     </td>
-                    <td><div class="hodina"><span class="ucitel">Su</span><span class="ucebna">15</span><span class="predmet">C</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Ng</span><span class="ucebna">15</span><span class="predmet">M</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Pr</span><span class="ucebna">15</span><span class="predmet">TD</span></div></td>
-                    <td style="padding: 0;">
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">C</span><span class="ucitel">Su</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">TD</span><span class="ucitel">Pr</span></div></td>
+                    <td>
                         <div class="split">
-                            <div class="hodina"><span class="ucitel">Bu</span><span class="ucebna">5a</span><span class="predmet" style="font-size:1.2em;">A</span><span class="skupina">1/2</span></div>
+                            <div class="hodina"><span class="ucebna">5a</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
                             <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucitel">Ir</span><span class="ucebna">15</span><span class="predmet" style="font-size:1.2em;">A</span><span class="skupina">2/2</span></div>
+                            <div class="hodina"><span class="ucebna">15</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
                         </div>
                     </td>
-                    <td><div class="hodina"><span class="ucitel">Su</span><span class="ucebna">15</span><span class="predmet">D</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Jk</span><span class="ucebna">15</span><span class="predmet">Ele</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">D</span><span class="ucitel">Su</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">Ele</span><span class="ucitel">Jk</span></div></td>
                     <td></td>
                 </tr>
                 <tr id="day-5">
                     <td class="day">Pá</td>
-                    <td><div class="hodina"><span class="ucitel">Lc</span><span class="ucebna">TV</span><span class="predmet">TV</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Jk</span><span class="ucebna">15</span><span class="predmet">Ele</span></div></td>
-                    <td style="padding: 0;">
+                    <td><div class="hodina"><span class="ucebna">TV</span><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">Ele</span><span class="ucitel">Jk</span></div></td>
+                    <td>
                         <div class="split">
-                            <div class="hodina"><span class="ucitel">Bu</span><span class="ucebna">5b</span><span class="predmet" style="font-size:1.2em;">A</span><span class="skupina">1/2</span></div>
+                            <div class="hodina"><span class="ucebna">5b</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
                             <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucitel">Ir</span><span class="ucebna">15</span><span class="predmet" style="font-size:1.2em;">A</span><span class="skupina">2/2</span></div>
+                            <div class="hodina"><span class="ucebna">15</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
                         </div>
                     </td>
-                    <td><div class="hodina"><span class="ucitel">Su</span><span class="ucebna">15</span><span class="predmet">C</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Rk</span><span class="ucebna">8</span><span class="predmet">F</span></div></td>
-                    <td><div class="hodina"><span class="ucitel">Ng</span><span class="ucebna">15</span><span class="predmet">M</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">C</span><span class="ucitel">Su</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">8</span><span class="predmet">F</span><span class="ucitel">Rk</span></div></td>
+                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -368,8 +398,8 @@ themeToggle.addEventListener('click', () => {
 });
 
 function updateThemeUI(theme) {
-    if (theme === 'dark') { themeIcon.innerHTML = sunIcon; themeText.textContent = 'Light mode'; } 
-    else { themeIcon.innerHTML = moonIcon; themeText.textContent = 'Dark mode'; }
+    if (theme === 'dark') { themeIcon.innerHTML = sunIcon; themeText.textContent = 'Světlý režim'; } 
+    else { themeIcon.innerHTML = moonIcon; themeText.textContent = 'Tmavý režim'; }
 }
 
 // --- SVÁTEK ---
@@ -394,8 +424,7 @@ function updateTimers() {
     let target = new Date(now);
     target.setHours(7, 30, 0, 0);
 
-    // Dynamické zjištění konce vyučování podle aktuálního dne
-    let endOfSchoolMins = 14 * 60 + 45; // Výchozí nejpozdější čas
+    let endOfSchoolMins = 14 * 60 + 45; 
     if (day >= 1 && day <= 5) {
         const tr = document.getElementById(`day-${day}`);
         if (tr) {
@@ -403,13 +432,11 @@ function updateTimers() {
             let lastLessonIndex = -1;
             
             tds.forEach((td, index) => {
-                // Pokud buňka obsahuje text (není prázdná), zaznamená si její index
                 if (td.textContent.trim() !== '') {
                     lastLessonIndex = index;
                 }
             });
             
-            // Nastavení konce školy podle konce poslední nalezené hodiny
             if (lastLessonIndex !== -1 && lastLessonIndex < times.length) {
                 const [eh, em] = times[lastLessonIndex].end.split(':').map(Number);
                 endOfSchoolMins = eh * 60 + em;
@@ -420,15 +447,13 @@ function updateTimers() {
     let endOfSchool = new Date(now);
     endOfSchool.setHours(Math.floor(endOfSchoolMins / 60), endOfSchoolMins % 60, 0, 0);
 
-    // Logika resetu času na další den
     if (day === 6) { 
-        target.setDate(target.getDate() + 2); // Ze soboty na pondělí
+        target.setDate(target.getDate() + 2); 
     } else if (day === 0) { 
-        target.setDate(target.getDate() + 1); // Z neděle na pondělí
+        target.setDate(target.getDate() + 1); 
     } else if (now > endOfSchool) { 
-        // Posun odpočtu na zítřek až po SKUTEČNÉM konci dnešní výuky
         if (day === 5) { 
-            target.setDate(target.getDate() + 3); // Z pátku na pondělí
+            target.setDate(target.getDate() + 3); 
         } else { 
             target.setDate(target.getDate() + 1); 
         }
@@ -436,17 +461,15 @@ function updateTimers() {
 
     const diff = target - now;
     
-    // Zobrazení textu během školního dne (mezi 7:30 a tvou poslední hodinou)
     if (now >= target && now <= endOfSchool && day >= 1 && day <= 5) {
         document.getElementById('countdownText').innerText = `Škola právě probíhá`;
     } else {
         const h = Math.floor(diff / (1000 * 60 * 60));
         const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const s = Math.floor((diff % (1000 * 60)) / 1000);
-        document.getElementById('countdownText').innerText = `Začátek školy: ${h}h ${m}m ${s}s`;
+        document.getElementById('countdownText').innerText = `Začátek školy za: ${h}h ${m}m ${s}s`;
     }
 
-    // Odstranění všech tříd pro zvýraznění
     document.querySelectorAll('.current-lesson, .past-lesson, .next-lesson').forEach(el => {
         el.classList.remove('current-lesson', 'past-lesson', 'next-lesson');
     });
