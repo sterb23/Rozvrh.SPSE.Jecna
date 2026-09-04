@@ -23,16 +23,16 @@
             --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.1);
             --border: #e5e5ea;
             
-            /* Statusy hodin - Světlý */
             --past-bg: #e5e5ea;
             --past-text: #86868b;
             --past-opacity: 0.5;
-            
             --current-bg: rgba(255, 193, 7, 0.15);
             --current-border: #ffc107;
             --pulse-color: rgba(255, 193, 7, 0.5);
-            
             --next-border: #0071e3;
+            
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.4);
         }
 
         [data-theme="dark"] {
@@ -49,154 +49,148 @@
             --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.8);
             --border: #38383a;
             
-            /* Statusy hodin - Tmavý */
             --past-bg: #1c1c1e;
             --past-text: #48484a;
             --past-opacity: 0.4;
-            
             --current-bg: rgba(255, 193, 7, 0.1);
             --current-border: #ffca28;
             --pulse-color: rgba(255, 202, 40, 0.4);
-            
             --next-border: #0a84ff;
+            
+            --glass-bg: rgba(28, 28, 30, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
             background-color: var(--bg-body); 
             color: var(--text-main); 
-            margin: 0; 
-            padding: 0; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            transition: background-color 0.4s ease, color 0.4s ease;
+            margin: 0; padding: 0 0 100px 0; /* Místo pro spodní lištu */
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh; transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* --- HLAVIČKA A INFO PANEL --- */
+        /* --- HLAVIČKA --- */
         .header {
-            width: 95%; max-width: 1400px;
-            background: var(--bg-card);
-            margin: 20px 0; padding: 20px 30px;
-            border-radius: 24px; box-shadow: var(--shadow);
-            box-sizing: border-box; display: flex; flex-direction: row;
-            justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
-            transition: background-color 0.4s ease, box-shadow 0.4s ease;
+            width: 95%; max-width: 1400px; background: var(--bg-card);
+            margin: 20px 0; padding: 20px 30px; border-radius: 24px; 
+            box-shadow: var(--shadow); box-sizing: border-box; 
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
         }
-        
         .header-title h1 { margin: 0; font-size: 1.8rem; font-weight: 700; letter-spacing: -0.5px; }
-        .header-title p { margin: 4px 0 0; font-size: 0.95rem; color: var(--text-muted); font-weight: 500; transition: color 0.4s ease; }
+        .header-title p { margin: 4px 0 0; font-size: 0.95rem; color: var(--text-muted); font-weight: 500; }
 
-        .info-bar { display: flex; gap: 15px; flex-wrap: wrap; align-items: center; }
-        
+        .info-bar { display: flex; gap: 15px; flex-wrap: wrap; }
         .info-item {
             display: flex; align-items: center; gap: 8px;
-            font-size: 0.9rem; font-weight: 600; color: var(--text-main);
-            background: var(--bg-body); padding: 10px 16px; border-radius: 20px;
-            transition: background-color 0.4s ease, color 0.4s ease;
+            font-size: 0.9rem; font-weight: 600; background: var(--bg-body); 
+            padding: 10px 16px; border-radius: 20px;
         }
-        .info-item svg { width: 18px; height: 18px; fill: var(--accent); transition: fill 0.4s ease; }
+        .info-item svg { width: 18px; height: 18px; fill: var(--accent); }
 
-        .controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+        .controls { display: flex; gap: 10px; flex-wrap: wrap; }
         .btn-action {
             display: flex; align-items: center; gap: 8px; 
             background: var(--bg-body); border: none; color: var(--text-main);
             padding: 10px 20px; border-radius: 20px; cursor: pointer;
             font-size: 0.9rem; font-weight: 600; text-decoration: none;
-            transition: all 0.3s ease; font-family: inherit;
+            transition: all 0.3s ease;
         }
         .btn-action:hover { background: var(--border); transform: scale(1.05); }
         .btn-action svg { width: 18px; height: 18px; fill: currentColor; }
-        
         .btn-suplovani { background-color: var(--accent); color: white; }
-        .btn-suplovani:hover { background-color: var(--accent-hover); color: white; }
-        
         .btn-jidelna { background-color: var(--green); color: white; }
-        .btn-jidelna:hover { background-color: var(--green-hover); color: white; }
 
-        /* --- ROZVRH (Bublinový grid) --- */
-        .container { 
-            width: 98%; max-width: 1400px; 
-            margin-bottom: 20px; padding: 0 10px; box-sizing: border-box;
-        }
-        
+        /* --- ROZVRH --- */
+        .container { width: 98%; max-width: 1400px; margin-bottom: 20px; padding: 0 10px; box-sizing: border-box; }
         .table-wrapper { width: 100%; overflow-x: auto; padding-bottom: 20px; }
         table { border-collapse: separate; border-spacing: 12px; width: 100%; min-width: 1100px; }
-        th { color: var(--text-muted); font-weight: 600; font-size: 0.9em; padding: 5px; transition: color 0.4s ease; }
+        th { color: var(--text-muted); font-weight: 600; font-size: 0.9em; padding: 5px; }
         th small { display: block; font-size: 0.8em; margin-top: 4px; font-weight: 500; opacity: 0.8; }
-        .day { font-weight: 700; color: var(--text-main); font-size: 1.2em; text-align: center; width: 40px; transition: color 0.4s ease; }
+        .day { font-weight: 700; color: var(--text-main); font-size: 1.2em; text-align: center; width: 40px; }
 
         td:not(.day) { 
             background: var(--bg-card); border-radius: 20px;
             box-shadow: var(--shadow); vertical-align: middle; padding: 0;
-            border: 2px solid transparent; 
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+            border: 2px solid transparent; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
         }
         td:not(.day):not(:empty):hover { transform: translateY(-4px) scale(1.02); box-shadow: var(--shadow-hover); z-index: 10; position: relative; }
         td:empty { background: transparent; box-shadow: none; border: none; }
 
-        /* --- ANIMACE --- */
         @keyframes yellowPulseAnim {
             0% { box-shadow: 0 0 0 0 var(--pulse-color); }
             70% { box-shadow: 0 0 0 12px rgba(255, 193, 7, 0); }
             100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
         }
 
-        /* --- STATUSY --- */
-        .past-lesson { background-color: var(--past-bg) !important; opacity: var(--past-opacity); box-shadow: none !important; border-color: transparent !important; }
+        .past-lesson { background-color: var(--past-bg) !important; opacity: var(--past-opacity); }
         .past-lesson:hover { opacity: 1; }
         .past-lesson .predmet, .past-lesson .ucebna, .past-lesson .ucitel, .past-lesson .skupina { color: var(--past-text) !important; }
-        
         .current-lesson { background-color: var(--current-bg) !important; border-color: var(--current-border) !important; transform: scale(1.03); animation: yellowPulseAnim 2s infinite; z-index: 5; position: relative; }
-        .current-lesson:hover { transform: translateY(-4px) scale(1.04); }
         .next-lesson { border-color: var(--next-border) !important; }
 
-        /* --- OBSAH BUŇKY --- */
         .hodina { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 85px; min-width: 110px; box-sizing: border-box; border-radius: 18px; }
-        .predmet { font-weight: 700; font-size: 1.5em; color: var(--text-main); letter-spacing: -0.5px; transition: color 0.4s ease; }
-        .ucitel { position: absolute; bottom: 10px; right: 12px; font-size: 0.75em; font-weight: 600; color: var(--text-muted); transition: color 0.4s ease; }
-        .ucebna { position: absolute; top: 10px; right: 12px; font-size: 0.85em; font-weight: 700; color: var(--accent); transition: color 0.4s ease; }
-        .skupina { position: absolute; bottom: 10px; left: 12px; font-size: 0.75em; font-weight: 600; color: var(--text-muted); transition: color 0.4s ease; }
+        .predmet { font-weight: 700; font-size: 1.5em; }
+        .ucitel { position: absolute; bottom: 10px; right: 12px; font-size: 0.75em; font-weight: 600; color: var(--text-muted); }
+        .ucebna { position: absolute; top: 10px; right: 12px; font-size: 0.85em; font-weight: 700; color: var(--accent); }
+        .skupina { position: absolute; bottom: 10px; left: 12px; font-size: 0.75em; font-weight: 600; color: var(--text-muted); }
         
         .split { display: flex; flex-direction: column; width: 100%; height: 100%; border-radius: 18px; overflow: hidden; }
         .split .hodina { height: 50%; min-height: 42.5px; }
-        .split-divider { width: 100%; height: 1px; background-color: var(--border); transition: background-color 0.4s ease; }
+        .split-divider { width: 100%; height: 1px; background-color: var(--border); }
         .split .predmet { font-size: 1.2em; }
         .split .ucitel, .split .skupina, .split .ucebna { font-size: 0.7em; top: auto; bottom: auto; margin-top: -2px; }
         .split .ucebna { top: 4px; right: 8px; }
         .split .ucitel { bottom: 4px; right: 8px; }
         .split .skupina { bottom: 4px; left: 8px; }
 
-        /* --- KALENDÁŘ SEKCE --- */
-        .calendar-section {
-            width: 95%; max-width: 1400px;
-            background: var(--bg-card);
-            margin-bottom: 50px; padding: 25px 30px;
-            border-radius: 24px; box-shadow: var(--shadow);
-            box-sizing: border-box; transition: background-color 0.4s ease, box-shadow 0.4s ease;
+        /* --- SPODNÍ DOCK --- */
+        .dock-container {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 15px; padding: 10px;
+            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15); z-index: 100;
         }
-        .calendar-header {
-            display: flex; align-items: center; gap: 12px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--border); padding-bottom: 15px;
-            transition: border-color 0.4s ease;
-        }
-        .calendar-header svg { width: 28px; height: 28px; fill: var(--accent); }
-        .calendar-header h2 { margin: 0; font-size: 1.3rem; font-weight: 700; color: var(--text-main); transition: color 0.4s ease; }
         
-        .calendar-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px;
+        .dock-btn {
+            background: transparent; border: none; color: var(--text-main);
+            display: flex; align-items: center; justify-content: center;
+            width: 50px; height: 50px; border-radius: 50%; cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); position: relative;
         }
-        .calendar-item {
-            background: var(--bg-body); padding: 15px; border-radius: 16px;
-            display: flex; flex-direction: column; gap: 5px;
-            transition: background-color 0.4s ease;
-        }
-        .calendar-date { font-weight: 700; color: var(--accent); font-size: 1.05rem; }
-        .calendar-event { font-weight: 600; color: var(--text-main); font-size: 0.95rem; transition: color 0.4s ease; }
-        .calendar-desc { font-weight: 500; color: var(--text-muted); font-size: 0.85rem; transition: color 0.4s ease; }
+        .dock-btn:hover { background: var(--bg-card); transform: scale(1.15) translateY(-5px); box-shadow: var(--shadow); }
+        .dock-btn svg { width: 24px; height: 24px; fill: currentColor; }
         
+        .dock-btn.active { background: var(--accent); color: white; transform: scale(1.15) translateY(-5px); box-shadow: 0 8px 20px rgba(0, 113, 227, 0.4); }
+
+        /* --- APPLE WIDGET POPOVER (Kalendář) --- */
+        .widget-popover {
+            position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) scale(0.95) translateY(20px);
+            width: 90%; max-width: 800px; background: var(--bg-card);
+            border-radius: 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            padding: 25px; box-sizing: border-box; z-index: 90;
+            opacity: 0; pointer-events: none; visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+            border: 1px solid var(--border);
+        }
+        .widget-popover.show {
+            opacity: 1; transform: translateX(-50%) scale(1) translateY(0);
+            pointer-events: auto; visibility: visible;
+        }
+        
+        .widget-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
+        .widget-header svg { width: 24px; height: 24px; fill: var(--accent); }
+        .widget-header h2 { margin: 0; font-size: 1.3rem; font-weight: 700; color: var(--text-main); }
+        
+        .calendar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; max-height: 50vh; overflow-y: auto; padding-right: 5px;}
+        .calendar-grid::-webkit-scrollbar { width: 6px; }
+        .calendar-grid::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+        
+        .calendar-item { background: var(--bg-body); padding: 12px 15px; border-radius: 16px; display: flex; flex-direction: column; gap: 4px; }
+        .calendar-date { font-weight: 700; color: var(--accent); font-size: 0.95rem; }
+        .calendar-event { font-weight: 600; color: var(--text-main); font-size: 0.9rem; }
+        .calendar-desc { font-weight: 500; color: var(--text-muted); font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -206,21 +200,18 @@
         <h1 data-i18n="title">Rozvrh hodin</h1>
         <p data-i18n="subtitle">Třída: C1a | SPŠE Ječná</p>
     </div>
-
     <div class="info-bar">
         <div class="info-item">
             <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-            <span id="countdownText" data-i18n="calculating">Počítám...</span>
+            <span id="countdownText">Počítám...</span>
         </div>
         <div class="info-item">
             <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
-            <span id="nameDayText" data-i18n="loading">Načítám...</span>
+            <span id="nameDayText">Svátek: Načítám...</span>
         </div>
     </div>
-    
     <div class="controls">
-        <a href="https://strav.nasejidelna.cz/0341/faces/secured/mobile.jsp?status=true&printer=&keyboard=&terminal=false#" target="_blank" class="btn-action btn-jidelna">
-            <svg viewBox="0 0 24 24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>
+        <a href="https://strav.nasejidelna.cz/0341/faces/secured/mobile.jsp" target="_blank" class="btn-action btn-jidelna">
             <span data-i18n="canteen">Jídelna</span>
         </a>
         <a href="https://www.spsejecna.cz/suplovani" target="_blank" class="btn-action btn-suplovani">
@@ -230,10 +221,7 @@
             <svg id="themeIcon" viewBox="0 0 24 24"></svg>
             <span id="themeText" data-i18n="darkMode">Tmavý režim</span>
         </button>
-        <button class="btn-action" id="langToggle" aria-label="Změnit jazyk">
-            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.09 13.36 4 12.69 4 12s.09-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.17.64.26 1.31.26 2s-.09 1.36-.26 2h-3.38z"/></svg>
-            <span id="langText">CS / EN</span>
-        </button>
+        <button class="btn-action" id="langToggle">CS / EN</button>
     </div>
 </div>
 
@@ -362,151 +350,123 @@
     </div>
 </div>
 
-<!-- KALENDÁŘ VOLNÝCH DNŮ -->
-<div class="calendar-section">
-    <div class="calendar-header">
+<!-- Apple Dock -->
+<div class="dock-container">
+    <button class="dock-btn" id="btnShowCalendar" title="Kalendář volna">
         <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
-        <h2 data-i18n="calendarTitle">Prázdniny a volné dny (Školní rok 2026/2027)</h2>
+    </button>
+</div>
+
+<!-- Apple Widget Popover -->
+<div class="widget-popover" id="calendarWidget">
+    <div class="widget-header">
+        <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
+        <h2 data-i18n="calendarTitle">Prázdniny a volné dny</h2>
     </div>
     <div class="calendar-grid">
-        <div class="calendar-item">
-            <span class="calendar-date">28. 9. 2026</span>
-            <span class="calendar-event" data-i18n="event1">Den české státnosti</span>
-            <span class="calendar-desc" data-i18n="descHol">Státní svátek</span>
-        </div>
-        <div class="calendar-item">
-            <span class="calendar-date">28. – 30. 10. 2026</span>
-            <span class="calendar-event" data-i18n="event2">Podzimní prázdniny</span>
-            <span class="calendar-desc" data-i18n="descHolMulti">Středa až pátek (vč. svátku)</span>
-        </div>
-        <div class="calendar-item">
-            <span class="calendar-date">17. 11. 2026</span>
-            <span class="calendar-event" data-i18n="event3">Den boje za svobodu</span>
-            <span class="calendar-desc" data-i18n="descHol">Státní svátek</span>
-        </div>
-        <div class="calendar-item">
-            <span class="calendar-date">23. 12. 2026 – 3. 1. 2027</span>
-            <span class="calendar-event" data-i18n="event4">Vánoční prázdniny</span>
-            <span class="calendar-desc" data-i18n="descBack">Nástup do školy: Po 4. 1.</span>
-        </div>
-        <div class="calendar-item">
-            <span class="calendar-date">29. 1. 2027</span>
-            <span class="calendar-event" data-i18n="event5">Pololetní prázdniny</span>
-            <span class="calendar-desc" data-i18n="descFri">Pátek</span>
-        </div>
-        <div class="calendar-item">
-            <span class="calendar-date">22. – 28. 2. 2027</span>
-            <span class="calendar-event" data-i18n="event6">Jarní prázdniny</span>
-            <span class="calendar-desc" data-i18n="descPrg">Termín pro Prahu 1 až 5</span>
-        </div>
-        <div class="calendar-item">
-            <span class="calendar-date">25. – 29. 3. 2027</span>
-            <span class="calendar-event" data-i18n="event7">Velikonoční prázdniny</span>
-            <span class="calendar-desc" data-i18n="descEaster">Čtvrtek až pondělí</span>
-        </div>
-        <div class="calendar-item">
-            <span class="calendar-date">1. 5. a 8. 5. 2027</span>
-            <span class="calendar-event" data-i18n="event8">Květnové svátky</span>
-            <span class="calendar-desc" data-i18n="descSat">Vycházejí na víkend (soboty)</span>
-        </div>
+        <div class="calendar-item"><span class="calendar-date">28. 9.</span><span class="calendar-event" data-i18n="event1">Den české státnosti</span></div>
+        <div class="calendar-item"><span class="calendar-date">28. – 30. 10.</span><span class="calendar-event" data-i18n="event2">Podzimní prázdniny</span></div>
+        <div class="calendar-item"><span class="calendar-date">17. 11.</span><span class="calendar-event" data-i18n="event3">Den boje za svobodu</span></div>
+        <div class="calendar-item"><span class="calendar-date">23. 12. – 3. 1.</span><span class="calendar-event" data-i18n="event4">Vánoční prázdniny</span></div>
+        <div class="calendar-item"><span class="calendar-date">29. 1.</span><span class="calendar-event" data-i18n="event5">Pololetní prázdniny</span></div>
+        <div class="calendar-item"><span class="calendar-date">22. – 28. 2.</span><span class="calendar-event" data-i18n="event6">Jarní prázdniny (Praha 1-5)</span></div>
+        <div class="calendar-item"><span class="calendar-date">25. – 29. 3.</span><span class="calendar-event" data-i18n="event7">Velikonoce</span></div>
+        <div class="calendar-item"><span class="calendar-date">1. 5. a 8. 5.</span><span class="calendar-event" data-i18n="event8">Květnové svátky</span></div>
     </div>
 </div>
 
 <script>
-// --- PŘEKLADY (i18n) ---
 const translations = {
     cs: {
         title: "Rozvrh hodin", subtitle: "Třída: C1a | SPŠE Ječná", canteen: "Jídelna", subst: "Suplování",
         lightMode: "Světlý režim", darkMode: "Tmavý režim", schoolStarts: "Začátek školy: ", schoolInProgress: "Škola právě probíhá",
-        nameDay: "Dnes má svátek: ", nameDayError: "Svátek: Nelze načíst", calculating: "Počítám...", loading: "Načítám...",
-        mon: "Po", tue: "Út", wed: "St", thu: "Čt", fri: "Pá",
-        calendarTitle: "Prázdniny a volné dny (Školní rok 2026/2027)",
+        nameDayPrefix: "Dnes má svátek: ", nameDayErr: "Svátek nedostupný",
+        mon: "Po", tue: "Út", wed: "St", thu: "Čt", fri: "Pá", calendarTitle: "Prázdniny a volné dny",
         event1: "Den české státnosti", event2: "Podzimní prázdniny", event3: "Den boje za svobodu", event4: "Vánoční prázdniny",
-        event5: "Pololetní prázdniny", event6: "Jarní prázdniny", event7: "Velikonoční prázdniny", event8: "Květnové svátky",
-        descHol: "Státní svátek", descHolMulti: "Středa až pátek (vč. svátku)", descBack: "Nástup do školy: Po 4. 1.", 
-        descFri: "Pátek", descPrg: "Termín pro Prahu 1 až 5", descEaster: "Čtvrtek až pondělí", descSat: "Vycházejí na víkend (soboty)"
+        event5: "Pololetní prázdniny", event6: "Jarní prázdniny (Praha 1-5)", event7: "Velikonoce", event8: "Květnové svátky (Víkend)"
     },
     en: {
         title: "Timetable", subtitle: "Class: C1a | SPŠE Ječná", canteen: "Canteen", subst: "Substitution",
         lightMode: "Light Mode", darkMode: "Dark Mode", schoolStarts: "School starts in: ", schoolInProgress: "School in progress",
-        nameDay: "Name day today: ", nameDayError: "Name day: Cannot load", calculating: "Calculating...", loading: "Loading...",
-        mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri",
-        calendarTitle: "Holidays and Days Off (School Year 2026/2027)",
-        event1: "Statehood Day", event2: "Autumn Holidays", event3: "Struggle for Freedom Day", event4: "Christmas Holidays",
-        event5: "Half-term Holidays", event6: "Spring Holidays", event7: "Easter Holidays", event8: "May Holidays",
-        descHol: "National Holiday", descHolMulti: "Wednesday to Friday (incl. holiday)", descBack: "Back to school: Mon Jan 4",
-        descFri: "Friday", descPrg: "Schedule for Prague 1 to 5", descEaster: "Thursday to Monday", descSat: "Fall on weekends (Saturdays)"
+        nameDayPrefix: "Name day: ", nameDayErr: "Name day unavailable",
+        mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri", calendarTitle: "Holidays & Days Off",
+        event1: "Statehood Day", event2: "Autumn Holidays", event3: "Freedom Day", event4: "Christmas Holidays",
+        event5: "Half-term", event6: "Spring Holidays", event7: "Easter", event8: "May Holidays"
     }
 };
 
-let currentLang = 'cs';
-try { currentLang = localStorage.getItem('language') || 'cs'; } catch (e) {}
-const langToggle = document.getElementById('langToggle');
-
-function updateLanguageUI() {
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if(key !== 'calculating' && key !== 'loading') {
-            if (translations[currentLang][key]) el.textContent = translations[currentLang][key];
-        }
-    });
-    updateThemeUI(rootElement.getAttribute('data-theme'));
-    updateNameDayUI();
-}
-
-langToggle.addEventListener('click', () => {
-    currentLang = currentLang === 'cs' ? 'en' : 'cs';
-    try { localStorage.setItem('language', currentLang); } catch (e) {}
-    updateLanguageUI();
-    try { forceTimerUpdate(); } catch(e){}
-});
-
-// --- TÉMA (DARK/LIGHT) ---
-const themeToggle = document.getElementById('themeToggle');
-const rootElement = document.documentElement;
-const themeIcon = document.getElementById('themeIcon');
-const themeText = document.getElementById('themeText');
-const sunIcon = '<path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M12 3v2M12 19v2M5.636 5.636l1.414 1.414M16.95 16.95l1.414 1.414M3 12h2M19 12h2M5.636 18.364l1.414-1.414M16.95 7.05l1.414-1.414M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>';
-const moonIcon = '<path fill="currentColor" d="M12 21a9 9 0 1 1 9-9 9.01 9.01 0 0 1-9 9zm0-16.5a7.5 7.5 0 1 0 7.5 7.5A7.51 7.51 0 0 0 12 4.5z"/>';
-
-let savedTheme = 'light';
-try { savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); } catch (e) {}
-rootElement.setAttribute('data-theme', savedTheme);
-
-themeToggle.addEventListener('click', () => {
-    const newTheme = rootElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    rootElement.setAttribute('data-theme', newTheme);
-    try { localStorage.setItem('theme', newTheme); } catch (e) {}
-    updateThemeUI(newTheme);
-});
-
-function updateThemeUI(theme) {
-    if (theme === 'dark') { themeIcon.innerHTML = sunIcon; themeText.textContent = translations[currentLang].lightMode; } 
-    else { themeIcon.innerHTML = moonIcon; themeText.textContent = translations[currentLang].darkMode; }
-}
-
-updateLanguageUI();
-updateThemeUI(savedTheme);
-
-// --- SVÁTEK S AUTOMATICKÝM RESETEM O PŮLNOCI ---
+let currentLang = localStorage.getItem('language') || 'cs';
 let fetchedNameDay = "";
 let lastCheckedDay = new Date().getDate();
 
-function updateNameDayUI() {
-    const el = document.getElementById('nameDayText');
-    if (fetchedNameDay) el.innerText = `${translations[currentLang].nameDay}${fetchedNameDay}`;
-    else el.innerText = translations[currentLang].nameDayError;
+// Jazyk
+function updateLanguageUI() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang][key]) el.textContent = translations[currentLang][key];
+    });
+    updateThemeUI(document.documentElement.getAttribute('data-theme'));
+    updateNameDayText();
 }
+document.getElementById('langToggle').addEventListener('click', () => {
+    currentLang = currentLang === 'cs' ? 'en' : 'cs';
+    localStorage.setItem('language', currentLang);
+    updateLanguageUI();
+});
 
+// Téma
+const themeToggle = document.getElementById('themeToggle');
+const rootElement = document.documentElement;
+let savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+rootElement.setAttribute('data-theme', savedTheme);
+
+function updateThemeUI(theme) {
+    const icon = document.getElementById('themeIcon');
+    if (theme === 'dark') {
+        icon.innerHTML = '<path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M12 3v2M12 19v2M5.636 5.636l1.414 1.414M16.95 16.95l1.414 1.414M3 12h2M19 12h2M5.636 18.364l1.414-1.414M16.95 7.05l1.414-1.414M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>';
+        document.getElementById('themeText').textContent = translations[currentLang].lightMode;
+    } else {
+        icon.innerHTML = '<path fill="currentColor" d="M12 21a9 9 0 1 1 9-9 9.01 9.01 0 0 1-9 9zm0-16.5a7.5 7.5 0 1 0 7.5 7.5A7.51 7.51 0 0 0 12 4.5z"/>';
+        document.getElementById('themeText').textContent = translations[currentLang].darkMode;
+    }
+}
+themeToggle.addEventListener('click', () => {
+    const newTheme = rootElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    rootElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeUI(newTheme);
+});
+updateThemeUI(savedTheme);
+
+// Svátky
+function updateNameDayText() {
+    const el = document.getElementById('nameDayText');
+    if(el) el.innerText = fetchedNameDay ? `${translations[currentLang].nameDayPrefix}${fetchedNameDay}` : translations[currentLang].nameDayErr;
+}
 function loadNameDay() {
     fetch('https://svatkyapi.cz/api/day')
         .then(res => res.json())
-        .then(data => { fetchedNameDay = data.name; updateNameDayUI(); })
-        .catch(() => { fetchedNameDay = ""; updateNameDayUI(); });
+        .then(data => { fetchedNameDay = data.name; updateNameDayText(); })
+        .catch(() => { fetchedNameDay = ""; updateNameDayText(); }); // Brání záseku js
 }
-loadNameDay(); // Načtení při spuštění
+loadNameDay();
 
-// --- ROBUSTNÍ ČASOVAČ ---
+// Kalendář Dock logic
+const btnCal = document.getElementById('btnShowCalendar');
+const widgetCal = document.getElementById('calendarWidget');
+btnCal.addEventListener('click', (e) => {
+    e.stopPropagation();
+    widgetCal.classList.toggle('show');
+    btnCal.classList.toggle('active');
+});
+document.addEventListener('click', (e) => {
+    if (!widgetCal.contains(e.target) && !btnCal.contains(e.target)) {
+        widgetCal.classList.remove('show');
+        btnCal.classList.remove('active');
+    }
+});
+
+// Časovač (izolovaný od i18n tagů)
 const times = [
     { start: "07:30", end: "08:15" }, { start: "08:25", end: "09:10" },
     { start: "09:20", end: "10:05" }, { start: "10:20", end: "11:05" },
@@ -517,69 +477,54 @@ const times = [
 function forceTimerUpdate() {
     try {
         const now = new Date();
-        const currentDay = now.getDate();
-        
-        // Půlnoční reset svátku
-        if (currentDay !== lastCheckedDay) {
-            lastCheckedDay = currentDay;
+        if (now.getDate() !== lastCheckedDay) {
+            lastCheckedDay = now.getDate();
             loadNameDay(); 
         }
 
+        const el = document.getElementById('countdownText');
+        if(!el) return;
+
         const day = now.getDay();
         const currentMins = now.getHours() * 60 + now.getMinutes();
-        
-        let target = new Date(now);
-        target.setHours(7, 30, 0, 0);
-
+        let target = new Date(now); target.setHours(7, 30, 0, 0);
         let endOfSchoolMins = 14 * 60 + 45; 
-        let tr = null;
         
-        if (day >= 1 && day <= 5) {
-            tr = document.getElementById(`day-${day}`);
-            if (tr) {
-                const tds = tr.querySelectorAll('td:not(.day)');
-                let lastLessonIndex = -1;
-                tds.forEach((td, index) => { if (td.textContent.trim() !== '') lastLessonIndex = index; });
-                if (lastLessonIndex !== -1 && lastLessonIndex < times.length) {
-                    const [eh, em] = times[lastLessonIndex].end.split(':').map(Number);
-                    endOfSchoolMins = eh * 60 + em;
-                }
+        let tr = (day >= 1 && day <= 5) ? document.getElementById(`day-${day}`) : null;
+        if (tr) {
+            const tds = tr.querySelectorAll('td:not(.day)');
+            let lastIndex = -1;
+            tds.forEach((td, i) => { if (td.textContent.trim()) lastIndex = i; });
+            if (lastIndex !== -1 && lastIndex < times.length) {
+                const [eh, em] = times[lastIndex].end.split(':').map(Number);
+                endOfSchoolMins = eh * 60 + em;
             }
         }
 
         let endOfSchool = new Date(now);
         endOfSchool.setHours(Math.floor(endOfSchoolMins / 60), endOfSchoolMins % 60, 0, 0);
 
-        if (day === 6) { 
-            target.setDate(target.getDate() + 2); 
-        } else if (day === 0) { 
-            target.setDate(target.getDate() + 1); 
-        } else if (now > endOfSchool) { 
-            if (day === 5) { target.setDate(target.getDate() + 3); } 
-            else { target.setDate(target.getDate() + 1); }
-        }
+        if (day === 6) { target.setDate(target.getDate() + 2); } 
+        else if (day === 0) { target.setDate(target.getDate() + 1); } 
+        else if (now > endOfSchool) { target.setDate(target.getDate() + (day === 5 ? 3 : 1)); }
 
-        const diff = target - now;
-        const countdownEl = document.getElementById('countdownText');
-        
         if (now >= target && now <= endOfSchool && day >= 1 && day <= 5) {
-            countdownEl.innerText = translations[currentLang].schoolInProgress;
+            el.innerText = translations[currentLang].schoolInProgress;
         } else {
+            const diff = target - now;
             const h = Math.floor(diff / (1000 * 60 * 60));
             const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((diff % (1000 * 60)) / 1000);
-            countdownEl.innerText = `${translations[currentLang].schoolStarts}${h}h ${m}m ${s}s`;
+            el.innerText = `${translations[currentLang].schoolStarts}${h}h ${m}m ${s}s`;
         }
 
-        // Čištění a zvýrazňování statusů hodin
-        document.querySelectorAll('.current-lesson, .past-lesson, .next-lesson').forEach(el => {
-            el.classList.remove('current-lesson', 'past-lesson', 'next-lesson');
+        document.querySelectorAll('.current-lesson, .past-lesson, .next-lesson').forEach(cell => {
+            cell.classList.remove('current-lesson', 'past-lesson', 'next-lesson');
         });
 
         if (tr && day >= 1 && day <= 5) { 
             const tds = tr.querySelectorAll('td:not(.day)');
             let foundNext = false;
-            
             times.forEach((t, index) => {
                 if (index >= tds.length) return;
                 const cell = tds[index];
@@ -590,21 +535,15 @@ function forceTimerUpdate() {
                 const startMins = sh * 60 + sm;
                 const endMins = eh * 60 + em;
                 
-                if (currentMins >= startMins && currentMins <= endMins) {
-                    cell.classList.add('current-lesson');
-                } else if (currentMins > endMins) {
-                    cell.classList.add('past-lesson');
-                } else if (currentMins < startMins && !foundNext) {
-                    cell.classList.add('next-lesson');
-                    foundNext = true;
-                }
+                if (currentMins >= startMins && currentMins <= endMins) cell.classList.add('current-lesson');
+                else if (currentMins > endMins) cell.classList.add('past-lesson');
+                else if (currentMins < startMins && !foundNext) { cell.classList.add('next-lesson'); foundNext = true; }
             });
         }
-    } catch (e) {
-        console.error("Chyba časovače:", e);
-    }
+    } catch (e) { console.error("Časovač:", e); }
 }
 
+updateLanguageUI();
 setInterval(forceTimerUpdate, 1000);
 forceTimerUpdate(); 
 </script>
