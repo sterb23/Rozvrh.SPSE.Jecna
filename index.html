@@ -1,623 +1,188 @@
 <!DOCTYPE html>
-<html lang="cs" data-theme="light">
+<html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rozvrh C1a - Plynulý zaoblený styl</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <title>Rozvrh a Mapa Učeben</title>
     <style>
         :root {
-            /* Světlý režim - Apple styl */
-            --bg-body: #f5f5f7;
-            --bg-card: #ffffff;
-            --text-main: #1d1d1f;
-            --text-muted: #86868b;
-            --accent: #0071e3;
-            --accent-hover: #0077ed;
-            --green: #34c759;
-            --green-hover: #30d158;
-            --shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
-            --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.1);
-            --border: #e5e5ea;
-            
-            --past-bg: #e5e5ea;
-            --past-text: #86868b;
-            --past-opacity: 0.5;
-            --current-bg: rgba(255, 193, 7, 0.15);
-            --current-border: #ffc107;
-            --pulse-color: rgba(255, 193, 7, 0.5);
-            --next-border: #0071e3;
-            
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --glass-border: rgba(255, 255, 255, 0.4);
+            --primary: #4f46e5;
+            --bg: #f3f4f6;
+            --surface: #ffffff;
+            --text: #1f2937;
         }
-
-        [data-theme="dark"] {
-            /* Tmavý režim - Apple styl */
-            --bg-body: #000000;
-            --bg-card: #1c1c1e;
-            --text-main: #f5f5f7;
-            --text-muted: #98989d;
-            --accent: #0a84ff;
-            --accent-hover: #47a1ff;
-            --green: #30d158;
-            --green-hover: #34c759;
-            --shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
-            --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.8);
-            --border: #38383a;
-            
-            --past-bg: #1c1c1e;
-            --past-text: #48484a;
-            --past-opacity: 0.4;
-            --current-bg: rgba(255, 193, 7, 0.1);
-            --current-border: #ffca28;
-            --pulse-color: rgba(255, 202, 40, 0.4);
-            --next-border: #0a84ff;
-            
-            --glass-bg: rgba(28, 28, 30, 0.85);
-            --glass-border: rgba(255, 255, 255, 0.1);
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-
-        body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
-            background-color: var(--bg-body); 
-            color: var(--text-main); 
-            margin: 0; padding: 0 0 100px 0;
-            display: flex; flex-direction: column; align-items: center;
-            min-height: 100vh; transition: background-color 0.4s ease, color 0.4s ease;
-        }
-
-        /* --- HLAVIČKA --- */
-        .header {
-            width: 95%; max-width: 1400px; background: var(--bg-card);
-            margin: 20px 0; padding: 20px 30px; border-radius: 24px; 
-            box-shadow: var(--shadow); box-sizing: border-box; 
-            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
-        }
-        .header-title h1 { margin: 0; font-size: 1.8rem; font-weight: 700; letter-spacing: -0.5px; }
-        .header-title p { margin: 4px 0 0; font-size: 0.95rem; color: var(--text-muted); font-weight: 500; }
-
-        .info-bar { display: flex; gap: 15px; flex-wrap: wrap; }
-        .info-item {
-            display: flex; align-items: center; gap: 8px;
-            font-size: 0.9rem; font-weight: 600; background: var(--bg-body); 
-            padding: 10px 16px; border-radius: 20px;
-        }
-        .info-item svg { width: 18px; height: 18px; fill: var(--accent); }
-
-        .controls { display: flex; gap: 10px; flex-wrap: wrap; }
-        .btn-action {
-            display: flex; align-items: center; gap: 8px; 
-            background: var(--bg-body); border: none; color: var(--text-main);
-            padding: 10px 20px; border-radius: 20px; cursor: pointer;
-            font-size: 0.9rem; font-weight: 600; text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        .btn-action:hover { background: var(--border); transform: scale(1.05); }
-        .btn-action svg { width: 18px; height: 18px; fill: currentColor; }
-        .btn-suplovani { background-color: var(--accent); color: white; }
-        .btn-jidelna { background-color: var(--green); color: white; }
-
-        /* --- ROZVRH --- */
-        .container { width: 98%; max-width: 1400px; margin-bottom: 20px; padding: 0 10px; box-sizing: border-box; }
-        .table-wrapper { width: 100%; overflow-x: auto; padding-bottom: 20px; }
-        table { border-collapse: separate; border-spacing: 12px; width: 100%; min-width: 1100px; }
-        th { color: var(--text-muted); font-weight: 600; font-size: 0.9em; padding: 5px; }
-        th small { display: block; font-size: 0.8em; margin-top: 4px; font-weight: 500; opacity: 0.8; }
-        .day { font-weight: 700; color: var(--text-main); font-size: 1.2em; text-align: center; width: 40px; }
-
-        td:not(.day) { 
-            background: var(--bg-card); border-radius: 20px;
-            box-shadow: var(--shadow); vertical-align: middle; padding: 0;
-            border: 2px solid transparent; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
-        }
-        td:not(.day):not(:empty):hover { transform: translateY(-4px) scale(1.02); box-shadow: var(--shadow-hover); z-index: 10; position: relative; }
-        td:empty { background: transparent; box-shadow: none; border: none; }
-
-        @keyframes yellowPulseAnim {
-            0% { box-shadow: 0 0 0 0 var(--pulse-color); }
-            70% { box-shadow: 0 0 0 12px rgba(255, 193, 7, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
-        }
-
-        .past-lesson { background-color: var(--past-bg) !important; opacity: var(--past-opacity); }
-        .past-lesson:hover { opacity: 1; }
-        .past-lesson .predmet, .past-lesson .ucebna, .past-lesson .ucitel, .past-lesson .skupina { color: var(--past-text) !important; }
-        .current-lesson { background-color: var(--current-bg) !important; border-color: var(--current-border) !important; transform: scale(1.03); animation: yellowPulseAnim 2s infinite; z-index: 5; position: relative; }
-        .next-lesson { border-color: var(--next-border) !important; }
-
-        .hodina { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 85px; min-width: 110px; box-sizing: border-box; border-radius: 18px; }
-        .predmet { font-weight: 700; font-size: 1.5em; }
-        .ucitel { position: absolute; bottom: 10px; right: 12px; font-size: 0.75em; font-weight: 600; color: var(--text-muted); }
-        .skupina { position: absolute; bottom: 10px; left: 12px; font-size: 0.75em; font-weight: 600; color: var(--text-muted); }
-        
-        .ucebna { 
-            position: absolute; top: 10px; right: 12px; font-size: 0.85em; font-weight: 700; 
-            color: var(--accent); cursor: pointer; transition: transform 0.2s ease, color 0.2s ease; 
-        }
-        .ucebna:hover { transform: scale(1.2); color: var(--accent-hover); }
-
-        .split { display: flex; flex-direction: column; width: 100%; height: 100%; border-radius: 18px; overflow: hidden; }
-        .split .hodina { height: 50%; min-height: 42.5px; }
-        .split-divider { width: 100%; height: 1px; background-color: var(--border); }
-        .split .predmet { font-size: 1.2em; }
-        .split .ucitel, .split .skupina, .split .ucebna { font-size: 0.7em; top: auto; bottom: auto; margin-top: -2px; }
-        .split .ucebna { top: 4px; right: 8px; }
-        .split .ucitel { bottom: 4px; right: 8px; }
-        .split .skupina { bottom: 4px; left: 8px; }
-
-        /* --- APPLE DOCK A KALENDÁŘ --- */
-        .dock-container {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            display: flex; gap: 15px; padding: 10px;
-            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border); border-radius: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15); z-index: 100;
+        .app-container {
+            width: 100%;
+            max-width: 800px;
         }
         
-        .dock-btn {
-            background: transparent; border: none; color: var(--text-main);
-            display: flex; align-items: center; justify-content: center;
-            width: 50px; height: 50px; border-radius: 50%; cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); position: relative;
-        }
-        .dock-btn:hover { background: var(--bg-card); transform: scale(1.15) translateY(-5px); box-shadow: var(--shadow); }
-        .dock-btn svg { width: 24px; height: 24px; fill: currentColor; }
-        .dock-btn.active { background: var(--accent); color: white; transform: scale(1.15) translateY(-5px); box-shadow: 0 8px 20px rgba(0, 113, 227, 0.4); }
-
-        .widget-popover {
-            position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) scale(0.95) translateY(20px);
-            width: 90%; max-width: 800px; background: var(--bg-card);
-            border-radius: 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            padding: 25px; box-sizing: border-box; z-index: 90;
-            opacity: 0; pointer-events: none; visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-            border: 1px solid var(--border);
-        }
-        .widget-popover.show { opacity: 1; transform: translateX(-50%) scale(1) translateY(0); pointer-events: auto; visibility: visible; }
-        
-        .widget-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
-        .widget-header svg { width: 24px; height: 24px; fill: var(--accent); }
-        .widget-header h2 { margin: 0; font-size: 1.3rem; font-weight: 700; color: var(--text-main); }
-        
-        .calendar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; max-height: 50vh; overflow-y: auto; padding-right: 5px;}
-        .calendar-grid::-webkit-scrollbar { width: 6px; }
-        .calendar-grid::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-        
-        .calendar-item { background: var(--bg-body); padding: 12px 15px; border-radius: 16px; display: flex; flex-direction: column; gap: 4px; }
-        .calendar-date { font-weight: 700; color: var(--accent); font-size: 0.95rem; }
-        .calendar-event { font-weight: 600; color: var(--text-main); font-size: 0.9rem; }
-
-        /* --- APPLE TOOLTIP PRO UČEBNY --- */
-        .room-tooltip {
-            position: fixed;
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--border);
-            padding: 8px 16px;
+        /* Ovládání rozvrhu */
+        .schedule-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--surface);
+            padding: 15px 20px;
             border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-main);
-            z-index: 1000;
-            pointer-events: none;
-            opacity: 0;
-            visibility: hidden;
-            /* Výchozí stav pro animaci zdola nahoru */
-            transform: translate(-50%, 10px) scale(0.8);
-            /* Bouncy křivka pro Apple pocit */
-            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
         }
-        .room-tooltip.show {
-            opacity: 1;
-            visibility: visible;
-            /* Cílový stav nad učebnou */
-            transform: translate(-50%, -100%) scale(1);
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+        button:hover { opacity: 0.9; }
+        
+        /* Kontejner pro animaci patra */
+        .floor-wrapper {
+            background: var(--surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        /* CSS Animace pro zmizení a objevení */
+        .anim-fade-out {
+            animation: fadeOut 0.3s ease forwards;
+        }
+        .anim-fade-in {
+            animation: fadeIn 0.3s ease forwards;
+        }
+        
+        @keyframes fadeOut {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.98); }
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.98); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Layout učeben */
+        .floor-title {
+            margin-top: 0;
+            border-bottom: 2px solid var(--bg);
+            padding-bottom: 10px;
+            font-size: 1.1rem;
+            color: #4b5563;
+        }
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .room {
+            background: var(--bg);
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .room.active {
+            background: #e0e7ff;
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
         }
     </style>
 </head>
 <body>
-
-<div class="header">
-    <div class="header-title">
-        <h1 data-i18n="title">Rozvrh hodin</h1>
-        <p data-i18n="subtitle">Třída: C1a | SPŠE Ječná</p>
-    </div>
-    <div class="info-bar">
-        <div class="info-item">
-            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-            <span id="countdownText">Počítám...</span>
+    <div class="app-container">
+        <!-- Ovládací panel rozvrhu -->
+        <div class="schedule-controls">
+            <button onclick="shiftSchedule(-1)">&#8592; Předchozí</button>
+            <h2 id="current-time">1. Hodina</h2>
+            <button onclick="shiftSchedule(1)">Další &#8594;</button>
         </div>
-        <div class="info-item">
-            <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
-            <span id="nameDayText">Svátek: Načítám...</span>
+
+        <!-- Tento kontejner se pokaždé animuje -->
+        <div id="floor-map" class="floor-wrapper anim-fade-in">
+            
+            <!-- Správné patro -->
+            <h3 class="floor-title">Hlavní patro</h3>
+            <div class="rooms-grid">
+                <!-- Zde jsou zachovány pouze tyto tři učebny -->
+                <div class="room" id="room-15">15</div>
+                <div class="room" id="room-5a">5a</div>
+                <div class="room" id="room-5b">5b</div>
+            </div>
+
+            <!-- Ostatní učebny přesunuté na jiné patro -->
+            <h3 class="floor-title">Ostatní patra (Přízemí atd.)</h3>
+            <div class="rooms-grid">
+                <div class="room" id="room-1">1</div>
+                <div class="room" id="room-2">2</div>
+                <div class="room" id="room-3">3</div>
+                <div class="room" id="room-4">4</div>
+            </div>
+            
         </div>
     </div>
-    <div class="controls">
-        <a href="https://strav.nasejidelna.cz/0341/faces/secured/mobile.jsp" target="_blank" class="btn-action btn-jidelna">
-            <span data-i18n="canteen">Jídelna</span>
-        </a>
-        <a href="https://www.spsejecna.cz/suplovani" target="_blank" class="btn-action btn-suplovani">
-            <span data-i18n="subst">Suplování</span>
-        </a>
-        <button class="btn-action" id="themeToggle" aria-label="Přepnout režim">
-            <svg id="themeIcon" viewBox="0 0 24 24"></svg>
-            <span id="themeText" data-i18n="darkMode">Tmavý režim</span>
-        </button>
-        <button class="btn-action" id="langToggle">CS / EN</button>
-    </div>
-</div>
 
-<div class="container">
-    <div class="table-wrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th style="width: 40px;"></th>
-                    <th>1<small>7:30 - 8:15</small></th>
-                    <th>2<small>8:25 - 9:10</small></th>
-                    <th>3<small>9:20 - 10:05</small></th>
-                    <th>4<small>10:20 - 11:05</small></th>
-                    <th>5<small>11:15 - 12:00</small></th>
-                    <th>6<small>12:10 - 12:55</small></th>
-                    <th>7<small>13:05 - 13:50</small></th>
-                    <th>8<small>14:00 - 14:45</small></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="day-1">
-                    <td class="day" data-i18n="mon">Po</td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">F</span><span class="ucitel">Rk</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">C</span><span class="ucitel">Su</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">D</span><span class="ucitel">Su</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">Ele</span><span class="ucitel">Jk</span></div></td>
-                    <td>
-                        <div class="split">
-                            <div class="hodina"><span class="ucebna">15</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucebna">5b</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
-                        </div>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr id="day-2">
-                    <td class="day" data-i18n="tue">Út</td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">HW</span><span class="ucitel">Ku</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">IT</span><span class="ucitel">Me</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">TV</span><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
-                    <td></td>
-                    <td>
-                        <div class="split">
-                            <div class="hodina"><span class="ucebna">18a</span><span class="predmet">IT</span><span class="skupina">2/2</span><span class="ucitel">Ha</span></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucebna">18b</span><span class="predmet">IT</span><span class="skupina">1/2</span><span class="ucitel">Me</span></div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="split">
-                            <div class="hodina"><span class="ucebna">18a</span><span class="predmet">IT</span><span class="skupina">2/2</span><span class="ucitel">Ha</span></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucebna">18b</span><span class="predmet">IT</span><span class="skupina">1/2</span><span class="ucitel">Me</span></div>
-                        </div>
-                    </td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
-                </tr>
-                <tr id="day-3">
-                    <td class="day" data-i18n="wed">St</td>
-                    <td>
-                        <div class="split">
-                            <div class="hodina"><span class="ucebna">5a</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucebna">17a</span><span class="predmet">TD</span><span class="skupina">2/2</span><span class="ucitel">Pr</span></div>
-                        </div>
-                    </td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">HW</span><span class="ucitel">Ku</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">TD</span><span class="ucitel">Pr</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
-                    <td>
-                        <div class="split">
-                            <div class="hodina"></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucebna">5a</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
-                        </div>
-                    </td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr id="day-4">
-                    <td class="day" data-i18n="thu">Čt</td>
-                    <td>
-                        <div class="split">
-                            <div class="hodina"><span class="ucebna">19a</span><span class="predmet">TD</span><span class="skupina">1/2</span><span class="ucitel">Pr</span></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"></div>
-                        </div>
-                    </td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">C</span><span class="ucitel">Su</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">TD</span><span class="ucitel">Pr</span></div></td>
-                    <td>
-                        <div class="split">
-                            <div class="hodina"><span class="ucebna">5a</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucebna">15</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
-                        </div>
-                    </td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">D</span><span class="ucitel">Su</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">Ele</span><span class="ucitel">Jk</span></div></td>
-                    <td></td>
-                </tr>
-                <tr id="day-5">
-                    <td class="day" data-i18n="fri">Pá</td>
-                    <td><div class="hodina"><span class="ucebna">TV</span><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">Ele</span><span class="ucitel">Jk</span></div></td>
-                    <td>
-                        <div class="split">
-                            <div class="hodina"><span class="ucebna">5b</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucebna">15</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
-                        </div>
-                    </td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">C</span><span class="ucitel">Su</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">8</span><span class="predmet">F</span><span class="ucitel">Rk</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<!-- Apple Dock -->
-<div class="dock-container">
-    <button class="dock-btn" id="btnShowCalendar" title="Kalendář volna">
-        <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
-    </button>
-</div>
-
-<!-- Apple Widget Popover (Kalendář) -->
-<div class="widget-popover" id="calendarWidget">
-    <div class="widget-header">
-        <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
-        <h2 data-i18n="calendarTitle">Prázdniny a volné dny</h2>
-    </div>
-    <div class="calendar-grid">
-        <div class="calendar-item"><span class="calendar-date">28. 9.</span><span class="calendar-event" data-i18n="event1">Den české státnosti</span></div>
-        <div class="calendar-item"><span class="calendar-date">28. – 30. 10.</span><span class="calendar-event" data-i18n="event2">Podzimní prázdniny</span></div>
-        <div class="calendar-item"><span class="calendar-date">17. 11.</span><span class="calendar-event" data-i18n="event3">Den boje za svobodu</span></div>
-        <div class="calendar-item"><span class="calendar-date">23. 12. – 3. 1.</span><span class="calendar-event" data-i18n="event4">Vánoční prázdniny</span></div>
-        <div class="calendar-item"><span class="calendar-date">29. 1.</span><span class="calendar-event" data-i18n="event5">Pololetní prázdniny</span></div>
-        <div class="calendar-item"><span class="calendar-date">22. – 28. 2.</span><span class="calendar-event" data-i18n="event6">Jarní prázdniny (Praha 1-5)</span></div>
-        <div class="calendar-item"><span class="calendar-date">25. – 29. 3.</span><span class="calendar-event" data-i18n="event7">Velikonoce</span></div>
-        <div class="calendar-item"><span class="calendar-date">1. 5. a 8. 5.</span><span class="calendar-event" data-i18n="event8">Květnové svátky</span></div>
-    </div>
-</div>
-
-<!-- Apple Popover pro patra učeben -->
-<div id="roomTooltip" class="room-tooltip">
-    <span id="roomTooltipText"></span>
-</div>
-
-<script>
-const translations = {
-    cs: {
-        title: "Rozvrh hodin", subtitle: "Třída: C1a | SPŠE Ječná", canteen: "Jídelna", subst: "Suplování",
-        lightMode: "Světlý režim", darkMode: "Tmavý režim", schoolStarts: "Začátek školy: ", schoolInProgress: "Škola právě probíhá",
-        nameDayPrefix: "Dnes má svátek: ", nameDayErr: "Svátek nedostupný",
-        mon: "Po", tue: "Út", wed: "St", thu: "Čt", fri: "Pá", calendarTitle: "Prázdniny a volné dny",
-        event1: "Den české státnosti", event2: "Podzimní prázdniny", event3: "Den boje za svobodu", event4: "Vánoční prázdniny",
-        event5: "Pololetní prázdniny", event6: "Jarní prázdniny (Praha 1-5)", event7: "Velikonoce", event8: "Květnové svátky",
-        floor1: "1. patro", floor2: "2. patro", floor3: "3. patro", floor4: "4. patro", floorGym: "Suterén (Tělocvična)"
-    },
-    en: {
-        title: "Timetable", subtitle: "Class: C1a | SPŠE Ječná", canteen: "Canteen", subst: "Substitution",
-        lightMode: "Light Mode", darkMode: "Dark Mode", schoolStarts: "School starts in: ", schoolInProgress: "School in progress",
-        nameDayPrefix: "Name day: ", nameDayErr: "Name day unavailable",
-        mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri", calendarTitle: "Holidays & Days Off",
-        event1: "Statehood Day", event2: "Autumn Holidays", event3: "Freedom Day", event4: "Christmas Holidays",
-        event5: "Half-term", event6: "Spring Holidays", event7: "Easter", event8: "May Holidays",
-        floor1: "1st Floor", floor2: "2nd Floor", floor3: "3rd Floor", floor4: "4th Floor", floorGym: "Basement (Gym)"
-    }
-};
-
-let currentLang = localStorage.getItem('language') || 'cs';
-let fetchedNameDay = "";
-let lastCheckedDay = new Date().getDate();
-
-// Jazyk
-function updateLanguageUI() {
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[currentLang][key]) el.textContent = translations[currentLang][key];
-    });
-    updateThemeUI(document.documentElement.getAttribute('data-theme'));
-    updateNameDayText();
-}
-document.getElementById('langToggle').addEventListener('click', () => {
-    currentLang = currentLang === 'cs' ? 'en' : 'cs';
-    localStorage.setItem('language', currentLang);
-    updateLanguageUI();
-});
-
-// Téma
-const themeToggle = document.getElementById('themeToggle');
-const rootElement = document.documentElement;
-let savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-rootElement.setAttribute('data-theme', savedTheme);
-
-function updateThemeUI(theme) {
-    const icon = document.getElementById('themeIcon');
-    if (theme === 'dark') {
-        icon.innerHTML = '<path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M12 3v2M12 19v2M5.636 5.636l1.414 1.414M16.95 16.95l1.414 1.414M3 12h2M19 12h2M5.636 18.364l1.414-1.414M16.95 7.05l1.414-1.414M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>';
-        document.getElementById('themeText').textContent = translations[currentLang].lightMode;
-    } else {
-        icon.innerHTML = '<path fill="currentColor" d="M12 21a9 9 0 1 1 9-9 9.01 9.01 0 0 1-9 9zm0-16.5a7.5 7.5 0 1 0 7.5 7.5A7.51 7.51 0 0 0 12 4.5z"/>';
-        document.getElementById('themeText').textContent = translations[currentLang].darkMode;
-    }
-}
-themeToggle.addEventListener('click', () => {
-    const newTheme = rootElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    rootElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateThemeUI(newTheme);
-});
-updateThemeUI(savedTheme);
-
-// Svátky
-function updateNameDayText() {
-    const el = document.getElementById('nameDayText');
-    if(el) el.innerText = fetchedNameDay ? `${translations[currentLang].nameDayPrefix}${fetchedNameDay}` : translations[currentLang].nameDayErr;
-}
-function loadNameDay() {
-    fetch('https://svatkyapi.cz/api/day')
-        .then(res => res.json())
-        .then(data => { fetchedNameDay = data.name; updateNameDayText(); })
-        .catch(() => { fetchedNameDay = ""; updateNameDayText(); });
-}
-loadNameDay();
-
-// Kalendář Dock
-const btnCal = document.getElementById('btnShowCalendar');
-const widgetCal = document.getElementById('calendarWidget');
-btnCal.addEventListener('click', (e) => {
-    e.stopPropagation();
-    widgetCal.classList.toggle('show');
-    btnCal.classList.toggle('active');
-});
-document.addEventListener('click', (e) => {
-    if (!widgetCal.contains(e.target) && !btnCal.contains(e.target)) {
-        widgetCal.classList.remove('show');
-        btnCal.classList.remove('active');
-    }
-});
-
-// Zobrazení pater pro učebny (Apple Popover)
-const roomTooltip = document.getElementById('roomTooltip');
-const roomTooltipText = document.getElementById('roomTooltipText');
-
-document.querySelectorAll('.ucebna').forEach(el => {
-    el.addEventListener('click', (e) => {
-        e.stopPropagation(); // Zabrání zavření hned po kliknutí
-        const roomName = el.textContent.trim().toLowerCase();
-        let floorKey = "";
-
-        // Logika určování pater na Ječné
-        if (roomName === 'tv') {
-            floorKey = "floorGym";
-        } else {
-            const num = parseInt(roomName);
-            if (!isNaN(num)) {
-                if (num < 10) floorKey = "floor1";
-                else if (num < 15) floorKey = "floor2";
-                else if (num < 18) floorKey = "floor3";
-                else floorKey = "floor4";
-            }
-        }
-
-        // Nastavení textu (s podporou jazyka)
-        roomTooltipText.textContent = floorKey ? translations[currentLang][floorKey] : (currentLang === 'cs' ? "Neznámé patro" : "Unknown floor");
-
-        // Výpočet pozice (přímo nad kliknuté číslo)
-        const rect = el.getBoundingClientRect();
-        roomTooltip.style.left = (rect.left + rect.width / 2) + 'px';
-        roomTooltip.style.top = (rect.top - 8) + 'px'; 
+    <script>
+        const floorMap = document.getElementById('floor-map');
+        const timeDisplay = document.getElementById('current-time');
         
-        roomTooltip.classList.add('show');
-    });
-});
+        // Ukázková data pro přepínání rozvrhu
+        const schedule = [
+            { time: "1. Hodina (8:00 - 8:45)", activeRoom: "room-15" },
+            { time: "2. Hodina (8:55 - 9:40)", activeRoom: "room-5a" },
+            { time: "3. Hodina (10:00 - 10:45)", activeRoom: "room-1" },
+            { time: "4. Hodina (10:55 - 11:40)", activeRoom: "room-5b" }
+        ];
+        let currentIndex = 0;
 
-// Schování tooltipu při kliknutí jinam nebo posunutí
-document.addEventListener('click', () => roomTooltip.classList.remove('show'));
-window.addEventListener('scroll', () => roomTooltip.classList.remove('show'));
+        function shiftSchedule(direction) {
+            // 1. Spustit animaci zmizení
+            floorMap.classList.remove('anim-fade-in');
+            floorMap.classList.add('anim-fade-out');
 
+            // 2. Počkat na dokončení animace (300ms) a změnit data
+            setTimeout(() => {
+                // Posun v poli rozvrhu
+                currentIndex += direction;
+                if (currentIndex < 0) currentIndex = schedule.length - 1;
+                if (currentIndex >= schedule.length) currentIndex = 0;
 
-// Časovač
-const times = [
-    { start: "07:30", end: "08:15" }, { start: "08:25", end: "09:10" },
-    { start: "09:20", end: "10:05" }, { start: "10:20", end: "11:05" },
-    { start: "11:15", end: "12:00" }, { start: "12:10", end: "12:55" },
-    { start: "13:05", end: "13:50" }, { start: "14:00", end: "14:45" }
-];
+                // Aktualizace zobrazeného času
+                timeDisplay.textContent = schedule[currentIndex].time;
 
-function forceTimerUpdate() {
-    try {
-        const now = new Date();
-        if (now.getDate() !== lastCheckedDay) { lastCheckedDay = now.getDate(); loadNameDay(); }
+                // Zvýraznění aktivní učebny
+                document.querySelectorAll('.room').forEach(r => r.classList.remove('active'));
+                const activeRoomId = schedule[currentIndex].activeRoom;
+                const targetRoom = document.getElementById(activeRoomId);
+                if(targetRoom) {
+                    targetRoom.classList.add('active');
+                }
 
-        const el = document.getElementById('countdownText');
-        if(!el) return;
-
-        const day = now.getDay();
-        const currentMins = now.getHours() * 60 + now.getMinutes();
-        let target = new Date(now); target.setHours(7, 30, 0, 0);
-        let endOfSchoolMins = 14 * 60 + 45; 
+                // 3. Spustit animaci objevení
+                floorMap.classList.remove('anim-fade-out');
+                floorMap.classList.add('anim-fade-in');
+            }, 300); // Časovač odpovídá délce fadeOut animace v CSS
+        }
         
-        let tr = (day >= 1 && day <= 5) ? document.getElementById(`day-${day}`) : null;
-        if (tr) {
-            const tds = tr.querySelectorAll('td:not(.day)');
-            let lastIndex = -1;
-            tds.forEach((td, i) => { if (td.textContent.trim()) lastIndex = i; });
-            if (lastIndex !== -1 && lastIndex < times.length) {
-                const [eh, em] = times[lastIndex].end.split(':').map(Number);
-                endOfSchoolMins = eh * 60 + em;
-            }
-        }
-
-        let endOfSchool = new Date(now);
-        endOfSchool.setHours(Math.floor(endOfSchoolMins / 60), endOfSchoolMins % 60, 0, 0);
-
-        if (day === 6) { target.setDate(target.getDate() + 2); } 
-        else if (day === 0) { target.setDate(target.getDate() + 1); } 
-        else if (now > endOfSchool) { target.setDate(target.getDate() + (day === 5 ? 3 : 1)); }
-
-        if (now >= target && now <= endOfSchool && day >= 1 && day <= 5) {
-            el.innerText = translations[currentLang].schoolInProgress;
-        } else {
-            const diff = target - now;
-            const h = Math.floor(diff / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
-            el.innerText = `${translations[currentLang].schoolStarts}${h}h ${m}m ${s}s`;
-        }
-
-        document.querySelectorAll('.current-lesson, .past-lesson, .next-lesson').forEach(cell => {
-            cell.classList.remove('current-lesson', 'past-lesson', 'next-lesson');
-        });
-
-        if (tr && day >= 1 && day <= 5) { 
-            const tds = tr.querySelectorAll('td:not(.day)');
-            let foundNext = false;
-            times.forEach((t, index) => {
-                if (index >= tds.length) return;
-                const cell = tds[index];
-                if (!cell.textContent.trim()) return; 
-                
-                const [sh, sm] = t.start.split(':').map(Number);
-                const [eh, em] = t.end.split(':').map(Number);
-                const startMins = sh * 60 + sm;
-                const endMins = eh * 60 + em;
-                
-                if (currentMins >= startMins && currentMins <= endMins) cell.classList.add('current-lesson');
-                else if (currentMins > endMins) cell.classList.add('past-lesson');
-                else if (currentMins < startMins && !foundNext) { cell.classList.add('next-lesson'); foundNext = true; }
-            });
-        }
-    } catch (e) { console.error("Časovač:", e); }
-}
-
-updateLanguageUI();
-setInterval(forceTimerUpdate, 1000);
-forceTimerUpdate(); 
-</script>
-
+        // Inicializace při prvním načtení
+        document.getElementById(schedule[0].activeRoom).classList.add('active');
+    </script>
 </body>
 </html>
