@@ -70,6 +70,34 @@
             min-height: 100vh; transition: background-color 0.4s ease, color 0.4s ease;
         }
 
+        /* --- LOGIN OVERLAY --- */
+        .login-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-body); z-index: 1000;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .login-box {
+            background: var(--bg-card); padding: 40px; border-radius: 24px;
+            box-shadow: var(--shadow-hover); width: 90%; max-width: 400px;
+            text-align: center; border: 1px solid var(--border);
+        }
+        .login-box h2 { margin-top: 0; font-size: 1.5rem; font-weight: 700; color: var(--text-main); }
+        .login-box p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; line-height: 1.4; }
+        .login-input {
+            width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 12px;
+            border: 1px solid var(--border); background: var(--bg-body);
+            color: var(--text-main); font-size: 1rem; box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        .login-input:focus { outline: none; border-color: var(--accent); }
+        .login-btn {
+            width: 100%; padding: 14px; border-radius: 12px; background: var(--accent);
+            color: white; border: none; font-size: 1rem; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        .login-btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
+        .error-msg { color: #ff3b30 !important; font-size: 0.85rem !important; display: none; margin-top: -10px !important; margin-bottom: 15px !important; }
+
         /* --- HLAVIČKA --- */
         .header {
             width: 95%; max-width: 1400px; background: var(--bg-card);
@@ -190,187 +218,264 @@
 </head>
 <body>
 
-<div class="header">
-    <div class="header-title">
-        <h1 data-i18n="title">Rozvrh hodin</h1>
-        <p data-i18n="subtitle">Třída: C1a | SPŠE Ječná</p>
-    </div>
-    <div class="info-bar">
-        <div class="info-item">
-            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-            <span id="countdownText">Počítám...</span>
+<!-- PŘIHLAŠOVACÍ OBRAZOVKA -->
+<div id="loginOverlay" class="login-overlay">
+    <div class="login-box">
+        <h2>Přihlášení</h2>
+        <p>Pro přístup k rozvrhu se prosím přihlas.</p>
+        
+        <div id="step1">
+            <input type="email" id="emailInput" placeholder="jmeno.prijmeni@spsejecna.cz" class="login-input">
+            <p id="emailError" class="error-msg">Zadej platný školní e-mail (@spsejecna.cz).</p>
+            <button id="emailBtn" class="login-btn">Pokračovat přes Microsoft</button>
         </div>
-        <div class="info-item">
-            <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
-            <span id="nameDayText">Svátek: Načítám...</span>
+
+        <div id="step2" style="display: none;">
+            <p>Ověření identity: Zadej příjmení třídní učitelky.</p>
+            <input type="text" id="teacherInput" placeholder="Příjmení" class="login-input">
+            <p id="teacherError" class="error-msg">Nesprávné příjmení.</p>
+            <button id="teacherBtn" class="login-btn">Odemknout rozvrh</button>
         </div>
     </div>
-    <div class="controls">
-        <a href="https://strav.nasejidelna.cz/0341/faces/secured/mobile.jsp" target="_blank" class="btn-action btn-jidelna">
-            <span data-i18n="canteen">Jídelna</span>
-        </a>
-        <a href="https://www.spsejecna.cz/suplovani" target="_blank" class="btn-action btn-suplovani">
-            <span data-i18n="subst">Suplování</span>
-        </a>
-        <button class="btn-action" id="themeToggle" aria-label="Přepnout režim">
-            <svg id="themeIcon" viewBox="0 0 24 24"></svg>
-            <span id="themeText" data-i18n="darkMode">Tmavý režim</span>
+</div>
+
+<!-- HLAVNÍ OBSAH (skrytý dokud nedojde k přihlášení) -->
+<div id="appContent" style="display: none; width: 100%; display: flex; flex-direction: column; align-items: center;">
+
+    <div class="header">
+        <div class="header-title">
+            <h1 data-i18n="title">Rozvrh hodin</h1>
+            <p data-i18n="subtitle">Třída: C1a | SPŠE Ječná</p>
+        </div>
+        <div class="info-bar">
+            <div class="info-item">
+                <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                <span id="countdownText">Počítám...</span>
+            </div>
+            <div class="info-item">
+                <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+                <span id="nameDayText">Svátek: Načítám...</span>
+            </div>
+        </div>
+        <div class="controls">
+            <a href="https://strav.nasejidelna.cz/0341/faces/secured/mobile.jsp" target="_blank" class="btn-action btn-jidelna">
+                <span data-i18n="canteen">Jídelna</span>
+            </a>
+            <a href="https://www.spsejecna.cz/suplovani" target="_blank" class="btn-action btn-suplovani">
+                <span data-i18n="subst">Suplování</span>
+            </a>
+            <button class="btn-action" id="themeToggle" aria-label="Přepnout režim">
+                <svg id="themeIcon" viewBox="0 0 24 24"></svg>
+                <span id="themeText" data-i18n="darkMode">Tmavý režim</span>
+            </button>
+            <button class="btn-action" id="langToggle">CS / EN</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 40px;"></th>
+                        <th>1<small>7:30 - 8:15</small></th>
+                        <th>2<small>8:25 - 9:10</small></th>
+                        <th>3<small>9:20 - 10:05</small></th>
+                        <th>4<small>10:20 - 11:05</small></th>
+                        <th>5<small>11:15 - 12:00</small></th>
+                        <th>6<small>12:10 - 12:55</small></th>
+                        <th>7<small>13:05 - 13:50</small></th>
+                        <th>8<small>14:00 - 14:45</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="day-1">
+                        <td class="day" data-i18n="mon">Po</td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">F</span><span class="ucitel">Rk</span></div></td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">C</span><span class="ucitel">Su</span></div></td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">D</span><span class="ucitel">Su</span></div></td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">Ele</span><span class="ucitel">Jk</span></div></td>
+                        <td>
+                            <div class="split">
+                                <div class="hodina"><span class="ucebna">15</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
+                                <div class="split-divider"></div>
+                                <div class="hodina"><span class="ucebna">5b</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr id="day-2">
+                        <td class="day" data-i18n="tue">Út</td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">HW</span><span class="ucitel">Ku</span></div></td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">IT</span><span class="ucitel">Me</span></div></td>
+                        <td><div class="hodina"><span class="ucebna">TV</span><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
+                        <td></td>
+                        <td>
+                            <div class="split">
+                                <div class="hodina"><span class="ucebna">18a</span><span class="predmet">IT</span><span class="skupina">2/2</span><span class="ucitel">Ha</span></div>
+                                <div class="split-divider"></div>
+                                <div class="hodina"><span class="ucebna">18b</span><span class="predmet">IT</span><span class="skupina">1/2</span><span class="ucitel">Me</span></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="split">
+                                <div class="hodina"><span class="ucebna">18a</span><span class="predmet">IT</span><span class="skupina">2/2</span><span class="ucitel">Ha</span></div>
+                                <div class="split-divider"></div>
+                                <div class="hodina"><span class="ucebna">18b</span><span class="predmet">IT</span><span class="skupina">1/2</span><span class="ucitel">Me</span></div>
+                            </div>
+                        </td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
+                    </tr>
+                    <tr id="day-3">
+                        <td class="day" data-i18n="wed">St</td>
+                        <td>
+                            <div class="split">
+                                <div class="hodina"><span class="ucebna">5a</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
+                                <div class="split-divider"></div>
+                                <div class="hodina"><span class="ucebna">17a</span><span class="predmet">TD</span><span class="skupina">2/2</span><span class="ucitel">Pr</span></div>
+                            </div>
+                        </td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">HW</span><span class="ucitel">Ku</span></div></td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">TD</span><span class="ucitel">Pr</span></div></td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
+                        <td>
+                            <div class="split">
+                                <div class="hodina"></div>
+                                <div class="split-divider"></div>
+                                <div class="hodina"><span class="ucebna">5a</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
+                            </div>
+                        </td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr id="day-4">
+                        <td class="day" data-i18n="thu">Čt</td>
+                        <td>
+                            <div class="split">
+                                <div class="hodina"><span class="ucebna">19a</span><span class="predmet">TD</span><span class="skupina">1/2</span><span class="ucitel">Pr</span></div>
+                                <div class="split-divider"></div>
+                                <div class="hodina"></div>
+                            </div>
+                        </td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">C</span><span class="ucitel">Su</span></div></td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">TD</span><span class="ucitel">Pr</span></div></td>
+                        <td>
+                            <div class="split">
+                                <div class="hodina"><span class="ucebna">5a</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
+                                <div class="split-divider"></div>
+                                <div class="hodina"><span class="ucebna">15</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
+                            </div>
+                        </td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">D</span><span class="ucitel">Su</span></div></td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">Ele</span><span class="ucitel">Jk</span></div></td>
+                        <td></td>
+                    </tr>
+                    <tr id="day-5">
+                        <td class="day" data-i18n="fri">Pá</td>
+                        <td><div class="hodina"><span class="ucebna">TV</span><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">Ele</span><span class="ucitel">Jk</span></div></td>
+                        <td>
+                            <div class="split">
+                                <div class="hodina"><span class="ucebna">5b</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
+                                <div class="split-divider"></div>
+                                <div class="hodina"><span class="ucebna">15</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
+                            </div>
+                        </td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">C</span><span class="ucitel">Su</span></div></td>
+                        <td><div class="hodina"><span class="ucebna">8</span><span class="predmet">F</span><span class="ucitel">Rk</span></div></td>
+                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Apple Dock -->
+    <div class="dock-container">
+        <button class="dock-btn" id="btnShowCalendar" title="Kalendář volna">
+            <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
         </button>
-        <button class="btn-action" id="langToggle">CS / EN</button>
     </div>
-</div>
 
-<div class="container">
-    <div class="table-wrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th style="width: 40px;"></th>
-                    <th>1<small>7:30 - 8:15</small></th>
-                    <th>2<small>8:25 - 9:10</small></th>
-                    <th>3<small>9:20 - 10:05</small></th>
-                    <th>4<small>10:20 - 11:05</small></th>
-                    <th>5<small>11:15 - 12:00</small></th>
-                    <th>6<small>12:10 - 12:55</small></th>
-                    <th>7<small>13:05 - 13:50</small></th>
-                    <th>8<small>14:00 - 14:45</small></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="day-1">
-                    <td class="day" data-i18n="mon">Po</td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">F</span><span class="ucitel">Rk</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">C</span><span class="ucitel">Su</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">D</span><span class="ucitel">Su</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">Ele</span><span class="ucitel">Jk</span></div></td>
-                    <td>
-                        <div class="split">
-                            <div class="hodina"><span class="ucebna">15</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucebna">5b</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
-                        </div>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr id="day-2">
-                    <td class="day" data-i18n="tue">Út</td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">HW</span><span class="ucitel">Ku</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">IT</span><span class="ucitel">Me</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">TV</span><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
-                    <td></td>
-                    <td>
-                        <div class="split">
-                            <div class="hodina"><span class="ucebna">18a</span><span class="predmet">IT</span><span class="skupina">2/2</span><span class="ucitel">Ha</span></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucebna">18b</span><span class="predmet">IT</span><span class="skupina">1/2</span><span class="ucitel">Me</span></div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="split">
-                            <div class="hodina"><span class="ucebna">18a</span><span class="predmet">IT</span><span class="skupina">2/2</span><span class="ucitel">Ha</span></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucebna">18b</span><span class="predmet">IT</span><span class="skupina">1/2</span><span class="ucitel">Me</span></div>
-                        </div>
-                    </td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
-                </tr>
-                <tr id="day-3">
-                    <td class="day" data-i18n="wed">St</td>
-                    <td>
-                        <div class="split">
-                            <div class="hodina"><span class="ucebna">5a</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucebna">17a</span><span class="predmet">TD</span><span class="skupina">2/2</span><span class="ucitel">Pr</span></div>
-                        </div>
-                    </td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">HW</span><span class="ucitel">Ku</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">TD</span><span class="ucitel">Pr</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
-                    <td>
-                        <div class="split">
-                            <div class="hodina"></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucebna">5a</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
-                        </div>
-                    </td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr id="day-4">
-                    <td class="day" data-i18n="thu">Čt</td>
-                    <td>
-                        <div class="split">
-                            <div class="hodina"><span class="ucebna">19a</span><span class="predmet">TD</span><span class="skupina">1/2</span><span class="ucitel">Pr</span></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"></div>
-                        </div>
-                    </td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">C</span><span class="ucitel">Su</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">TD</span><span class="ucitel">Pr</span></div></td>
-                    <td>
-                        <div class="split">
-                            <div class="hodina"><span class="ucebna">5a</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucebna">15</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
-                        </div>
-                    </td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">D</span><span class="ucitel">Su</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">Ele</span><span class="ucitel">Jk</span></div></td>
-                    <td></td>
-                </tr>
-                <tr id="day-5">
-                    <td class="day" data-i18n="fri">Pá</td>
-                    <td><div class="hodina"><span class="ucebna">TV</span><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">Ele</span><span class="ucitel">Jk</span></div></td>
-                    <td>
-                        <div class="split">
-                            <div class="hodina"><span class="ucebna">5b</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
-                            <div class="split-divider"></div>
-                            <div class="hodina"><span class="ucebna">15</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
-                        </div>
-                    </td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">C</span><span class="ucitel">Su</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">8</span><span class="predmet">F</span><span class="ucitel">Rk</span></div></td>
-                    <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<!-- Apple Dock -->
-<div class="dock-container">
-    <button class="dock-btn" id="btnShowCalendar" title="Kalendář volna">
-        <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
-    </button>
-</div>
-
-<!-- Apple Widget Popover (Kalendář) -->
-<div class="widget-popover" id="calendarWidget">
-    <div class="widget-header">
-        <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
-        <h2 data-i18n="calendarTitle">Prázdniny a volné dny</h2>
-    </div>
-    <div class="calendar-grid">
-        <div class="calendar-item"><span class="calendar-date">28. 9.</span><span class="calendar-event" data-i18n="event1">Den české státnosti</span></div>
-        <div class="calendar-item"><span class="calendar-date">28. – 30. 10.</span><span class="calendar-event" data-i18n="event2">Podzimní prázdniny</span></div>
-        <div class="calendar-item"><span class="calendar-date">17. 11.</span><span class="calendar-event" data-i18n="event3">Den boje za svobodu</span></div>
-        <div class="calendar-item"><span class="calendar-date">23. 12. – 3. 1.</span><span class="calendar-event" data-i18n="event4">Vánoční prázdniny</span></div>
-        <div class="calendar-item"><span class="calendar-date">29. 1.</span><span class="calendar-event" data-i18n="event5">Pololetní prázdniny</span></div>
-        <div class="calendar-item"><span class="calendar-date">22. – 28. 2.</span><span class="calendar-event" data-i18n="event6">Jarní prázdniny (Praha 1-5)</span></div>
-        <div class="calendar-item"><span class="calendar-date">25. – 29. 3.</span><span class="calendar-event" data-i18n="event7">Velikonoce</span></div>
-        <div class="calendar-item"><span class="calendar-date">1. 5. a 8. 5.</span><span class="calendar-event" data-i18n="event8">Květnové svátky</span></div>
+    <!-- Apple Widget Popover (Kalendář) -->
+    <div class="widget-popover" id="calendarWidget">
+        <div class="widget-header">
+            <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
+            <h2 data-i18n="calendarTitle">Prázdniny a volné dny</h2>
+        </div>
+        <div class="calendar-grid">
+            <div class="calendar-item"><span class="calendar-date">28. 9.</span><span class="calendar-event" data-i18n="event1">Den české státnosti</span></div>
+            <div class="calendar-item"><span class="calendar-date">28. – 30. 10.</span><span class="calendar-event" data-i18n="event2">Podzimní prázdniny</span></div>
+            <div class="calendar-item"><span class="calendar-date">17. 11.</span><span class="calendar-event" data-i18n="event3">Den boje za svobodu</span></div>
+            <div class="calendar-item"><span class="calendar-date">23. 12. – 3. 1.</span><span class="calendar-event" data-i18n="event4">Vánoční prázdniny</span></div>
+            <div class="calendar-item"><span class="calendar-date">29. 1.</span><span class="calendar-event" data-i18n="event5">Pololetní prázdniny</span></div>
+            <div class="calendar-item"><span class="calendar-date">22. – 28. 2.</span><span class="calendar-event" data-i18n="event6">Jarní prázdniny (Praha 1-5)</span></div>
+            <div class="calendar-item"><span class="calendar-date">25. – 29. 3.</span><span class="calendar-event" data-i18n="event7">Velikonoce</span></div>
+            <div class="calendar-item"><span class="calendar-date">1. 5. a 8. 5.</span><span class="calendar-event" data-i18n="event8">Květnové svátky</span></div>
+        </div>
     </div>
 </div>
 
 <script>
+// --- LOGIKA PŘIHLÁŠENÍ ---
+const loginOverlay = document.getElementById('loginOverlay');
+const appContent = document.getElementById('appContent');
+const emailInput = document.getElementById('emailInput');
+const emailBtn = document.getElementById('emailBtn');
+const step1 = document.getElementById('step1');
+const step2 = document.getElementById('step2');
+const teacherInput = document.getElementById('teacherInput');
+const teacherBtn = document.getElementById('teacherBtn');
+
+// Skrytí rozvrhu na začátku (pro jistotu kvůli flex layoutu)
+appContent.style.display = 'none';
+document.body.style.overflow = 'hidden'; // Zamezí scrollování s overlayem
+
+// Kontrola uloženého přihlášení (aby se nemusel přihlašovat po každém refreshi)
+if (localStorage.getItem('rozvrh_authenticated') === 'true') {
+    loginOverlay.style.display = 'none';
+    appContent.style.display = 'flex';
+    document.body.style.overflow = 'auto';
+}
+
+emailBtn.addEventListener('click', () => {
+    const email = emailInput.value.trim().toLowerCase();
+    if (email.endsWith('@spsejecna.cz')) {
+        document.getElementById('emailError').style.display = 'none';
+        step1.style.display = 'none';
+        step2.style.display = 'block';
+    } else {
+        document.getElementById('emailError').style.display = 'block';
+    }
+});
+
+teacherBtn.addEventListener('click', () => {
+    const name = teacherInput.value.trim().toLowerCase();
+    // Odstranění diakritiky pro benevolentnější ověření
+    const normalizedName = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    
+    if (normalizedName === 'studenkova') {
+        localStorage.setItem('rozvrh_authenticated', 'true');
+        loginOverlay.style.opacity = '0';
+        setTimeout(() => {
+            loginOverlay.style.display = 'none';
+            appContent.style.display = 'flex';
+            document.body.style.overflow = 'auto';
+        }, 300);
+    } else {
+        document.getElementById('teacherError').style.display = 'block';
+    }
+});
+
+
+// --- ZBYTEK LOGIKY (Téma, Jazyk, Časovač) ---
 const translations = {
     cs: {
         title: "Rozvrh hodin", subtitle: "Třída: C1a | SPŠE Ječná", canteen: "Jídelna", subst: "Suplování",
@@ -394,7 +499,6 @@ let currentLang = localStorage.getItem('language') || 'cs';
 let fetchedNameDay = "";
 let lastCheckedDay = new Date().getDate();
 
-// Jazyk
 function updateLanguageUI() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -409,7 +513,6 @@ document.getElementById('langToggle').addEventListener('click', () => {
     updateLanguageUI();
 });
 
-// Téma
 const themeToggle = document.getElementById('themeToggle');
 const rootElement = document.documentElement;
 let savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -433,7 +536,6 @@ themeToggle.addEventListener('click', () => {
 });
 updateThemeUI(savedTheme);
 
-// Svátky
 function updateNameDayText() {
     const el = document.getElementById('nameDayText');
     if(el) el.innerText = fetchedNameDay ? `${translations[currentLang].nameDayPrefix}${fetchedNameDay}` : translations[currentLang].nameDayErr;
@@ -446,7 +548,6 @@ function loadNameDay() {
 }
 loadNameDay();
 
-// Kalendář Dock
 const btnCal = document.getElementById('btnShowCalendar');
 const widgetCal = document.getElementById('calendarWidget');
 btnCal.addEventListener('click', (e) => {
@@ -461,8 +562,6 @@ document.addEventListener('click', (e) => {
     }
 });
 
-
-// Časovač
 const times = [
     { start: "07:30", end: "08:15" }, { start: "08:25", end: "09:10" },
     { start: "09:20", end: "10:05" }, { start: "10:20", end: "11:05" },
