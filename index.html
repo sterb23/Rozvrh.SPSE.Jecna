@@ -68,35 +68,42 @@
             margin: 0; padding: 0 0 100px 0;
             display: flex; flex-direction: column; align-items: center;
             min-height: 100vh; transition: background-color 0.4s ease, color 0.4s ease;
+            overflow: hidden; /* Zamezí scrollování při načítání */
         }
 
-        /* --- LOGIN OVERLAY --- */
-        .login-overlay {
+        /* --- NAČÍTACÍ OBRAZOVKA --- */
+        .loading-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg-body); z-index: 1000;
-            display: flex; align-items: center; justify-content: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
         }
-        .login-box {
-            background: var(--bg-card); padding: 40px; border-radius: 24px;
-            box-shadow: var(--shadow-hover); width: 90%; max-width: 400px;
-            text-align: center; border: 1px solid var(--border);
+        
+        .loading-logo {
+            font-size: 2.5rem; font-weight: 800; color: var(--text-main);
+            letter-spacing: -1px; margin-bottom: 25px;
+            animation: pulseText 2s infinite;
         }
-        .login-box h2 { margin-top: 0; font-size: 1.5rem; font-weight: 700; color: var(--text-main); }
-        .login-box p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; line-height: 1.4; }
-        .login-input {
-            width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 12px;
-            border: 1px solid var(--border); background: var(--bg-body);
-            color: var(--text-main); font-size: 1rem; box-sizing: border-box;
-            transition: border-color 0.3s;
+        
+        .loading-logo span { color: var(--accent); }
+
+        .spinner {
+            width: 40px; height: 40px;
+            border: 4px solid var(--border);
+            border-top: 4px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
-        .login-input:focus { outline: none; border-color: var(--accent); }
-        .login-btn {
-            width: 100%; padding: 14px; border-radius: 12px; background: var(--accent);
-            color: white; border: none; font-size: 1rem; font-weight: 600;
-            cursor: pointer; transition: all 0.3s ease;
+
+        @keyframes spin { 
+            0% { transform: rotate(0deg); } 
+            100% { transform: rotate(360deg); } 
         }
-        .login-btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
-        .error-msg { color: #ff3b30 !important; font-size: 0.85rem !important; display: none; margin-top: -10px !important; margin-bottom: 15px !important; }
+        @keyframes pulseText { 
+            0% { opacity: 0.7; transform: scale(0.98); } 
+            50% { opacity: 1; transform: scale(1); } 
+            100% { opacity: 0.7; transform: scale(0.98); } 
+        }
 
         /* --- HLAVIČKA --- */
         .header {
@@ -218,29 +225,12 @@
 </head>
 <body>
 
-<!-- PŘIHLAŠOVACÍ OBRAZOVKA -->
-<div id="loginOverlay" class="login-overlay">
-    <div class="login-box">
-        <h2>Přihlášení</h2>
-        <p>Pro přístup k rozvrhu se prosím přihlas.</p>
-        
-        <div id="step1">
-            <input type="email" id="emailInput" placeholder="jmeno.prijmeni@spsejecna.cz" class="login-input">
-            <p id="emailError" class="error-msg">Zadej platný školní e-mail (@spsejecna.cz).</p>
-            <button id="emailBtn" class="login-btn">Pokračovat přes Microsoft</button>
-        </div>
-
-        <div id="step2" style="display: none;">
-            <p>Ověření identity: Zadej příjmení třídní učitelky.</p>
-            <input type="text" id="teacherInput" placeholder="Příjmení" class="login-input">
-            <p id="teacherError" class="error-msg">Nesprávné příjmení.</p>
-            <button id="teacherBtn" class="login-btn">Odemknout rozvrh</button>
-        </div>
-    </div>
+<div id="loadingOverlay" class="loading-overlay">
+    <div class="loading-logo">SPŠE <span>Ječná</span></div>
+    <div class="spinner"></div>
 </div>
 
-<!-- HLAVNÍ OBSAH (skrytý dokud nedojde k přihlášení) -->
-<div id="appContent" style="display: none; width: 100%; display: flex; flex-direction: column; align-items: center;">
+<div id="appContent" style="display: none; width: 100%; flex-direction: column; align-items: center;">
 
     <div class="header">
         <div class="header-title">
@@ -397,14 +387,12 @@
         </div>
     </div>
 
-    <!-- Apple Dock -->
     <div class="dock-container">
         <button class="dock-btn" id="btnShowCalendar" title="Kalendář volna">
             <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
         </button>
     </div>
 
-    <!-- Apple Widget Popover (Kalendář) -->
     <div class="widget-popover" id="calendarWidget">
         <div class="widget-header">
             <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
@@ -424,56 +412,19 @@
 </div>
 
 <script>
-// --- LOGIKA PŘIHLÁŠENÍ ---
-const loginOverlay = document.getElementById('loginOverlay');
-const appContent = document.getElementById('appContent');
-const emailInput = document.getElementById('emailInput');
-const emailBtn = document.getElementById('emailBtn');
-const step1 = document.getElementById('step1');
-const step2 = document.getElementById('step2');
-const teacherInput = document.getElementById('teacherInput');
-const teacherBtn = document.getElementById('teacherBtn');
-
-// Skrytí rozvrhu na začátku (pro jistotu kvůli flex layoutu)
-appContent.style.display = 'none';
-document.body.style.overflow = 'hidden'; // Zamezí scrollování s overlayem
-
-// Kontrola uloženého přihlášení (aby se nemusel přihlašovat po každém refreshi)
-if (localStorage.getItem('rozvrh_authenticated') === 'true') {
-    loginOverlay.style.display = 'none';
-    appContent.style.display = 'flex';
-    document.body.style.overflow = 'auto';
-}
-
-emailBtn.addEventListener('click', () => {
-    const email = emailInput.value.trim().toLowerCase();
-    if (email.endsWith('@spsejecna.cz')) {
-        document.getElementById('emailError').style.display = 'none';
-        step1.style.display = 'none';
-        step2.style.display = 'block';
-    } else {
-        document.getElementById('emailError').style.display = 'block';
-    }
-});
-
-teacherBtn.addEventListener('click', () => {
-    const name = teacherInput.value.trim().toLowerCase();
-    // Odstranění diakritiky pro benevolentnější ověření
-    const normalizedName = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+// --- LOGIKA NAČÍTÁNÍ (Loading Screen) ---
+window.addEventListener('DOMContentLoaded', () => {
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const appContent = document.getElementById('appContent');
     
-    if (normalizedName === 'studenkova') {
-        localStorage.setItem('rozvrh_authenticated', 'true');
-        loginOverlay.style.opacity = '0';
-        setTimeout(() => {
-            loginOverlay.style.display = 'none';
-            appContent.style.display = 'flex';
-            document.body.style.overflow = 'auto';
-        }, 300);
-    } else {
-        document.getElementById('teacherError').style.display = 'block';
-    }
+    // Časovač, který loading obrazovku schová po 1.5 vteřinách
+    setTimeout(() => {
+        loadingOverlay.style.opacity = '0';
+        loadingOverlay.style.visibility = 'hidden';
+        appContent.style.display = 'flex';
+        document.body.style.overflow = 'auto'; // Vrátí možnost scrollovat dolů k tabulce
+    }, 1500); 
 });
-
 
 // --- ZBYTEK LOGIKY (Téma, Jazyk, Časovač) ---
 const translations = {
