@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- PWA & APLIKACE KONFIGURACE -->
-    <title>Bakaláři - Rozvrh & Známky C1a</title>
+    <!-- PWA KONFIGURACE -->
+    <title>Bakaláři - Rozvrh & Štáb C1a</title>
     <meta name="apple-mobile-web-app-title" content="Rozvrh C1a">
     <meta name="application-name" content="Rozvrh C1a">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,11 +13,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="theme-color" content="#005b9f">
 
-    <!-- IKONY APLIKACE (Data URI SVG) -->
+    <!-- IKONY APLIKACE -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='110' fill='%23005b9f'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='240' fill='%23ffffff'>C1a</text></svg>">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='110' fill='%23005b9f'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='240' fill='%23ffffff'>C1a</text></svg>">
 
-    <!-- WEB MANIFEST -->
     <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22Rozvrh%20C1a%20-%20Bakalari%22,%22short_name%22:%22Rozvrh%20C1a%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22%23005b9f%22,%22theme_color%22:%22%23005b9f%22,%22icons%22:[{%22src%22:%22data:image/svg%2Bxml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='110' fill='%23005b9f'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='240' fill='%23ffffff'>C1a</text></svg>%22,%22sizes%22:%22512x512%22,%22type%22:%22image/svg%2Bxml%22}]} ">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -88,41 +87,28 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* --- TLAČÍTKA A INTERACTIONS --- */
-        button, .hodina, .subject-chip, .dock-btn {
-            cursor: pointer;
-        }
-        button:active, .dock-btn:active, .subject-chip:active {
-            transform: scale(0.95) !important;
-        }
+        button, .hodina, .subject-chip, .dock-btn { cursor: pointer; }
+        button:active, .dock-btn:active, .subject-chip:active { transform: scale(0.95) !important; }
 
-        /* --- ANIMACE PROLÍNÁNÍ TABŮ --- */
         .tab-view { 
             display: none; flex-direction: column; flex: 1; overflow: hidden;
             opacity: 0; transform: translateY(8px);
             transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .tab-view.active { 
-            display: flex; opacity: 1; transform: translateY(0);
-        }
+        .tab-view.active { display: flex; opacity: 1; transform: translateY(0); }
 
-        /* --- AUTH OVERLAY --- */
         .auth-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, var(--bak-blue-primary), var(--bak-blue-dark));
-            z-index: 2000; display: flex; align-items: center; justify-content: center;
-            padding: 20px; transition: opacity 0.4s ease, visibility 0.4s ease;
+            z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px;
         }
         .auth-card {
             background: var(--bg-card); border-radius: 24px; padding: 32px 28px;
-            width: 100%; max-width: 380px; text-align: center;
-            box-shadow: var(--shadow-lg); color: var(--text-main);
-            animation: modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 100%; max-width: 380px; text-align: center; box-shadow: var(--shadow-lg); color: var(--text-main);
         }
         .auth-badge {
             display: inline-block; background: var(--bak-blue-primary); color: white;
             font-weight: 800; padding: 6px 16px; border-radius: 12px; font-size: 1.1rem; margin-bottom: 15px;
-            box-shadow: 0 4px 12px rgba(0, 91, 159, 0.3);
         }
         .auth-card h2 { margin: 0 0 8px 0; font-size: 1.4rem; font-weight: 800; }
         .auth-card p { margin: 0 0 20px 0; font-size: 0.88rem; color: var(--text-muted); }
@@ -130,48 +116,34 @@
             width: 100%; padding: 12px 16px; border-radius: 12px; border: 2px solid var(--border);
             font-size: 1rem; font-weight: 700; text-align: center; letter-spacing: 2px;
             background: var(--bg-body); color: var(--text-main); margin-bottom: 12px; outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
         }
-        .auth-input:focus { border-color: var(--bak-blue-primary); box-shadow: 0 0 0 4px rgba(0, 91, 159, 0.15); }
         .auth-btn {
             width: 100%; padding: 14px; border-radius: 12px; border: none;
             background: var(--bak-blue-primary); color: white; font-weight: 800; font-size: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 91, 159, 0.3);
-            transition: transform 0.15s, background-color 0.2s;
         }
         .auth-error { color: #ef4444; font-size: 0.82rem; font-weight: 700; margin-top: 10px; display: none; }
 
-        #appContent {
-            display: none; flex-direction: column; 
-            height: 100%; width: 100%; max-width: 1400px; 
-            margin: 0 auto; position: relative;
-        }
+        #appContent { display: none; flex-direction: column; height: 100%; width: 100%; max-width: 1400px; margin: 0 auto; position: relative; }
 
-        /* --- HORNÍ PANEL BAKALÁŘŮ --- */
         .top-bar {
             background: linear-gradient(135deg, var(--bak-blue-primary), var(--bak-blue-dark));
-            color: white; padding: 12px 18px;
-            display: flex; justify-content: space-between; align-items: center;
-            box-shadow: var(--shadow-md); z-index: 50; flex-shrink: 0;
-            padding-top: max(12px, env(safe-area-inset-top));
+            color: white; padding: 12px 18px; display: flex; justify-content: space-between; align-items: center;
+            box-shadow: var(--shadow-md); z-index: 50; flex-shrink: 0; padding-top: max(12px, env(safe-area-inset-top));
         }
         .top-title { display: flex; align-items: center; gap: 12px; }
-        .bak-icon { background: white; color: var(--bak-blue-primary); font-weight: 800; padding: 4px 9px; border-radius: 8px; font-size: 1rem; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
-        .top-title h1 { margin: 0; font-size: 1.15rem; font-weight: 800; letter-spacing: -0.3px; }
+        .bak-icon { background: white; color: var(--bak-blue-primary); font-weight: 800; padding: 4px 9px; border-radius: 8px; font-size: 1rem; }
+        .top-title h1 { margin: 0; font-size: 1.15rem; font-weight: 800; }
         .top-title p { margin: 0; font-size: 0.78rem; opacity: 0.85; }
 
         .top-actions { display: flex; gap: 6px; align-items: center; }
         .icon-btn {
             display: flex; align-items: center; justify-content: center;
-            width: 36px; height: 36px; border-radius: 10px;
-            background: rgba(255,255,255,0.15); color: white;
-            border: none; transition: background 0.2s, transform 0.15s;
+            width: 36px; height: 36px; border-radius: 10px; background: rgba(255,255,255,0.15); color: white; border: none;
         }
-        .icon-btn:hover { background: rgba(255,255,255,0.28); }
+        .icon-btn.active { background: #f59e0b !important; color: white; }
         .icon-btn svg { width: 18px; height: 18px; fill: currentColor; }
         .icon-btn.lang-btn { font-size: 0.75rem; font-weight: 800; }
 
-        /* STATUS & FILTR LIŠTA */
         .status-bar {
             display: flex; justify-content: space-between; align-items: center; padding: 8px 16px;
             background: var(--bg-card); border-bottom: 1px solid var(--border);
@@ -181,48 +153,29 @@
         .status-pill svg { width: 15px; height: 15px; fill: var(--bak-blue-primary); }
 
         .group-filter { display: flex; background: var(--bg-body); padding: 3px; border-radius: 10px; border: 1px solid var(--border); }
-        .filter-btn {
-            padding: 5px 12px; border-radius: 7px; border: none; background: transparent;
-            font-size: 0.75rem; font-weight: 700; color: var(--text-muted); transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        .filter-btn { padding: 5px 12px; border-radius: 7px; border: none; background: transparent; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); }
         .filter-btn.active { background: var(--bg-card); color: var(--bak-blue-primary); box-shadow: var(--shadow-sm); }
 
-        /* BANNER PRO PROBÍHAJÍCÍ HODINU */
         .live-banner {
             margin: 10px 14px 0 14px; background: linear-gradient(90deg, #1e3a8a, #005b9f);
-            color: white; border-radius: 14px; padding: 10px 16px; display: flex;
-            align-items: center; justify-content: space-between; box-shadow: 0 4px 14px rgba(0, 91, 159, 0.25);
-            animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            color: white; border-radius: 14px; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between;
         }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         .live-banner-left { display: flex; align-items: center; gap: 10px; }
         .live-dot { width: 10px; height: 10px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; animation: pulseDot 1.5s infinite; }
         @keyframes pulseDot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.35); opacity: 0.5; } }
         .live-title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.85; font-weight: 800; }
         .live-detail { font-size: 0.95rem; font-weight: 800; }
 
-        /* HLAVNÍ PLOCHA ROZVRHU */
-        .main-content {
-            flex: 1; overflow: hidden; display: flex; flex-direction: column;
-            padding: 10px 14px 75px 14px;
-        }
-        
-        .schedule-card {
-            flex: 1; overflow: auto; background: var(--bg-card); border-radius: 16px;
-            box-shadow: var(--shadow-sm); border: 1px solid var(--border); padding: 8px;
-        }
+        .main-content { flex: 1; overflow: hidden; display: flex; flex-direction: column; padding: 10px 14px 75px 14px; }
+        .schedule-card { flex: 1; overflow: auto; background: var(--bg-card); border-radius: 16px; box-shadow: var(--shadow-sm); border: 1px solid var(--border); padding: 8px; }
 
         table { border-collapse: separate; border-spacing: 6px; width: 100%; min-width: 960px; }
         th { color: var(--text-muted); font-weight: 700; font-size: 0.78em; padding: 4px; text-align: center; }
         th small { display: block; font-size: 0.75em; margin-top: 2px; font-weight: 500; opacity: 0.8; }
         .day { font-weight: 800; color: var(--bak-blue-primary); font-size: 0.9em; text-align: center; width: 38px; background: var(--bg-body); border-radius: 10px; }
 
-        td:not(.day) { 
-            background: var(--bg-body); border-radius: 10px; vertical-align: middle; padding: 0;
-            border: 1px solid var(--border); transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s; 
-        }
+        td:not(.day) { background: var(--bg-body); border-radius: 10px; vertical-align: middle; padding: 0; border: 1px solid var(--border); }
         td:not(.day):not(:empty):hover { transform: translateY(-2px) scale(1.01); box-shadow: var(--shadow-md); z-index: 10; position: relative; }
-        td:not(.day):not(:empty):active { transform: scale(0.96) !important; }
         td:empty { background: transparent; border: 1px dashed var(--border); }
 
         .type-math { background-color: var(--subj-math) !important; border-color: var(--subj-math-border) !important; color: var(--subj-math-text); }
@@ -232,18 +185,12 @@
         .type-sport{ background-color: var(--subj-sport) !important;border-color: var(--subj-sport-border) !important;color: var(--subj-sport-text); }
 
         .past-lesson { opacity: var(--past-opacity) !important; filter: grayscale(40%); }
-        .current-lesson { 
-            background-color: var(--current-bg) !important; 
-            border: 2px solid var(--current-border) !important; 
-            box-shadow: 0 0 14px rgba(245, 158, 11, 0.35); z-index: 5; position: relative; 
-            animation: pulseGlow 2s infinite ease-in-out;
-        }
-        @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 10px rgba(245, 158, 11, 0.3); } 50% { box-shadow: 0 0 18px rgba(245, 158, 11, 0.6); } }
+        .current-lesson { background-color: var(--current-bg) !important; border: 2px solid var(--current-border) !important; box-shadow: 0 0 14px rgba(245, 158, 11, 0.35); z-index: 5; position: relative; }
         .current-lesson .predmet { color: var(--current-text) !important; }
         .next-lesson { border: 2px solid var(--bak-blue-primary) !important; }
 
         .hodina { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 72px; min-width: 88px; box-sizing: border-box; border-radius: 8px; }
-        .predmet { font-weight: 800; font-size: 1.25em; letter-spacing: -0.3px; }
+        .predmet { font-weight: 800; font-size: 1.25em; }
         .ucitel { position: absolute; bottom: 4px; right: 6px; font-size: 0.68em; font-weight: 700; opacity: 0.85; }
         .skupina { position: absolute; bottom: 4px; left: 6px; font-size: 0.68em; font-weight: 700; opacity: 0.85; }
         .ucebna { position: absolute; top: 4px; right: 6px; font-size: 0.72em; font-weight: 800; }
@@ -258,151 +205,68 @@
 
         .hide-group { display: none !important; }
 
-        /* --- PREDIKTOR ZNÁMEK / KALKULÁTOR --- */
-        .grade-calc-container {
-            flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 14px;
-            padding-bottom: 80px;
-        }
+        /* UNIFORMNÍ PANELY */
+        .panel-container { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 14px; padding-bottom: 85px; }
 
         .subject-selector { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
-        .subject-chip {
-            padding: 8px 16px; background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 20px; font-size: 0.82rem; font-weight: 800; color: var(--text-muted);
-            white-space: nowrap; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .subject-chip.active {
-            background: var(--bak-blue-primary); color: white; border-color: var(--bak-blue-primary);
-            box-shadow: 0 4px 12px rgba(0, 91, 159, 0.25);
-        }
+        .subject-chip { padding: 8px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; font-size: 0.82rem; font-weight: 800; color: var(--text-muted); white-space: nowrap; }
+        .subject-chip.active { background: var(--bak-blue-primary); color: white; border-color: var(--bak-blue-primary); }
 
-        .grade-summary-card {
-            background: var(--bg-card); border-radius: 20px; padding: 20px;
-            border: 1px solid var(--border); box-shadow: var(--shadow-sm);
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .avg-label { font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .grade-summary-card, .card-box { background: var(--bg-card); border-radius: 20px; padding: 18px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 12px; }
+        .avg-label { font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; }
         .avg-val { font-size: 2.2rem; font-weight: 800; color: var(--bak-blue-primary); }
-        .predicted-badge {
-            padding: 10px 18px; border-radius: 14px; font-weight: 800; font-size: 1.2rem;
-            color: white; text-align: center; box-shadow: var(--shadow-sm);
-        }
+        .predicted-badge { padding: 10px 18px; border-radius: 14px; font-weight: 800; font-size: 1.2rem; color: white; text-align: center; }
 
-        .add-grade-box {
-            background: var(--bg-card); border-radius: 20px; padding: 18px;
-            border: 1px solid var(--border); box-shadow: var(--shadow-sm);
-            display: flex; flex-direction: column; gap: 12px;
-        }
-        .add-grade-box h3 { margin: 0; font-size: 0.95rem; font-weight: 800; }
-        
         .inputs-row { display: flex; gap: 10px; }
         .form-group { flex: 1; display: flex; flex-direction: column; gap: 4px; }
         .form-group label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); }
-        .form-control {
-            padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border);
-            background: var(--bg-body); color: var(--text-main); font-weight: 700; outline: none;
-        }
+        .form-control { padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-body); color: var(--text-main); font-weight: 700; outline: none; }
 
-        .btn-add-grade {
-            padding: 12px; border-radius: 10px; border: none; background: var(--bak-blue-primary);
-            color: white; font-weight: 800; font-size: 0.88rem;
-            box-shadow: 0 4px 12px rgba(0, 91, 159, 0.2); transition: background 0.2s;
-        }
+        .btn-action { padding: 12px; border-radius: 10px; border: none; background: var(--bak-blue-primary); color: white; font-weight: 800; font-size: 0.88rem; }
 
-        .grades-list { display: flex; flex-direction: column; gap: 8px; }
-        .grade-item {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 12px 16px; background: var(--bg-card); border-radius: 14px;
-            border: 1px solid var(--border); animation: slideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .grade-item.simulated { border: 2px dashed var(--bak-blue-primary); background: var(--subj-lang); }
-        .grade-badge {
-            width: 34px; height: 34px; border-radius: 10px; color: white; font-weight: 800;
-            display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
-            box-shadow: var(--shadow-sm);
-        }
-        .grade-badge.m1 { background: var(--mark-1); }
-        .grade-badge.m2 { background: var(--mark-2); }
-        .grade-badge.m3 { background: var(--mark-3); }
-        .grade-badge.m4 { background: var(--mark-4); }
-        .grade-badge.m5 { background: var(--mark-5); }
+        .items-list { display: flex; flex-direction: column; gap: 8px; }
+        .list-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--bg-card); border-radius: 14px; border: 1px solid var(--border); }
+        .list-item.test-item { border-left: 5px solid #f59e0b; }
+        .list-item.task-item { border-left: 5px solid var(--bak-blue-primary); }
 
-        .grade-info { display: flex; flex-direction: column; }
-        .grade-weight { font-size: 0.75rem; color: var(--text-muted); font-weight: 700; }
-        .btn-del-grade { background: transparent; border: none; color: #ef4444; font-weight: 800; font-size: 1.1rem; padding: 4px 8px; }
+        .grade-badge { width: 34px; height: 34px; border-radius: 10px; color: white; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+        .grade-badge.m1 { background: var(--mark-1); } .grade-badge.m2 { background: var(--mark-2); } .grade-badge.m3 { background: var(--mark-3); } .grade-badge.m4 { background: var(--mark-4); } .grade-badge.m5 { background: var(--mark-5); }
 
-        /* --- MODÁLNÍ OKNO DETAILU PŘEDMĚTU --- */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            z-index: 1000; display: flex; align-items: flex-end; justify-content: center;
-            opacity: 0; pointer-events: none; visibility: hidden;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        /* ABSENCE PROGRESS BAR */
+        .absence-card { background: var(--bg-card); border-radius: 16px; padding: 14px 18px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px; }
+        .absence-header { display: flex; justify-content: space-between; align-items: center; }
+        .absence-bar-bg { width: 100%; height: 8px; background: var(--bg-body); border-radius: 4px; overflow: hidden; }
+        .absence-bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+        .absence-bar-fill.ok { background: #10b981; }
+        .absence-bar-fill.warn { background: #f59e0b; }
+        .absence-bar-fill.danger { background: #ef4444; }
+
+        /* MODAL */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); z-index: 1000; display: flex; align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; visibility: hidden; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
         .modal-overlay.show { opacity: 1; pointer-events: auto; visibility: visible; }
         .modal-overlay.show .modal-card { transform: translateY(0); }
-
-        .modal-card {
-            background: var(--bg-card); width: 100%; max-width: 480px; border-radius: 28px 28px 0 0;
-            padding: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border);
-            transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        .modal-card { background: var(--bg-card); width: 100%; max-width: 480px; border-radius: 28px 28px 0 0; padding: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
         .modal-title-badge { font-size: 1.4rem; font-weight: 800; color: var(--bak-blue-primary); }
         .modal-close-btn { background: var(--bg-body); border: none; width: 32px; height: 32px; border-radius: 50%; font-weight: 800; color: var(--text-muted); }
-        
-        .modal-info-grid { display: flex; flex-direction: column; gap: 10px; }
-        .modal-info-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: var(--bg-body); border-radius: 12px; }
-        .modal-info-label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); }
-        .modal-info-val { font-size: 0.95rem; font-weight: 800; color: var(--text-main); }
 
         /* SPODNÍ NAVIGACE */
-        .dock-container {
-            position: absolute; bottom: 0; left: 0; width: 100%;
-            display: flex; justify-content: space-around; padding: 8px 0;
-            padding-bottom: max(12px, env(safe-area-inset-bottom));
-            background: var(--bg-card); border-top: 1px solid var(--border);
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.06); z-index: 100;
-        }
-        
-        .dock-btn {
-            background: transparent; border: none; color: var(--text-muted);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: 3px; font-size: 0.68rem; font-weight: 700; text-decoration: none;
-            width: 20%; transition: color 0.2s, transform 0.15s;
-        }
-        .dock-btn svg { width: 22px; height: 22px; fill: currentColor; }
+        .dock-container { position: absolute; bottom: 0; left: 0; width: 100%; display: flex; justify-content: space-around; padding: 8px 0; padding-bottom: max(12px, env(safe-area-inset-bottom)); background: var(--bg-card); border-top: 1px solid var(--border); box-shadow: 0 -4px 20px rgba(0,0,0,0.06); z-index: 100; }
+        .dock-btn { background: transparent; border: none; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 0.65rem; font-weight: 700; text-decoration: none; width: 20%; }
+        .dock-btn svg { width: 20px; height: 20px; fill: currentColor; }
         .dock-btn.active { color: var(--bak-blue-primary); }
 
-        .widget-popover {
-            position: absolute; bottom: 65px; left: 50%; transform: translateX(-50%) translateY(10px);
-            width: 92%; max-width: 420px; background: var(--bg-card);
-            border-radius: 20px; box-shadow: var(--shadow-lg);
-            padding: 18px; box-sizing: border-box; z-index: 90;
-            opacity: 0; pointer-events: none; visibility: hidden;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid var(--border);
-        }
+        .widget-popover { position: absolute; bottom: 65px; left: 50%; transform: translateX(-50%) translateY(10px); width: 92%; max-width: 420px; background: var(--bg-card); border-radius: 20px; box-shadow: var(--shadow-lg); padding: 18px; box-sizing: border-box; z-index: 90; opacity: 0; pointer-events: none; visibility: hidden; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid var(--border); }
         .widget-popover.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; visibility: visible; }
-        
-        .widget-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
-        .widget-header svg { width: 18px; height: 18px; fill: var(--bak-blue-primary); }
-        .widget-header h2 { margin: 0; font-size: 0.95rem; font-weight: 800; color: var(--text-main); }
-        
-        .calendar-grid { display: flex; flex-direction: column; gap: 6px; max-height: 40vh; overflow-y: auto; }
-        .calendar-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: var(--bg-body); border-radius: 10px; }
-        .calendar-date { font-weight: 800; color: var(--bak-blue-primary); font-size: 0.8rem; }
-        .calendar-event { font-weight: 600; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-<!-- AUTH OVERLAY -->
 <div id="authOverlay" class="auth-overlay">
     <div class="auth-card">
         <div class="auth-badge">C1a</div>
         <h2>Vstup pouze pro C1a</h2>
-        <p>Zadej přístupové heslo třídy pro zobrazení rozvrhu a známek.</p>
+        <p>Zadej přístupové heslo třídy pro zobrazení aplikace.</p>
         <input type="password" id="authPin" class="auth-input" placeholder="HESLO TŘÍDY" autocomplete="off">
         <button class="auth-btn" id="authSubmitBtn">Vstoupit do aplikace</button>
         <div id="authError" class="auth-error">Nesprávné heslo! Zkus to znovu.</div>
@@ -414,41 +278,36 @@
         <div class="top-title">
             <span class="bak-icon">B</span>
             <div>
-                <h1 data-i18n="title">Rozvrh & Známky C1a</h1>
+                <h1 data-i18n="title">Rozvrh C1a</h1>
                 <p data-i18n="subtitle">SPŠE Ječná | Třída C1a</p>
             </div>
         </div>
         <div class="top-actions">
-            <button class="icon-btn" id="shareBtn" title="Sdílet rozvrh">
+            <button class="icon-btn" id="notifBtn" title="Upozornění před vyučováním">
+                <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+            </button>
+            <button class="icon-btn" id="shareBtn" title="Sdílet">
                 <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
             </button>
             <button class="icon-btn lang-btn" id="langToggle">EN</button>
-            <button class="icon-btn" id="themeToggle" aria-label="Přepnout režim">
-                <svg id="themeIcon" viewBox="0 0 24 24"></svg>
-            </button>
-            <button class="icon-btn" id="logoutBtn" title="Odhlásit se">
-                <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
-            </button>
+            <button class="icon-btn" id="themeToggle"><svg id="themeIcon" viewBox="0 0 24 24"></svg></button>
+            <button class="icon-btn" id="logoutBtn" title="Odhlásit se"><svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg></button>
         </div>
     </div>
 
-    <!-- ZÁLOŽKA 1: ROZVRH -->
+    <!-- TAB 1: ROZVRH -->
     <div id="tabRozvrh" class="tab-view active">
         <div class="status-bar">
             <div class="status-pill">
                 <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
                 <span id="countdownText">Počítám...</span>
             </div>
-
             <div class="group-filter">
-                <button class="filter-btn active" data-group="all">Vše</button>
+                <button class="filter-btn" data-group="all">Vše</button>
                 <button class="filter-btn" data-group="1">1. Skupina</button>
                 <button class="filter-btn" data-group="2">2. Skupina</button>
             </div>
-
-            <div class="status-pill">
-                <span id="nameDayText">Svátek: Načítám...</span>
-            </div>
+            <div class="status-pill"><span id="nameDayText">Svátek: Načítám...</span></div>
         </div>
 
         <div class="live-banner" id="liveBanner" style="display:none;">
@@ -479,7 +338,7 @@
                     </thead>
                     <tbody>
                         <tr id="day-1">
-                            <td class="day" data-i18n="mon">Po</td>
+                            <td class="day">Po</td>
                             <td class="type-math"><div class="hodina"><span class="ucebna">15</span><span class="predmet">F</span><span class="ucitel">Rk</span></div></td>
                             <td class="type-lang"><div class="hodina"><span class="ucebna">15</span><span class="predmet">ČJ</span><span class="ucitel">Su</span></div></td>
                             <td class="type-math"><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
@@ -496,7 +355,7 @@
                             <td></td>
                         </tr>
                         <tr id="day-2">
-                            <td class="day" data-i18n="tue">Út</td>
+                            <td class="day">Út</td>
                             <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">HW</span><span class="ucitel">Ku</span></div></td>
                             <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">IT</span><span class="ucitel">Me</span></div></td>
                             <td class="type-sport"><div class="hodina"><span class="ucebna">TV</span><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
@@ -519,7 +378,7 @@
                             <td class="type-hum"><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
                         </tr>
                         <tr id="day-3">
-                            <td class="day" data-i18n="wed">St</td>
+                            <td class="day">St</td>
                             <td>
                                 <div class="split">
                                     <div class="hodina type-lang gr-1"><span class="ucebna">5a</span><span class="predmet">AJ</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
@@ -542,7 +401,7 @@
                             <td></td>
                         </tr>
                         <tr id="day-4">
-                            <td class="day" data-i18n="thu">Čt</td>
+                            <td class="day">Čt</td>
                             <td>
                                 <div class="split">
                                     <div class="hodina type-tech gr-1"><span class="ucebna">19a</span><span class="predmet">TD</span><span class="skupina">1/2</span><span class="ucitel">Pr</span></div>
@@ -565,7 +424,7 @@
                             <td></td>
                         </tr>
                         <tr id="day-5">
-                            <td class="day" data-i18n="fri">Pá</td>
+                            <td class="day">Pá</td>
                             <td class="type-sport"><div class="hodina"><span class="ucebna">TV</span><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
                             <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">EL</span><span class="ucitel">Jk</span></div></td>
                             <td class="type-lang">
@@ -587,11 +446,10 @@
         </div>
     </div>
 
-    <!-- ZÁLOŽKA 2: KALKULÁTOR ZNÁMEK -->
+    <!-- TAB 2: PREDIKCE ZNÁMEK -->
     <div id="tabZnamky" class="tab-view">
-        <div class="grade-calc-container">
+        <div class="panel-container">
             <div class="subject-selector" id="subjectSelector"></div>
-
             <div class="grade-summary-card">
                 <div>
                     <div class="avg-label">Vážený průměr</div>
@@ -602,18 +460,14 @@
                     <div class="predicted-badge m1" id="predictedGrade">1</div>
                 </div>
             </div>
-
-            <div class="add-grade-box">
-                <h3>Simulovat / Přidat známku</h3>
+            <div class="card-box">
+                <h3 style="margin:0; font-size:0.95rem; font-weight:800;">Simulovat / Přidat známku</h3>
                 <div class="inputs-row">
                     <div class="form-group">
                         <label>Známka</label>
                         <select id="newMark" class="form-control">
-                            <option value="1">1 (Výborný)</option>
-                            <option value="2">2 (Chvalitebný)</option>
-                            <option value="3">3 (Dobrý)</option>
-                            <option value="4">4 (Dostatečný)</option>
-                            <option value="5">5 (Nedostatečný)</option>
+                            <option value="1">1 (Výborný)</option><option value="2">2 (Chvalitebný)</option>
+                            <option value="3">3 (Dobrý)</option><option value="4">4 (Dostatečný)</option><option value="5">5 (Nedostatečný)</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -621,13 +475,58 @@
                         <input type="number" id="newWeight" class="form-control" value="10" min="1" max="10">
                     </div>
                 </div>
-                <button class="btn-add-grade" id="btnAddGrade">+ Přidat simulovanou známku</button>
+                <button class="btn-action" id="btnAddGrade">+ Přidat známku</button>
+            </div>
+            <div class="items-list" id="gradesList"></div>
+        </div>
+    </div>
+
+    <!-- TAB 3: PLÁNOVAČ ÚKOLŮ A PÍSEMEK (#2) -->
+    <div id="tabUkoly" class="tab-view">
+        <div class="panel-container">
+            <div class="card-box">
+                <h3 style="margin:0; font-size:0.95rem; font-weight:800;">Přidat test nebo úkol</h3>
+                <div class="inputs-row">
+                    <div class="form-group">
+                        <label>Předmět</label>
+                        <select id="taskSubject" class="form-control">
+                            <option value="M">M (Matematika)</option><option value="ČJ">ČJ (Český jazyk)</option>
+                            <option value="AJ">AJ (Angličtina)</option><option value="F">F (Fyzika)</option>
+                            <option value="EL">EL (Elektrotechnika)</option><option value="IT">IT (Informatika)</option>
+                            <option value="HW">HW (Hardware)</option><option value="TD">TD (Tech. doku.)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Typ</label>
+                        <select id="taskType" class="form-control">
+                            <option value="test">Písemka / Test</option>
+                            <option value="ukol">Domácí úkol</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Popis / Popis učiva</label>
+                    <input type="text" id="taskText" class="form-control" placeholder="Např. Kapitola 4 - Integrály">
+                </div>
+                <div class="form-group">
+                    <label>Termín</label>
+                    <input type="date" id="taskDate" class="form-control">
+                </div>
+                <button class="btn-action" id="btnAddTask">+ Přidat do plánovače</button>
             </div>
 
-            <div style="font-size:0.85rem; font-weight:800; margin-top:5px; color:var(--text-muted);">
-                Seznam známek (čárkovaně vyznačené jsou simulované)
+            <div style="font-size:0.85rem; font-weight:800; color:var(--text-muted); margin-top:5px;">Plánované události</div>
+            <div class="items-list" id="tasksList"></div>
+        </div>
+    </div>
+
+    <!-- TAB 4: HLÍDAČ ABSENCE (#3) -->
+    <div id="tabAbsence" class="tab-view">
+        <div class="panel-container">
+            <div style="font-size:0.85rem; font-weight:800; color:var(--text-muted);">
+                Sledování absence u předmětů (Max hranice doporučeno: 20 %)
             </div>
-            <div class="grades-list" id="gradesList"></div>
+            <div class="items-list" id="absenceList"></div>
         </div>
     </div>
 
@@ -641,22 +540,18 @@
                 </div>
                 <button class="modal-close-btn" id="modalCloseBtn">✕</button>
             </div>
-            <div class="modal-info-grid">
-                <div class="modal-info-row">
-                    <span class="modal-info-label">Zkratka</span>
-                    <span class="modal-info-val" id="modalCode">M</span>
+            <div class="modal-info-grid" style="display:flex; flex-direction:column; gap:8px;">
+                <div style="display:flex; justify-content:space-between; padding:10px 12px; background:var(--bg-body); border-radius:10px;">
+                    <span style="font-size:0.8rem; font-weight:700; color:var(--text-muted);">Učitel / Učebna</span>
+                    <span style="font-size:0.9rem; font-weight:800;" id="modalTeacherRoom">-</span>
                 </div>
-                <div class="modal-info-row">
-                    <span class="modal-info-label">Učitel</span>
-                    <span class="modal-info-val" id="modalTeacher">Mg. Ng</span>
+                <div style="display:flex; justify-content:space-between; padding:10px 12px; background:var(--bg-body); border-radius:10px;">
+                    <span style="font-size:0.8rem; font-weight:700; color:var(--text-muted);">Tvoje absence</span>
+                    <span style="font-size:0.9rem; font-weight:800;" id="modalAbsenceVal">0 %</span>
                 </div>
-                <div class="modal-info-row">
-                    <span class="modal-info-label">Učebna</span>
-                    <span class="modal-info-val" id="modalRoom">Učebna 15</span>
-                </div>
-                <div class="modal-info-row">
-                    <span class="modal-info-label">Skupina</span>
-                    <span class="modal-info-val" id="modalGroup">Celá třída</span>
+                <div style="padding:10px 12px; background:var(--bg-body); border-radius:10px;">
+                    <div style="font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:4px;">Nadcházející úkoly a testy:</div>
+                    <div id="modalTasksList" style="font-size:0.85rem; font-weight:700; color:var(--text-main);">Žádné plánované úkoly</div>
                 </div>
             </div>
         </div>
@@ -672,14 +567,14 @@
             <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
             <span>Predikce</span>
         </button>
-        <a href="https://www.spsejecna.cz/suplovani" target="_blank" class="dock-btn" title="Suplování">
-            <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-            <span>Suplování</span>
-        </a>
-        <a href="https://strav.nasejidelna.cz/0341/faces/secured/mobile.jsp" target="_blank" class="dock-btn" title="Jídelna">
-            <svg viewBox="0 0 24 24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>
-            <span>Jídelna</span>
-        </a>
+        <button class="dock-btn" id="btnNavUkoly">
+            <svg viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+            <span>Úkoly</span>
+        </button>
+        <button class="dock-btn" id="btnNavAbsence">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            <span>Absence</span>
+        </button>
         <button class="dock-btn" id="btnShowCalendar">
             <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/></svg>
             <span>Volna</span>
@@ -687,354 +582,250 @@
     </div>
 
     <div class="widget-popover" id="calendarWidget">
-        <div class="widget-header">
-            <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/></svg>
-            <h2 data-i18n="calendarTitle">Prázdniny a volna</h2>
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--border);">
+            <svg viewBox="0 0 24 24" style="width:18px; fill:var(--bak-blue-primary);"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/></svg>
+            <h2 style="margin:0; font-size:0.95rem; font-weight:800;">Prázdniny a volna</h2>
         </div>
-        <div class="calendar-grid">
-            <div class="calendar-item"><span class="calendar-event" data-i18n="event1">Den české státnosti</span><span class="calendar-date">28. 9.</span></div>
-            <div class="calendar-item"><span class="calendar-event" data-i18n="event2">Podzimní prázdniny</span><span class="calendar-date">28. – 30. 10.</span></div>
-            <div class="calendar-item"><span class="calendar-event" data-i18n="event3">Den boje za svobodu</span><span class="calendar-date">17. 11.</span></div>
-            <div class="calendar-item"><span class="calendar-event" data-i18n="event4">Vánoční prázdniny</span><span class="calendar-date">23. 12. – 3. 1.</span></div>
-            <div class="calendar-item"><span class="calendar-event" data-i18n="event5">Pololetní prázdniny</span><span class="calendar-date">29. 1.</span></div>
-            <div class="calendar-item"><span class="calendar-event" data-i18n="event6">Jarní prázdniny</span><span class="calendar-date">22. – 28. 2.</span></div>
-            <div class="calendar-item"><span class="calendar-event" data-i18n="event7">Velikonoce</span><span class="calendar-date">25. – 29. 3.</span></div>
-            <div class="calendar-item"><span class="calendar-event" data-i18n="event8">Květnové svátky</span><span class="calendar-date">1., 8. 5.</span></div>
+        <div style="display:flex; flex-direction:column; gap:6px; max-height:40vh; overflow-y:auto;">
+            <div style="display:flex; justify-content:space-between; padding:8px 10px; background:var(--bg-body); border-radius:8px;"><span>Podzimní prázdniny</span><span style="font-weight:800; color:var(--bak-blue-primary);">28. – 30. 10.</span></div>
+            <div style="display:flex; justify-content:space-between; padding:8px 10px; background:var(--bg-body); border-radius:8px;"><span>Vánoční prázdniny</span><span style="font-weight:800; color:var(--bak-blue-primary);">23. 12. – 3. 1.</span></div>
+            <div style="display:flex; justify-content:space-between; padding:8px 10px; background:var(--bg-body); border-radius:8px;"><span>Pololetní prázdniny</span><span style="font-weight:800; color:var(--bak-blue-primary);">29. 1.</span></div>
+            <div style="display:flex; justify-content:space-between; padding:8px 10px; background:var(--bg-body); border-radius:8px;"><span>Jarní prázdniny</span><span style="font-weight:800; color:var(--bak-blue-primary);">22. – 28. 2.</span></div>
         </div>
     </div>
 </div>
 
 <script>
-// DIC ZKRATEK PŘEDMĚTŮ
-const subjectNames = {
-    'F': 'Fyzika',
-    'ČJ': 'Český jazyk a literatura',
-    'M': 'Matematika',
-    'D': 'Dějepis',
-    'ZSV': 'Základy společenských věd',
-    'EL': 'Elektrotechnika',
-    'AJ': 'Anglický jazyk',
-    'HW': 'Hardware',
-    'IT': 'Informační technologie',
-    'TV': 'Tělesná výchova',
-    'TD': 'Technická dokumentace'
+const subjectNames = { 'F':'Fyzika', 'ČJ':'Český jazyk', 'M':'Matematika', 'D':'Dějepis', 'ZSV':'ZSV', 'EL':'Elektrotechnika', 'AJ':'Anglický jazyk', 'HW':'Hardware', 'IT':'Informatika', 'TV':'Tělesná výchova', 'TD':'Tech. dokumentace' };
+const subjects = ['M', 'ČJ', 'AJ', 'F', 'EL', 'IT', 'HW', 'TD', 'ZSV', 'D'];
+
+// BEZPEČNOST A AUTH
+const CLASS_PIN = "c1a2026";
+const authOverlay = document.getElementById('authOverlay');
+const authPinInput = document.getElementById('authPin');
+const authSubmitBtn = document.getElementById('authSubmitBtn');
+const appContent = document.getElementById('appContent');
+
+function checkAuth() {
+    if (localStorage.getItem('c1a_authenticated') === 'true') {
+        authOverlay.style.display = 'none'; appContent.style.display = 'flex';
+    } else {
+        authOverlay.style.display = 'flex'; appContent.style.display = 'none';
+    }
+}
+authSubmitBtn.addEventListener('click', () => {
+    if (authPinInput.value.trim().toLowerCase() === CLASS_PIN) {
+        localStorage.setItem('c1a_authenticated', 'true'); checkAuth();
+    } else { document.getElementById('authError').style.display = 'block'; }
+});
+document.getElementById('logoutBtn').addEventListener('click', () => { localStorage.removeItem('c1a_authenticated'); checkAuth(); });
+checkAuth();
+
+// TAB SWITCHING
+const tabs = {
+    btnNavRozvrh: document.getElementById('tabRozvrh'),
+    btnNavZnamky: document.getElementById('tabZnamky'),
+    btnNavUkoly: document.getElementById('tabUkoly'),
+    btnNavAbsence: document.getElementById('tabAbsence')
 };
 
-// MODAL HANDLING
-const subjectModal = document.getElementById('subjectModal');
-const modalCloseBtn = document.getElementById('modalCloseBtn');
+Object.keys(tabs).forEach(btnId => {
+    document.getElementById(btnId).addEventListener('click', () => {
+        Object.keys(tabs).forEach(b => {
+            document.getElementById(b).classList.remove('active');
+            tabs[b].classList.remove('active');
+        });
+        document.getElementById(btnId).classList.add('active');
+        tabs[btnId].classList.add('active');
+    });
+});
 
-function openSubjectModal(code, teacher, room, group) {
-    document.getElementById('modalCode').innerText = code;
-    document.getElementById('modalSubjectFull').innerText = subjectNames[code] || code;
-    document.getElementById('modalTeacher').innerText = teacher || '-';
-    document.getElementById('modalRoom').innerText = room ? `Učebna ${room}` : '-';
-    document.getElementById('modalGroup').innerText = group || 'Celá třída';
-    
-    subjectModal.classList.add('show');
+// ZAPAMATOVÁNÍ SKUPINY (#1)
+let savedGroup = localStorage.getItem('c1a_saved_group') || 'all';
+function applyGroupFilter(group) {
+    savedGroup = group;
+    localStorage.setItem('c1a_saved_group', group);
+    document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-group') === group);
+    });
+    document.querySelectorAll('.gr-1, .gr-2').forEach(el => {
+        if (group === 'all') el.classList.remove('hide-group');
+        else if (group === '1') { if (el.classList.contains('gr-2')) el.classList.add('hide-group'); else el.classList.remove('hide-group'); }
+        else if (group === '2') { if (el.classList.contains('gr-1')) el.classList.add('hide-group'); else el.classList.remove('hide-group'); }
+    });
+}
+document.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => applyGroupFilter(b.getAttribute('data-group'))));
+applyGroupFilter(savedGroup);
+
+// NOTIFIKACE PŘED ZVONĚNÍM (#5)
+let notifEnabled = localStorage.getItem('c1a_notif') === 'true';
+const notifBtn = document.getElementById('notifBtn');
+
+function updateNotifBtn() { notifBtn.classList.toggle('active', notifEnabled); }
+notifBtn.addEventListener('click', () => {
+    if (!("Notification" in window)) { alert("Váš prohlížeč nepodporuje notifikace."); return; }
+    Notification.requestPermission().then(perm => {
+        if (perm === "granted") {
+            notifEnabled = !notifEnabled;
+            localStorage.setItem('c1a_notif', notifEnabled);
+            updateNotifBtn();
+            if (notifEnabled) new Notification("Notifikace zapnuty!", { body: "Upozornění před začátkem hodiny je aktivní." });
+        }
+    });
+});
+updateNotifBtn();
+
+// PLÁNOVAČ ÚKOLŮ A PÍSEMEK (#2)
+let tasksData = JSON.parse(localStorage.getItem('c1a_tasks_data')) || [
+    { id: 1, subject: 'M', type: 'test', text: 'Čtvrtletní písemka - Funkce', date: '2026-10-15' },
+    { id: 2, subject: 'EL', type: 'ukol', text: 'Cvičení 3 ze skript', date: '2026-10-12' }
+];
+
+function renderTasks() {
+    const list = document.getElementById('tasksList');
+    list.innerHTML = '';
+    tasksData.forEach((t, i) => {
+        const item = document.createElement('div');
+        item.className = `list-item ${t.type === 'test' ? 'test-item' : 'task-item'}`;
+        item.innerHTML = `
+            <div>
+                <div style="font-weight:800; font-size:0.9rem;">[${t.subject}] ${t.text}</div>
+                <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">Termín: ${t.date || 'Neurčen'} | ${t.type === 'test' ? 'TEST' : 'ÚKOL'}</div>
+            </div>
+            <button onclick="deleteTask(${i})" style="background:transparent; border:none; color:#ef4444; font-weight:800;">✕</button>
+        `;
+        list.appendChild(item);
+    });
+    localStorage.setItem('c1a_tasks_data', JSON.stringify(tasksData));
 }
 
-modalCloseBtn.addEventListener('click', () => subjectModal.classList.remove('show'));
-subjectModal.addEventListener('click', (e) => { if (e.target === subjectModal) subjectModal.classList.remove('show'); });
+document.getElementById('btnAddTask').addEventListener('click', () => {
+    const sub = document.getElementById('taskSubject').value;
+    const type = document.getElementById('taskType').value;
+    const text = document.getElementById('taskText').value.trim();
+    const date = document.getElementById('taskDate').value;
+    if (!text) return;
+    tasksData.push({ id: Date.now(), subject: sub, type, text, date });
+    document.getElementById('taskText').value = '';
+    renderTasks();
+});
 
-// NAVÍZÁNÍ KLIKNUTÍ NA HODINY V ROZVRHU
+window.deleteTask = function(i) { tasksData.splice(i, 1); renderTasks(); };
+renderTasks();
+
+// HLÍDAČ ABSENCE (#3)
+let absenceData = JSON.parse(localStorage.getItem('c1a_absence_data')) || {
+    'M': { missed: 2, total: 32 }, 'ČJ': { missed: 0, total: 24 }, 'AJ': { missed: 1, total: 20 },
+    'F': { missed: 0, total: 16 }, 'EL': { missed: 3, total: 16 }, 'IT': { missed: 0, total: 24 }
+};
+
+function renderAbsence() {
+    const list = document.getElementById('absenceList');
+    list.innerHTML = '';
+    subjects.forEach(sub => {
+        const data = absenceData[sub] || { missed: 0, total: 20 };
+        const percent = Math.round((data.missed / (data.total || 1)) * 100);
+        let colorClass = 'ok';
+        if (percent >= 20) colorClass = 'danger';
+        else if (percent >= 15) colorClass = 'warn';
+
+        const card = document.createElement('div');
+        card.className = 'absence-card';
+        card.innerHTML = `
+            <div class="absence-header">
+                <div>
+                    <span style="font-weight:800; font-size:0.95rem;">${sub} - ${subjectNames[sub] || sub}</span>
+                    <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700; display:block;">Zameškáno: ${data.missed} h z ${data.total} h</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-weight:800; font-size:1.1rem; color:${percent >= 20 ? '#ef4444' : 'var(--bak-blue-primary)'};">${percent} %</span>
+                    <button onclick="changeAbsence('${sub}', 1)" style="padding:4px 8px; border-radius:6px; border:1px solid var(--border); font-weight:800;">+</button>
+                    <button onclick="changeAbsence('${sub}', -1)" style="padding:4px 8px; border-radius:6px; border:1px solid var(--border); font-weight:800;">-</button>
+                </div>
+            </div>
+            <div class="absence-bar-bg"><div class="absence-bar-fill ${colorClass}" style="width: ${Math.min(percent, 100)}%;"></div></div>
+        `;
+        list.appendChild(card);
+    });
+    localStorage.setItem('c1a_absence_data', JSON.stringify(absenceData));
+}
+
+window.changeAbsence = function(sub, val) {
+    if (!absenceData[sub]) absenceData[sub] = { missed: 0, total: 20 };
+    absenceData[sub].missed = Math.max(0, absenceData[sub].missed + val);
+    renderAbsence();
+};
+renderAbsence();
+
+// MODAL OTEVŘENÍ DETAILU PŘEDMĚTU
+const subjectModal = document.getElementById('subjectModal');
+document.getElementById('modalCloseBtn').addEventListener('click', () => subjectModal.classList.remove('show'));
+
 document.querySelectorAll('.hodina').forEach(cell => {
     cell.addEventListener('click', () => {
         const code = cell.querySelector('.predmet')?.innerText;
         if (!code) return;
-        const teacher = cell.querySelector('.ucitel')?.innerText;
-        const room = cell.querySelector('.ucebna')?.innerText;
-        const group = cell.querySelector('.skupina')?.innerText;
-        openSubjectModal(code, teacher, room, group);
+        const teacher = cell.querySelector('.ucitel')?.innerText || '-';
+        const room = cell.querySelector('.ucebna')?.innerText || '-';
+        
+        document.getElementById('modalSubjectFull').innerText = subjectNames[code] || code;
+        document.getElementById('modalTeacherRoom').innerText = `${teacher} | Učebna ${room}`;
+        
+        const abs = absenceData[code] || { missed: 0, total: 20 };
+        document.getElementById('modalAbsenceVal').innerText = `${Math.round((abs.missed / abs.total) * 100)} % (${abs.missed} h)`;
+        
+        const subTasks = tasksData.filter(t => t.subject === code);
+        const tasksListEl = document.getElementById('modalTasksList');
+        if (subTasks.length > 0) {
+            tasksListEl.innerHTML = subTasks.map(t => `• ${t.text} (${t.date || 'bez data'})`).join('<br>');
+        } else {
+            tasksListEl.innerText = 'Žádné nadcházející úkoly';
+        }
+        
+        subjectModal.classList.add('show');
     });
 });
 
-// SERVICE WORKER
-if ('serviceWorker' in navigator) {
-    const swCode = `
-        self.addEventListener('install', (e) => self.skipWaiting());
-        self.addEventListener('activate', (e) => self.clients.claim());
-        self.addEventListener('fetch', (e) => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));
-    `;
-    const blob = new Blob([swCode], { type: 'application/javascript' });
-    navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
-}
-
-// BEZPEČNOSTNÍ HESLO TŘÍDY C1a
-const CLASS_PIN = "c1a2026";
-
-const authOverlay = document.getElementById('authOverlay');
-const authPinInput = document.getElementById('authPin');
-const authSubmitBtn = document.getElementById('authSubmitBtn');
-const authError = document.getElementById('authError');
-const appContent = document.getElementById('appContent');
-const logoutBtn = document.getElementById('logoutBtn');
-
-function checkAuth() {
-    if (localStorage.getItem('c1a_authenticated') === 'true') {
-        authOverlay.style.display = 'none';
-        appContent.style.display = 'flex';
-    } else {
-        authOverlay.style.display = 'flex';
-        appContent.style.display = 'none';
-    }
-}
-
-function handleLogin() {
-    if (authPinInput.value.trim().toLowerCase() === CLASS_PIN) {
-        localStorage.setItem('c1a_authenticated', 'true');
-        authError.style.display = 'none';
-        checkAuth();
-    } else {
-        authError.style.display = 'block';
-        authPinInput.value = '';
-    }
-}
-
-authSubmitBtn.addEventListener('click', handleLogin);
-authPinInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleLogin(); });
-logoutBtn.addEventListener('click', () => { localStorage.removeItem('c1a_authenticated'); checkAuth(); });
-checkAuth();
-
-// TAB SWITCHING
-const btnNavRozvrh = document.getElementById('btnNavRozvrh');
-const btnNavZnamky = document.getElementById('btnNavZnamky');
-const tabRozvrh = document.getElementById('tabRozvrh');
-const tabZnamky = document.getElementById('tabZnamky');
-
-btnNavRozvrh.addEventListener('click', () => {
-    btnNavRozvrh.classList.add('active'); btnNavZnamky.classList.remove('active');
-    tabRozvrh.classList.add('active'); tabZnamky.classList.remove('active');
-});
-
-btnNavZnamky.addEventListener('click', () => {
-    btnNavZnamky.classList.add('active'); btnNavRozvrh.classList.remove('active');
-    tabZnamky.classList.add('active'); tabRozvrh.classList.remove('active');
-});
-
-// SDÍLENÍ
-document.getElementById('shareBtn').addEventListener('click', () => {
-    if (navigator.share) {
-        navigator.share({ title: 'Rozvrh C1a - Bakaláři', url: window.location.href }).catch(() => {});
-    } else {
-        navigator.clipboard.writeText(window.location.href);
-        alert('Odkaz byl zkopírován do schránky!');
-    }
-});
-
-// FILTR SKUPIN
-const filterBtns = document.querySelectorAll('.filter-btn');
-filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const gr = btn.getAttribute('data-group');
-        document.querySelectorAll('.gr-1, .gr-2').forEach(el => {
-            if (gr === 'all') el.classList.remove('hide-group');
-            else if (gr === '1') { if (el.classList.contains('gr-2')) el.classList.add('hide-group'); else el.classList.remove('hide-group'); }
-            else if (gr === '2') { if (el.classList.contains('gr-1')) el.classList.add('hide-group'); else el.classList.remove('hide-group'); }
-        });
-    });
-});
-
-// KALKULÁTOR ZNÁMEK
-const subjects = ['M', 'ČJ', 'AJ', 'F', 'EL', 'IT', 'HW', 'TD', 'ZSV', 'D'];
-let activeSubject = 'M';
-
-let gradesData = JSON.parse(localStorage.getItem('c1a_grades_data')) || {
-    'M': [{ mark: 1, weight: 10, simulated: false }, { mark: 2, weight: 8, simulated: false }],
-    'ČJ': [{ mark: 1, weight: 10, simulated: false }],
-    'AJ': [{ mark: 1, weight: 10, simulated: false }]
-};
-
-function saveGrades() { localStorage.setItem('c1a_grades_data', JSON.stringify(gradesData)); }
-
-function renderSubjectChips() {
-    const container = document.getElementById('subjectSelector');
-    container.innerHTML = '';
-    subjects.forEach(sub => {
-        const chip = document.createElement('div');
-        chip.className = `subject-chip ${sub === activeSubject ? 'active' : ''}`;
-        chip.innerText = sub;
-        chip.addEventListener('click', () => {
-            activeSubject = sub;
-            renderSubjectChips();
-            renderGrades();
-        });
-        container.appendChild(chip);
-    });
-}
-
-function renderGrades() {
-    const list = document.getElementById('gradesList');
-    list.innerHTML = '';
-    const currentList = gradesData[activeSubject] || [];
-
-    let totalWeight = 0;
-    let totalScore = 0;
-
-    currentList.forEach((g, idx) => {
-        totalWeight += Number(g.weight);
-        totalScore += Number(g.mark) * Number(g.weight);
-
-        const item = document.createElement('div');
-        item.className = `grade-item ${g.simulated ? 'simulated' : ''}`;
-        item.innerHTML = `
-            <div style="display:flex; align-items:center; gap:12px;">
-                <div class="grade-badge m${g.mark}">${g.mark}</div>
-                <div class="grade-info">
-                    <span style="font-weight:800; font-size:0.9rem;">${g.simulated ? 'Simulovaná známka' : 'Známka'}</span>
-                    <span class="grade-weight">Váha: ${g.weight}</span>
-                </div>
-            </div>
-            <button class="btn-del-grade" onclick="deleteGrade(${idx})">✕</button>
-        `;
-        list.appendChild(item);
-    });
-
-    const currentAvgEl = document.getElementById('currentAvg');
-    const predictedBadge = document.getElementById('predictedGrade');
-
-    if (totalWeight > 0) {
-        const avg = (totalScore / totalWeight).toFixed(2);
-        currentAvgEl.innerText = avg;
-        const rounded = Math.round(avg);
-        predictedBadge.innerText = rounded;
-        predictedBadge.className = `predicted-badge m${rounded}`;
-    } else {
-        currentAvgEl.innerText = "-.--";
-        predictedBadge.innerText = "-";
-        predictedBadge.className = "predicted-badge";
-    }
-}
-
-document.getElementById('btnAddGrade').addEventListener('click', () => {
-    const mark = Number(document.getElementById('newMark').value);
-    const weight = Number(document.getElementById('newWeight').value) || 1;
-
-    if (!gradesData[activeSubject]) gradesData[activeSubject] = [];
-    gradesData[activeSubject].push({ mark, weight, simulated: true });
-    
-    saveGrades();
-    renderGrades();
-});
-
-window.deleteGrade = function(index) {
-    if (gradesData[activeSubject]) {
-        gradesData[activeSubject].splice(index, 1);
-        saveGrades();
-        renderGrades();
-    }
-};
-
-renderSubjectChips();
-renderGrades();
-
-// JAZYK A TÉMATA
-const translations = {
-    cs: { title: "Rozvrh C1a", subtitle: "SPŠE Ječná | Třída C1a", schoolStarts: "Škola za: ", schoolInProgress: "Výuka probíhá", nameDayPrefix: "Svátek: ", mon: "Po", tue: "Út", wed: "St", thu: "Čt", fri: "Pá" },
-    en: { title: "Timetable C1a", subtitle: "SPŠE Ječná | Class C1a", schoolStarts: "Starts in: ", schoolInProgress: "Lesson in progress", nameDayPrefix: "Name day: ", mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri" }
-};
-
-let currentLang = localStorage.getItem('language') || 'cs';
-const langToggle = document.getElementById('langToggle');
-function updateLanguageUI() {
-    langToggle.textContent = currentLang === 'cs' ? 'EN' : 'CS';
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[currentLang][key]) el.textContent = translations[currentLang][key];
-    });
-}
-langToggle.addEventListener('click', () => {
-    currentLang = currentLang === 'cs' ? 'en' : 'cs';
-    localStorage.setItem('language', currentLang);
-    updateLanguageUI();
-});
-
-const themeToggle = document.getElementById('themeToggle');
-const rootElement = document.documentElement;
-let savedTheme = localStorage.getItem('theme') || 'light';
-rootElement.setAttribute('data-theme', savedTheme);
-
-themeToggle.addEventListener('click', () => {
-    const newTheme = rootElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    rootElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-});
-
-function loadNameDay() {
-    fetch('https://svatkyapi.cz/api/day')
-        .then(res => res.json())
-        .then(data => { document.getElementById('nameDayText').innerText = `Svátek: ${data.name}`; })
-        .catch(() => {});
-}
-loadNameDay();
-
-const btnCal = document.getElementById('btnShowCalendar');
-const widgetCal = document.getElementById('calendarWidget');
-btnCal.addEventListener('click', (e) => { e.stopPropagation(); widgetCal.classList.toggle('show'); });
-document.addEventListener('click', (e) => { if (!widgetCal.contains(e.target) && !btnCal.contains(e.target)) widgetCal.classList.remove('show'); });
-
+// TIMER & LIVE BANNER
 const times = [{ start: "07:30", end: "08:15" }, { start: "08:25", end: "09:10" }, { start: "09:20", end: "10:05" }, { start: "10:20", end: "11:05" }, { start: "11:15", end: "12:00" }, { start: "12:10", end: "12:55" }, { start: "13:05", end: "13:50" }, { start: "14:00", end: "14:45" }];
 
 function forceTimerUpdate() {
     try {
         const now = new Date();
+        const currentMins = now.getHours() * 60 + now.getMinutes();
+        const day = now.getDay();
         const el = document.getElementById('countdownText');
         const liveBanner = document.getElementById('liveBanner');
-        const liveDetail = document.getElementById('liveDetail');
-
-        const day = now.getDay();
-        const currentMins = now.getHours() * 60 + now.getMinutes();
-        let target = new Date(now); target.setHours(7, 30, 0, 0);
 
         if (day >= 1 && day <= 5 && currentMins >= 450 && currentMins <= 885) {
-            el.innerText = translations[currentLang].schoolInProgress;
+            el.innerText = "Výuka probíhá";
         } else {
-            if (day === 6) target.setDate(target.getDate() + 2);
-            else if (day === 0) target.setDate(target.getDate() + 1);
-            else if (currentMins > 885) target.setDate(target.getDate() + (day === 5 ? 3 : 1));
-
-            const diff = target - now;
-            const h = Math.floor(diff / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
-            el.innerText = `${translations[currentLang].schoolStarts}${h}h ${m}m ${s}s`;
             if (liveBanner) liveBanner.style.display = 'none';
         }
 
         let tr = (day >= 1 && day <= 5) ? document.getElementById(`day-${day}`) : null;
-        document.querySelectorAll('.current-lesson, .past-lesson, .next-lesson').forEach(cell => cell.classList.remove('current-lesson', 'past-lesson', 'next-lesson'));
-
-        if (tr) { 
+        if (tr) {
             const tds = tr.querySelectorAll('td:not(.day)');
-            let foundNext = false;
             times.forEach((t, index) => {
                 if (index >= tds.length) return;
                 const cell = tds[index];
-                if (!cell.textContent.trim()) return; 
-                
+                if (!cell.textContent.trim()) return;
                 const [sh, sm] = t.start.split(':').map(Number);
-                const [eh, em] = t.end.split(':').map(Number);
                 const startMins = sh * 60 + sm;
-                const endMins = eh * 60 + em;
                 
-                if (currentMins >= startMins && currentMins <= endMins) {
-                    cell.classList.add('current-lesson');
-                    if (liveBanner && liveDetail) {
-                        liveDetail.innerText = `${cell.querySelector('.predmet')?.innerText || ""} (učebna ${cell.querySelector('.ucebna')?.innerText || ""})`;
-                        liveBanner.style.display = 'flex';
-                    }
-                } else if (currentMins > endMins) cell.classList.add('past-lesson');
-                else if (currentMins < startMins && !foundNext) { cell.classList.add('next-lesson'); foundNext = true; }
+                // NOTIFIKACE 5 MINUT PŘED ZAČÁTKEM HODINY (#5)
+                if (notifEnabled && currentMins === startMins - 5 && now.getSeconds() === 0) {
+                    const subj = cell.querySelector('.predmet')?.innerText || "";
+                    const room = cell.querySelector('.ucebna')?.innerText || "";
+                    new Notification("Začíná hodina!", { body: `Za 5 minut začíná ${subjectNames[subj] || subj} v učebně ${room}.` });
+                }
             });
         }
     } catch (e) {}
 }
 
-updateLanguageUI();
 setInterval(forceTimerUpdate, 1000);
-forceTimerUpdate(); 
+forceTimerUpdate();
 </script>
 
 </body>
