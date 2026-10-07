@@ -3,70 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Bakaláři - Rozvrh C1a</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* Bakaláři Brand Colors */
             --bak-blue-primary: #005b9f;
-            --bak-blue-dark: #003f72;
-            --bak-blue-light: #e6f0f8;
-            --bg-body: #f0f2f5;
+            --bak-blue-dark: #003e6e;
+            --bak-blue-accent: #0076cf;
+            --bg-body: #f4f6f9;
             --bg-card: #ffffff;
-            --text-main: #212529;
-            --text-muted: #6c757d;
-            --accent: #005b9f;
-            --border: #dcdfe6;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
             
-            /* Stavové barvy vyučování */
-            --past-bg: #e9ecef;
-            --past-text: #adb5bd;
-            --past-opacity: 0.6;
-            --current-bg: #fff3cd;
-            --current-border: #ffecb5;
-            --current-text: #664d03;
-            --pulse-color: rgba(255, 193, 7, 0.6);
-            --next-border: #005b9f;
+            --past-opacity: 0.45;
+            --current-bg: #fffbebfb;
+            --current-border: #f59e0b;
+            --current-text: #b45309;
 
-            /* Bakaláři typy předmětů (barvy) */
-            --subj-math: #e8f5e9; --subj-math-border: #a5d6a7; --subj-math-text: #1b5e20;
-            --subj-lang: #e3f2fd; --subj-lang-border: #90caf9; --subj-lang-text: #0d47a1;
-            --subj-hum:  #fff3e0; --subj-hum-border:  #ffcc80; --subj-hum-text:  #e65100;
-            --subj-tech: #f3e5f5; --subj-tech-border: #ce93d8; --subj-tech-text: #4a148c;
-            --subj-sport:#e0f2f1; --subj-sport-border:#80cbc4; --subj-sport-text:#004d40;
+            /* Předmětové barvy Bakaláři */
+            --subj-math: #ecfdf5; --subj-math-border: #a7f3d0; --subj-math-text: #047857;
+            --subj-lang: #eff6ff; --subj-lang-border: #bfdbfe; --subj-lang-text: #1d4ed8;
+            --subj-hum:  #fff7ed; --subj-hum-border:  #fed7aa; --subj-hum-text:  #c2410c;
+            --subj-tech: #f5f3ff; --subj-tech-border: #ddd6fe; --subj-tech-text: #6d28d9;
+            --subj-sport:#f0fdf4; --subj-sport-border:#bbf7d0; --subj-sport-text:#15803d;
 
-            --shadow: 0 2px 8px rgba(0,0,0,0.08);
-            --shadow-hover: 0 4px 12px rgba(0,0,0,0.15);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.12);
         }
 
         [data-theme="dark"] {
-            --bg-body: #121212;
-            --bg-card: #1e1e1e;
-            --text-main: #e0e0e0;
-            --text-muted: #a0a0a0;
-            --border: #333333;
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
             
-            --past-bg: #2a2a2a;
-            --past-text: #555555;
-            --past-opacity: 0.5;
-            --current-bg: #3d3200;
-            --current-border: #856404;
-            --current-text: #fff3cd;
+            --current-bg: #451a03;
+            --current-border: #d97706;
+            --current-text: #fef3c7;
 
-            --subj-math: #1b3320; --subj-math-border: #2e5a35; --subj-math-text: #a5d6a7;
-            --subj-lang: #15283c; --subj-lang-border: #224263; --subj-lang-text: #90caf9;
-            --subj-hum:  #382411; --subj-hum-border:  #5c3c1e; --subj-hum-text:  #ffcc80;
-            --subj-tech: #2a1833; --subj-tech-border: #4a2d59; --subj-tech-text: #ce93d8;
-            --subj-sport:#112a28; --subj-sport-border:#1f4d4a; --subj-sport-text:#80cbc4;
+            --subj-math: #064e3b; --subj-math-border: #047857; --subj-math-text: #a7f3d0;
+            --subj-lang: #1e3a8a; --subj-lang-border: #1d4ed8; --subj-lang-text: #bfdbfe;
+            --subj-hum:  #7c2d12; --subj-hum-border:  #c2410c; --subj-hum-text:  #fed7aa;
+            --subj-tech: #4c1d95; --subj-tech-border: #6d28d9; --subj-tech-text: #ddd6fe;
+            --subj-sport:#14532d; --subj-sport-border:#15803d; --subj-sport-text:#bbf7d0;
 
-            --shadow: 0 2px 8px rgba(0,0,0,0.4);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.5);
         }
 
+        * { box-sizing: border-box; }
         body { 
-            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif; 
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; 
             background-color: var(--bg-body); 
             color: var(--text-main); 
             margin: 0; padding: 0;
@@ -76,42 +72,71 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        /* --- OBRAZOVKA PŘÍSTUPU (ZÁMEK TŘÍDY C1a) --- */
+        .auth-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--bak-blue-primary), var(--bak-blue-dark));
+            z-index: 2000; display: flex; align-items: center; justify-content: center;
+            padding: 20px; transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .auth-card {
+            background: var(--bg-card); border-radius: 20px; padding: 32px 28px;
+            width: 100%; max-width: 380px; text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3); color: var(--text-main);
+        }
+        .auth-badge {
+            display: inline-block; background: var(--bak-blue-primary); color: white;
+            font-weight: 800; padding: 6px 14px; border-radius: 12px; font-size: 1.1rem; margin-bottom: 15px;
+        }
+        .auth-card h2 { margin: 0 0 8px 0; font-size: 1.4rem; font-weight: 800; }
+        .auth-card p { margin: 0 0 20px 0; font-size: 0.88rem; color: var(--text-muted); }
+        .auth-input {
+            width: 100%; padding: 12px 16px; border-radius: 10px; border: 2px solid var(--border);
+            font-size: 1rem; font-weight: 600; text-align: center; letter-spacing: 2px;
+            background: var(--bg-body); color: var(--text-main); margin-bottom: 12px; outline: none;
+            transition: border-color 0.2s;
+        }
+        .auth-input:focus { border-color: var(--bak-blue-primary); }
+        .auth-btn {
+            width: 100%; padding: 12px; border-radius: 10px; border: none;
+            background: var(--bak-blue-primary); color: white; font-weight: 700; font-size: 1rem;
+            cursor: pointer; transition: background 0.2s, transform 0.1s;
+        }
+        .auth-btn:active { transform: scale(0.98); }
+        .auth-error { color: #ef4444; font-size: 0.8rem; font-weight: 600; margin-top: 10px; display: none; }
+
+        /* --- NAČÍTACÍ OBRAZOVKA --- */
+        .loading-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bak-blue-primary); z-index: 1500;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: white; transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .spinner { width: 36px; height: 36px; border: 4px solid rgba(255,255,255,0.2); border-top: 4px solid #ffffff; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
         #appContent {
             display: none; flex-direction: column; 
             height: 100%; width: 100%; max-width: 1400px; 
             margin: 0 auto; position: relative;
         }
 
-        /* --- NAČÍTACÍ OBRAZOVKA BAKALÁŘI --- */
-        .loading-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bak-blue-primary); z-index: 1000;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            color: white; transition: opacity 0.4s ease, visibility 0.4s ease;
-        }
-        .loading-logo { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 20px; }
-        .loading-logo span { color: #ffca28; }
-        .spinner { width: 36px; height: 36px; border: 4px solid rgba(255,255,255,0.2); border-top: 4px solid #ffffff; border-radius: 50%; animation: spin 0.8s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        /* --- BAKALÁŘI HORNÍ LIŠTA --- */
+        /* --- HORNÍ PANEL --- */
         .top-bar {
             background: linear-gradient(135deg, var(--bak-blue-primary), var(--bak-blue-dark));
-            color: white;
-            padding: 12px 20px;
+            color: white; padding: 12px 18px;
             display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            z-index: 50; flex-shrink: 0;
+            box-shadow: var(--shadow-md); z-index: 50; flex-shrink: 0;
         }
         .top-title { display: flex; align-items: center; gap: 12px; }
-        .bak-icon { background: white; color: var(--bak-blue-primary); font-weight: 800; padding: 4px 8px; border-radius: 6px; font-size: 0.9rem; }
-        .top-title h1 { margin: 0; font-size: 1.2rem; font-weight: 700; }
-        .top-title p { margin: 0; font-size: 0.8rem; opacity: 0.85; }
+        .bak-icon { background: white; color: var(--bak-blue-primary); font-weight: 800; padding: 4px 8px; border-radius: 8px; font-size: 0.95rem; }
+        .top-title h1 { margin: 0; font-size: 1.15rem; font-weight: 800; }
+        .top-title p { margin: 0; font-size: 0.78rem; opacity: 0.85; }
 
-        .top-actions { display: flex; gap: 8px; align-items: center; }
+        .top-actions { display: flex; gap: 6px; align-items: center; }
         .icon-btn {
             display: flex; align-items: center; justify-content: center;
-            width: 34px; height: 34px; border-radius: 6px;
+            width: 34px; height: 34px; border-radius: 8px;
             background: rgba(255,255,255,0.15); color: white;
             border: none; cursor: pointer; transition: background 0.2s;
         }
@@ -119,43 +144,59 @@
         .icon-btn svg { width: 18px; height: 18px; fill: currentColor; }
         .icon-btn.lang-btn { font-size: 0.75rem; font-weight: 700; }
 
-        /* INFORMACE O ČASU A SVÁTKU */
+        /* STATUS & FILTR LISTA */
         .status-bar {
-            display: flex; justify-content: space-between; align-items: center; padding: 8px 15px;
+            display: flex; justify-content: space-between; align-items: center; padding: 8px 16px;
             background: var(--bg-card); border-bottom: 1px solid var(--border);
-            font-size: 0.82rem; font-weight: 600; color: var(--text-muted);
+            font-size: 0.82rem; font-weight: 600; color: var(--text-muted); gap: 10px; flex-wrap: wrap;
         }
         .status-pill { display: flex; align-items: center; gap: 6px; }
         .status-pill svg { width: 15px; height: 15px; fill: var(--bak-blue-primary); }
 
-        /* --- ROZVRHOVÁ TABULKA BAKALÁŘI --- */
+        /* FILTR SKUPIN */
+        .group-filter { display: flex; background: var(--bg-body); padding: 3px; border-radius: 8px; border: 1px solid var(--border); }
+        .filter-btn {
+            padding: 4px 10px; border-radius: 6px; border: none; background: transparent;
+            font-size: 0.75rem; font-weight: 700; color: var(--text-muted); cursor: pointer; transition: all 0.2s;
+        }
+        .filter-btn.active { background: var(--bg-card); color: var(--bak-blue-primary); box-shadow: var(--shadow-sm); }
+
+        /* --- KARTA PRÁVĚ PROBÍHAJÍCÍ HODINY --- */
+        .live-banner {
+            margin: 10px 14px 0 14px; background: linear-gradient(90deg, #1e3a8a, #005b9f);
+            color: white; border-radius: 12px; padding: 10px 16px; display: flex;
+            align-items: center; justify-content: space-between; box-shadow: var(--shadow-sm);
+        }
+        .live-banner-left { display: flex; align-items: center; gap: 10px; }
+        .live-dot { width: 10px; height: 10px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 8px #22c55e; animation: pulseDot 1.5s infinite; }
+        @keyframes pulseDot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.5; } }
+        .live-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; font-weight: 700; }
+        .live-detail { font-size: 0.95rem; font-weight: 800; }
+
+        /* --- HLAVNÍ PLOCHA ROZVRHU --- */
         .main-content {
-            flex: 1; overflow: hidden;
-            display: flex; flex-direction: column;
-            padding: 12px 12px 80px 12px;
+            flex: 1; overflow: hidden; display: flex; flex-direction: column;
+            padding: 10px 14px 75px 14px;
         }
         
         .schedule-card {
-            flex: 1; overflow: auto;
-            background: var(--bg-card); border-radius: 8px;
-            box-shadow: var(--shadow); border: 1px solid var(--border);
-            padding: 8px;
+            flex: 1; overflow: auto; background: var(--bg-card); border-radius: 14px;
+            box-shadow: var(--shadow-sm); border: 1px solid var(--border); padding: 8px;
         }
 
-        table { border-collapse: separate; border-spacing: 6px; width: 100%; min-width: 950px; }
-        th { color: var(--text-muted); font-weight: 700; font-size: 0.8em; padding: 4px; text-align: center; }
-        th small { display: block; font-size: 0.75em; margin-top: 2px; font-weight: 400; }
-        .day { font-weight: 700; color: var(--bak-blue-primary); font-size: 0.95em; text-align: center; width: 40px; background: var(--bg-body); border-radius: 6px; }
+        table { border-collapse: separate; border-spacing: 5px; width: 100%; min-width: 960px; }
+        th { color: var(--text-muted); font-weight: 700; font-size: 0.78em; padding: 4px; text-align: center; }
+        th small { display: block; font-size: 0.75em; margin-top: 2px; font-weight: 500; opacity: 0.8; }
+        .day { font-weight: 800; color: var(--bak-blue-primary); font-size: 0.9em; text-align: center; width: 38px; background: var(--bg-body); border-radius: 8px; }
 
         td:not(.day) { 
-            background: var(--bg-body); border-radius: 6px;
-            vertical-align: middle; padding: 0;
+            background: var(--bg-body); border-radius: 8px; vertical-align: middle; padding: 0;
             border: 1px solid var(--border); transition: all 0.2s ease; 
         }
-        td:not(.day):not(:empty):hover { transform: translateY(-1px); box-shadow: var(--shadow-hover); z-index: 10; position: relative; }
+        td:not(.day):not(:empty):hover { transform: translateY(-2px); box-shadow: var(--shadow-md); z-index: 10; position: relative; }
         td:empty { background: transparent; border: 1px dashed var(--border); }
 
-        /* KATEGORIZE HODIN DLE BAREV BAKALÁŘŮ */
+        /* STYLY KATEGORIÍ PŘEDMĚTŮ */
         .type-math { background-color: var(--subj-math) !important; border-color: var(--subj-math-border) !important; color: var(--subj-math-text); }
         .type-lang { background-color: var(--subj-lang) !important; border-color: var(--subj-lang-border) !important; color: var(--subj-lang-text); }
         .type-hum  { background-color: var(--subj-hum) !important;  border-color: var(--subj-hum-border) !important;  color: var(--subj-hum-text); }
@@ -163,77 +204,85 @@
         .type-sport{ background-color: var(--subj-sport) !important;border-color: var(--subj-sport-border) !important;color: var(--subj-sport-text); }
 
         /* DYNAMICKÉ STAVY HODIN */
-        .past-lesson { opacity: var(--past-opacity) !important; filter: grayscale(50%); }
+        .past-lesson { opacity: var(--past-opacity) !important; filter: grayscale(40%); }
         .current-lesson { 
             background-color: var(--current-bg) !important; 
             border: 2px solid var(--current-border) !important; 
-            animation: pulseBorder 2s infinite; z-index: 5; position: relative; 
+            box-shadow: 0 0 12px rgba(245, 158, 11, 0.3); z-index: 5; position: relative; 
         }
         .current-lesson .predmet { color: var(--current-text) !important; }
-        .next-lesson { border: 2px solid var(--next-border) !important; }
+        .next-lesson { border: 2px solid var(--bak-blue-primary) !important; }
 
-        @keyframes pulseBorder {
-            0% { box-shadow: 0 0 0 0 var(--pulse-color); }
-            70% { box-shadow: 0 0 0 6px rgba(255, 193, 7, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
-        }
-
-        .hodina { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 72px; min-width: 90px; box-sizing: border-box; border-radius: 5px; }
+        .hodina { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 70px; min-width: 88px; box-sizing: border-box; border-radius: 6px; }
         .predmet { font-weight: 800; font-size: 1.25em; }
-        .ucitel { position: absolute; bottom: 4px; right: 6px; font-size: 0.7em; font-weight: 700; opacity: 0.8; }
-        .skupina { position: absolute; bottom: 4px; left: 6px; font-size: 0.7em; font-weight: 700; opacity: 0.8; }
-        .ucebna { position: absolute; top: 4px; right: 6px; font-size: 0.75em; font-weight: 800; }
+        .ucitel { position: absolute; bottom: 4px; right: 6px; font-size: 0.68em; font-weight: 700; opacity: 0.85; }
+        .skupina { position: absolute; bottom: 4px; left: 6px; font-size: 0.68em; font-weight: 700; opacity: 0.85; }
+        .ucebna { position: absolute; top: 4px; right: 6px; font-size: 0.72em; font-weight: 800; }
 
-        .split { display: flex; flex-direction: column; width: 100%; height: 100%; border-radius: 5px; overflow: hidden; }
-        .split .hodina { height: 36px; min-height: 36px; }
+        .split { display: flex; flex-direction: column; width: 100%; height: 100%; border-radius: 6px; overflow: hidden; }
+        .split .hodina { height: 35px; min-height: 35px; }
         .split-divider { width: 100%; height: 1px; background-color: var(--border); }
-        .split .predmet { font-size: 0.95em; }
+        .split .predmet { font-size: 0.92em; }
         .split .ucebna { top: 2px; right: 5px; font-size: 0.65em; }
         .split .ucitel { bottom: 2px; right: 5px; font-size: 0.6em; }
         .split .skupina { bottom: 2px; left: 5px; font-size: 0.6em; }
 
-        /* --- SPODNÍ NAVIGAČNÍ PANEL (BAKALÁŘI BOTTOM NAV) --- */
+        /* SKRÝVÁNÍ SKUPIN PŘI FILTRU */
+        .hide-group { display: none !important; }
+
+        /* --- SPODNÍ NAVIGAČNÍ PANEL --- */
         .dock-container {
             position: absolute; bottom: 0; left: 0; width: 100%;
-            display: flex; justify-content: space-around; padding: 8px 0;
+            display: flex; justify-content: space-around; padding: 8px 0 12px 0;
             background: var(--bg-card); border-top: 1px solid var(--border);
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.05); z-index: 100;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.05); z-index: 100;
         }
         
         .dock-btn {
             background: transparent; border: none; color: var(--text-muted);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: 2px; font-size: 0.7rem; font-weight: 600; cursor: pointer; text-decoration: none;
-            width: 25%;
+            gap: 3px; font-size: 0.68rem; font-weight: 700; cursor: pointer; text-decoration: none;
+            width: 20%; transition: color 0.2s;
         }
         .dock-btn svg { width: 20px; height: 20px; fill: currentColor; }
         .dock-btn.active { color: var(--bak-blue-primary); }
 
-        /* WIDGET POPOVER */
+        /* POPUP WIDGET */
         .widget-popover {
             position: absolute; bottom: 65px; left: 50%; transform: translateX(-50%) translateY(10px);
             width: 92%; max-width: 420px; background: var(--bg-card);
-            border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 16px; box-shadow: var(--shadow-lg);
             padding: 16px; box-sizing: border-box; z-index: 90;
             opacity: 0; pointer-events: none; visibility: hidden;
-            transition: all 0.2s ease; border: 1px solid var(--border);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid var(--border);
         }
         .widget-popover.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; visibility: visible; }
         
         .widget-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
         .widget-header svg { width: 18px; height: 18px; fill: var(--bak-blue-primary); }
-        .widget-header h2 { margin: 0; font-size: 1rem; font-weight: 700; color: var(--text-main); }
+        .widget-header h2 { margin: 0; font-size: 0.95rem; font-weight: 800; color: var(--text-main); }
         
         .calendar-grid { display: flex; flex-direction: column; gap: 6px; max-height: 40vh; overflow-y: auto; }
-        .calendar-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--bg-body); border-radius: 6px; }
-        .calendar-date { font-weight: 700; color: var(--bak-blue-primary); font-size: 0.8rem; }
+        .calendar-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--bg-body); border-radius: 8px; }
+        .calendar-date { font-weight: 800; color: var(--bak-blue-primary); font-size: 0.8rem; }
         .calendar-event { font-weight: 600; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-<div id="loadingOverlay" class="loading-overlay">
-    <div class="loading-logo">BAKALÁŘI <span>web</span></div>
+<!-- BEZPEČNOSTNÍ VSTUP PRO C1a -->
+<div id="authOverlay" class="auth-overlay">
+    <div class="auth-card">
+        <div class="auth-badge">C1a</div>
+        <h2>Vstup pouze pro C1a</h2>
+        <p>Zadej přístupové heslo třídy pro zobrazení rozvrhu hodin.</p>
+        <input type="password" id="authPin" class="auth-input" placeholder="HESLO TŘÍDY" autocomplete="off">
+        <button class="auth-btn" id="authSubmitBtn">Vstoupit do aplikace</button>
+        <div id="authError" class="auth-error">Nesprávné heslo! Zkus to znovu.</div>
+    </div>
+</div>
+
+<div id="loadingOverlay" class="loading-overlay" style="display:none;">
     <div class="spinner"></div>
 </div>
 
@@ -242,14 +291,20 @@
         <div class="top-title">
             <span class="bak-icon">B</span>
             <div>
-                <h1 data-i18n="title">Rozvrh hodin</h1>
-                <p data-i18n="subtitle">Třída: C1a | SPŠE Ječná</p>
+                <h1 data-i18n="title">Rozvrh C1a</h1>
+                <p data-i18n="subtitle">SPŠE Ječná | Třída C1a</p>
             </div>
         </div>
         <div class="top-actions">
+            <button class="icon-btn" id="shareBtn" title="Sdílet rozvrh">
+                <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+            </button>
             <button class="icon-btn lang-btn" id="langToggle">EN</button>
             <button class="icon-btn" id="themeToggle" aria-label="Přepnout režim">
                 <svg id="themeIcon" viewBox="0 0 24 24"></svg>
+            </button>
+            <button class="icon-btn" id="logoutBtn" title="Odhlásit se">
+                <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
             </button>
         </div>
     </div>
@@ -259,9 +314,27 @@
             <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
             <span id="countdownText">Počítám...</span>
         </div>
+
+        <!-- FILTR SKUPINY -->
+        <div class="group-filter">
+            <button class="filter-btn active" data-group="all">Vše</button>
+            <button class="filter-btn" data-group="1">1. Skupina</button>
+            <button class="filter-btn" data-group="2">2. Skupina</button>
+        </div>
+
         <div class="status-pill">
-            <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
             <span id="nameDayText">Svátek: Načítám...</span>
+        </div>
+    </div>
+
+    <!-- AKTIVNÍ PŘEHLEDOVÁ LIŠTA PRO PRAVĚ PROBÍHAJÍCÍ HODINU -->
+    <div class="live-banner" id="liveBanner" style="display:none;">
+        <div class="live-banner-left">
+            <div class="live-dot"></div>
+            <div>
+                <div class="live-title">Právě probíhá</div>
+                <div class="live-detail" id="liveDetail">-</div>
+            </div>
         </div>
     </div>
 
@@ -292,9 +365,9 @@
                         <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">EL</span><span class="ucitel">Jk</span></div></td>
                         <td class="type-lang">
                             <div class="split">
-                                <div class="hodina"><span class="ucebna">15</span><span class="predmet">AJ</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
+                                <div class="hodina gr-1"><span class="ucebna">15</span><span class="predmet">AJ</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
                                 <div class="split-divider"></div>
-                                <div class="hodina"><span class="ucebna">5b</span><span class="predmet">AJ</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
+                                <div class="hodina gr-2"><span class="ucebna">5b</span><span class="predmet">AJ</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
                             </div>
                         </td>
                         <td></td>
@@ -308,16 +381,16 @@
                         <td></td>
                         <td class="type-tech">
                             <div class="split">
-                                <div class="hodina"><span class="ucebna">18a</span><span class="predmet">IT</span><span class="skupina">2/2</span><span class="ucitel">Ha</span></div>
+                                <div class="hodina gr-2"><span class="ucebna">18a</span><span class="predmet">IT</span><span class="skupina">2/2</span><span class="ucitel">Ha</span></div>
                                 <div class="split-divider"></div>
-                                <div class="hodina"><span class="ucebna">18b</span><span class="predmet">IT</span><span class="skupina">1/2</span><span class="ucitel">Me</span></div>
+                                <div class="hodina gr-1"><span class="ucebna">18b</span><span class="predmet">IT</span><span class="skupina">1/2</span><span class="ucitel">Me</span></div>
                             </div>
                         </td>
                         <td class="type-tech">
                             <div class="split">
-                                <div class="hodina"><span class="ucebna">18a</span><span class="predmet">IT</span><span class="skupina">2/2</span><span class="ucitel">Ha</span></div>
+                                <div class="hodina gr-2"><span class="ucebna">18a</span><span class="predmet">IT</span><span class="skupina">2/2</span><span class="ucitel">Ha</span></div>
                                 <div class="split-divider"></div>
-                                <div class="hodina"><span class="ucebna">18b</span><span class="predmet">IT</span><span class="skupina">1/2</span><span class="ucitel">Me</span></div>
+                                <div class="hodina gr-1"><span class="ucebna">18b</span><span class="predmet">IT</span><span class="skupina">1/2</span><span class="ucitel">Me</span></div>
                             </div>
                         </td>
                         <td class="type-hum"><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
@@ -326,9 +399,9 @@
                         <td class="day" data-i18n="wed">St</td>
                         <td>
                             <div class="split">
-                                <div class="hodina type-lang"><span class="ucebna">5a</span><span class="predmet">AJ</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
+                                <div class="hodina type-lang gr-1"><span class="ucebna">5a</span><span class="predmet">AJ</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
                                 <div class="split-divider"></div>
-                                <div class="hodina type-tech"><span class="ucebna">17a</span><span class="predmet">TD</span><span class="skupina">2/2</span><span class="ucitel">Pr</span></div>
+                                <div class="hodina type-tech gr-2"><span class="ucebna">17a</span><span class="predmet">TD</span><span class="skupina">2/2</span><span class="ucitel">Pr</span></div>
                             </div>
                         </td>
                         <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">HW</span><span class="ucitel">Ku</span></div></td>
@@ -336,9 +409,9 @@
                         <td class="type-math"><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
                         <td>
                             <div class="split">
-                                <div class="hodina"></div>
+                                <div class="hodina gr-1"></div>
                                 <div class="split-divider"></div>
-                                <div class="hodina type-lang"><span class="ucebna">5a</span><span class="predmet">AJ</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
+                                <div class="hodina type-lang gr-2"><span class="ucebna">5a</span><span class="predmet">AJ</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
                             </div>
                         </td>
                         <td class="type-hum"><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
@@ -349,9 +422,9 @@
                         <td class="day" data-i18n="thu">Čt</td>
                         <td>
                             <div class="split">
-                                <div class="hodina type-tech"><span class="ucebna">19a</span><span class="predmet">TD</span><span class="skupina">1/2</span><span class="ucitel">Pr</span></div>
+                                <div class="hodina type-tech gr-1"><span class="ucebna">19a</span><span class="predmet">TD</span><span class="skupina">1/2</span><span class="ucitel">Pr</span></div>
                                 <div class="split-divider"></div>
-                                <div class="hodina"></div>
+                                <div class="hodina gr-2"></div>
                             </div>
                         </td>
                         <td class="type-lang"><div class="hodina"><span class="ucebna">15</span><span class="predmet">ČJ</span><span class="ucitel">Su</span></div></td>
@@ -359,9 +432,9 @@
                         <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">TD</span><span class="ucitel">Pr</span></div></td>
                         <td class="type-lang">
                             <div class="split">
-                                <div class="hodina"><span class="ucebna">5a</span><span class="predmet">AJ</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
+                                <div class="hodina gr-1"><span class="ucebna">5a</span><span class="predmet">AJ</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
                                 <div class="split-divider"></div>
-                                <div class="hodina"><span class="ucebna">15</span><span class="predmet">AJ</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
+                                <div class="hodina gr-2"><span class="ucebna">15</span><span class="predmet">AJ</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
                             </div>
                         </td>
                         <td class="type-hum"><div class="hodina"><span class="ucebna">15</span><span class="predmet">D</span><span class="ucitel">Su</span></div></td>
@@ -374,9 +447,9 @@
                         <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">EL</span><span class="ucitel">Jk</span></div></td>
                         <td class="type-lang">
                             <div class="split">
-                                <div class="hodina"><span class="ucebna">5b</span><span class="predmet">AJ</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
+                                <div class="hodina gr-1"><span class="ucebna">5b</span><span class="predmet">AJ</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
                                 <div class="split-divider"></div>
-                                <div class="hodina"><span class="ucebna">15</span><span class="predmet">AJ</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
+                                <div class="hodina gr-2"><span class="ucebna">15</span><span class="predmet">AJ</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
                             </div>
                         </td>
                         <td class="type-lang"><div class="hodina"><span class="ucebna">15</span><span class="predmet">ČJ</span><span class="ucitel">Su</span></div></td>
@@ -390,6 +463,7 @@
         </div>
     </div>
 
+    <!-- SPODNÍ NAVIGACE -->
     <div class="dock-container">
         <button class="dock-btn active" id="btnRozvrh">
             <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
@@ -405,7 +479,7 @@
         </a>
         <button class="dock-btn" id="btnShowCalendar">
             <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/></svg>
-            <span>Akce</span>
+            <span>Volna</span>
         </button>
     </div>
 
@@ -428,27 +502,96 @@
 </div>
 
 <script>
-window.addEventListener('DOMContentLoaded', () => {
-    const loadingOverlay = document.getElementById('loadingOverlay');
-    const appContent = document.getElementById('appContent');
-    setTimeout(() => {
-        loadingOverlay.style.opacity = '0';
-        loadingOverlay.style.visibility = 'hidden';
+// BEZPEČNOSTNÍ HESLO TŘÍDY C1a
+const CLASS_PIN = "c1a2026"; // Zde můžete změnit heslo pro spolužáky
+
+const authOverlay = document.getElementById('authOverlay');
+const authPinInput = document.getElementById('authPin');
+const authSubmitBtn = document.getElementById('authSubmitBtn');
+const authError = document.getElementById('authError');
+const appContent = document.getElementById('appContent');
+const logoutBtn = document.getElementById('logoutBtn');
+
+function checkAuth() {
+    if (localStorage.getItem('c1a_authenticated') === 'true') {
+        authOverlay.style.display = 'none';
         appContent.style.display = 'flex';
-    }, 800); 
+    } else {
+        authOverlay.style.display = 'flex';
+        appContent.style.display = 'none';
+    }
+}
+
+function handleLogin() {
+    const entered = authPinInput.value.trim().toLowerCase();
+    if (entered === CLASS_PIN) {
+        localStorage.setItem('c1a_authenticated', 'true');
+        authError.style.display = 'none';
+        checkAuth();
+    } else {
+        authError.style.display = 'block';
+        authPinInput.value = '';
+        authPinInput.focus();
+    }
+}
+
+authSubmitBtn.addEventListener('click', handleLogin);
+authPinInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleLogin(); });
+
+logoutBtn.addEventListener('click', () => {
+    localStorage.removeItem('c1a_authenticated');
+    checkAuth();
+});
+
+checkAuth();
+
+// SDÍLENÍ
+document.getElementById('shareBtn').addEventListener('click', () => {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Rozvrh C1a - Bakaláři',
+            text: 'Rozvrh hodin třídy C1a pro SPŠE Ječná.',
+            url: window.location.href
+        }).catch(() => {});
+    } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Odkaz na rozvrh byl zkopírován do schránky!');
+    }
+});
+
+// FILTR SKUPIN
+const filterBtns = document.querySelectorAll('.filter-btn');
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const gr = btn.getAttribute('data-group');
+        
+        document.querySelectorAll('.gr-1, .gr-2').forEach(el => {
+            if (gr === 'all') {
+                el.classList.remove('hide-group');
+            } else if (gr === '1') {
+                if (el.classList.contains('gr-2')) el.classList.add('hide-group');
+                else el.classList.remove('hide-group');
+            } else if (gr === '2') {
+                if (el.classList.contains('gr-1')) el.classList.add('hide-group');
+                else el.classList.remove('hide-group');
+            }
+        });
+    });
 });
 
 const translations = {
     cs: {
-        title: "Rozvrh hodin", subtitle: "Třída: C1a | SPŠE Ječná",
-        schoolStarts: "Škola za: ", schoolInProgress: "Probíhá výuka",
+        title: "Rozvrh C1a", subtitle: "SPŠE Ječná | Třída C1a",
+        schoolStarts: "Škola za: ", schoolInProgress: "Výuka probíhá",
         nameDayPrefix: "Svátek: ", nameDayErr: "Svátek Nedostupný",
         mon: "Po", tue: "Út", wed: "St", thu: "Čt", fri: "Pá", calendarTitle: "Prázdniny a volna",
         event1: "Státní svátek", event2: "Podzimní prázdniny", event3: "Státní svátek", event4: "Vánoční prázdniny",
         event5: "Pololetní prázdniny", event6: "Jarní prázdniny", event7: "Velikonoce", event8: "Květnové svátky"
     },
     en: {
-        title: "Timetable", subtitle: "Class: C1a | SPŠE Ječná",
+        title: "Timetable C1a", subtitle: "SPŠE Ječná | Class C1a",
         schoolStarts: "Starts in: ", schoolInProgress: "Lesson in progress",
         nameDayPrefix: "Name day: ", nameDayErr: "Unavailable",
         mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri", calendarTitle: "Holidays",
@@ -537,6 +680,9 @@ function forceTimerUpdate() {
         if (now.getDate() !== lastCheckedDay) { lastCheckedDay = now.getDate(); loadNameDay(); }
 
         const el = document.getElementById('countdownText');
+        const liveBanner = document.getElementById('liveBanner');
+        const liveDetail = document.getElementById('liveDetail');
+
         if(!el) return;
 
         const day = now.getDay();
@@ -570,6 +716,7 @@ function forceTimerUpdate() {
             const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((diff % (1000 * 60)) / 1000);
             el.innerText = `${translations[currentLang].schoolStarts}${h}h ${m}m ${s}s`;
+            if (liveBanner) liveBanner.style.display = 'none';
         }
 
         document.querySelectorAll('.current-lesson, .past-lesson, .next-lesson').forEach(cell => {
@@ -579,6 +726,8 @@ function forceTimerUpdate() {
         if (tr && day >= 1 && day <= 5) { 
             const tds = tr.querySelectorAll('td:not(.day)');
             let foundNext = false;
+            let currentLessonText = "";
+
             times.forEach((t, index) => {
                 if (index >= tds.length) return;
                 const cell = tds[index];
@@ -589,10 +738,22 @@ function forceTimerUpdate() {
                 const startMins = sh * 60 + sm;
                 const endMins = eh * 60 + em;
                 
-                if (currentMins >= startMins && currentMins <= endMins) cell.classList.add('current-lesson');
+                if (currentMins >= startMins && currentMins <= endMins) {
+                    cell.classList.add('current-lesson');
+                    const subj = cell.querySelector('.predmet')?.innerText || "";
+                    const room = cell.querySelector('.ucebna')?.innerText || "";
+                    currentLessonText = `${subj} (učebna ${room})`;
+                }
                 else if (currentMins > endMins) cell.classList.add('past-lesson');
                 else if (currentMins < startMins && !foundNext) { cell.classList.add('next-lesson'); foundNext = true; }
             });
+
+            if (currentLessonText && liveBanner && liveDetail) {
+                liveDetail.innerText = currentLessonText;
+                liveBanner.style.display = 'flex';
+            } else if (liveBanner) {
+                liveBanner.style.display = 'none';
+            }
         }
     } catch (e) { console.error("Časovač:", e); }
 }
