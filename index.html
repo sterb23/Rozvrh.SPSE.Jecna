@@ -48,9 +48,9 @@
 
             --mark-1: #10b981; --mark-2: #84cc16; --mark-3: #f59e0b; --mark-4: #f97316; --mark-5: #ef4444;
 
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-            --shadow-lg: 0 10px 25px rgba(0,0,0,0.12);
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
+            --shadow-md: 0 6px 16px rgba(0,0,0,0.08);
+            --shadow-lg: 0 16px 32px rgba(0,0,0,0.14);
         }
 
         [data-theme="dark"] {
@@ -70,12 +70,13 @@
             --subj-tech: #4c1d95; --subj-tech-border: #6d28d9; --subj-tech-text: #ddd6fe;
             --subj-sport:#14532d; --subj-sport-border:#15803d; --subj-sport-text:#bbf7d0;
 
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
-            --shadow-lg: 0 10px 25px rgba(0,0,0,0.5);
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.3);
+            --shadow-md: 0 6px 16px rgba(0,0,0,0.4);
+            --shadow-lg: 0 16px 32px rgba(0,0,0,0.5);
         }
 
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease; }
+        
         body { 
             font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; 
             background-color: var(--bg-body); 
@@ -87,36 +88,58 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* --- OVERLAY PŘÍSTUPU --- */
+        /* --- TLAČÍTKA A INTERACTIONS --- */
+        button, .hodina, .subject-chip, .dock-btn {
+            cursor: pointer;
+        }
+        button:active, .dock-btn:active, .subject-chip:active {
+            transform: scale(0.95) !important;
+        }
+
+        /* --- ANIMACE PROLÍNÁNÍ TABŮ --- */
+        .tab-view { 
+            display: none; flex-direction: column; flex: 1; overflow: hidden;
+            opacity: 0; transform: translateY(8px);
+            transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .tab-view.active { 
+            display: flex; opacity: 1; transform: translateY(0);
+        }
+
+        /* --- AUTH OVERLAY --- */
         .auth-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, var(--bak-blue-primary), var(--bak-blue-dark));
             z-index: 2000; display: flex; align-items: center; justify-content: center;
-            padding: 20px; transition: opacity 0.4s ease;
+            padding: 20px; transition: opacity 0.4s ease, visibility 0.4s ease;
         }
         .auth-card {
-            background: var(--bg-card); border-radius: 20px; padding: 32px 28px;
+            background: var(--bg-card); border-radius: 24px; padding: 32px 28px;
             width: 100%; max-width: 380px; text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3); color: var(--text-main);
+            box-shadow: var(--shadow-lg); color: var(--text-main);
+            animation: modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .auth-badge {
             display: inline-block; background: var(--bak-blue-primary); color: white;
-            font-weight: 800; padding: 6px 14px; border-radius: 12px; font-size: 1.1rem; margin-bottom: 15px;
+            font-weight: 800; padding: 6px 16px; border-radius: 12px; font-size: 1.1rem; margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0, 91, 159, 0.3);
         }
         .auth-card h2 { margin: 0 0 8px 0; font-size: 1.4rem; font-weight: 800; }
         .auth-card p { margin: 0 0 20px 0; font-size: 0.88rem; color: var(--text-muted); }
         .auth-input {
-            width: 100%; padding: 12px 16px; border-radius: 10px; border: 2px solid var(--border);
-            font-size: 1rem; font-weight: 600; text-align: center; letter-spacing: 2px;
+            width: 100%; padding: 12px 16px; border-radius: 12px; border: 2px solid var(--border);
+            font-size: 1rem; font-weight: 700; text-align: center; letter-spacing: 2px;
             background: var(--bg-body); color: var(--text-main); margin-bottom: 12px; outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
-        .auth-input:focus { border-color: var(--bak-blue-primary); }
+        .auth-input:focus { border-color: var(--bak-blue-primary); box-shadow: 0 0 0 4px rgba(0, 91, 159, 0.15); }
         .auth-btn {
-            width: 100%; padding: 12px; border-radius: 10px; border: none;
-            background: var(--bak-blue-primary); color: white; font-weight: 700; font-size: 1rem;
-            cursor: pointer; transition: background 0.2s;
+            width: 100%; padding: 14px; border-radius: 12px; border: none;
+            background: var(--bak-blue-primary); color: white; font-weight: 800; font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 91, 159, 0.3);
+            transition: transform 0.15s, background-color 0.2s;
         }
-        .auth-error { color: #ef4444; font-size: 0.8rem; font-weight: 600; margin-top: 10px; display: none; }
+        .auth-error { color: #ef4444; font-size: 0.82rem; font-weight: 700; margin-top: 10px; display: none; }
 
         #appContent {
             display: none; flex-direction: column; 
@@ -124,7 +147,7 @@
             margin: 0 auto; position: relative;
         }
 
-        /* --- HORNÍ PANEL --- */
+        /* --- HORNÍ PANEL BAKALÁŘŮ --- */
         .top-bar {
             background: linear-gradient(135deg, var(--bak-blue-primary), var(--bak-blue-dark));
             color: white; padding: 12px 18px;
@@ -133,24 +156,20 @@
             padding-top: max(12px, env(safe-area-inset-top));
         }
         .top-title { display: flex; align-items: center; gap: 12px; }
-        .bak-icon { background: white; color: var(--bak-blue-primary); font-weight: 800; padding: 4px 8px; border-radius: 8px; font-size: 0.95rem; }
-        .top-title h1 { margin: 0; font-size: 1.15rem; font-weight: 800; }
+        .bak-icon { background: white; color: var(--bak-blue-primary); font-weight: 800; padding: 4px 9px; border-radius: 8px; font-size: 1rem; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+        .top-title h1 { margin: 0; font-size: 1.15rem; font-weight: 800; letter-spacing: -0.3px; }
         .top-title p { margin: 0; font-size: 0.78rem; opacity: 0.85; }
 
         .top-actions { display: flex; gap: 6px; align-items: center; }
         .icon-btn {
             display: flex; align-items: center; justify-content: center;
-            width: 34px; height: 34px; border-radius: 8px;
+            width: 36px; height: 36px; border-radius: 10px;
             background: rgba(255,255,255,0.15); color: white;
-            border: none; cursor: pointer; transition: background 0.2s;
+            border: none; transition: background 0.2s, transform 0.15s;
         }
-        .icon-btn:hover { background: rgba(255,255,255,0.3); }
+        .icon-btn:hover { background: rgba(255,255,255,0.28); }
         .icon-btn svg { width: 18px; height: 18px; fill: currentColor; }
-        .icon-btn.lang-btn { font-size: 0.75rem; font-weight: 700; }
-
-        /* TAB VIEWS */
-        .tab-view { display: none; flex-direction: column; flex: 1; overflow: hidden; }
-        .tab-view.active { display: flex; }
+        .icon-btn.lang-btn { font-size: 0.75rem; font-weight: 800; }
 
         /* STATUS & FILTR LIŠTA */
         .status-bar {
@@ -161,23 +180,25 @@
         .status-pill { display: flex; align-items: center; gap: 6px; }
         .status-pill svg { width: 15px; height: 15px; fill: var(--bak-blue-primary); }
 
-        .group-filter { display: flex; background: var(--bg-body); padding: 3px; border-radius: 8px; border: 1px solid var(--border); }
+        .group-filter { display: flex; background: var(--bg-body); padding: 3px; border-radius: 10px; border: 1px solid var(--border); }
         .filter-btn {
-            padding: 4px 10px; border-radius: 6px; border: none; background: transparent;
-            font-size: 0.75rem; font-weight: 700; color: var(--text-muted); cursor: pointer; transition: all 0.2s;
+            padding: 5px 12px; border-radius: 7px; border: none; background: transparent;
+            font-size: 0.75rem; font-weight: 700; color: var(--text-muted); transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .filter-btn.active { background: var(--bg-card); color: var(--bak-blue-primary); box-shadow: var(--shadow-sm); }
 
         /* BANNER PRO PROBÍHAJÍCÍ HODINU */
         .live-banner {
             margin: 10px 14px 0 14px; background: linear-gradient(90deg, #1e3a8a, #005b9f);
-            color: white; border-radius: 12px; padding: 10px 16px; display: flex;
-            align-items: center; justify-content: space-between; box-shadow: var(--shadow-sm);
+            color: white; border-radius: 14px; padding: 10px 16px; display: flex;
+            align-items: center; justify-content: space-between; box-shadow: 0 4px 14px rgba(0, 91, 159, 0.25);
+            animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         .live-banner-left { display: flex; align-items: center; gap: 10px; }
-        .live-dot { width: 10px; height: 10px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 8px #22c55e; animation: pulseDot 1.5s infinite; }
-        @keyframes pulseDot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.5; } }
-        .live-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; font-weight: 700; }
+        .live-dot { width: 10px; height: 10px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; animation: pulseDot 1.5s infinite; }
+        @keyframes pulseDot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.35); opacity: 0.5; } }
+        .live-title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.85; font-weight: 800; }
         .live-detail { font-size: 0.95rem; font-weight: 800; }
 
         /* HLAVNÍ PLOCHA ROZVRHU */
@@ -187,20 +208,21 @@
         }
         
         .schedule-card {
-            flex: 1; overflow: auto; background: var(--bg-card); border-radius: 14px;
+            flex: 1; overflow: auto; background: var(--bg-card); border-radius: 16px;
             box-shadow: var(--shadow-sm); border: 1px solid var(--border); padding: 8px;
         }
 
-        table { border-collapse: separate; border-spacing: 5px; width: 100%; min-width: 960px; }
+        table { border-collapse: separate; border-spacing: 6px; width: 100%; min-width: 960px; }
         th { color: var(--text-muted); font-weight: 700; font-size: 0.78em; padding: 4px; text-align: center; }
         th small { display: block; font-size: 0.75em; margin-top: 2px; font-weight: 500; opacity: 0.8; }
-        .day { font-weight: 800; color: var(--bak-blue-primary); font-size: 0.9em; text-align: center; width: 38px; background: var(--bg-body); border-radius: 8px; }
+        .day { font-weight: 800; color: var(--bak-blue-primary); font-size: 0.9em; text-align: center; width: 38px; background: var(--bg-body); border-radius: 10px; }
 
         td:not(.day) { 
-            background: var(--bg-body); border-radius: 8px; vertical-align: middle; padding: 0;
-            border: 1px solid var(--border); transition: all 0.2s ease; 
+            background: var(--bg-body); border-radius: 10px; vertical-align: middle; padding: 0;
+            border: 1px solid var(--border); transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s; 
         }
-        td:not(.day):not(:empty):hover { transform: translateY(-2px); box-shadow: var(--shadow-md); z-index: 10; position: relative; }
+        td:not(.day):not(:empty):hover { transform: translateY(-2px) scale(1.01); box-shadow: var(--shadow-md); z-index: 10; position: relative; }
+        td:not(.day):not(:empty):active { transform: scale(0.96) !important; }
         td:empty { background: transparent; border: 1px dashed var(--border); }
 
         .type-math { background-color: var(--subj-math) !important; border-color: var(--subj-math-border) !important; color: var(--subj-math-text); }
@@ -213,19 +235,21 @@
         .current-lesson { 
             background-color: var(--current-bg) !important; 
             border: 2px solid var(--current-border) !important; 
-            box-shadow: 0 0 12px rgba(245, 158, 11, 0.3); z-index: 5; position: relative; 
+            box-shadow: 0 0 14px rgba(245, 158, 11, 0.35); z-index: 5; position: relative; 
+            animation: pulseGlow 2s infinite ease-in-out;
         }
+        @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 10px rgba(245, 158, 11, 0.3); } 50% { box-shadow: 0 0 18px rgba(245, 158, 11, 0.6); } }
         .current-lesson .predmet { color: var(--current-text) !important; }
         .next-lesson { border: 2px solid var(--bak-blue-primary) !important; }
 
-        .hodina { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 70px; min-width: 88px; box-sizing: border-box; border-radius: 6px; }
-        .predmet { font-weight: 800; font-size: 1.25em; }
+        .hodina { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 72px; min-width: 88px; box-sizing: border-box; border-radius: 8px; }
+        .predmet { font-weight: 800; font-size: 1.25em; letter-spacing: -0.3px; }
         .ucitel { position: absolute; bottom: 4px; right: 6px; font-size: 0.68em; font-weight: 700; opacity: 0.85; }
         .skupina { position: absolute; bottom: 4px; left: 6px; font-size: 0.68em; font-weight: 700; opacity: 0.85; }
         .ucebna { position: absolute; top: 4px; right: 6px; font-size: 0.72em; font-weight: 800; }
 
-        .split { display: flex; flex-direction: column; width: 100%; height: 100%; border-radius: 6px; overflow: hidden; }
-        .split .hodina { height: 35px; min-height: 35px; }
+        .split { display: flex; flex-direction: column; width: 100%; height: 100%; border-radius: 8px; overflow: hidden; }
+        .split .hodina { height: 36px; min-height: 36px; }
         .split-divider { width: 100%; height: 1px; background-color: var(--border); }
         .split .predmet { font-size: 0.92em; }
         .split .ucebna { top: 2px; right: 5px; font-size: 0.65em; }
@@ -240,33 +264,31 @@
             padding-bottom: 80px;
         }
 
-        .subject-selector {
-            display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px;
-        }
+        .subject-selector { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
         .subject-chip {
-            padding: 8px 14px; background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 20px; font-size: 0.82rem; font-weight: 700; color: var(--text-muted);
-            cursor: pointer; white-space: nowrap; transition: all 0.2s;
+            padding: 8px 16px; background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 20px; font-size: 0.82rem; font-weight: 800; color: var(--text-muted);
+            white-space: nowrap; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .subject-chip.active {
             background: var(--bak-blue-primary); color: white; border-color: var(--bak-blue-primary);
-            box-shadow: var(--shadow-sm);
+            box-shadow: 0 4px 12px rgba(0, 91, 159, 0.25);
         }
 
         .grade-summary-card {
-            background: var(--bg-card); border-radius: 16px; padding: 18px;
+            background: var(--bg-card); border-radius: 20px; padding: 20px;
             border: 1px solid var(--border); box-shadow: var(--shadow-sm);
             display: flex; justify-content: space-between; align-items: center;
         }
-        .avg-label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+        .avg-label { font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
         .avg-val { font-size: 2.2rem; font-weight: 800; color: var(--bak-blue-primary); }
         .predicted-badge {
-            padding: 8px 16px; border-radius: 12px; font-weight: 800; font-size: 1.1rem;
-            color: white; text-align: center;
+            padding: 10px 18px; border-radius: 14px; font-weight: 800; font-size: 1.2rem;
+            color: white; text-align: center; box-shadow: var(--shadow-sm);
         }
 
         .add-grade-box {
-            background: var(--bg-card); border-radius: 16px; padding: 16px;
+            background: var(--bg-card); border-radius: 20px; padding: 18px;
             border: 1px solid var(--border); box-shadow: var(--shadow-sm);
             display: flex; flex-direction: column; gap: 12px;
         }
@@ -276,26 +298,29 @@
         .form-group { flex: 1; display: flex; flex-direction: column; gap: 4px; }
         .form-group label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); }
         .form-control {
-            padding: 10px; border-radius: 8px; border: 1px solid var(--border);
+            padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border);
             background: var(--bg-body); color: var(--text-main); font-weight: 700; outline: none;
         }
 
         .btn-add-grade {
-            padding: 10px; border-radius: 8px; border: none; background: var(--bak-blue-primary);
-            color: white; font-weight: 700; font-size: 0.85rem; cursor: pointer;
-            transition: background 0.2s;
+            padding: 12px; border-radius: 10px; border: none; background: var(--bak-blue-primary);
+            color: white; font-weight: 800; font-size: 0.88rem;
+            box-shadow: 0 4px 12px rgba(0, 91, 159, 0.2); transition: background 0.2s;
         }
 
         .grades-list { display: flex; flex-direction: column; gap: 8px; }
         .grade-item {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 10px 14px; background: var(--bg-card); border-radius: 12px;
-            border: 1px solid var(--border);
+            padding: 12px 16px; background: var(--bg-card); border-radius: 14px;
+            border: 1px solid var(--border); animation: slideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        
         .grade-item.simulated { border: 2px dashed var(--bak-blue-primary); background: var(--subj-lang); }
         .grade-badge {
-            width: 32px; height: 32px; border-radius: 8px; color: white; font-weight: 800;
+            width: 34px; height: 34px; border-radius: 10px; color: white; font-weight: 800;
             display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+            box-shadow: var(--shadow-sm);
         }
         .grade-badge.m1 { background: var(--mark-1); }
         .grade-badge.m2 { background: var(--mark-2); }
@@ -304,8 +329,33 @@
         .grade-badge.m5 { background: var(--mark-5); }
 
         .grade-info { display: flex; flex-direction: column; }
-        .grade-weight { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
-        .btn-del-grade { background: transparent; border: none; color: #ef4444; font-weight: 800; cursor: pointer; font-size: 1.1rem; }
+        .grade-weight { font-size: 0.75rem; color: var(--text-muted); font-weight: 700; }
+        .btn-del-grade { background: transparent; border: none; color: #ef4444; font-weight: 800; font-size: 1.1rem; padding: 4px 8px; }
+
+        /* --- MODÁLNÍ OKNO DETAILU PŘEDMĚTU --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            z-index: 1000; display: flex; align-items: flex-end; justify-content: center;
+            opacity: 0; pointer-events: none; visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .modal-overlay.show { opacity: 1; pointer-events: auto; visibility: visible; }
+        .modal-overlay.show .modal-card { transform: translateY(0); }
+
+        .modal-card {
+            background: var(--bg-card); width: 100%; max-width: 480px; border-radius: 28px 28px 0 0;
+            padding: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border);
+            transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .modal-title-badge { font-size: 1.4rem; font-weight: 800; color: var(--bak-blue-primary); }
+        .modal-close-btn { background: var(--bg-body); border: none; width: 32px; height: 32px; border-radius: 50%; font-weight: 800; color: var(--text-muted); }
+        
+        .modal-info-grid { display: flex; flex-direction: column; gap: 10px; }
+        .modal-info-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: var(--bg-body); border-radius: 12px; }
+        .modal-info-label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); }
+        .modal-info-val { font-size: 0.95rem; font-weight: 800; color: var(--text-main); }
 
         /* SPODNÍ NAVIGACE */
         .dock-container {
@@ -313,23 +363,23 @@
             display: flex; justify-content: space-around; padding: 8px 0;
             padding-bottom: max(12px, env(safe-area-inset-bottom));
             background: var(--bg-card); border-top: 1px solid var(--border);
-            box-shadow: 0 -4px 15px rgba(0,0,0,0.05); z-index: 100;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.06); z-index: 100;
         }
         
         .dock-btn {
             background: transparent; border: none; color: var(--text-muted);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: 3px; font-size: 0.68rem; font-weight: 700; cursor: pointer; text-decoration: none;
-            width: 20%; transition: color 0.2s;
+            gap: 3px; font-size: 0.68rem; font-weight: 700; text-decoration: none;
+            width: 20%; transition: color 0.2s, transform 0.15s;
         }
-        .dock-btn svg { width: 20px; height: 20px; fill: currentColor; }
+        .dock-btn svg { width: 22px; height: 22px; fill: currentColor; }
         .dock-btn.active { color: var(--bak-blue-primary); }
 
         .widget-popover {
             position: absolute; bottom: 65px; left: 50%; transform: translateX(-50%) translateY(10px);
             width: 92%; max-width: 420px; background: var(--bg-card);
-            border-radius: 16px; box-shadow: var(--shadow-lg);
-            padding: 16px; box-sizing: border-box; z-index: 90;
+            border-radius: 20px; box-shadow: var(--shadow-lg);
+            padding: 18px; box-sizing: border-box; z-index: 90;
             opacity: 0; pointer-events: none; visibility: hidden;
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid var(--border);
         }
@@ -340,13 +390,14 @@
         .widget-header h2 { margin: 0; font-size: 0.95rem; font-weight: 800; color: var(--text-main); }
         
         .calendar-grid { display: flex; flex-direction: column; gap: 6px; max-height: 40vh; overflow-y: auto; }
-        .calendar-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--bg-body); border-radius: 8px; }
+        .calendar-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: var(--bg-body); border-radius: 10px; }
         .calendar-date { font-weight: 800; color: var(--bak-blue-primary); font-size: 0.8rem; }
         .calendar-event { font-weight: 600; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
+<!-- AUTH OVERLAY -->
 <div id="authOverlay" class="auth-overlay">
     <div class="auth-card">
         <div class="auth-badge">C1a</div>
@@ -536,12 +587,10 @@
         </div>
     </div>
 
-    <!-- ZÁLOŽKA 2: KALKULÁTOR / PREDIKCE ZNÁMEK -->
+    <!-- ZÁLOŽKA 2: KALKULÁTOR ZNÁMEK -->
     <div id="tabZnamky" class="tab-view">
         <div class="grade-calc-container">
-            <div class="subject-selector" id="subjectSelector">
-                <!-- Dynamicky načtené čipy předmětů -->
-            </div>
+            <div class="subject-selector" id="subjectSelector"></div>
 
             <div class="grade-summary-card">
                 <div>
@@ -578,8 +627,37 @@
             <div style="font-size:0.85rem; font-weight:800; margin-top:5px; color:var(--text-muted);">
                 Seznam známek (čárkovaně vyznačené jsou simulované)
             </div>
-            <div class="grades-list" id="gradesList">
-                <!-- Dynamicky vložené známky -->
+            <div class="grades-list" id="gradesList"></div>
+        </div>
+    </div>
+
+    <!-- MODAL DETAILU PŘEDMĚTU -->
+    <div class="modal-overlay" id="subjectModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div>
+                    <div style="font-size:0.75rem; font-weight:800; color:var(--text-muted); text-transform:uppercase;">Detail výuky</div>
+                    <div class="modal-title-badge" id="modalSubjectFull">Matematika</div>
+                </div>
+                <button class="modal-close-btn" id="modalCloseBtn">✕</button>
+            </div>
+            <div class="modal-info-grid">
+                <div class="modal-info-row">
+                    <span class="modal-info-label">Zkratka</span>
+                    <span class="modal-info-val" id="modalCode">M</span>
+                </div>
+                <div class="modal-info-row">
+                    <span class="modal-info-label">Učitel</span>
+                    <span class="modal-info-val" id="modalTeacher">Mg. Ng</span>
+                </div>
+                <div class="modal-info-row">
+                    <span class="modal-info-label">Učebna</span>
+                    <span class="modal-info-val" id="modalRoom">Učebna 15</span>
+                </div>
+                <div class="modal-info-row">
+                    <span class="modal-info-label">Skupina</span>
+                    <span class="modal-info-val" id="modalGroup">Celá třída</span>
+                </div>
             </div>
         </div>
     </div>
@@ -627,7 +705,51 @@
 </div>
 
 <script>
-// SERVICE WORKER PRO OFFLINE PROVOZ
+// DIC ZKRATEK PŘEDMĚTŮ
+const subjectNames = {
+    'F': 'Fyzika',
+    'ČJ': 'Český jazyk a literatura',
+    'M': 'Matematika',
+    'D': 'Dějepis',
+    'ZSV': 'Základy společenských věd',
+    'EL': 'Elektrotechnika',
+    'AJ': 'Anglický jazyk',
+    'HW': 'Hardware',
+    'IT': 'Informační technologie',
+    'TV': 'Tělesná výchova',
+    'TD': 'Technická dokumentace'
+};
+
+// MODAL HANDLING
+const subjectModal = document.getElementById('subjectModal');
+const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+function openSubjectModal(code, teacher, room, group) {
+    document.getElementById('modalCode').innerText = code;
+    document.getElementById('modalSubjectFull').innerText = subjectNames[code] || code;
+    document.getElementById('modalTeacher').innerText = teacher || '-';
+    document.getElementById('modalRoom').innerText = room ? `Učebna ${room}` : '-';
+    document.getElementById('modalGroup').innerText = group || 'Celá třída';
+    
+    subjectModal.classList.add('show');
+}
+
+modalCloseBtn.addEventListener('click', () => subjectModal.classList.remove('show'));
+subjectModal.addEventListener('click', (e) => { if (e.target === subjectModal) subjectModal.classList.remove('show'); });
+
+// NAVÍZÁNÍ KLIKNUTÍ NA HODINY V ROZVRHU
+document.querySelectorAll('.hodina').forEach(cell => {
+    cell.addEventListener('click', () => {
+        const code = cell.querySelector('.predmet')?.innerText;
+        if (!code) return;
+        const teacher = cell.querySelector('.ucitel')?.innerText;
+        const room = cell.querySelector('.ucebna')?.innerText;
+        const group = cell.querySelector('.skupina')?.innerText;
+        openSubjectModal(code, teacher, room, group);
+    });
+});
+
+// SERVICE WORKER
 if ('serviceWorker' in navigator) {
     const swCode = `
         self.addEventListener('install', (e) => self.skipWaiting());
@@ -674,7 +796,7 @@ authPinInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handle
 logoutBtn.addEventListener('click', () => { localStorage.removeItem('c1a_authenticated'); checkAuth(); });
 checkAuth();
 
-// TAB SWITCHING (ROZVRH VS PREDIKCE ZNÁMEK)
+// TAB SWITCHING
 const btnNavRozvrh = document.getElementById('btnNavRozvrh');
 const btnNavZnamky = document.getElementById('btnNavZnamky');
 const tabRozvrh = document.getElementById('tabRozvrh');
@@ -690,7 +812,7 @@ btnNavZnamky.addEventListener('click', () => {
     tabZnamky.classList.add('active'); tabRozvrh.classList.remove('active');
 });
 
-// SDÍLENÍ ODKAZU
+// SDÍLENÍ
 document.getElementById('shareBtn').addEventListener('click', () => {
     if (navigator.share) {
         navigator.share({ title: 'Rozvrh C1a - Bakaláři', url: window.location.href }).catch(() => {});
@@ -700,7 +822,7 @@ document.getElementById('shareBtn').addEventListener('click', () => {
     }
 });
 
-// FILTR SKUPIN V ROZVRHU
+// FILTR SKUPIN
 const filterBtns = document.querySelectorAll('.filter-btn');
 filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -715,20 +837,17 @@ filterBtns.forEach(btn => {
     });
 });
 
-// --- KALKULÁTOR ZNÁMEK / PREDIKTOR LOGIKA ---
+// KALKULÁTOR ZNÁMEK
 const subjects = ['M', 'ČJ', 'AJ', 'F', 'EL', 'IT', 'HW', 'TD', 'ZSV', 'D'];
 let activeSubject = 'M';
 
-// Struktura dat pro známky uložená v localStorage
 let gradesData = JSON.parse(localStorage.getItem('c1a_grades_data')) || {
     'M': [{ mark: 1, weight: 10, simulated: false }, { mark: 2, weight: 8, simulated: false }],
     'ČJ': [{ mark: 1, weight: 10, simulated: false }],
     'AJ': [{ mark: 1, weight: 10, simulated: false }]
 };
 
-function saveGrades() {
-    localStorage.setItem('c1a_grades_data', JSON.stringify(gradesData));
-}
+function saveGrades() { localStorage.setItem('c1a_grades_data', JSON.stringify(gradesData)); }
 
 function renderSubjectChips() {
     const container = document.getElementById('subjectSelector');
@@ -811,16 +930,13 @@ window.deleteGrade = function(index) {
 renderSubjectChips();
 renderGrades();
 
-// JAZYKY A POPUPY
+// JAZYK A TÉMATA
 const translations = {
     cs: { title: "Rozvrh C1a", subtitle: "SPŠE Ječná | Třída C1a", schoolStarts: "Škola za: ", schoolInProgress: "Výuka probíhá", nameDayPrefix: "Svátek: ", mon: "Po", tue: "Út", wed: "St", thu: "Čt", fri: "Pá" },
     en: { title: "Timetable C1a", subtitle: "SPŠE Ječná | Class C1a", schoolStarts: "Starts in: ", schoolInProgress: "Lesson in progress", nameDayPrefix: "Name day: ", mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri" }
 };
 
 let currentLang = localStorage.getItem('language') || 'cs';
-let fetchedNameDay = "";
-let lastCheckedDay = new Date().getDate();
-
 const langToggle = document.getElementById('langToggle');
 function updateLanguageUI() {
     langToggle.textContent = currentLang === 'cs' ? 'EN' : 'CS';
@@ -849,7 +965,7 @@ themeToggle.addEventListener('click', () => {
 function loadNameDay() {
     fetch('https://svatkyapi.cz/api/day')
         .then(res => res.json())
-        .then(data => { fetchedNameDay = data.name; document.getElementById('nameDayText').innerText = `Svátek: ${fetchedNameDay}`; })
+        .then(data => { document.getElementById('nameDayText').innerText = `Svátek: ${data.name}`; })
         .catch(() => {});
 }
 loadNameDay();
