@@ -3,67 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Rozvrh C1a - Aplikace</title>
+    <title>Bakaláři - Rozvrh C1a</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-body: #f5f5f7;
+            /* Bakaláři Brand Colors */
+            --bak-blue-primary: #005b9f;
+            --bak-blue-dark: #003f72;
+            --bak-blue-light: #e6f0f8;
+            --bg-body: #f0f2f5;
             --bg-card: #ffffff;
-            --text-main: #1d1d1f;
-            --text-muted: #86868b;
-            --accent: #0071e3;
-            --accent-hover: #0077ed;
-            --green: #34c759;
-            --shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
-            --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.1);
-            --border: #e5e5ea;
-            --past-bg: #e5e5ea;
-            --past-text: #86868b;
-            --past-opacity: 0.5;
-            --current-bg: rgba(255, 193, 7, 0.15);
-            --current-border: #ffc107;
-            --pulse-color: rgba(255, 193, 7, 0.5);
-            --next-border: #0071e3;
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --glass-border: rgba(255, 255, 255, 0.4);
+            --text-main: #212529;
+            --text-muted: #6c757d;
+            --accent: #005b9f;
+            --border: #dcdfe6;
+            
+            /* Stavové barvy vyučování */
+            --past-bg: #e9ecef;
+            --past-text: #adb5bd;
+            --past-opacity: 0.6;
+            --current-bg: #fff3cd;
+            --current-border: #ffecb5;
+            --current-text: #664d03;
+            --pulse-color: rgba(255, 193, 7, 0.6);
+            --next-border: #005b9f;
+
+            /* Bakaláři typy předmětů (barvy) */
+            --subj-math: #e8f5e9; --subj-math-border: #a5d6a7; --subj-math-text: #1b5e20;
+            --subj-lang: #e3f2fd; --subj-lang-border: #90caf9; --subj-lang-text: #0d47a1;
+            --subj-hum:  #fff3e0; --subj-hum-border:  #ffcc80; --subj-hum-text:  #e65100;
+            --subj-tech: #f3e5f5; --subj-tech-border: #ce93d8; --subj-tech-text: #4a148c;
+            --subj-sport:#e0f2f1; --subj-sport-border:#80cbc4; --subj-sport-text:#004d40;
+
+            --shadow: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-hover: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         [data-theme="dark"] {
-            --bg-body: #000000;
-            --bg-card: #1c1c1e;
-            --text-main: #f5f5f7;
-            --text-muted: #98989d;
-            --accent: #0a84ff;
-            --accent-hover: #47a1ff;
-            --green: #30d158;
-            --shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
-            --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.8);
-            --border: #38383a;
-            --past-bg: #1c1c1e;
-            --past-text: #48484a;
-            --past-opacity: 0.4;
-            --current-bg: rgba(255, 193, 7, 0.1);
-            --current-border: #ffca28;
-            --pulse-color: rgba(255, 202, 40, 0.4);
-            --next-border: #0a84ff;
-            --glass-bg: rgba(28, 28, 30, 0.85);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --bg-body: #121212;
+            --bg-card: #1e1e1e;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --border: #333333;
+            
+            --past-bg: #2a2a2a;
+            --past-text: #555555;
+            --past-opacity: 0.5;
+            --current-bg: #3d3200;
+            --current-border: #856404;
+            --current-text: #fff3cd;
+
+            --subj-math: #1b3320; --subj-math-border: #2e5a35; --subj-math-text: #a5d6a7;
+            --subj-lang: #15283c; --subj-lang-border: #224263; --subj-lang-text: #90caf9;
+            --subj-hum:  #382411; --subj-hum-border:  #5c3c1e; --subj-hum-text:  #ffcc80;
+            --subj-tech: #2a1833; --subj-tech-border: #4a2d59; --subj-tech-text: #ce93d8;
+            --subj-sport:#112a28; --subj-sport-border:#1f4d4a; --subj-sport-text:#80cbc4;
+
+            --shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
 
-        /* --- ZÁKLAD (App-like chování) --- */
         body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif; 
             background-color: var(--bg-body); 
             color: var(--text-main); 
             margin: 0; padding: 0;
-            height: 100dvh; width: 100vw; /* Pevná výška obrazovky */
-            overflow: hidden; /* Zákaz scrollování celé stránky */
-            user-select: none; -webkit-user-select: none; /* Zákaz označování textu */
-            -webkit-tap-highlight-color: transparent; /* Zákaz problikávání při kliku na mobilu */
-            transition: background-color 0.4s ease, color 0.4s ease;
+            height: 100dvh; width: 100vw;
+            overflow: hidden;
+            user-select: none; -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         #appContent {
@@ -72,176 +82,169 @@
             margin: 0 auto; position: relative;
         }
 
-        /* --- NAČÍTACÍ OBRAZOVKA --- */
+        /* --- NAČÍTACÍ OBRAZOVKA BAKALÁŘI --- */
         .loading-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-body); z-index: 1000;
+            background: var(--bak-blue-primary); z-index: 1000;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
+            color: white; transition: opacity 0.4s ease, visibility 0.4s ease;
         }
-        .loading-logo { font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 25px; animation: pulseText 1.5s infinite; }
-        .loading-logo span { color: var(--accent); }
-        .spinner { width: 40px; height: 40px; border: 4px solid var(--border); border-top: 4px solid var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
+        .loading-logo { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 20px; }
+        .loading-logo span { color: #ffca28; }
+        .spinner { width: 36px; height: 36px; border: 4px solid rgba(255,255,255,0.2); border-top: 4px solid #ffffff; border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes pulseText { 0%, 100% { opacity: 0.7; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1); } }
 
-        /* --- APP TOP BAR (Hlavička) --- */
+        /* --- BAKALÁŘI HORNÍ LIŠTA --- */
         .top-bar {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            padding: 15px 20px;
+            background: linear-gradient(135deg, var(--bak-blue-primary), var(--bak-blue-dark));
+            color: white;
+            padding: 12px 20px;
             display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             z-index: 50; flex-shrink: 0;
-            padding-top: max(15px, env(safe-area-inset-top));
         }
-        .top-title h1 { margin: 0; font-size: 1.4rem; font-weight: 700; letter-spacing: -0.5px; }
-        .top-title p { margin: 2px 0 0; font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
-        
+        .top-title { display: flex; align-items: center; gap: 12px; }
+        .bak-icon { background: white; color: var(--bak-blue-primary); font-weight: 800; padding: 4px 8px; border-radius: 6px; font-size: 0.9rem; }
+        .top-title h1 { margin: 0; font-size: 1.2rem; font-weight: 700; }
+        .top-title p { margin: 0; font-size: 0.8rem; opacity: 0.85; }
+
         .top-actions { display: flex; gap: 8px; align-items: center; }
         .icon-btn {
             display: flex; align-items: center; justify-content: center;
-            width: 36px; height: 36px; border-radius: 50%;
-            background: var(--bg-body); color: var(--text-main);
-            border: none; cursor: pointer; transition: all 0.2s ease;
-            text-decoration: none;
+            width: 34px; height: 34px; border-radius: 6px;
+            background: rgba(255,255,255,0.15); color: white;
+            border: none; cursor: pointer; transition: background 0.2s;
         }
-        .icon-btn:hover { background: var(--border); transform: scale(1.05); }
+        .icon-btn:hover { background: rgba(255,255,255,0.3); }
         .icon-btn svg { width: 18px; height: 18px; fill: currentColor; }
         .icon-btn.lang-btn { font-size: 0.75rem; font-weight: 700; }
-        
-        /* Informační lišta (Svátek a čas) */
-        .status-bar {
-            display: flex; justify-content: center; gap: 15px; padding: 10px 20px;
-            background: transparent; flex-shrink: 0; overflow-x: auto;
-        }
-        .status-pill {
-            display: flex; align-items: center; gap: 6px;
-            font-size: 0.85rem; font-weight: 600; background: var(--bg-card); 
-            padding: 8px 14px; border-radius: 20px; box-shadow: var(--shadow);
-            border: 1px solid var(--border); white-space: nowrap;
-        }
-        .status-pill svg { width: 16px; height: 16px; fill: var(--accent); }
 
-        /* --- HLAVNÍ PLOCHA ROZVRHU --- */
+        /* INFORMACE O ČASU A SVÁTKU */
+        .status-bar {
+            display: flex; justify-content: space-between; align-items: center; padding: 8px 15px;
+            background: var(--bg-card); border-bottom: 1px solid var(--border);
+            font-size: 0.82rem; font-weight: 600; color: var(--text-muted);
+        }
+        .status-pill { display: flex; align-items: center; gap: 6px; }
+        .status-pill svg { width: 15px; height: 15px; fill: var(--bak-blue-primary); }
+
+        /* --- ROZVRHOVÁ TABULKA BAKALÁŘI --- */
         .main-content {
-            flex: 1; overflow: hidden; /* Důležité: Rodič se nesmí posouvat */
+            flex: 1; overflow: hidden;
             display: flex; flex-direction: column;
-            padding: 0 15px 90px 15px; /* Místo dole pro Dock */
+            padding: 12px 12px 80px 12px;
         }
         
-        /* Vnitřní karta pro tabulku, která jediná jde scrollovat */
         .schedule-card {
             flex: 1; overflow: auto;
-            background: var(--bg-card); border-radius: 24px;
+            background: var(--bg-card); border-radius: 8px;
             box-shadow: var(--shadow); border: 1px solid var(--border);
-            padding: 15px;
-            
-            /* Skrytí scrollbaru pro čistý vzhled (Chrome/Safari) */
-            -ms-overflow-style: none; scrollbar-width: none; 
+            padding: 8px;
         }
-        .schedule-card::-webkit-scrollbar { display: none; }
 
-        table { border-collapse: separate; border-spacing: 10px; width: 100%; min-width: 1000px; }
-        th { color: var(--text-muted); font-weight: 600; font-size: 0.85em; padding: 5px; }
-        th small { display: block; font-size: 0.8em; margin-top: 4px; font-weight: 500; opacity: 0.8; }
-        .day { font-weight: 700; color: var(--text-main); font-size: 1.1em; text-align: center; width: 35px; }
+        table { border-collapse: separate; border-spacing: 6px; width: 100%; min-width: 950px; }
+        th { color: var(--text-muted); font-weight: 700; font-size: 0.8em; padding: 4px; text-align: center; }
+        th small { display: block; font-size: 0.75em; margin-top: 2px; font-weight: 400; }
+        .day { font-weight: 700; color: var(--bak-blue-primary); font-size: 0.95em; text-align: center; width: 40px; background: var(--bg-body); border-radius: 6px; }
 
         td:not(.day) { 
-            background: var(--bg-body); border-radius: 18px;
+            background: var(--bg-body); border-radius: 6px;
             vertical-align: middle; padding: 0;
-            border: 2px solid transparent; transition: all 0.3s ease; 
+            border: 1px solid var(--border); transition: all 0.2s ease; 
         }
-        td:not(.day):not(:empty):hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); z-index: 10; position: relative; }
-        td:empty { background: transparent; }
+        td:not(.day):not(:empty):hover { transform: translateY(-1px); box-shadow: var(--shadow-hover); z-index: 10; position: relative; }
+        td:empty { background: transparent; border: 1px dashed var(--border); }
+
+        /* KATEGORIZE HODIN DLE BAREV BAKALÁŘŮ */
+        .type-math { background-color: var(--subj-math) !important; border-color: var(--subj-math-border) !important; color: var(--subj-math-text); }
+        .type-lang { background-color: var(--subj-lang) !important; border-color: var(--subj-lang-border) !important; color: var(--subj-lang-text); }
+        .type-hum  { background-color: var(--subj-hum) !important;  border-color: var(--subj-hum-border) !important;  color: var(--subj-hum-text); }
+        .type-tech { background-color: var(--subj-tech) !important; border-color: var(--subj-tech-border) !important; color: var(--subj-tech-text); }
+        .type-sport{ background-color: var(--subj-sport) !important;border-color: var(--subj-sport-border) !important;color: var(--subj-sport-text); }
+
+        /* DYNAMICKÉ STAVY HODIN */
+        .past-lesson { opacity: var(--past-opacity) !important; filter: grayscale(50%); }
+        .current-lesson { 
+            background-color: var(--current-bg) !important; 
+            border: 2px solid var(--current-border) !important; 
+            animation: pulseBorder 2s infinite; z-index: 5; position: relative; 
+        }
+        .current-lesson .predmet { color: var(--current-text) !important; }
+        .next-lesson { border: 2px solid var(--next-border) !important; }
 
         @keyframes pulseBorder {
             0% { box-shadow: 0 0 0 0 var(--pulse-color); }
-            70% { box-shadow: 0 0 0 8px rgba(255, 193, 7, 0); }
+            70% { box-shadow: 0 0 0 6px rgba(255, 193, 7, 0); }
             100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
         }
 
-        .past-lesson { background-color: var(--past-bg) !important; opacity: var(--past-opacity); }
-        .past-lesson:hover { opacity: 1; }
-        .past-lesson .predmet, .past-lesson .ucebna, .past-lesson .ucitel, .past-lesson .skupina { color: var(--past-text) !important; }
-        
-        .current-lesson { 
-            background-color: var(--current-bg) !important; border-color: var(--current-border) !important; 
-            transform: scale(1.02); animation: pulseBorder 2s infinite; z-index: 5; position: relative; 
-        }
-        .next-lesson { border-color: var(--next-border) !important; }
+        .hodina { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 72px; min-width: 90px; box-sizing: border-box; border-radius: 5px; }
+        .predmet { font-weight: 800; font-size: 1.25em; }
+        .ucitel { position: absolute; bottom: 4px; right: 6px; font-size: 0.7em; font-weight: 700; opacity: 0.8; }
+        .skupina { position: absolute; bottom: 4px; left: 6px; font-size: 0.7em; font-weight: 700; opacity: 0.8; }
+        .ucebna { position: absolute; top: 4px; right: 6px; font-size: 0.75em; font-weight: 800; }
 
-        .hodina { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 80px; min-width: 100px; box-sizing: border-box; border-radius: 16px; }
-        .predmet { font-weight: 700; font-size: 1.4em; }
-        .ucitel { position: absolute; bottom: 8px; right: 10px; font-size: 0.7em; font-weight: 600; color: var(--text-muted); }
-        .skupina { position: absolute; bottom: 8px; left: 10px; font-size: 0.7em; font-weight: 600; color: var(--text-muted); }
-        .ucebna { position: absolute; top: 8px; right: 10px; font-size: 0.8em; font-weight: 700; color: var(--accent); }
-
-        .split { display: flex; flex-direction: column; width: 100%; height: 100%; border-radius: 16px; overflow: hidden; }
-        .split .hodina { height: 50%; min-height: 40px; }
+        .split { display: flex; flex-direction: column; width: 100%; height: 100%; border-radius: 5px; overflow: hidden; }
+        .split .hodina { height: 36px; min-height: 36px; }
         .split-divider { width: 100%; height: 1px; background-color: var(--border); }
-        .split .predmet { font-size: 1.1em; }
-        .split .ucitel, .split .skupina, .split .ucebna { font-size: 0.65em; top: auto; bottom: auto; margin-top: -2px; }
-        .split .ucebna { top: 4px; right: 8px; }
-        .split .ucitel { bottom: 4px; right: 8px; }
-        .split .skupina { bottom: 4px; left: 8px; }
+        .split .predmet { font-size: 0.95em; }
+        .split .ucebna { top: 2px; right: 5px; font-size: 0.65em; }
+        .split .ucitel { bottom: 2px; right: 5px; font-size: 0.6em; }
+        .split .skupina { bottom: 2px; left: 5px; font-size: 0.6em; }
 
-        /* --- APPLE DOCK (Spodní navigace) --- */
+        /* --- SPODNÍ NAVIGAČNÍ PANEL (BAKALÁŘI BOTTOM NAV) --- */
         .dock-container {
-            position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%);
-            display: flex; gap: 12px; padding: 8px 12px;
-            background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border); border-radius: 35px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15); z-index: 100;
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            display: flex; justify-content: space-around; padding: 8px 0;
+            background: var(--bg-card); border-top: 1px solid var(--border);
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05); z-index: 100;
         }
         
         .dock-btn {
-            background: transparent; border: none; color: var(--text-main);
-            display: flex; align-items: center; justify-content: center;
-            width: 46px; height: 46px; border-radius: 50%; cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-            text-decoration: none;
+            background: transparent; border: none; color: var(--text-muted);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 2px; font-size: 0.7rem; font-weight: 600; cursor: pointer; text-decoration: none;
+            width: 25%;
         }
-        .dock-btn:hover { background: var(--bg-card); transform: scale(1.1); }
-        .dock-btn svg { width: 22px; height: 22px; fill: currentColor; }
-        .dock-btn.active { background: var(--accent); color: white; transform: scale(1.1) translateY(-4px); box-shadow: 0 8px 20px rgba(0, 113, 227, 0.4); }
-        .dock-btn.suplovani { color: var(--accent); }
-        .dock-btn.jidelna { color: var(--green); }
+        .dock-btn svg { width: 20px; height: 20px; fill: currentColor; }
+        .dock-btn.active { color: var(--bak-blue-primary); }
 
-        /* Widget Popover */
+        /* WIDGET POPOVER */
         .widget-popover {
-            position: absolute; bottom: 95px; left: 50%; transform: translateX(-50%) scale(0.95) translateY(10px);
-            width: 90%; max-width: 400px; background: var(--bg-card);
-            border-radius: 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            padding: 20px; box-sizing: border-box; z-index: 90;
+            position: absolute; bottom: 65px; left: 50%; transform: translateX(-50%) translateY(10px);
+            width: 92%; max-width: 420px; background: var(--bg-card);
+            border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 16px; box-sizing: border-box; z-index: 90;
             opacity: 0; pointer-events: none; visibility: hidden;
-            transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
-            border: 1px solid var(--border);
+            transition: all 0.2s ease; border: 1px solid var(--border);
         }
-        .widget-popover.show { opacity: 1; transform: translateX(-50%) scale(1) translateY(0); pointer-events: auto; visibility: visible; }
+        .widget-popover.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; visibility: visible; }
         
-        .widget-header { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
-        .widget-header svg { width: 20px; height: 20px; fill: var(--accent); }
-        .widget-header h2 { margin: 0; font-size: 1.1rem; font-weight: 700; }
+        .widget-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+        .widget-header svg { width: 18px; height: 18px; fill: var(--bak-blue-primary); }
+        .widget-header h2 { margin: 0; font-size: 1rem; font-weight: 700; color: var(--text-main); }
         
-        .calendar-grid { display: flex; flex-direction: column; gap: 8px; max-height: 40vh; overflow-y: auto; }
-        .calendar-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: var(--bg-body); border-radius: 12px; }
-        .calendar-date { font-weight: 700; color: var(--accent); font-size: 0.85rem; }
-        .calendar-event { font-weight: 600; font-size: 0.85rem; }
+        .calendar-grid { display: flex; flex-direction: column; gap: 6px; max-height: 40vh; overflow-y: auto; }
+        .calendar-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--bg-body); border-radius: 6px; }
+        .calendar-date { font-weight: 700; color: var(--bak-blue-primary); font-size: 0.8rem; }
+        .calendar-event { font-weight: 600; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
 <div id="loadingOverlay" class="loading-overlay">
-    <div class="loading-logo">SPŠE <span>Ječná</span></div>
+    <div class="loading-logo">BAKALÁŘI <span>web</span></div>
     <div class="spinner"></div>
 </div>
 
 <div id="appContent">
     <div class="top-bar">
         <div class="top-title">
-            <h1 data-i18n="title">Rozvrh hodin</h1>
-            <p data-i18n="subtitle">Třída: C1a</p>
+            <span class="bak-icon">B</span>
+            <div>
+                <h1 data-i18n="title">Rozvrh hodin</h1>
+                <p data-i18n="subtitle">Třída: C1a | SPŠE Ječná</p>
+            </div>
         </div>
         <div class="top-actions">
             <button class="icon-btn lang-btn" id="langToggle">EN</button>
@@ -268,77 +271,77 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>1<small>7:30 - 8:15</small></th>
-                        <th>2<small>8:25 - 9:10</small></th>
-                        <th>3<small>9:20 - 10:05</small></th>
-                        <th>4<small>10:20 - 11:05</small></th>
-                        <th>5<small>11:15 - 12:00</small></th>
-                        <th>6<small>12:10 - 12:55</small></th>
-                        <th>7<small>13:05 - 13:50</small></th>
-                        <th>8<small>14:00 - 14:45</small></th>
+                        <th>1.<small>7:30 - 8:15</small></th>
+                        <th>2.<small>8:25 - 9:10</small></th>
+                        <th>3.<small>9:20 - 10:05</small></th>
+                        <th>4.<small>10:20 - 11:05</small></th>
+                        <th>5.<small>11:15 - 12:00</small></th>
+                        <th>6.<small>12:10 - 12:55</small></th>
+                        <th>7.<small>13:05 - 13:50</small></th>
+                        <th>8.<small>14:00 - 14:45</small></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr id="day-1">
                         <td class="day" data-i18n="mon">Po</td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">F</span><span class="ucitel">Rk</span></div></td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">C</span><span class="ucitel">Su</span></div></td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">D</span><span class="ucitel">Su</span></div></td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">Ele</span><span class="ucitel">Jk</span></div></td>
-                        <td>
+                        <td class="type-math"><div class="hodina"><span class="ucebna">15</span><span class="predmet">F</span><span class="ucitel">Rk</span></div></td>
+                        <td class="type-lang"><div class="hodina"><span class="ucebna">15</span><span class="predmet">ČJ</span><span class="ucitel">Su</span></div></td>
+                        <td class="type-math"><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
+                        <td class="type-hum"><div class="hodina"><span class="ucebna">15</span><span class="predmet">D</span><span class="ucitel">Su</span></div></td>
+                        <td class="type-hum"><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
+                        <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">EL</span><span class="ucitel">Jk</span></div></td>
+                        <td class="type-lang">
                             <div class="split">
-                                <div class="hodina"><span class="ucebna">15</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
+                                <div class="hodina"><span class="ucebna">15</span><span class="predmet">AJ</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
                                 <div class="split-divider"></div>
-                                <div class="hodina"><span class="ucebna">5b</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
+                                <div class="hodina"><span class="ucebna">5b</span><span class="predmet">AJ</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
                             </div>
                         </td>
                         <td></td>
                     </tr>
                     <tr id="day-2">
                         <td class="day" data-i18n="tue">Út</td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">HW</span><span class="ucitel">Ku</span></div></td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">IT</span><span class="ucitel">Me</span></div></td>
-                        <td><div class="hodina"><span class="ucebna">TV</span><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
+                        <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">HW</span><span class="ucitel">Ku</span></div></td>
+                        <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">IT</span><span class="ucitel">Me</span></div></td>
+                        <td class="type-sport"><div class="hodina"><span class="ucebna">TV</span><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
+                        <td class="type-math"><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
                         <td></td>
-                        <td>
+                        <td class="type-tech">
                             <div class="split">
                                 <div class="hodina"><span class="ucebna">18a</span><span class="predmet">IT</span><span class="skupina">2/2</span><span class="ucitel">Ha</span></div>
                                 <div class="split-divider"></div>
                                 <div class="hodina"><span class="ucebna">18b</span><span class="predmet">IT</span><span class="skupina">1/2</span><span class="ucitel">Me</span></div>
                             </div>
                         </td>
-                        <td>
+                        <td class="type-tech">
                             <div class="split">
                                 <div class="hodina"><span class="ucebna">18a</span><span class="predmet">IT</span><span class="skupina">2/2</span><span class="ucitel">Ha</span></div>
                                 <div class="split-divider"></div>
                                 <div class="hodina"><span class="ucebna">18b</span><span class="predmet">IT</span><span class="skupina">1/2</span><span class="ucitel">Me</span></div>
                             </div>
                         </td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
+                        <td class="type-hum"><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
                     </tr>
                     <tr id="day-3">
                         <td class="day" data-i18n="wed">St</td>
                         <td>
                             <div class="split">
-                                <div class="hodina"><span class="ucebna">5a</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
+                                <div class="hodina type-lang"><span class="ucebna">5a</span><span class="predmet">AJ</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
                                 <div class="split-divider"></div>
-                                <div class="hodina"><span class="ucebna">17a</span><span class="predmet">TD</span><span class="skupina">2/2</span><span class="ucitel">Pr</span></div>
+                                <div class="hodina type-tech"><span class="ucebna">17a</span><span class="predmet">TD</span><span class="skupina">2/2</span><span class="ucitel">Pr</span></div>
                             </div>
                         </td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">HW</span><span class="ucitel">Ku</span></div></td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">TD</span><span class="ucitel">Pr</span></div></td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
+                        <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">HW</span><span class="ucitel">Ku</span></div></td>
+                        <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">TD</span><span class="ucitel">Pr</span></div></td>
+                        <td class="type-math"><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
                         <td>
                             <div class="split">
                                 <div class="hodina"></div>
                                 <div class="split-divider"></div>
-                                <div class="hodina"><span class="ucebna">5a</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
+                                <div class="hodina type-lang"><span class="ucebna">5a</span><span class="predmet">AJ</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
                             </div>
                         </td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
+                        <td class="type-hum"><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -346,39 +349,39 @@
                         <td class="day" data-i18n="thu">Čt</td>
                         <td>
                             <div class="split">
-                                <div class="hodina"><span class="ucebna">19a</span><span class="predmet">TD</span><span class="skupina">1/2</span><span class="ucitel">Pr</span></div>
+                                <div class="hodina type-tech"><span class="ucebna">19a</span><span class="predmet">TD</span><span class="skupina">1/2</span><span class="ucitel">Pr</span></div>
                                 <div class="split-divider"></div>
                                 <div class="hodina"></div>
                             </div>
                         </td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">C</span><span class="ucitel">Su</span></div></td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">TD</span><span class="ucitel">Pr</span></div></td>
-                        <td>
+                        <td class="type-lang"><div class="hodina"><span class="ucebna">15</span><span class="predmet">ČJ</span><span class="ucitel">Su</span></div></td>
+                        <td class="type-math"><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
+                        <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">TD</span><span class="ucitel">Pr</span></div></td>
+                        <td class="type-lang">
                             <div class="split">
-                                <div class="hodina"><span class="ucebna">5a</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
+                                <div class="hodina"><span class="ucebna">5a</span><span class="predmet">AJ</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
                                 <div class="split-divider"></div>
-                                <div class="hodina"><span class="ucebna">15</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
+                                <div class="hodina"><span class="ucebna">15</span><span class="predmet">AJ</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
                             </div>
                         </td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">D</span><span class="ucitel">Su</span></div></td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">Ele</span><span class="ucitel">Jk</span></div></td>
+                        <td class="type-hum"><div class="hodina"><span class="ucebna">15</span><span class="predmet">D</span><span class="ucitel">Su</span></div></td>
+                        <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">EL</span><span class="ucitel">Jk</span></div></td>
                         <td></td>
                     </tr>
                     <tr id="day-5">
                         <td class="day" data-i18n="fri">Pá</td>
-                        <td><div class="hodina"><span class="ucebna">TV</span><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">Ele</span><span class="ucitel">Jk</span></div></td>
-                        <td>
+                        <td class="type-sport"><div class="hodina"><span class="ucebna">TV</span><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
+                        <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">EL</span><span class="ucitel">Jk</span></div></td>
+                        <td class="type-lang">
                             <div class="split">
-                                <div class="hodina"><span class="ucebna">5b</span><span class="predmet">A</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
+                                <div class="hodina"><span class="ucebna">5b</span><span class="predmet">AJ</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
                                 <div class="split-divider"></div>
-                                <div class="hodina"><span class="ucebna">15</span><span class="predmet">A</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
+                                <div class="hodina"><span class="ucebna">15</span><span class="predmet">AJ</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
                             </div>
                         </td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">C</span><span class="ucitel">Su</span></div></td>
-                        <td><div class="hodina"><span class="ucebna">8</span><span class="predmet">F</span><span class="ucitel">Rk</span></div></td>
-                        <td><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
+                        <td class="type-lang"><div class="hodina"><span class="ucebna">15</span><span class="predmet">ČJ</span><span class="ucitel">Su</span></div></td>
+                        <td class="type-math"><div class="hodina"><span class="ucebna">8</span><span class="predmet">F</span><span class="ucitel">Rk</span></div></td>
+                        <td class="type-math"><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -388,20 +391,27 @@
     </div>
 
     <div class="dock-container">
-        <a href="https://strav.nasejidelna.cz/0341/faces/secured/mobile.jsp" target="_blank" class="dock-btn jidelna" title="Jídelna">
-            <svg viewBox="0 0 24 24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>
-        </a>
-        <button class="dock-btn" id="btnShowCalendar" title="Prázdniny">
-            <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
+        <button class="dock-btn active" id="btnRozvrh">
+            <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+            <span>Rozvrh</span>
         </button>
-        <a href="https://www.spsejecna.cz/suplovani" target="_blank" class="dock-btn suplovani" title="Suplování">
+        <a href="https://www.spsejecna.cz/suplovani" target="_blank" class="dock-btn" title="Suplování">
             <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            <span>Suplování</span>
         </a>
+        <a href="https://strav.nasejidelna.cz/0341/faces/secured/mobile.jsp" target="_blank" class="dock-btn" title="Jídelna">
+            <svg viewBox="0 0 24 24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>
+            <span>Jídelna</span>
+        </a>
+        <button class="dock-btn" id="btnShowCalendar">
+            <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/></svg>
+            <span>Akce</span>
+        </button>
     </div>
 
     <div class="widget-popover" id="calendarWidget">
         <div class="widget-header">
-            <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/></svg>
             <h2 data-i18n="calendarTitle">Prázdniny a volna</h2>
         </div>
         <div class="calendar-grid">
@@ -425,21 +435,21 @@ window.addEventListener('DOMContentLoaded', () => {
         loadingOverlay.style.opacity = '0';
         loadingOverlay.style.visibility = 'hidden';
         appContent.style.display = 'flex';
-    }, 1200); 
+    }, 800); 
 });
 
 const translations = {
     cs: {
-        title: "Rozvrh hodin", subtitle: "Třída: C1a",
+        title: "Rozvrh hodin", subtitle: "Třída: C1a | SPŠE Ječná",
         schoolStarts: "Škola za: ", schoolInProgress: "Probíhá výuka",
-        nameDayPrefix: "Svátek: ", nameDayErr: "Svátek nedostupný",
+        nameDayPrefix: "Svátek: ", nameDayErr: "Svátek Nedostupný",
         mon: "Po", tue: "Út", wed: "St", thu: "Čt", fri: "Pá", calendarTitle: "Prázdniny a volna",
         event1: "Státní svátek", event2: "Podzimní prázdniny", event3: "Státní svátek", event4: "Vánoční prázdniny",
         event5: "Pololetní prázdniny", event6: "Jarní prázdniny", event7: "Velikonoce", event8: "Květnové svátky"
     },
     en: {
-        title: "Timetable", subtitle: "Class: C1a",
-        schoolStarts: "Starts in: ", schoolInProgress: "In progress",
+        title: "Timetable", subtitle: "Class: C1a | SPŠE Ječná",
+        schoolStarts: "Starts in: ", schoolInProgress: "Lesson in progress",
         nameDayPrefix: "Name day: ", nameDayErr: "Unavailable",
         mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri", calendarTitle: "Holidays",
         event1: "State Holiday", event2: "Autumn Break", event3: "State Holiday", event4: "Christmas Break",
