@@ -12,23 +12,24 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#0a0a0c">
 
-    <!-- NOVÁ MINIMALISTICKÁ IKONA APLIKACE (Černobílá vektorová mřížka) -->
+    <!-- IKONA APLIKACE -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='112' fill='%230a0a0c'/><rect x='116' y='136' width='120' height='100' rx='24' fill='%23ffffff'/><rect x='276' y='136' width='120' height='100' rx='24' fill='%23ffffff' fill-opacity='0.35'/><rect x='116' y='276' width='120' height='100' rx='24' fill='%23ffffff' fill-opacity='0.35'/><rect x='276' y='276' width='120' height='100' rx='24' fill='%23ffffff'/></svg>">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='112' fill='%230a0a0c'/><rect x='116' y='136' width='120' height='100' rx='24' fill='%23ffffff'/><rect x='276' y='136' width='120' height='100' rx='24' fill='%23ffffff' fill-opacity='0.35'/><rect x='116' y='276' width='120' height='100' rx='24' fill='%23ffffff' fill-opacity='0.35'/><rect x='276' y='276' width='120' height='100' rx='24' fill='%23ffffff'/></svg>">
 
-    <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22C1a%20Rozvrh%22,%22short_name%22:%22C1a%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22%230a0a0c%22,%22theme_color%22:%22%230a0a0c%22,%22icons%22:[{%22src%22:%22data:image/svg%2Bxml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='112' fill='%230a0a0c'/><rect x='116' y='136' width='120' height='100' rx='24' fill='%23ffffff'/><rect x='276' y='136' width='120' height='100' rx='24' fill='%23ffffff' fill-opacity='0.35'/><rect x='116' y='276' width='120' height='100' rx='24' fill='%23ffffff' fill-opacity='0.35'/><rect x='276' y='276' width='120' height='100' rx='24' fill='%23ffffff'/></svg>%22,%22sizes%22:%22512x512%22,%22type%22:%22image/svg+xml%22}]}">
+    <!-- SheetJS pro čtení Excel souborů (.xlsx, .xls, .csv) -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 
     <style>
         :root {
             --accent: #007aff;
             --bg-body: #f5f5f7;
-            --bg-surface: rgba(255, 255, 255, 0.82);
+            --bg-surface: rgba(255, 255, 255, 0.84);
             --bg-solid: #ffffff;
-            --bg-subtle: rgba(0, 0, 0, 0.04);
+            --bg-subtle: rgba(0, 0, 0, 0.045);
             --text-main: #111113;
             --text-muted: #7c7c82;
-            --border: rgba(0, 0, 0, 0.07);
-            --dock-bg: rgba(255, 255, 255, 0.85);
+            --border: rgba(0, 0, 0, 0.075);
+            --dock-bg: rgba(255, 255, 255, 0.86);
             
             --past-opacity: 0.35;
             --current-bg: rgba(0, 122, 255, 0.12);
@@ -40,20 +41,19 @@
             --c-tech: #7a1fa2;  --bg-tech: rgba(175, 82, 222, 0.12);
             --c-sport:#168038;  --bg-sport:rgba(48, 209, 88, 0.12);
 
-            --m1: #34c759; --m2: #30d158; --m3: #ff9500; --m4: #ff6900; --m5: #ff3b30;
             --shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
         }
 
         [data-theme="dark"] {
             --accent: #0a84ff;
             --bg-body: #09090b;
-            --bg-surface: rgba(24, 24, 27, 0.82);
+            --bg-surface: rgba(24, 24, 27, 0.84);
             --bg-solid: #18181b;
             --bg-subtle: rgba(255, 255, 255, 0.06);
             --text-main: #f4f4f6;
             --text-muted: #8e8e93;
-            --border: rgba(255, 255, 255, 0.08);
-            --dock-bg: rgba(24, 24, 27, 0.85);
+            --border: rgba(255, 255, 255, 0.085);
+            --dock-bg: rgba(24, 24, 27, 0.86);
 
             --current-bg: rgba(10, 132, 255, 0.18);
             --current-border: #0a84ff;
@@ -86,7 +86,7 @@
             transition: background-color 0.25s ease, color 0.25s ease;
         }
 
-        button, input, select { font-family: inherit; }
+        button, input, select, textarea { font-family: inherit; }
         button { cursor: pointer; border: none; background: none; color: inherit; }
         button:active { transform: scale(0.96); }
 
@@ -149,7 +149,6 @@
             margin-bottom: 12px;
             outline: none;
         }
-        .auth-input:focus { border-color: var(--accent); }
         .auth-btn {
             width: 100%;
             padding: 14px;
@@ -185,7 +184,6 @@
             justify-content: center;
             font-weight: 800;
             font-size: 0.85rem;
-            letter-spacing: -0.5px;
         }
         .brand-info h1 { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.3px; }
         .brand-info span { font-size: 0.75rem; color: var(--text-muted); display: block; }
@@ -206,12 +204,11 @@
             justify-content: center;
             font-size: 0.75rem;
             font-weight: 700;
-            transition: background-color 0.2s;
         }
         .icon-btn:hover { background: var(--border); }
         .icon-btn svg { width: 17px; height: 17px; fill: currentColor; }
 
-        /* SUB-HEADER CONTROLS (FILTER + LIVE STATUS) */
+        /* SUB-HEADER CONTROLS */
         .control-strip {
             display: flex;
             justify-content: space-between;
@@ -329,9 +326,7 @@
             transform: translateY(-1px);
             box-shadow: 0 4px 14px rgba(0,0,0,0.06);
         }
-        td:empty {
-            background: transparent;
-        }
+        td:empty { background: transparent; }
 
         .type-math  { background: var(--bg-math) !important; color: var(--c-math); }
         .type-lang  { background: var(--bg-lang) !important; color: var(--c-lang); }
@@ -344,9 +339,7 @@
             background: var(--current-bg) !important;
             box-shadow: inset 0 0 0 2px var(--current-border) !important;
         }
-        .next-lesson {
-            box-shadow: inset 0 0 0 1.5px var(--text-muted) !important;
-        }
+        .next-lesson { box-shadow: inset 0 0 0 1.5px var(--text-muted) !important; }
 
         .hodina {
             position: relative;
@@ -373,7 +366,7 @@
         .split .skupina { bottom: 3px; left: 6px; font-size: 0.58rem; }
         .hide-group { display: none !important; }
 
-        /* PANELS (ZNÁMKY, ÚKOLY, ABSENCE) */
+        /* PANELS (JÍDELNA & SUPLOVÁNÍ) */
         .panel-scroll {
             flex: 1;
             overflow-y: auto;
@@ -400,43 +393,18 @@
             padding: 20px;
             box-shadow: var(--shadow);
         }
-        .card-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 14px; }
-
-        .chips-row {
-            display: flex;
-            gap: 6px;
-            overflow-x: auto;
-            padding-bottom: 4px;
-        }
-        .chip {
-            padding: 8px 15px;
-            border-radius: 12px;
-            background: var(--bg-subtle);
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            white-space: nowrap;
-        }
-        .chip.active { background: var(--text-main); color: var(--bg-solid); }
-
-        .stat-row {
+        .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
         }
-        .stat-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.4px; }
-        .stat-value { font-size: 2.3rem; font-weight: 800; letter-spacing: -1px; margin-top: 2px; }
-        .pred-pill {
-            padding: 10px 20px;
-            border-radius: 14px;
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: #fff;
-            background: var(--text-muted);
-        }
+        .card-title { font-size: 0.92rem; font-weight: 700; }
 
-        .form-row { display: flex; gap: 10px; margin-bottom: 12px; }
-        .field { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+        .form-row { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+        .field { flex: 1; min-width: 140px; display: flex; flex-direction: column; gap: 5px; }
         .field label { font-size: 0.74rem; font-weight: 600; color: var(--text-muted); }
         .input {
             width: 100%;
@@ -450,41 +418,104 @@
             outline: none;
         }
         .input:focus { border-color: var(--accent); }
+
         .btn-primary {
-            width: 100%;
-            padding: 12px;
+            padding: 11px 16px;
             border-radius: 12px;
             background: var(--text-main);
             color: var(--bg-solid);
             font-weight: 600;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
+        .btn-secondary {
+            padding: 11px 16px;
+            border-radius: 12px;
+            background: var(--bg-subtle);
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+        .btn-secondary:hover { background: var(--border); }
 
         .list-stack { display: flex; flex-direction: column; gap: 8px; }
         .list-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 12px;
             padding: 13px 16px;
             background: var(--bg-surface);
             border: 1px solid var(--border);
             border-radius: 16px;
         }
-        .mark-dot {
-            width: 34px;
-            height: 34px;
-            border-radius: 10px;
-            color: #fff;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
+        .day-tag {
+            padding: 5px 10px;
+            border-radius: 9px;
+            background: var(--bg-subtle);
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--accent);
+            white-space: nowrap;
         }
-        .m1 { background: var(--m1); } .m2 { background: var(--m2); } .m3 { background: var(--m3); } .m4 { background: var(--m4); } .m5 { background: var(--m5); }
 
-        .bar-track { width: 100%; height: 6px; background: var(--bg-subtle); border-radius: 3px; overflow: hidden; margin-top: 10px; }
-        .bar-fill { height: 100%; border-radius: 3px; transition: width 0.25s ease; }
+        /* EXCEL TABLE INSIDE SUPLOVÁNÍ */
+        .excel-table-wrap {
+            overflow: auto;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: var(--bg-solid);
+        }
+        .excel-table {
+            width: 100%;
+            min-width: 520px;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        .excel-table th, .excel-table td {
+            padding: 10px 12px;
+            text-align: left;
+            font-size: 0.8rem;
+            border-bottom: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            background: transparent !important;
+            color: var(--text-main);
+            border-radius: 0 !important;
+        }
+        .excel-table th {
+            font-weight: 700;
+            background: var(--bg-subtle) !important;
+            color: var(--text-muted);
+        }
+        .excel-table tr:last-child td { border-bottom: none; }
+        .excel-table th:last-child, .excel-table td:last-child { border-right: none; }
+
+        .drop-zone {
+            border: 1.5px dashed var(--border);
+            border-radius: 16px;
+            padding: 18px;
+            text-align: center;
+            background: var(--bg-subtle);
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .drop-zone.dragover {
+            border-color: var(--accent);
+            background: var(--current-bg);
+        }
+        .notice {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+            margin-top: 8px;
+        }
 
         /* FLOATING DOCK */
         .dock {
@@ -514,6 +545,7 @@
             font-weight: 600;
             color: var(--text-muted);
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
         .dock-item svg { width: 19px; height: 19px; fill: currentColor; }
         .dock-item.active {
@@ -548,12 +580,9 @@
             border-radius: 24px;
             padding: 24px;
             width: 100%;
-            max-width: 400px;
+            max-width: 380px;
             box-shadow: var(--shadow);
-            transform: scale(0.96);
-            transition: transform 0.2s ease;
         }
-        .modal-bg.show .modal-box { transform: scale(1); }
         .modal-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
         .modal-top h3 { font-size: 1.2rem; font-weight: 700; }
         .close-x { width: 30px; height: 30px; border-radius: 50%; background: var(--bg-subtle); font-weight: 700; color: var(--text-muted); }
@@ -580,12 +609,11 @@
         <div class="brand">
             <div class="brand-mark">C1a</div>
             <div class="brand-info">
-                <h1 data-i18n="title">Rozvrh hodin</h1>
+                <h1>Rozvrh C1a</h1>
                 <span>SPŠE Ječná</span>
             </div>
         </div>
         <div class="top-controls">
-            <button class="icon-btn" id="langToggle">EN</button>
             <button class="icon-btn" id="themeToggle" title="Vzhled"><svg id="themeIcon" viewBox="0 0 24 24"></svg></button>
             <button class="icon-btn" id="logoutBtn" title="Odhlásit"><svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg></button>
         </div>
@@ -595,9 +623,9 @@
     <section id="tabRozvrh" class="tab-view active">
         <div class="control-strip">
             <div class="segmented">
-                <button class="seg-btn" data-group="all" data-i18n="groupAll">Vše</button>
-                <button class="seg-btn" data-group="1" data-i18n="group1">1. skupina</button>
-                <button class="seg-btn" data-group="2" data-i18n="group2">2. skupina</button>
+                <button class="seg-btn" data-group="all">Vše</button>
+                <button class="seg-btn" data-group="1">1. skupina</button>
+                <button class="seg-btn" data-group="2">2. skupina</button>
             </div>
             <div class="status-chip">
                 <span class="pulse-dot idle" id="statusDot"></span>
@@ -623,7 +651,7 @@
                     </thead>
                     <tbody>
                         <tr id="day-1">
-                            <td class="day-cell" data-i18n="mon">Po</td>
+                            <td class="day-cell">Po</td>
                             <td class="type-math"><div class="hodina"><span class="ucebna">15</span><span class="predmet">F</span><span class="ucitel">Rk</span></div></td>
                             <td class="type-lang"><div class="hodina"><span class="ucebna">15</span><span class="predmet">ČJ</span><span class="ucitel">Su</span></div></td>
                             <td class="type-math"><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
@@ -640,7 +668,7 @@
                             <td></td>
                         </tr>
                         <tr id="day-2">
-                            <td class="day-cell" data-i18n="tue">Út</td>
+                            <td class="day-cell">Út</td>
                             <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">HW</span><span class="ucitel">Ku</span></div></td>
                             <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">IT</span><span class="ucitel">Me</span></div></td>
                             <td class="type-sport"><div class="hodina"><span class="ucebna">TV</span><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
@@ -663,7 +691,7 @@
                             <td class="type-hum"><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
                         </tr>
                         <tr id="day-3">
-                            <td class="day-cell" data-i18n="wed">St</td>
+                            <td class="day-cell">St</td>
                             <td>
                                 <div class="split">
                                     <div class="hodina type-lang gr-1"><span class="ucebna">5a</span><span class="predmet">AJ</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
@@ -686,7 +714,7 @@
                             <td></td>
                         </tr>
                         <tr id="day-4">
-                            <td class="day-cell" data-i18n="thu">Čt</td>
+                            <td class="day-cell">Čt</td>
                             <td>
                                 <div class="split">
                                     <div class="hodina type-tech gr-1"><span class="ucebna">19a</span><span class="predmet">TD</span><span class="skupina">1/2</span><span class="ucitel">Pr</span></div>
@@ -709,7 +737,7 @@
                             <td></td>
                         </tr>
                         <tr id="day-5">
-                            <td class="day-cell" data-i18n="fri">Pá</td>
+                            <td class="day-cell">Pá</td>
                             <td class="type-sport"><div class="hodina"><span class="ucebna">TV</span><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
                             <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">EL</span><span class="ucitel">Jk</span></div></td>
                             <td class="type-lang">
@@ -731,91 +759,98 @@
         </div>
     </section>
 
-    <!-- TAB 2: ZNÁMKY -->
-    <section id="tabZnamky" class="tab-view">
+    <!-- TAB 2: JÍDELNA -->
+    <section id="tabJidelna" class="tab-view">
         <div class="panel-scroll">
-            <div class="chips-row" id="subjectSelector"></div>
             <div class="grid-2">
-                <div class="card stat-row">
-                    <div>
-                        <div class="stat-label" data-i18n="avgLabel">Vážený průměr</div>
-                        <div class="stat-value" id="currentAvg">-.--</div>
-                    </div>
-                    <div style="text-align:right;">
-                        <div class="stat-label" style="margin-bottom:6px;" data-i18n="predictLabel">Výsledná</div>
-                        <div class="pred-pill" id="predictedGrade">-</div>
-                    </div>
-                </div>
                 <div class="card">
-                    <div class="card-title" data-i18n="addGradeTitle">Přidat známku</div>
+                    <div class="card-header">
+                        <div class="card-title">Jídelna</div>
+                        <a id="canteenPortalLink" href="https://www.spsejecna.cz" target="_blank" rel="noopener noreferrer" class="btn-secondary">Web školy ↗</a>
+                    </div>
                     <div class="form-row">
                         <div class="field">
-                            <label data-i18n="markLabel">Známka</label>
-                            <select id="newMark" class="input">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+                            <label>Den</label>
+                            <select id="mealDay" class="input">
+                                <option value="Po">Pondělí</option>
+                                <option value="Út">Úterý</option>
+                                <option value="St">Středa</option>
+                                <option value="Čt">Čtvrtek</option>
+                                <option value="Pá">Pátek</option>
                             </select>
                         </div>
                         <div class="field">
-                            <label data-i18n="weightLabel">Váha (1–10)</label>
-                            <input type="number" id="newWeight" class="input" value="10" min="1" max="10">
+                            <label>Jídlo / Oběd</label>
+                            <input type="text" id="mealText" class="input" placeholder="Např. Svíčková, knedlík">
                         </div>
                     </div>
-                    <button class="btn-primary" id="btnAddGrade" data-i18n="btnAddGradeBtn">Přidat</button>
+                    <button class="btn-primary" id="btnAddMeal">Uložit do jídelníčku</button>
                 </div>
-                <div class="list-stack span-2" id="gradesList"></div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Odkaz na jídelnu / výdej</div>
+                    </div>
+                    <div class="form-row">
+                        <div class="field">
+                            <label>URL portálu jídelny</label>
+                            <input type="url" id="canteenUrlInput" class="input" placeholder="https://...">
+                        </div>
+                    </div>
+                    <button class="btn-secondary" id="btnSaveCanteenUrl">Uložit odkaz</button>
+                    <p class="notice">Odkaz vpravo nahoře otevře portál pro objednávání nebo výpis jídel.</p>
+                </div>
             </div>
+
+            <div class="list-stack" id="mealsList"></div>
         </div>
     </section>
 
-    <!-- TAB 3: ÚKOLY -->
-    <section id="tabUkoly" class="tab-view">
+    <!-- TAB 3: SUPLOVÁNÍ (EXCEL) -->
+    <section id="tabSuplovani" class="tab-view">
         <div class="panel-scroll">
             <div class="card">
-                <div class="card-title" data-i18n="addTaskTitle">Nový test nebo úkol</div>
-                <div class="form-row">
-                    <div class="field">
-                        <label data-i18n="subjectLabel">Předmět</label>
-                        <select id="taskSubject" class="input">
-                            <option value="M">M</option><option value="ČJ">ČJ</option><option value="AJ">AJ</option>
-                            <option value="F">F</option><option value="EL">EL</option><option value="IT">IT</option>
-                            <option value="HW">HW</option><option value="TD">TD</option><option value="D">D</option><option value="ZSV">ZSV</option>
-                        </select>
-                    </div>
-                    <div class="field">
-                        <label data-i18n="typeLabel">Typ</label>
-                        <select id="taskType" class="input">
-                            <option value="test">Test</option>
-                            <option value="ukol">Úkol</option>
-                        </select>
-                    </div>
-                    <div class="field">
-                        <label data-i18n="dateLabel">Termín</label>
-                        <input type="date" id="taskDate" class="input">
+                <div class="card-header">
+                    <div class="card-title">Mimořádný rozvrh / Suplování (Excel)</div>
+                    <input type="file" id="excelFileInput" accept=".xlsx,.xls,.csv" style="display:none;">
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                        <button class="btn-primary" id="btnPickExcel">Nahrát Excel (.xlsx / .csv)</button>
+                        <button class="btn-secondary" id="btnClearExcel">Vymazat</button>
                     </div>
                 </div>
-                <div class="form-row">
+
+                <div id="dropZone" class="drop-zone">
+                    <div style="font-size:0.88rem; font-weight:700;">Přetáhni sem Excel soubor se suplováním nebo klikni na „Nahrát Excel“</div>
+                    <div class="notice">Automaticky zvýrazní řádky obsahující <strong>C1a</strong> (lze filtrovat vyhledáváním níže).</div>
+                </div>
+
+                <div class="form-row" style="margin-top:14px;">
                     <div class="field">
-                        <input type="text" id="taskText" class="input" placeholder="Téma nebo zadání...">
+                        <label>Načíst Excel z URL (pokud server povolí CORS)</label>
+                        <input type="url" id="excelUrlInput" class="input" placeholder="https://.../suplovani.xlsx">
+                    </div>
+                    <div class="field" style="flex:0 0 auto; justify-content:flex-end;">
+                        <button class="btn-secondary" id="btnFetchExcelUrl">Načíst URL</button>
                     </div>
                 </div>
-                <button class="btn-primary" id="btnAddTask" data-i18n="btnAddTaskBtn">Uložit</button>
+
+                <div class="form-row" style="margin-bottom:0;">
+                    <div class="field">
+                        <label>Filtrovat v tabulce</label>
+                        <input type="text" id="excelFilterInput" class="input" value="C1a" placeholder="Např. C1a, hodina, učitel...">
+                    </div>
+                </div>
+
+                <div id="excelStatus" class="notice">Zatím není načten žádný Excel soubor.</div>
             </div>
-            <div class="list-stack" id="tasksList"></div>
+
+            <div class="excel-table-wrap" id="excelTableWrap" style="display:none;">
+                <table class="excel-table" id="excelTable"></table>
+            </div>
         </div>
     </section>
 
-    <!-- TAB 4: ABSENCE -->
-    <section id="tabAbsence" class="tab-view">
-        <div class="panel-scroll">
-            <div class="list-stack" id="absenceList"></div>
-        </div>
-    </section>
-
-    <!-- MODAL DETAILU -->
+    <!-- MODAL DETAILU HODINY -->
     <div class="modal-bg" id="subjectModal">
         <div class="modal-box">
             <div class="modal-top">
@@ -823,37 +858,29 @@
                 <button class="close-x" id="modalCloseBtn">✕</button>
             </div>
             <div class="detail-row">
-                <span style="color:var(--text-muted);" data-i18n="modalTeacherLabel">Vyučující / Učebna</span>
-                <strong id="modalTeacherRoom">-</strong>
+                <span style="color:var(--text-muted);">Vyučující</span>
+                <strong id="modalTeacher">-</strong>
             </div>
             <div class="detail-row">
-                <span style="color:var(--text-muted);" data-i18n="modalAbsenceLabel">Absence</span>
-                <strong id="modalAbsenceVal">0 %</strong>
-            </div>
-            <div style="padding:12px 14px; background:var(--bg-subtle); border-radius:12px; font-size:0.85rem;">
-                <div style="color:var(--text-muted); margin-bottom:6px; font-weight:600;" data-i18n="modalTasksHeader">Plánované úkoly:</div>
-                <div id="modalTasksList">Žádné</div>
+                <span style="color:var(--text-muted);">Učebna</span>
+                <strong id="modalRoom">-</strong>
             </div>
         </div>
     </div>
 
-    <!-- DOCK -->
+    <!-- DOCK (POUZE ROZVRH, JÍDELNA, SUPLOVÁNÍ) -->
     <nav class="dock">
         <button class="dock-item active" data-tab="tabRozvrh">
             <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
-            <span data-i18n="navSchedule">Rozvrh</span>
+            <span>Rozvrh</span>
         </button>
-        <button class="dock-item" data-tab="tabZnamky">
-            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-            <span data-i18n="navGrades">Známky</span>
+        <button class="dock-item" data-tab="tabJidelna">
+            <svg viewBox="0 0 24 24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>
+            <span>Jídelna</span>
         </button>
-        <button class="dock-item" data-tab="tabUkoly">
-            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-            <span data-i18n="navTasks">Úkoly</span>
-        </button>
-        <button class="dock-item" data-tab="tabAbsence">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-            <span data-i18n="navAbsence">Absence</span>
+        <button class="dock-item" data-tab="tabSuplovani">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            <span>Suplování</span>
         </button>
     </nav>
 </div>
@@ -861,10 +888,9 @@
 <script>
 const subjectNames = {
     'F': 'Fyzika', 'ČJ': 'Český jazyk', 'M': 'Matematika', 'D': 'Dějepis',
-    'ZSV': 'ZSV', 'EL': 'Elektrotechnika', 'AJ': 'Anglický jazyk',
-    'HW': 'Hardware', 'IT': 'Informatika', 'TV': 'Tělesná výchova', 'TD': 'Tech. dokumentace'
+    'ZSV': 'Základy společenských věd', 'EL': 'Elektrotechnika', 'AJ': 'Anglický jazyk',
+    'HW': 'Hardware', 'IT': 'Informatika', 'TV': 'Tělesná výchova', 'TD': 'Technická dokumentace'
 };
-const subjects = ['M', 'ČJ', 'AJ', 'F', 'EL', 'IT', 'HW', 'TD', 'ZSV', 'D'];
 
 /* AUTH */
 const CLASS_PIN = "c1a2026";
@@ -893,47 +919,6 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
     checkAuth();
 });
 checkAuth();
-
-/* I18N */
-const translations = {
-    cs: {
-        title: "Rozvrh hodin", groupAll: "Vše", group1: "1. skupina", group2: "2. skupina",
-        mon: "Po", tue: "Út", wed: "St", thu: "Čt", fri: "Pá",
-        navSchedule: "Rozvrh", navGrades: "Známky", navTasks: "Úkoly", navAbsence: "Absence",
-        avgLabel: "Vážený průměr", predictLabel: "Výsledná", addGradeTitle: "Přidat známku",
-        markLabel: "Známka", weightLabel: "Váha (1–10)", btnAddGradeBtn: "Přidat",
-        addTaskTitle: "Nový test nebo úkol", subjectLabel: "Předmět", typeLabel: "Typ", dateLabel: "Termín", btnAddTaskBtn: "Uložit",
-        modalTeacherLabel: "Vyučující / Učebna", modalAbsenceLabel: "Absence", modalTasksHeader: "Plánované úkoly:",
-        startsIn: "Začátek za", endsIn: "konec za", breakNext: "Přestávka · další:"
-    },
-    en: {
-        title: "Timetable", groupAll: "All", group1: "Group 1", group2: "Group 2",
-        mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri",
-        navSchedule: "Schedule", navGrades: "Grades", navTasks: "Tasks", navAbsence: "Absence",
-        avgLabel: "Weighted Avg", predictLabel: "Final", addGradeTitle: "Add Grade",
-        markLabel: "Grade", weightLabel: "Weight (1–10)", btnAddGradeBtn: "Add",
-        addTaskTitle: "New Test or Task", subjectLabel: "Subject", typeLabel: "Type", dateLabel: "Date", btnAddTaskBtn: "Save",
-        modalTeacherLabel: "Teacher / Room", modalAbsenceLabel: "Absence", modalTasksHeader: "Upcoming tasks:",
-        startsIn: "Starts in", endsIn: "ends in", breakNext: "Break · next:"
-    }
-};
-
-let currentLang = localStorage.getItem('c1a_lang') || 'cs';
-const langToggle = document.getElementById('langToggle');
-function applyLang() {
-    langToggle.innerText = currentLang === 'cs' ? 'EN' : 'CS';
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[currentLang][key]) el.innerText = translations[currentLang][key];
-    });
-}
-langToggle.addEventListener('click', () => {
-    currentLang = currentLang === 'cs' ? 'en' : 'cs';
-    localStorage.setItem('c1a_lang', currentLang);
-    applyLang();
-    updateClock();
-});
-applyLang();
 
 /* THEME */
 const themeIcon = document.getElementById('themeIcon');
@@ -977,159 +962,162 @@ function applyGroup(group) {
 document.querySelectorAll('.seg-btn').forEach(b => b.addEventListener('click', () => applyGroup(b.getAttribute('data-group'))));
 applyGroup(savedGroup);
 
-/* GRADES */
-let activeSubject = 'M';
-let gradesData = JSON.parse(localStorage.getItem('c1a_grades_data')) || {};
+/* JÍDELNA */
+let mealsData = JSON.parse(localStorage.getItem('c1a_meals_data')) || [];
+let canteenUrl = localStorage.getItem('c1a_canteen_url') || 'https://www.spsejecna.cz';
 
-function renderSubjectChips() {
-    const box = document.getElementById('subjectSelector');
-    box.innerHTML = '';
-    subjects.forEach(sub => {
-        const btn = document.createElement('button');
-        btn.className = `chip ${sub === activeSubject ? 'active' : ''}`;
-        btn.innerText = sub;
-        btn.onclick = () => { activeSubject = sub; renderSubjectChips(); renderGrades(); };
-        box.appendChild(btn);
-    });
-}
+const canteenLinkEl = document.getElementById('canteenPortalLink');
+const canteenUrlInput = document.getElementById('canteenUrlInput');
+canteenLinkEl.href = canteenUrl;
+canteenUrlInput.value = canteenUrl;
 
-function renderGrades() {
-    const list = document.getElementById('gradesList');
+document.getElementById('btnSaveCanteenUrl').addEventListener('click', () => {
+    const val = canteenUrlInput.value.trim();
+    if (!val) return;
+    canteenUrl = val;
+    localStorage.setItem('c1a_canteen_url', canteenUrl);
+    canteenLinkEl.href = canteenUrl;
+});
+
+function renderMeals() {
+    const list = document.getElementById('mealsList');
     list.innerHTML = '';
-    const arr = gradesData[activeSubject] || [];
-    let wSum = 0, sSum = 0;
-
-    arr.forEach((g, idx) => {
-        wSum += Number(g.weight);
-        sSum += Number(g.mark) * Number(g.weight);
+    mealsData.forEach((m, i) => {
         const row = document.createElement('div');
         row.className = 'list-row';
         row.innerHTML = `
             <div style="display:flex; align-items:center; gap:12px;">
-                <div class="mark-dot m${g.mark}">${g.mark}</div>
-                <div>
-                    <strong style="font-size:0.9rem;">${subjectNames[activeSubject]}</strong>
-                    <span style="display:block; font-size:0.75rem; color:var(--text-muted);">Váha ${g.weight}</span>
-                </div>
+                <span class="day-tag">${m.day}</span>
+                <strong style="font-size:0.9rem;">${m.text}</strong>
             </div>
-            <button onclick="deleteGrade(${idx})" style="color:#ff3b30; font-weight:700; padding:6px;">✕</button>
+            <button onclick="deleteMeal(${i})" style="color:#ff3b30; font-weight:700; padding:6px;">✕</button>
         `;
         list.appendChild(row);
     });
+    localStorage.setItem('c1a_meals_data', JSON.stringify(mealsData));
+}
 
-    const avgEl = document.getElementById('currentAvg');
-    const predEl = document.getElementById('predictedGrade');
-    if (wSum > 0) {
-        const avg = (sSum / wSum).toFixed(2);
-        const rounded = Math.min(5, Math.max(1, Math.round(avg)));
-        avgEl.innerText = avg;
-        predEl.innerText = rounded;
-        predEl.className = `pred-pill m${rounded}`;
+document.getElementById('btnAddMeal').addEventListener('click', () => {
+    const text = document.getElementById('mealText').value.trim();
+    if (!text) return;
+    mealsData.push({ day: document.getElementById('mealDay').value, text });
+    document.getElementById('mealText').value = '';
+    renderMeals();
+});
+window.deleteMeal = i => { mealsData.splice(i, 1); renderMeals(); };
+renderMeals();
+
+/* SUPLOVÁNÍ — EXCEL PARSER */
+let loadedRows = [];
+const excelFileInput = document.getElementById('excelFileInput');
+const excelFilterInput = document.getElementById('excelFilterInput');
+const excelUrlInput = document.getElementById('excelUrlInput');
+const excelStatus = document.getElementById('excelStatus');
+const excelTableWrap = document.getElementById('excelTableWrap');
+const excelTable = document.getElementById('excelTable');
+const dropZone = document.getElementById('dropZone');
+
+const savedExcelUrl = localStorage.getItem('c1a_excel_url');
+if (savedExcelUrl) excelUrlInput.value = savedExcelUrl;
+
+function renderExcelTable() {
+    if (!loadedRows.length) {
+        excelTableWrap.style.display = 'none';
+        return;
+    }
+    const query = excelFilterInput.value.trim().toLowerCase();
+    const header = loadedRows[0] || [];
+    const bodyRows = loadedRows.slice(1).filter(row => {
+        if (!query) return true;
+        return row.some(cell => String(cell ?? '').toLowerCase().includes(query));
+    });
+
+    let html = '<thead><tr>';
+    header.forEach(col => {
+        html += `<th>${escapeHtml(String(col ?? ''))}</th>`;
+    });
+    html += '</tr></thead><tbody>';
+
+    if (!bodyRows.length) {
+        html += `<tr><td colspan="${Math.max(1, header.length)}" style="text-align:center; color:var(--text-muted);">Žádné řádky neodpovídají filtru „${escapeHtml(query)}“.</td></tr>`;
     } else {
-        avgEl.innerText = '-.--';
-        predEl.innerText = '-';
-        predEl.className = 'pred-pill';
+        bodyRows.forEach(row => {
+            html += '<tr>';
+            for (let c = 0; c < header.length; c++) {
+                html += `<td>${escapeHtml(String(row[c] ?? ''))}</td>`;
+            }
+            html += '</tr>';
+        });
+    }
+    html += '</tbody>';
+    excelTable.innerHTML = html;
+    excelTableWrap.style.display = 'block';
+}
+
+function escapeHtml(str) {
+    return str.replace(/[&<>"']/g, ch => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[ch]));
+}
+
+function parseWorkbookBuffer(buffer, label) {
+    try {
+        const wb = XLSX.read(buffer, { type: 'array' });
+        const firstSheet = wb.SheetNames[0];
+        const sheet = wb.Sheets[firstSheet];
+        const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: '' });
+        loadedRows = rows.filter(r => r.some(cell => String(cell ?? '').trim() !== ''));
+        excelStatus.innerText = `Načteno: ${label} (list: ${firstSheet}, řádků: ${Math.max(0, loadedRows.length - 1)})`;
+        renderExcelTable();
+    } catch (err) {
+        excelStatus.innerText = `Chyba při čtení souboru: ${err.message}`;
     }
 }
 
-document.getElementById('btnAddGrade').addEventListener('click', () => {
-    const mark = Number(document.getElementById('newMark').value);
-    const weight = Math.min(10, Math.max(1, Number(document.getElementById('newWeight').value) || 1));
-    if (!gradesData[activeSubject]) gradesData[activeSubject] = [];
-    gradesData[activeSubject].push({ mark, weight });
-    localStorage.setItem('c1a_grades_data', JSON.stringify(gradesData));
-    renderGrades();
+document.getElementById('btnPickExcel').addEventListener('click', () => excelFileInput.click());
+excelFileInput.addEventListener('change', e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => parseWorkbookBuffer(ev.target.result, file.name);
+    reader.readAsArrayBuffer(file);
 });
 
-window.deleteGrade = idx => {
-    gradesData[activeSubject].splice(idx, 1);
-    localStorage.setItem('c1a_grades_data', JSON.stringify(gradesData));
-    renderGrades();
-};
-renderSubjectChips();
-renderGrades();
-
-/* TASKS */
-let tasksData = JSON.parse(localStorage.getItem('c1a_tasks_data')) || [];
-function renderTasks() {
-    const list = document.getElementById('tasksList');
-    list.innerHTML = '';
-    tasksData.forEach((t, i) => {
-        const row = document.createElement('div');
-        row.className = 'list-row';
-        row.innerHTML = `
-            <div>
-                <div style="font-weight:700; font-size:0.9rem;">
-                    <span style="color:${t.type === 'test' ? '#ff9500' : 'var(--accent)'};">[${t.subject}]</span> ${t.text}
-                </div>
-                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">
-                    ${t.type === 'test' ? 'Test' : 'Úkol'} · ${t.date || 'Bez termínu'}
-                </div>
-            </div>
-            <button onclick="deleteTask(${i})" style="color:#ff3b30; font-weight:700; padding:6px;">✕</button>
-        `;
-        list.appendChild(row);
-    });
-    localStorage.setItem('c1a_tasks_data', JSON.stringify(tasksData));
-}
-
-document.getElementById('btnAddTask').addEventListener('click', () => {
-    const text = document.getElementById('taskText').value.trim();
-    if (!text) return;
-    tasksData.push({
-        subject: document.getElementById('taskSubject').value,
-        type: document.getElementById('taskType').value,
-        date: document.getElementById('taskDate').value,
-        text
-    });
-    document.getElementById('taskText').value = '';
-    renderTasks();
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => parseWorkbookBuffer(ev.target.result, file.name);
+    reader.readAsArrayBuffer(file);
 });
-window.deleteTask = i => { tasksData.splice(i, 1); renderTasks(); };
-renderTasks();
 
-/* ABSENCE */
-let absenceData = JSON.parse(localStorage.getItem('c1a_absence_data')) || {
-    'M': { missed: 0, total: 32 }, 'ČJ': { missed: 0, total: 24 }, 'AJ': { missed: 0, total: 20 },
-    'F': { missed: 0, total: 16 }, 'EL': { missed: 0, total: 16 }, 'IT': { missed: 0, total: 24 },
-    'HW': { missed: 0, total: 16 }, 'TD': { missed: 0, total: 24 }, 'D': { missed: 0, total: 16 }, 'ZSV': { missed: 0, total: 16 }
-};
+document.getElementById('btnFetchExcelUrl').addEventListener('click', async () => {
+    const url = excelUrlInput.value.trim();
+    if (!url) return;
+    localStorage.setItem('c1a_excel_url', url);
+    excelStatus.innerText = 'Stahuji Excel...';
+    try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const buf = await res.arrayBuffer();
+        parseWorkbookBuffer(buf, url);
+    } catch (err) {
+        excelStatus.innerText = 'Přímé stažení z URL bylo zablokováno prohlížečem (CORS). Stáhni soubor ze stránky školy a nahraj ho přes „Nahrát Excel“.';
+    }
+});
 
-function renderAbsence() {
-    const list = document.getElementById('absenceList');
-    list.innerHTML = '';
-    subjects.forEach(sub => {
-        const d = absenceData[sub] || { missed: 0, total: 20 };
-        const pct = Math.round((d.missed / (d.total || 1)) * 100);
-        const color = pct >= 20 ? '#ff3b30' : (pct >= 15 ? '#ff9500' : '#34c759');
+document.getElementById('btnClearExcel').addEventListener('click', () => {
+    loadedRows = [];
+    excelFileInput.value = '';
+    excelTableWrap.style.display = 'none';
+    excelStatus.innerText = 'Zatím není načten žádný Excel soubor.';
+});
 
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.style.padding = '16px 18px';
-        card.innerHTML = `
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-                <div>
-                    <strong style="font-size:0.92rem;">${sub} · ${subjectNames[sub]}</strong>
-                    <span style="display:block; font-size:0.75rem; color:var(--text-muted);">${d.missed} / ${d.total} h</span>
-                </div>
-                <div style="display:flex; align-items:center; gap:8px;">
-                    <strong style="font-size:0.95rem; color:${color}; margin-right:4px;">${pct} %</strong>
-                    <button onclick="modAbs('${sub}', -1)" style="width:28px; height:28px; border-radius:8px; background:var(--bg-subtle); font-weight:700;">−</button>
-                    <button onclick="modAbs('${sub}', 1)" style="width:28px; height:28px; border-radius:8px; background:var(--bg-subtle); font-weight:700;">+</button>
-                </div>
-            </div>
-            <div class="bar-track"><div class="bar-fill" style="width:${Math.min(100, pct)}%; background:${color};"></div></div>
-        `;
-        list.appendChild(card);
-    });
-    localStorage.setItem('c1a_absence_data', JSON.stringify(absenceData));
-}
-window.modAbs = (sub, delta) => {
-    if (!absenceData[sub]) absenceData[sub] = { missed: 0, total: 20 };
-    absenceData[sub].missed = Math.max(0, absenceData[sub].missed + delta);
-    renderAbsence();
-};
-renderAbsence();
+excelFilterInput.addEventListener('input', renderExcelTable);
 
 /* LESSON MODAL */
 const modal = document.getElementById('subjectModal');
@@ -1140,23 +1128,14 @@ document.querySelectorAll('.hodina').forEach(cell => {
     cell.addEventListener('click', () => {
         const code = cell.querySelector('.predmet')?.innerText;
         if (!code) return;
-        const teacher = cell.querySelector('.ucitel')?.innerText || '-';
-        const room = cell.querySelector('.ucebna')?.innerText || '-';
-        const abs = absenceData[code] || { missed: 0, total: 20 };
-
         document.getElementById('modalSubjectFull').innerText = subjectNames[code] || code;
-        document.getElementById('modalTeacherRoom').innerText = `${teacher} · ${room}`;
-        document.getElementById('modalAbsenceVal').innerText = `${Math.round((abs.missed / (abs.total || 1)) * 100)} % (${abs.missed} h)`;
-
-        const subTasks = tasksData.filter(t => t.subject === code);
-        document.getElementById('modalTasksList').innerHTML = subTasks.length
-            ? subTasks.map(t => `• ${t.text} (${t.date || 'bez data'})`).join('<br>')
-            : 'Žádné';
+        document.getElementById('modalTeacher').innerText = cell.querySelector('.ucitel')?.innerText || '-';
+        document.getElementById('modalRoom').innerText = cell.querySelector('.ucebna')?.innerText || '-';
         modal.classList.add('show');
     });
 });
 
-/* LIVE CLOCK & LESSON HIGHLIGHT */
+/* LIVE CLOCK */
 const times = [
     { start: "07:30", end: "08:15" }, { start: "08:25", end: "09:10" },
     { start: "09:20", end: "10:05" }, { start: "10:20", end: "11:05" },
@@ -1170,7 +1149,6 @@ function updateClock() {
     const day = now.getDay();
     const statusText = document.getElementById('statusText');
     const statusDot = document.getElementById('statusDot');
-    const t = translations[currentLang];
 
     document.querySelectorAll('.current-lesson, .past-lesson, .next-lesson')
         .forEach(el => el.classList.remove('current-lesson', 'past-lesson', 'next-lesson'));
@@ -1193,7 +1171,7 @@ function updateClock() {
                 const subj = cell.querySelector('.predmet')?.innerText || '';
                 const room = cell.querySelector('.ucebna')?.innerText || '';
                 statusDot.classList.remove('idle');
-                statusText.innerText = `${subj} (${room}) · ${t.endsIn} ${eM - mins} min`;
+                statusText.innerText = `${subj} (${room}) · konec za ${eM - mins} min`;
                 activeFound = true;
             } else if (mins > eM) {
                 cell.classList.add('past-lesson');
@@ -1203,7 +1181,7 @@ function updateClock() {
                 if (!activeFound) {
                     const subj = cell.querySelector('.predmet')?.innerText || '';
                     statusDot.classList.add('idle');
-                    statusText.innerText = `${t.breakNext} ${subj} (${sM - mins} min)`;
+                    statusText.innerText = `Přestávka · další: ${subj} (${sM - mins} min)`;
                 }
             }
         });
@@ -1222,7 +1200,7 @@ function updateClock() {
         const h = Math.floor(diff / 3600000);
         const m = Math.floor((diff % 3600000) / 60000);
         statusDot.classList.add('idle');
-        statusText.innerText = `${t.startsIn} ${h}h ${m}m`;
+        statusText.innerText = `Začátek za ${h}h ${m}m`;
     }
 }
 
