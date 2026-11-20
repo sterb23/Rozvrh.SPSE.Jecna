@@ -4,516 +4,626 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
-    <title>Bakaláři - Rozvrh & Štáb C1a</title>
-    <meta name="apple-mobile-web-app-title" content="Rozvrh C1a">
-    <meta name="application-name" content="Rozvrh C1a">
+    <title>C1a — Rozvrh</title>
+    <meta name="apple-mobile-web-app-title" content="C1a">
+    <meta name="application-name" content="C1a">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="theme-color" content="#007aff">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0a0a0c">
 
-    <!-- IKONY APLIKACE -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='110' fill='%23007aff'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='240' fill='%23ffffff'>C1a</text></svg>">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='110' fill='%23007aff'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='240' fill='%23ffffff'>C1a</text></svg>">
+    <!-- NOVÁ MINIMALISTICKÁ IKONA APLIKACE (Černobílá vektorová mřížka) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='112' fill='%230a0a0c'/><rect x='116' y='136' width='120' height='100' rx='24' fill='%23ffffff'/><rect x='276' y='136' width='120' height='100' rx='24' fill='%23ffffff' fill-opacity='0.35'/><rect x='116' y='276' width='120' height='100' rx='24' fill='%23ffffff' fill-opacity='0.35'/><rect x='276' y='276' width='120' height='100' rx='24' fill='%23ffffff'/></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='112' fill='%230a0a0c'/><rect x='116' y='136' width='120' height='100' rx='24' fill='%23ffffff'/><rect x='276' y='136' width='120' height='100' rx='24' fill='%23ffffff' fill-opacity='0.35'/><rect x='116' y='276' width='120' height='100' rx='24' fill='%23ffffff' fill-opacity='0.35'/><rect x='276' y='276' width='120' height='100' rx='24' fill='%23ffffff'/></svg>">
 
-    <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22Rozvrh%20C1a%20-%20Bakalari%22,%22short_name%22:%22Rozvrh%20C1a%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22%23007aff%22,%22theme_color%22:%22%23007aff%22,%22icons%22:[{%22src%22:%22data:image/svg%2Bxml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='110' fill='%23007aff'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='240' fill='%23ffffff'>C1a</text></svg>%22,%22sizes%22:%22512x512%22,%22type%22:%22image/svg%2Bxml%22}]} ">
+    <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22C1a%20Rozvrh%22,%22short_name%22:%22C1a%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22%230a0a0c%22,%22theme_color%22:%22%230a0a0c%22,%22icons%22:[{%22src%22:%22data:image/svg%2Bxml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='112' fill='%230a0a0c'/><rect x='116' y='136' width='120' height='100' rx='24' fill='%23ffffff'/><rect x='276' y='136' width='120' height='100' rx='24' fill='%23ffffff' fill-opacity='0.35'/><rect x='116' y='276' width='120' height='100' rx='24' fill='%23ffffff' fill-opacity='0.35'/><rect x='276' y='276' width='120' height='100' rx='24' fill='%23ffffff'/></svg>%22,%22sizes%22:%22512x512%22,%22type%22:%22image/svg+xml%22}]}">
 
     <style>
         :root {
-            --ios-blue: #007aff;
-            --ios-dark-blue: #0051a8;
-            --bg-body: #f2f2f7;
-            --bg-card: rgba(255, 255, 255, 0.75);
-            --bg-card-solid: #ffffff;
-            --text-main: #1c1c1e;
-            --text-muted: #8e8e93;
-            --border: rgba(60, 60, 67, 0.12);
-            --dock-bg: rgba(255, 255, 255, 0.72);
-            --glass-blur: 30px;
+            --accent: #007aff;
+            --bg-body: #f5f5f7;
+            --bg-surface: rgba(255, 255, 255, 0.82);
+            --bg-solid: #ffffff;
+            --bg-subtle: rgba(0, 0, 0, 0.04);
+            --text-main: #111113;
+            --text-muted: #7c7c82;
+            --border: rgba(0, 0, 0, 0.07);
+            --dock-bg: rgba(255, 255, 255, 0.85);
             
-            --past-opacity: 0.38;
-            --current-bg: rgba(255, 149, 0, 0.15);
-            --current-border: #ff9500;
-            --current-text: #b26200;
+            --past-opacity: 0.35;
+            --current-bg: rgba(0, 122, 255, 0.12);
+            --current-border: #007aff;
 
-            --subj-math: rgba(52, 199, 89, 0.15);  --subj-math-border: rgba(52, 199, 89, 0.35);  --subj-math-text: #1b7a2d;
-            --subj-lang: rgba(0, 122, 255, 0.15);  --subj-lang-border: rgba(0, 122, 255, 0.35);  --subj-lang-text: #0040dd;
-            --subj-hum:  rgba(255, 149, 0, 0.15);  --subj-hum-border:  rgba(255, 149, 0, 0.35);   --subj-hum-text:  #b26200;
-            --subj-tech: rgba(175, 82, 222, 0.15); --subj-tech-border: rgba(175, 82, 222, 0.35); --subj-tech-text: #8922af;
-            --subj-sport:rgba(48, 209, 88, 0.15);  --subj-sport-border:rgba(48, 209, 88, 0.35);  --subj-sport-text:#1b7a2d;
+            --c-math: #1b8a36;  --bg-math: rgba(52, 199, 89, 0.12);
+            --c-lang: #0055d4;  --bg-lang: rgba(0, 122, 255, 0.12);
+            --c-hum:  #b85d00;  --bg-hum:  rgba(255, 149, 0, 0.12);
+            --c-tech: #7a1fa2;  --bg-tech: rgba(175, 82, 222, 0.12);
+            --c-sport:#168038;  --bg-sport:rgba(48, 209, 88, 0.12);
 
-            --mark-1: #34c759; --mark-2: #30d158; --mark-3: #ff9500; --mark-4: #ff6900; --mark-5: #ff3b30;
-
-            --shadow-sm: 0 4px 12px rgba(0,0,0,0.03);
-            --shadow-md: 0 8px 24px rgba(0,0,0,0.06);
-            --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
+            --m1: #34c759; --m2: #30d158; --m3: #ff9500; --m4: #ff6900; --m5: #ff3b30;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
         }
 
         [data-theme="dark"] {
-            --bg-body: #000000;
-            --bg-card: rgba(28, 28, 30, 0.75);
-            --bg-card-solid: #1c1c1e;
-            --text-main: #f2f2f7;
-            --text-muted: #98989f;
-            --border: rgba(255, 255, 255, 0.12);
-            --dock-bg: rgba(30, 30, 30, 0.75);
-            
-            --current-bg: rgba(255, 159, 10, 0.22);
-            --current-border: #ff9f0a;
-            --current-text: #ffd60a;
+            --accent: #0a84ff;
+            --bg-body: #09090b;
+            --bg-surface: rgba(24, 24, 27, 0.82);
+            --bg-solid: #18181b;
+            --bg-subtle: rgba(255, 255, 255, 0.06);
+            --text-main: #f4f4f6;
+            --text-muted: #8e8e93;
+            --border: rgba(255, 255, 255, 0.08);
+            --dock-bg: rgba(24, 24, 27, 0.85);
 
-            --subj-math: rgba(48, 209, 88, 0.22);  --subj-math-border: rgba(48, 209, 88, 0.45);  --subj-math-text: #32d74b;
-            --subj-lang: rgba(10, 132, 255, 0.22); --subj-lang-border: rgba(10, 132, 255, 0.45); --subj-lang-text: #0a84ff;
-            --subj-hum:  rgba(255, 159, 10, 0.22); --subj-hum-border:  rgba(255, 159, 10, 0.45);  --subj-hum-text:  #ff9f0a;
-            --subj-tech: rgba(191, 90, 242, 0.22);--subj-tech-border: rgba(191, 90, 242, 0.45);--subj-tech-text: #bf5af2;
-            --subj-sport:rgba(50, 215, 75, 0.22);  --subj-sport-border:rgba(50, 215, 75, 0.45);  --subj-sport-text:#32d74b;
+            --current-bg: rgba(10, 132, 255, 0.18);
+            --current-border: #0a84ff;
 
-            --shadow-sm: 0 4px 12px rgba(0,0,0,0.3);
-            --shadow-md: 0 8px 24px rgba(0,0,0,0.4);
-            --shadow-lg: 0 20px 40px rgba(0,0,0,0.6);
+            --c-math: #32d74b;  --bg-math: rgba(48, 209, 88, 0.14);
+            --c-lang: #409cff;  --bg-lang: rgba(10, 132, 255, 0.14);
+            --c-hum:  #ff9f0a;  --bg-hum:  rgba(255, 159, 10, 0.14);
+            --c-tech: #bf5af2;  --bg-tech: rgba(191, 90, 242, 0.14);
+            --c-sport:#32d74b;  --bg-sport:rgba(50, 215, 75, 0.14);
+
+            --shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
         }
 
-        * { 
-            box-sizing: border-box; 
-            margin: 0; padding: 0;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
             -webkit-font-smoothing: antialiased;
-            transition: background-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease, color 0.3s ease;
-        }
-        
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-body); 
-            color: var(--text-main); 
-            height: 100dvh; width: 100vw;
-            overflow: hidden;
-            user-select: none; -webkit-user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
 
-        #appContent { 
-            display: none; 
-            flex-direction: column; 
-            height: 100dvh; 
-            width: 100%; 
-            max-width: 1400px; 
-            margin: 0 auto; 
-            position: relative; 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            height: 100dvh;
+            width: 100vw;
+            overflow: hidden;
+            user-select: none;
+            transition: background-color 0.25s ease, color 0.25s ease;
         }
 
-        button, .hodina, .subject-chip, .dock-btn { cursor: pointer; }
-        button:active, .dock-btn:active, .subject-chip:active { transform: scale(0.96) !important; transition: transform 0.12s ease !important; }
+        button, input, select { font-family: inherit; }
+        button { cursor: pointer; border: none; background: none; color: inherit; }
+        button:active { transform: scale(0.96); }
 
-        .tab-view { 
-            display: none; flex-direction: column; flex: 1; overflow: hidden;
-            opacity: 0; transform: scale(0.99) translateY(6px);
-            transition: opacity 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        #appContent {
+            display: none;
+            flex-direction: column;
+            height: 100dvh;
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
         }
-        .tab-view.active { display: flex; opacity: 1; transform: scale(1) translateY(0); }
 
         /* AUTH OVERLAY */
         .auth-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.4); backdrop-filter: blur(var(--glass-blur)) saturate(180%); -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
-            z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px;
+            position: fixed;
+            inset: 0;
+            background: var(--bg-body);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
         }
         .auth-card {
-            background: var(--bg-card); backdrop-filter: blur(30px); border-radius: 32px; padding: 36px 28px;
-            width: 100%; max-width: 360px; text-align: center; box-shadow: var(--shadow-lg); border: 1px solid var(--border);
+            background: var(--bg-solid);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 36px 28px;
+            width: 100%;
+            max-width: 340px;
+            text-align: center;
+            box-shadow: var(--shadow);
         }
-        .auth-badge {
-            display: inline-block; background: var(--ios-blue); color: white;
-            font-weight: 700; padding: 6px 16px; border-radius: 14px; font-size: 1.1rem; margin-bottom: 16px;
+        .auth-logo {
+            width: 52px;
+            height: 52px;
+            background: var(--text-main);
+            color: var(--bg-solid);
+            border-radius: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
         }
-        .auth-card h2 { margin: 0 0 6px 0; font-size: 1.35rem; font-weight: 700; }
-        .auth-card p { margin: 0 0 20px 0; font-size: 0.85rem; color: var(--text-muted); }
+        .auth-card h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.3px; }
+        .auth-card p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 22px; }
         .auth-input {
-            width: 100%; padding: 14px; border-radius: 14px; border: 1px solid var(--border);
-            font-size: 1rem; font-weight: 600; text-align: center; letter-spacing: 3px;
-            background: rgba(128,128,128,0.08); color: var(--text-main); margin-bottom: 14px; outline: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: var(--bg-subtle);
+            color: var(--text-main);
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+            outline: none;
         }
+        .auth-input:focus { border-color: var(--accent); }
         .auth-btn {
-            width: 100%; padding: 14px; border-radius: 14px; border: none;
-            background: var(--ios-blue); color: white; font-weight: 700; font-size: 1rem;
-            box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            background: var(--text-main);
+            color: var(--bg-solid);
+            font-weight: 600;
+            font-size: 0.95rem;
         }
-        .auth-error { color: #ff3b30; font-size: 0.82rem; font-weight: 600; margin-top: 10px; display: none; }
+        .auth-error { color: #ff3b30; font-size: 0.8rem; font-weight: 600; margin-top: 12px; display: none; }
 
-        /* TOP BAR */
+        /* TOP HEADER */
         .top-bar {
-            background: var(--bg-card); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur));
-            color: var(--text-main); padding: 14px 24px; display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid var(--border); z-index: 50; flex-shrink: 0; padding-top: max(14px, env(safe-area-inset-top));
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: max(14px, env(safe-area-inset-top)) 20px 12px 20px;
+            flex-shrink: 0;
         }
-        .top-title { display: flex; align-items: center; gap: 12px; }
-        .bak-icon { background: var(--ios-blue); color: white; font-weight: 800; padding: 5px 12px; border-radius: 12px; font-size: 1rem; }
-        .top-title h1 { margin: 0; font-size: 1.2rem; font-weight: 700; letter-spacing: -0.2px; }
-        .top-title p { margin: 0; font-size: 0.78rem; color: var(--text-muted); }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: var(--text-main);
+            color: var(--bg-solid);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: -0.5px;
+        }
+        .brand-info h1 { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.3px; }
+        .brand-info span { font-size: 0.75rem; color: var(--text-muted); display: block; }
 
-        .top-actions { display: flex; gap: 8px; align-items: center; }
+        .top-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
         .icon-btn {
-            display: flex; align-items: center; justify-content: center;
-            width: 38px; height: 38px; border-radius: 12px; background: rgba(128,128,128,0.1); color: var(--text-main); border: none;
-            transition: all 0.2s ease;
+            width: 36px;
+            height: 36px;
+            border-radius: 11px;
+            background: var(--bg-subtle);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            transition: background-color 0.2s;
         }
-        .icon-btn.active { background: var(--ios-blue) !important; color: white; }
-        .icon-btn svg { width: 18px; height: 18px; fill: currentColor; }
-        .icon-btn.lang-btn { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.5px; }
+        .icon-btn:hover { background: var(--border); }
+        .icon-btn svg { width: 17px; height: 17px; fill: currentColor; }
 
-        #themeToggle {
-            background: linear-gradient(135deg, #007aff, #5856d6);
-            color: white;
-            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.35);
+        /* SUB-HEADER CONTROLS (FILTER + LIVE STATUS) */
+        .control-strip {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px 12px 20px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .segmented {
+            display: inline-flex;
+            background: var(--bg-subtle);
+            padding: 3px;
+            border-radius: 11px;
+        }
+        .seg-btn {
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+        .seg-btn.active {
+            background: var(--bg-solid);
+            color: var(--text-main);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
 
-        /* STATUS BAR */
-        .status-bar {
-            display: flex; justify-content: space-between; align-items: center; padding: 10px 24px;
-            background: var(--bg-card); border-bottom: 1px solid var(--border);
-            font-size: 0.82rem; font-weight: 600; color: var(--text-muted); gap: 10px; flex-wrap: wrap;
+        .status-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: var(--bg-subtle);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-main);
         }
-        .status-pill { display: flex; align-items: center; gap: 6px; }
-        .status-pill svg { width: 15px; height: 15px; fill: var(--ios-blue); }
-
-        .group-filter { display: flex; background: rgba(128,128,128,0.1); padding: 3px; border-radius: 12px; border: 1px solid var(--border); }
-        .filter-btn { padding: 6px 14px; border-radius: 9px; border: none; background: transparent; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); }
-        .filter-btn.active { background: var(--bg-card-solid); color: var(--ios-blue); box-shadow: var(--shadow-sm); }
-
-        .live-banner {
-            margin: 12px 24px 0 24px; background: rgba(0, 122, 255, 0.12); border: 1px solid rgba(0, 122, 255, 0.3);
-            color: var(--text-main); border-radius: 16px; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between;
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #34c759;
+            box-shadow: 0 0 8px #34c759;
         }
-        .live-banner-left { display: flex; align-items: center; gap: 10px; }
-        .live-dot { width: 10px; height: 10px; background: #34c759; border-radius: 50%; box-shadow: 0 0 10px #34c759; animation: pulseDot 1.5s infinite; }
-        @keyframes pulseDot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.35); opacity: 0.5; } }
-        .live-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; font-weight: 700; }
-        .live-detail { font-size: 0.92rem; font-weight: 700; }
+        .pulse-dot.idle { background: var(--text-muted); box-shadow: none; }
 
-        /* MAIN CONTENT & SCHEDULE */
-        .main-content { flex: 1; overflow: hidden; display: flex; flex-direction: column; padding: 16px 24px 100px 24px; }
-        .schedule-card { flex: 1; overflow: auto; background: var(--bg-card); backdrop-filter: blur(var(--glass-blur)); border-radius: 24px; box-shadow: var(--shadow-sm); border: 1px solid var(--border); padding: 14px; }
+        /* TAB VIEWS */
+        .tab-view {
+            display: none;
+            flex-direction: column;
+            flex: 1;
+            overflow: hidden;
+            animation: fadeIn 0.2s ease;
+        }
+        .tab-view.active { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
-        table { border-collapse: separate; border-spacing: 8px; width: 100%; min-width: 850px; }
-        th { color: var(--text-muted); font-weight: 600; font-size: 0.8em; padding: 6px; text-align: center; }
-        th small { display: block; font-size: 0.72em; margin-top: 2px; font-weight: 400; opacity: 0.85; }
-        .day { font-weight: 700; color: var(--ios-blue); font-size: 0.9em; text-align: center; width: 45px; background: rgba(128,128,128,0.08); border-radius: 14px; }
+        /* SCHEDULE TABLE */
+        .schedule-wrap {
+            flex: 1;
+            padding: 0 20px 92px 20px;
+            overflow: hidden;
+            display: flex;
+        }
+        .schedule-card {
+            flex: 1;
+            background: var(--bg-surface);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 12px;
+            overflow: auto;
+            box-shadow: var(--shadow);
+        }
+        table {
+            width: 100%;
+            min-width: 820px;
+            border-collapse: separate;
+            border-spacing: 6px;
+        }
+        th {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            padding: 4px 4px 8px 4px;
+            text-align: center;
+        }
+        th small {
+            display: block;
+            font-size: 0.68rem;
+            font-weight: 400;
+            opacity: 0.75;
+            margin-top: 2px;
+        }
+        .day-cell {
+            width: 42px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background: var(--bg-subtle);
+            border-radius: 12px;
+        }
+        td:not(.day-cell) {
+            border-radius: 13px;
+            background: var(--bg-subtle);
+            padding: 0;
+            vertical-align: middle;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        td:not(.day-cell):not(:empty):hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+        }
+        td:empty {
+            background: transparent;
+        }
 
-        td:not(.day) { background: rgba(128,128,128,0.06); border-radius: 14px; vertical-align: middle; padding: 0; border: 1px solid var(--border); }
-        td:not(.day):not(:empty):hover { transform: translateY(-2px) scale(1.01); box-shadow: var(--shadow-md); z-index: 10; position: relative; }
-        td:empty { background: transparent; border: 1px dashed var(--border); }
+        .type-math  { background: var(--bg-math) !important; color: var(--c-math); }
+        .type-lang  { background: var(--bg-lang) !important; color: var(--c-lang); }
+        .type-hum   { background: var(--bg-hum) !important;  color: var(--c-hum); }
+        .type-tech  { background: var(--bg-tech) !important; color: var(--c-tech); }
+        .type-sport { background: var(--bg-sport) !important;color: var(--c-sport); }
 
-        .type-math { background-color: var(--subj-math) !important; border-color: var(--subj-math-border) !important; color: var(--subj-math-text); }
-        .type-lang { background-color: var(--subj-lang) !important; border-color: var(--subj-lang-border) !important; color: var(--subj-lang-text); }
-        .type-hum  { background-color: var(--subj-hum) !important;  border-color: var(--subj-hum-border) !important;  color: var(--subj-hum-text); }
-        .type-tech { background-color: var(--subj-tech) !important; border-color: var(--subj-tech-border) !important; color: var(--subj-tech-text); }
-        .type-sport{ background-color: var(--subj-sport) !important;border-color: var(--subj-sport-border) !important;color: var(--subj-sport-text); }
+        .past-lesson { opacity: var(--past-opacity) !important; filter: grayscale(50%); }
+        .current-lesson {
+            background: var(--current-bg) !important;
+            box-shadow: inset 0 0 0 2px var(--current-border) !important;
+        }
+        .next-lesson {
+            box-shadow: inset 0 0 0 1.5px var(--text-muted) !important;
+        }
 
-        .past-lesson { opacity: var(--past-opacity) !important; filter: grayscale(60%); }
-        .current-lesson { background-color: var(--current-bg) !important; border: 2px solid var(--current-border) !important; box-shadow: 0 0 16px rgba(255, 149, 0, 0.3); z-index: 5; position: relative; }
-        .current-lesson .predmet { color: var(--current-text) !important; }
-        .next-lesson { border: 2px solid var(--ios-blue) !important; }
+        .hodina {
+            position: relative;
+            height: 72px;
+            min-width: 82px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 13px;
+        }
+        .predmet { font-weight: 700; font-size: 1.12rem; letter-spacing: -0.3px; }
+        .ucebna { position: absolute; top: 6px; right: 8px; font-size: 0.68rem; font-weight: 700; opacity: 0.85; }
+        .ucitel { position: absolute; bottom: 6px; right: 8px; font-size: 0.66rem; font-weight: 600; opacity: 0.75; }
+        .skupina { position: absolute; bottom: 6px; left: 8px; font-size: 0.65rem; font-weight: 700; opacity: 0.75; }
 
-        .hodina { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 76px; min-width: 85px; box-sizing: border-box; border-radius: 12px; }
-        .predmet { font-weight: 700; font-size: 1.2em; }
-        .ucitel { position: absolute; bottom: 5px; right: 8px; font-size: 0.68em; font-weight: 600; opacity: 0.8; }
-        .skupina { position: absolute; bottom: 5px; left: 8px; font-size: 0.68em; font-weight: 600; opacity: 0.8; }
-        .ucebna { position: absolute; top: 5px; right: 8px; font-size: 0.72em; font-weight: 700; }
-
-        .split { display: flex; flex-direction: column; width: 100%; height: 100%; border-radius: 12px; overflow: hidden; }
-        .split .hodina { height: 38px; min-height: 38px; }
-        .split-divider { width: 100%; height: 1px; background-color: var(--border); }
-        .split .predmet { font-size: 0.9em; }
-        .split .ucebna { top: 2px; right: 6px; font-size: 0.6em; }
-        .split .ucitel { bottom: 2px; right: 6px; font-size: 0.6em; }
-        .split .skupina { bottom: 2px; left: 6px; font-size: 0.6em; }
-
+        .split { display: flex; flex-direction: column; height: 100%; }
+        .split .hodina { height: 35.5px; min-height: 35.5px; }
+        .split-line { height: 1px; background: var(--border); width: 100%; }
+        .split .predmet { font-size: 0.86rem; }
+        .split .ucebna { top: 3px; right: 6px; font-size: 0.6rem; }
+        .split .ucitel { bottom: 3px; right: 6px; font-size: 0.58rem; }
+        .split .skupina { bottom: 3px; left: 6px; font-size: 0.58rem; }
         .hide-group { display: none !important; }
 
-        /* PANELS AND CARDS */
-        .panel-container { flex: 1; overflow-y: auto; padding: 16px 24px 100px 24px; display: flex; flex-direction: column; gap: 16px; }
-
-        .panel-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        /* PANELS (ZNÁMKY, ÚKOLY, ABSENCE) */
+        .panel-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: 4px 20px 100px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+        }
         @media (min-width: 768px) {
-            .panel-grid { grid-template-columns: 1fr 1fr; }
-            .panel-grid-full { grid-column: 1 / -1; }
+            .grid-2 { grid-template-columns: 1fr 1fr; }
+            .span-2 { grid-column: 1 / -1; }
         }
 
-        .subject-selector { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
-        .subject-chip { padding: 9px 18px; background: rgba(128,128,128,0.08); border: 1px solid var(--border); border-radius: 18px; font-size: 0.82rem; font-weight: 700; color: var(--text-muted); white-space: nowrap; }
-        .subject-chip.active { background: var(--ios-blue); color: white; border-color: var(--ios-blue); }
+        .card {
+            background: var(--bg-surface);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+        .card-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 14px; }
 
-        .grade-summary-card, .card-box { background: var(--bg-card); backdrop-filter: blur(var(--glass-blur)); border-radius: 24px; padding: 22px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 12px; }
-        .avg-label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; }
-        .avg-val { font-size: 2.4rem; font-weight: 700; color: var(--ios-blue); }
-        .predicted-badge { padding: 10px 20px; border-radius: 16px; font-weight: 700; font-size: 1.25rem; color: white; text-align: center; }
+        .chips-row {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+        .chip {
+            padding: 8px 15px;
+            border-radius: 12px;
+            background: var(--bg-subtle);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        .chip.active { background: var(--text-main); color: var(--bg-solid); }
 
-        .inputs-row { display: flex; gap: 12px; }
-        .form-group { flex: 1; display: flex; flex-direction: column; gap: 6px; }
-        .form-group label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); }
-        .form-control { padding: 12px 14px; border-radius: 14px; border: 1px solid var(--border); background: rgba(128,128,128,0.06); color: var(--text-main); font-weight: 600; outline: none; }
-
-        .btn-action { padding: 14px; border-radius: 16px; border: none; background: var(--ios-blue); color: white; font-weight: 700; font-size: 0.9rem; box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3); }
-
-        .items-list { display: flex; flex-direction: column; gap: 10px; }
-        .list-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 18px; border: 1px solid var(--border); }
-        .list-item.test-item { border-left: 5px solid #ff9500; }
-        .list-item.task-item { border-left: 5px solid var(--ios-blue); }
-
-        .grade-badge { width: 36px; height: 36px; border-radius: 12px; color: white; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
-        .grade-badge.m1 { background: var(--mark-1); } .grade-badge.m2 { background: var(--mark-2); } .grade-badge.m3 { background: var(--mark-3); } .grade-badge.m4 { background: var(--mark-4); } .grade-badge.m5 { background: var(--mark-5); }
-
-        .absence-card { background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 20px; padding: 16px 20px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 10px; }
-        .absence-header { display: flex; justify-content: space-between; align-items: center; }
-        .absence-bar-bg { width: 100%; height: 8px; background: rgba(128,128,128,0.1); border-radius: 4px; overflow: hidden; }
-        .absence-bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
-        .absence-bar-fill.ok { background: #34c759; }
-        .absence-bar-fill.warn { background: #ff9500; }
-        .absence-bar-fill.danger { background: #ff3b30; }
-
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); z-index: 1000; display: flex; align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; visibility: hidden; transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        .modal-overlay.show { opacity: 1; pointer-events: auto; visibility: visible; }
-        .modal-overlay.show .modal-card { transform: translateY(0); }
-        .modal-card { background: var(--bg-card); backdrop-filter: blur(30px); width: 100%; max-width: 500px; border-radius: 32px 32px 0 0; padding: 26px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
-        .modal-title-badge { font-size: 1.4rem; font-weight: 700; color: var(--ios-blue); }
-        .modal-close-btn { background: rgba(128,128,128,0.15); border: none; width: 32px; height: 32px; border-radius: 50%; font-weight: 700; color: var(--text-muted); }
-
-        /* ========================================================== */
-        /*  DOCK / BOTTOM NAVIGATION BAR (APPLE STYL PRO MOBIL I PC)  */
-        /* ========================================================== */
-        .dock-container { 
-            position: fixed; 
-            bottom: 0; 
-            left: 0; 
-            width: 100%; 
-            display: flex; 
-            justify-content: space-around; 
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            padding: 8px 0; 
-            padding-bottom: max(10px, env(safe-area-inset-bottom)); 
-            background: var(--dock-bg); 
-            backdrop-filter: blur(var(--glass-blur)); 
-            -webkit-backdrop-filter: blur(var(--glass-blur)); 
-            border-top: 1px solid var(--border); 
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.04); 
-            z-index: 100; 
-            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-        
-        .dock-btn { 
-            background: transparent; 
-            border: none; 
-            color: var(--text-muted); 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 3px; 
-            font-size: 0.65rem; 
-            font-weight: 600; 
-            text-decoration: none; 
-            width: 20%; 
-            position: relative;
-            transition: color 0.2s ease;
-        }
-        
-        .dock-btn svg { 
-            width: 24px; 
-            height: 24px; 
-            fill: currentColor; 
-            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        .dock-btn.active { color: var(--ios-blue); }
-
-        /* MAGICKÝ MACBOOK DOCK STYL NA PC (min-width: 768px) */
-        @media (min-width: 768px) {
-            .dock-container {
-                bottom: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: auto;
-                min-width: 380px;
-                padding: 10px 18px;
-                border-radius: 24px;
-                border: 1px solid var(--border);
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
-                gap: 12px;
-            }
-
-            .dock-btn {
-                width: auto;
-                padding: 6px 12px;
-                border-radius: 14px;
-            }
-
-            .dock-btn span {
-                display: none; /* Skryje text pod ikonou jako v macOS Docku */
-            }
-
-            .dock-btn svg {
-                width: 28px;
-                height: 28px;
-            }
-
-            /* Zoom efekt ikony po najetí myší */
-            .dock-btn:hover svg {
-                transform: scale(1.25) translateY(-4px);
-                color: var(--text-main);
-            }
-
-            /* macOS Tooltip bublina při hoveru */
-            .dock-btn::before {
-                content: attr(data-label);
-                position: absolute;
-                top: -46px;
-                left: 50%;
-                transform: translateX(-50%) translateY(4px);
-                background: rgba(0, 0, 0, 0.85);
-                color: #ffffff;
-                padding: 6px 12px;
-                border-radius: 8px;
-                font-size: 0.75rem;
-                font-weight: 600;
-                white-space: nowrap;
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.2s ease, transform 0.2s ease;
-                box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-            }
-
-            .dock-btn:hover::before {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-
-            /* Mac tečka pod aktivní ikonou */
-            .dock-btn.active::after {
-                content: '';
-                position: absolute;
-                bottom: -2px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 4px;
-                height: 4px;
-                border-radius: 50%;
-                background-color: var(--ios-blue);
-            }
+        .stat-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.4px; }
+        .stat-value { font-size: 2.3rem; font-weight: 800; letter-spacing: -1px; margin-top: 2px; }
+        .pred-pill {
+            padding: 10px 20px;
+            border-radius: 14px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #fff;
+            background: var(--text-muted);
         }
 
-        .widget-popover { 
-            position: absolute; 
-            bottom: 85px; 
-            left: 50%; 
-            transform: translateX(-50%) translateY(10px); 
-            width: 92%; 
-            max-width: 440px; 
-            background: var(--bg-card); 
-            backdrop-filter: blur(var(--glass-blur)); 
-            border-radius: 24px; 
-            box-shadow: var(--shadow-lg); 
-            padding: 20px; 
-            box-sizing: border-box; 
-            z-index: 90; 
-            opacity: 0; 
-            pointer-events: none; 
-            visibility: hidden; 
-            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1); 
-            border: 1px solid var(--border); 
+        .form-row { display: flex; gap: 10px; margin-bottom: 12px; }
+        .field { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+        .field label { font-size: 0.74rem; font-weight: 600; color: var(--text-muted); }
+        .input {
+            width: 100%;
+            padding: 11px 13px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--bg-subtle);
+            color: var(--text-main);
+            font-size: 0.88rem;
+            font-weight: 600;
+            outline: none;
         }
-        .widget-popover.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; visibility: visible; }
+        .input:focus { border-color: var(--accent); }
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            background: var(--text-main);
+            color: var(--bg-solid);
+            font-weight: 600;
+            font-size: 0.88rem;
+        }
 
-        .ios-toast {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
-            background: rgba(0, 0, 0, 0.85); color: white; padding: 12px 24px; border-radius: 24px;
-            font-size: 0.88rem; font-weight: 600; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25); z-index: 3000; opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            pointer-events: none; display: flex; align-items: center; gap: 8px;
+        .list-stack { display: flex; flex-direction: column; gap: 8px; }
+        .list-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 13px 16px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
         }
-        .ios-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .mark-dot {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .m1 { background: var(--m1); } .m2 { background: var(--m2); } .m3 { background: var(--m3); } .m4 { background: var(--m4); } .m5 { background: var(--m5); }
+
+        .bar-track { width: 100%; height: 6px; background: var(--bg-subtle); border-radius: 3px; overflow: hidden; margin-top: 10px; }
+        .bar-fill { height: 100%; border-radius: 3px; transition: width 0.25s ease; }
+
+        /* FLOATING DOCK */
+        .dock {
+            position: fixed;
+            bottom: max(14px, env(safe-area-inset-bottom));
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px;
+            background: var(--dock-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+            z-index: 100;
+        }
+        .dock-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 10px 16px;
+            border-radius: 16px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+        }
+        .dock-item svg { width: 19px; height: 19px; fill: currentColor; }
+        .dock-item.active {
+            background: var(--text-main);
+            color: var(--bg-solid);
+        }
+        @media (max-width: 520px) {
+            .dock-item span { display: none; }
+            .dock-item.active span { display: inline; }
+            .dock-item { padding: 10px 14px; }
+        }
+
+        /* MODAL */
+        .modal-bg {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+        .modal-bg.show { opacity: 1; pointer-events: auto; }
+        .modal-box {
+            background: var(--bg-solid);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 24px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: var(--shadow);
+            transform: scale(0.96);
+            transition: transform 0.2s ease;
+        }
+        .modal-bg.show .modal-box { transform: scale(1); }
+        .modal-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .modal-top h3 { font-size: 1.2rem; font-weight: 700; }
+        .close-x { width: 30px; height: 30px; border-radius: 50%; background: var(--bg-subtle); font-weight: 700; color: var(--text-muted); }
+        .detail-row { display: flex; justify-content: space-between; padding: 11px 14px; background: var(--bg-subtle); border-radius: 12px; font-size: 0.86rem; margin-bottom: 8px; }
     </style>
 </head>
 <body>
 
-<div id="toast" class="ios-toast"><span id="toastMsg">Odkaz zkopírován</span></div>
-
-<!-- AUTH OVERLAY -->
+<!-- AUTH -->
 <div id="authOverlay" class="auth-overlay">
     <div class="auth-card">
-        <div class="auth-badge">C1a</div>
-        <h2>Vstup pouze pro C1a</h2>
-        <p>Zadej přístupové heslo třídy pro zobrazení aplikace.</p>
-        <input type="password" id="authPin" class="auth-input" placeholder="••••" autocomplete="off">
-        <button class="auth-btn" id="authSubmitBtn">Vstoupit do aplikace</button>
-        <div id="authError" class="auth-error">Nesprávné heslo! Zkus to znovu.</div>
+        <div class="auth-logo">C1a</div>
+        <h2>Přístup pro třídu C1a</h2>
+        <p>Zadej heslo pro otevření rozvrhu.</p>
+        <input type="password" id="authPin" class="auth-input" placeholder="•••••••" autocomplete="off">
+        <button class="auth-btn" id="authSubmitBtn">Pokračovat</button>
+        <div id="authError" class="auth-error">Nesprávné heslo</div>
     </div>
 </div>
 
 <div id="appContent">
-    <div class="top-bar">
-        <div class="top-title">
-            <span class="bak-icon">B</span>
-            <div>
-                <h1 data-i18n="title">Rozvrh C1a</h1>
-                <p data-i18n="subtitle">SPŠE Ječná | Třída C1a</p>
+    <!-- HEADER -->
+    <header class="top-bar">
+        <div class="brand">
+            <div class="brand-mark">C1a</div>
+            <div class="brand-info">
+                <h1 data-i18n="title">Rozvrh hodin</h1>
+                <span>SPŠE Ječná</span>
             </div>
         </div>
-        <div class="top-actions">
-            <button class="icon-btn" id="notifBtn" title="Upozornění před vyučováním">
-                <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
-            </button>
-            <button class="icon-btn" id="shareBtn" title="Sdílet">
-                <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-            </button>
-            <button class="icon-btn lang-btn" id="langToggle">EN</button>
-            <button class="icon-btn" id="themeToggle" title="Přepnout vzhled"><svg id="themeIcon" viewBox="0 0 24 24" fill="currentColor"></svg></button>
-            <button class="icon-btn" id="logoutBtn" title="Odhlásit se"><svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg></button>
+        <div class="top-controls">
+            <button class="icon-btn" id="langToggle">EN</button>
+            <button class="icon-btn" id="themeToggle" title="Vzhled"><svg id="themeIcon" viewBox="0 0 24 24"></svg></button>
+            <button class="icon-btn" id="logoutBtn" title="Odhlásit"><svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg></button>
         </div>
-    </div>
+    </header>
 
     <!-- TAB 1: ROZVRH -->
-    <div id="tabRozvrh" class="tab-view active">
-        <div class="status-bar">
-            <div class="status-pill">
-                <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-                <span id="countdownText">Počítám...</span>
+    <section id="tabRozvrh" class="tab-view active">
+        <div class="control-strip">
+            <div class="segmented">
+                <button class="seg-btn" data-group="all" data-i18n="groupAll">Vše</button>
+                <button class="seg-btn" data-group="1" data-i18n="group1">1. skupina</button>
+                <button class="seg-btn" data-group="2" data-i18n="group2">2. skupina</button>
             </div>
-            <div class="group-filter">
-                <button class="filter-btn" data-group="all" data-i18n="groupAll">Vše</button>
-                <button class="filter-btn" data-group="1" data-i18n="group1">1. Skupina</button>
-                <button class="filter-btn" data-group="2" data-i18n="group2">2. Skupina</button>
-            </div>
-            <div class="status-pill"><span id="nameDayText">Svátek: Načítám...</span></div>
-        </div>
-
-        <div class="live-banner" id="liveBanner" style="display:none;">
-            <div class="live-banner-left">
-                <div class="live-dot"></div>
-                <div>
-                    <div class="live-title" data-i18n="liveTitle">Právě probíhá</div>
-                    <div class="live-detail" id="liveDetail">-</div>
-                </div>
+            <div class="status-chip">
+                <span class="pulse-dot idle" id="statusDot"></span>
+                <span id="statusText">Načítám...</span>
             </div>
         </div>
 
-        <div class="main-content">
+        <div class="schedule-wrap">
             <div class="schedule-card">
                 <table>
                     <thead>
                         <tr>
                             <th></th>
-                            <th>1.<small>7:30 - 8:15</small></th>
-                            <th>2.<small>8:25 - 9:10</small></th>
-                            <th>3.<small>9:20 - 10:05</small></th>
-                            <th>4.<small>10:20 - 11:05</small></th>
-                            <th>5.<small>11:15 - 12:00</small></th>
-                            <th>6.<small>12:10 - 12:55</small></th>
-                            <th>7.<small>13:05 - 13:50</small></th>
-                            <th>8.<small>14:00 - 14:45</small></th>
+                            <th>1.<small>7:30–8:15</small></th>
+                            <th>2.<small>8:25–9:10</small></th>
+                            <th>3.<small>9:20–10:05</small></th>
+                            <th>4.<small>10:20–11:05</small></th>
+                            <th>5.<small>11:15–12:00</small></th>
+                            <th>6.<small>12:10–12:55</small></th>
+                            <th>7.<small>13:05–13:50</small></th>
+                            <th>8.<small>14:00–14:45</small></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr id="day-1">
-                            <td class="day" data-i18n="mon">Po</td>
+                            <td class="day-cell" data-i18n="mon">Po</td>
                             <td class="type-math"><div class="hodina"><span class="ucebna">15</span><span class="predmet">F</span><span class="ucitel">Rk</span></div></td>
                             <td class="type-lang"><div class="hodina"><span class="ucebna">15</span><span class="predmet">ČJ</span><span class="ucitel">Su</span></div></td>
                             <td class="type-math"><div class="hodina"><span class="ucebna">15</span><span class="predmet">M</span><span class="ucitel">Ng</span></div></td>
@@ -523,14 +633,14 @@
                             <td class="type-lang">
                                 <div class="split">
                                     <div class="hodina gr-1"><span class="ucebna">15</span><span class="predmet">AJ</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
-                                    <div class="split-divider"></div>
+                                    <div class="split-line"></div>
                                     <div class="hodina gr-2"><span class="ucebna">5b</span><span class="predmet">AJ</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
                                 </div>
                             </td>
                             <td></td>
                         </tr>
                         <tr id="day-2">
-                            <td class="day" data-i18n="tue">Út</td>
+                            <td class="day-cell" data-i18n="tue">Út</td>
                             <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">HW</span><span class="ucitel">Ku</span></div></td>
                             <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">IT</span><span class="ucitel">Me</span></div></td>
                             <td class="type-sport"><div class="hodina"><span class="ucebna">TV</span><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
@@ -539,25 +649,25 @@
                             <td class="type-tech">
                                 <div class="split">
                                     <div class="hodina gr-2"><span class="ucebna">18a</span><span class="predmet">IT</span><span class="skupina">2/2</span><span class="ucitel">Ha</span></div>
-                                    <div class="split-divider"></div>
+                                    <div class="split-line"></div>
                                     <div class="hodina gr-1"><span class="ucebna">18b</span><span class="predmet">IT</span><span class="skupina">1/2</span><span class="ucitel">Me</span></div>
                                 </div>
                             </td>
                             <td class="type-tech">
                                 <div class="split">
                                     <div class="hodina gr-2"><span class="ucebna">18a</span><span class="predmet">IT</span><span class="skupina">2/2</span><span class="ucitel">Ha</span></div>
-                                    <div class="split-divider"></div>
+                                    <div class="split-line"></div>
                                     <div class="hodina gr-1"><span class="ucebna">18b</span><span class="predmet">IT</span><span class="skupina">1/2</span><span class="ucitel">Me</span></div>
                                 </div>
                             </td>
                             <td class="type-hum"><div class="hodina"><span class="ucebna">15</span><span class="predmet">ZSV</span><span class="ucitel">Ja</span></div></td>
                         </tr>
                         <tr id="day-3">
-                            <td class="day" data-i18n="wed">St</td>
+                            <td class="day-cell" data-i18n="wed">St</td>
                             <td>
                                 <div class="split">
                                     <div class="hodina type-lang gr-1"><span class="ucebna">5a</span><span class="predmet">AJ</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
-                                    <div class="split-divider"></div>
+                                    <div class="split-line"></div>
                                     <div class="hodina type-tech gr-2"><span class="ucebna">17a</span><span class="predmet">TD</span><span class="skupina">2/2</span><span class="ucitel">Pr</span></div>
                                 </div>
                             </td>
@@ -567,7 +677,7 @@
                             <td>
                                 <div class="split">
                                     <div class="hodina gr-1"></div>
-                                    <div class="split-divider"></div>
+                                    <div class="split-line"></div>
                                     <div class="hodina type-lang gr-2"><span class="ucebna">5a</span><span class="predmet">AJ</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
                                 </div>
                             </td>
@@ -576,11 +686,11 @@
                             <td></td>
                         </tr>
                         <tr id="day-4">
-                            <td class="day" data-i18n="thu">Čt</td>
+                            <td class="day-cell" data-i18n="thu">Čt</td>
                             <td>
                                 <div class="split">
                                     <div class="hodina type-tech gr-1"><span class="ucebna">19a</span><span class="predmet">TD</span><span class="skupina">1/2</span><span class="ucitel">Pr</span></div>
-                                    <div class="split-divider"></div>
+                                    <div class="split-line"></div>
                                     <div class="hodina gr-2"></div>
                                 </div>
                             </td>
@@ -590,7 +700,7 @@
                             <td class="type-lang">
                                 <div class="split">
                                     <div class="hodina gr-1"><span class="ucebna">5a</span><span class="predmet">AJ</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
-                                    <div class="split-divider"></div>
+                                    <div class="split-line"></div>
                                     <div class="hodina gr-2"><span class="ucebna">15</span><span class="predmet">AJ</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
                                 </div>
                             </td>
@@ -599,13 +709,13 @@
                             <td></td>
                         </tr>
                         <tr id="day-5">
-                            <td class="day" data-i18n="fri">Pá</td>
+                            <td class="day-cell" data-i18n="fri">Pá</td>
                             <td class="type-sport"><div class="hodina"><span class="ucebna">TV</span><span class="predmet">TV</span><span class="ucitel">Lc</span></div></td>
                             <td class="type-tech"><div class="hodina"><span class="ucebna">15</span><span class="predmet">EL</span><span class="ucitel">Jk</span></div></td>
                             <td class="type-lang">
                                 <div class="split">
                                     <div class="hodina gr-1"><span class="ucebna">5b</span><span class="predmet">AJ</span><span class="skupina">1/2</span><span class="ucitel">Bu</span></div>
-                                    <div class="split-divider"></div>
+                                    <div class="split-line"></div>
                                     <div class="hodina gr-2"><span class="ucebna">15</span><span class="predmet">AJ</span><span class="skupina">2/2</span><span class="ucitel">Ir</span></div>
                                 </div>
                             </td>
@@ -619,528 +729,412 @@
                 </table>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- TAB 2: PREDIKCE ZNÁMEK -->
-    <div id="tabZnamky" class="tab-view">
-        <div class="panel-container">
-            <div class="subject-selector" id="subjectSelector"></div>
-            <div class="panel-grid">
-                <div class="grade-summary-card">
+    <!-- TAB 2: ZNÁMKY -->
+    <section id="tabZnamky" class="tab-view">
+        <div class="panel-scroll">
+            <div class="chips-row" id="subjectSelector"></div>
+            <div class="grid-2">
+                <div class="card stat-row">
                     <div>
-                        <div class="avg-label" data-i18n="avgLabel">Vážený průměr</div>
-                        <div class="avg-val" id="currentAvg">1.00</div>
+                        <div class="stat-label" data-i18n="avgLabel">Vážený průměr</div>
+                        <div class="stat-value" id="currentAvg">-.--</div>
                     </div>
-                    <div>
-                        <div class="avg-label" style="text-align:right;" data-i18n="predictLabel">Předpověď</div>
-                        <div class="predicted-badge m1" id="predictedGrade">1</div>
+                    <div style="text-align:right;">
+                        <div class="stat-label" style="margin-bottom:6px;" data-i18n="predictLabel">Výsledná</div>
+                        <div class="pred-pill" id="predictedGrade">-</div>
                     </div>
                 </div>
-                <div class="card-box">
-                    <h3 style="margin:0; font-size:0.95rem; font-weight:700;" data-i18n="addGradeTitle">Simulovat / Přidat známku</h3>
-                    <div class="inputs-row">
-                        <div class="form-group">
+                <div class="card">
+                    <div class="card-title" data-i18n="addGradeTitle">Přidat známku</div>
+                    <div class="form-row">
+                        <div class="field">
                             <label data-i18n="markLabel">Známka</label>
-                            <select id="newMark" class="form-control">
-                                <option value="1">1 (Výborný)</option><option value="2">2 (Chvalitebný)</option>
-                                <option value="3">3 (Dobrý)</option><option value="4">4 (Dostatečný)</option><option value="5">5 (Nedostatečný)</option>
+                            <select id="newMark" class="input">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label data-i18n="weightLabel">Váha (1 - 10)</label>
-                            <input type="number" id="newWeight" class="form-control" value="10" min="1" max="10">
+                        <div class="field">
+                            <label data-i18n="weightLabel">Váha (1–10)</label>
+                            <input type="number" id="newWeight" class="input" value="10" min="1" max="10">
                         </div>
                     </div>
-                    <button class="btn-action" id="btnAddGrade" data-i18n="btnAddGradeBtn">+ Přidat známku</button>
+                    <button class="btn-primary" id="btnAddGrade" data-i18n="btnAddGradeBtn">Přidat</button>
                 </div>
-                <div class="items-list panel-grid-full" id="gradesList"></div>
+                <div class="list-stack span-2" id="gradesList"></div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- TAB 3: PLÁNOVAČ ÚKOLŮ A PÍSEMEK -->
-    <div id="tabUkoly" class="tab-view">
-        <div class="panel-container">
-            <div class="panel-grid">
-                <div class="card-box panel-grid-full">
-                    <h3 style="margin:0; font-size:0.95rem; font-weight:700;" data-i18n="addTaskTitle">Přidat test nebo úkol</h3>
-                    <div class="inputs-row">
-                        <div class="form-group">
-                            <label data-i18n="subjectLabel">Předmět</label>
-                            <select id="taskSubject" class="form-control">
-                                <option value="M">M (Matematika)</option>
-                                <option value="ČJ">ČJ (Český jazyk)</option>
-                                <option value="AJ">AJ (Angličtina)</option>
-                                <option value="F">F (Fyzika)</option>
-                                <option value="EL">EL (Elektrotechnika)</option>
-                                <option value="IT">IT (Informatika)</option>
-                                <option value="HW">HW (Hardware)</option>
-                                <option value="TD">TD (Tech. doku.)</option>
-                                <option value="D">D (Dějepis)</option>
-                                <option value="ZSV">ZSV (Základy společenských věd)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label data-i18n="typeLabel">Typ</label>
-                            <select id="taskType" class="form-control">
-                                <option value="test">Písemka / Test</option>
-                                <option value="ukol">Domácí úkol</option>
-                            </select>
-                        </div>
+    <!-- TAB 3: ÚKOLY -->
+    <section id="tabUkoly" class="tab-view">
+        <div class="panel-scroll">
+            <div class="card">
+                <div class="card-title" data-i18n="addTaskTitle">Nový test nebo úkol</div>
+                <div class="form-row">
+                    <div class="field">
+                        <label data-i18n="subjectLabel">Předmět</label>
+                        <select id="taskSubject" class="input">
+                            <option value="M">M</option><option value="ČJ">ČJ</option><option value="AJ">AJ</option>
+                            <option value="F">F</option><option value="EL">EL</option><option value="IT">IT</option>
+                            <option value="HW">HW</option><option value="TD">TD</option><option value="D">D</option><option value="ZSV">ZSV</option>
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label data-i18n="descLabel">Popis učiva</label>
-                        <input type="text" id="taskText" class="form-control" placeholder="Např. Kapitola 4 - Integrály">
+                    <div class="field">
+                        <label data-i18n="typeLabel">Typ</label>
+                        <select id="taskType" class="input">
+                            <option value="test">Test</option>
+                            <option value="ukol">Úkol</option>
+                        </select>
                     </div>
-                    <div class="form-group">
+                    <div class="field">
                         <label data-i18n="dateLabel">Termín</label>
-                        <input type="date" id="taskDate" class="form-control">
+                        <input type="date" id="taskDate" class="input">
                     </div>
-                    <button class="btn-action" id="btnAddTask" data-i18n="btnAddTaskBtn">+ Přidat do plánovače</button>
                 </div>
+                <div class="form-row">
+                    <div class="field">
+                        <input type="text" id="taskText" class="input" placeholder="Téma nebo zadání...">
+                    </div>
+                </div>
+                <button class="btn-primary" id="btnAddTask" data-i18n="btnAddTaskBtn">Uložit</button>
+            </div>
+            <div class="list-stack" id="tasksList"></div>
+        </div>
+    </section>
 
-                <div class="panel-grid-full">
-                    <div style="font-size:0.85rem; font-weight:700; color:var(--text-muted); margin-bottom:10px;" data-i18n="plannedHeader">Plánované události</div>
-                    <div class="items-list" id="tasksList"></div>
-                </div>
+    <!-- TAB 4: ABSENCE -->
+    <section id="tabAbsence" class="tab-view">
+        <div class="panel-scroll">
+            <div class="list-stack" id="absenceList"></div>
+        </div>
+    </section>
+
+    <!-- MODAL DETAILU -->
+    <div class="modal-bg" id="subjectModal">
+        <div class="modal-box">
+            <div class="modal-top">
+                <h3 id="modalSubjectFull">Předmět</h3>
+                <button class="close-x" id="modalCloseBtn">✕</button>
+            </div>
+            <div class="detail-row">
+                <span style="color:var(--text-muted);" data-i18n="modalTeacherLabel">Vyučující / Učebna</span>
+                <strong id="modalTeacherRoom">-</strong>
+            </div>
+            <div class="detail-row">
+                <span style="color:var(--text-muted);" data-i18n="modalAbsenceLabel">Absence</span>
+                <strong id="modalAbsenceVal">0 %</strong>
+            </div>
+            <div style="padding:12px 14px; background:var(--bg-subtle); border-radius:12px; font-size:0.85rem;">
+                <div style="color:var(--text-muted); margin-bottom:6px; font-weight:600;" data-i18n="modalTasksHeader">Plánované úkoly:</div>
+                <div id="modalTasksList">Žádné</div>
             </div>
         </div>
     </div>
 
-    <!-- TAB 4: HLÍDAČ ABSENCE -->
-    <div id="tabAbsence" class="tab-view">
-        <div class="panel-container">
-            <div style="font-size:0.85rem; font-weight:700; color:var(--text-muted);" data-i18n="absenceDesc">
-                Sledování absence u předmětů (Max doporučeno: 20 %)
-            </div>
-            <div class="items-list" id="absenceList"></div>
-        </div>
-    </div>
-
-    <!-- MODAL DETAILU PŘEDMĚTU -->
-    <div class="modal-overlay" id="subjectModal">
-        <div class="modal-card">
-            <div class="modal-header">
-                <div>
-                    <div style="font-size:0.72rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;" data-i18n="modalDetailTitle">Detail výuky</div>
-                    <div class="modal-title-badge" id="modalSubjectFull">Matematika</div>
-                </div>
-                <button class="modal-close-btn" id="modalCloseBtn">✕</button>
-            </div>
-            <div class="modal-info-grid" style="display:flex; flex-direction:column; gap:10px;">
-                <div style="display:flex; justify-content:space-between; padding:12px 14px; background:rgba(128,128,128,0.06); border-radius:14px;">
-                    <span style="font-size:0.85rem; font-weight:600; color:var(--text-muted);" data-i18n="modalTeacherLabel">Učitel / Učebna</span>
-                    <span style="font-size:0.95rem; font-weight:700;" id="modalTeacherRoom">-</span>
-                </div>
-                <div style="display:flex; justify-content:space-between; padding:12px 14px; background:rgba(128,128,128,0.06); border-radius:14px;">
-                    <span style="font-size:0.85rem; font-weight:600; color:var(--text-muted);" data-i18n="modalAbsenceLabel">Tvoje absence</span>
-                    <span style="font-size:0.95rem; font-weight:700;" id="modalAbsenceVal">0 %</span>
-                </div>
-                <div style="padding:14px; background:rgba(128,128,128,0.06); border-radius:14px;">
-                    <div style="font-size:0.85rem; font-weight:600; color:var(--text-muted); margin-bottom:6px;" data-i18n="modalTasksHeader">Nadcházející úkoly a testy:</div>
-                    <div id="modalTasksList" style="font-size:0.9rem; font-weight:600; color:var(--text-main);">Žádné plánované úkoly</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- APPLE NAVIGAČNÍ DOCK (MOBIL + PC) -->
-    <nav class="dock-container" id="bottomDock">
-        <button class="dock-btn active" id="btnNavRozvrh" data-label="Rozvrh">
+    <!-- DOCK -->
+    <nav class="dock">
+        <button class="dock-item active" data-tab="tabRozvrh">
             <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
             <span data-i18n="navSchedule">Rozvrh</span>
         </button>
-        <button class="dock-btn" id="btnNavZnamky" data-label="Predikce">
+        <button class="dock-item" data-tab="tabZnamky">
             <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-            <span data-i18n="navGrades">Predikce</span>
+            <span data-i18n="navGrades">Známky</span>
         </button>
-        <button class="dock-btn" id="btnNavUkoly" data-label="Úkoly">
-            <svg viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        <button class="dock-item" data-tab="tabUkoly">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
             <span data-i18n="navTasks">Úkoly</span>
         </button>
-        <button class="dock-btn" id="btnNavAbsence" data-label="Absence">
+        <button class="dock-item" data-tab="tabAbsence">
             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
             <span data-i18n="navAbsence">Absence</span>
         </button>
-        <button class="dock-btn" id="btnShowCalendar" data-label="Volna">
-            <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/></svg>
-            <span data-i18n="navHolidays">Volna</span>
-        </button>
     </nav>
-
-    <div class="widget-popover" id="calendarWidget">
-        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--border);">
-            <svg viewBox="0 0 24 24" style="width:18px; fill:var(--ios-blue);"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/></svg>
-            <h2 style="margin:0; font-size:0.95rem; font-weight:700;" data-i18n="holidaysTitle">Prázdniny a volna</h2>
-        </div>
-        <div style="display:flex; flex-direction:column; gap:6px; max-height:40vh; overflow-y:auto;">
-            <div style="display:flex; justify-content:space-between; padding:10px 12px; background:rgba(128,128,128,0.06); border-radius:12px;"><span data-i18n="autumnHolidays">Podzimní prázdniny</span><span style="font-weight:700; color:var(--ios-blue);">28. – 30. 10.</span></div>
-            <div style="display:flex; justify-content:space-between; padding:10px 12px; background:rgba(128,128,128,0.06); border-radius:12px;"><span data-i18n="xmasHolidays">Vánoční prázdniny</span><span style="font-weight:700; color:var(--ios-blue);">23. 12. – 3. 1.</span></div>
-            <div style="display:flex; justify-content:space-between; padding:10px 12px; background:rgba(128,128,128,0.06); border-radius:12px;"><span data-i18n="halfHolidays">Pololetní prázdniny</span><span style="font-weight:700; color:var(--ios-blue);">29. 1.</span></div>
-            <div style="display:flex; justify-content:space-between; padding:10px 12px; background:rgba(128,128,128,0.06); border-radius:12px;"><span data-i18n="springHolidays">Jarní prázdniny</span><span style="font-weight:700; color:var(--ios-blue);">22. – 28. 2.</span></div>
-        </div>
-    </div>
 </div>
 
 <script>
-const subjectNames = { 'F':'Fyzika', 'ČJ':'Český jazyk', 'M':'Matematika', 'D':'Dějepis', 'ZSV':'ZSV', 'EL':'Elektrotechnika', 'AJ':'Anglický jazyk', 'HW':'Hardware', 'IT':'Informatika', 'TV':'Tělesná výchova', 'TD':'Tech. dokumentace' };
+const subjectNames = {
+    'F': 'Fyzika', 'ČJ': 'Český jazyk', 'M': 'Matematika', 'D': 'Dějepis',
+    'ZSV': 'ZSV', 'EL': 'Elektrotechnika', 'AJ': 'Anglický jazyk',
+    'HW': 'Hardware', 'IT': 'Informatika', 'TV': 'Tělesná výchova', 'TD': 'Tech. dokumentace'
+};
 const subjects = ['M', 'ČJ', 'AJ', 'F', 'EL', 'IT', 'HW', 'TD', 'ZSV', 'D'];
 
-function showToast(msg) {
-    const toast = document.getElementById('toast');
-    document.getElementById('toastMsg').innerText = msg;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2600);
-}
-
+/* AUTH */
 const CLASS_PIN = "c1a2026";
 const authOverlay = document.getElementById('authOverlay');
-const authPinInput = document.getElementById('authPin');
-const authSubmitBtn = document.getElementById('authSubmitBtn');
+const authPin = document.getElementById('authPin');
 const appContent = document.getElementById('appContent');
 
 function checkAuth() {
-    if (localStorage.getItem('c1a_authenticated') === 'true') {
-        authOverlay.style.display = 'none'; appContent.style.display = 'flex';
+    const ok = localStorage.getItem('c1a_authenticated') === 'true';
+    authOverlay.style.display = ok ? 'none' : 'flex';
+    appContent.style.display = ok ? 'flex' : 'none';
+}
+function tryLogin() {
+    if (authPin.value.trim().toLowerCase() === CLASS_PIN) {
+        localStorage.setItem('c1a_authenticated', 'true');
+        document.getElementById('authError').style.display = 'none';
+        checkAuth();
     } else {
-        authOverlay.style.display = 'flex'; appContent.style.display = 'none';
+        document.getElementById('authError').style.display = 'block';
     }
 }
-authSubmitBtn.addEventListener('click', () => {
-    if (authPinInput.value.trim().toLowerCase() === CLASS_PIN) {
-        localStorage.setItem('c1a_authenticated', 'true'); checkAuth();
-    } else { document.getElementById('authError').style.display = 'block'; }
+document.getElementById('authSubmitBtn').addEventListener('click', tryLogin);
+authPin.addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+document.getElementById('logoutBtn').addEventListener('click', () => {
+    localStorage.removeItem('c1a_authenticated');
+    checkAuth();
 });
-document.getElementById('logoutBtn').addEventListener('click', () => { localStorage.removeItem('c1a_authenticated'); checkAuth(); });
 checkAuth();
 
+/* I18N */
 const translations = {
     cs: {
-        title: "Rozvrh C1a", subtitle: "SPŠE Ječná | Třída C1a",
-        groupAll: "Vše", group1: "1. Skupina", group2: "2. Skupina",
-        liveTitle: "Právě probíhá", mon: "Po", tue: "Út", wed: "St", thu: "Čt", fri: "Pá",
-        navSchedule: "Rozvrh", navGrades: "Predikce", navTasks: "Úkoly", navAbsence: "Absence", navHolidays: "Volna",
-        avgLabel: "Vážený průměr", predictLabel: "Předpověď", addGradeTitle: "Simulovat / Přidat známku",
-        markLabel: "Známka", weightLabel: "Váha (1 - 10)", btnAddGradeBtn: "+ Přidat známku",
-        addTaskTitle: "Přidat test nebo úkol", subjectLabel: "Předmět", typeLabel: "Typ", descLabel: "Popis učiva", dateLabel: "Termín", btnAddTaskBtn: "+ Přidat do plánovače",
-        plannedHeader: "Plánované události", absenceDesc: "Sledování absence u předmětů (Max doporučeno: 20 %)",
-        modalDetailTitle: "Detail výuky", modalTeacherLabel: "Učitel / Učebna", modalAbsenceLabel: "Tvoje absence", modalTasksHeader: "Nadcházející úkoly a testy:",
-        holidaysTitle: "Prázdniny a volna", autumnHolidays: "Podzimní prázdniny", xmasHolidays: "Vánoční prázdniny", halfHolidays: "Pololetní prázdniny", springHolidays: "Jarní prázdniny",
-        schoolStartsPrefix: "Škola za: ", inProgress: "Výuka probíhá", svatekPrefix: "Svátek: ",
-        notifOn: "Upozornění před hodinou zapnuta", notifOff: "Upozornění vypnuta", notifNotSupported: "Notifikace nejsou podporovány v tomto prohlížeči."
+        title: "Rozvrh hodin", groupAll: "Vše", group1: "1. skupina", group2: "2. skupina",
+        mon: "Po", tue: "Út", wed: "St", thu: "Čt", fri: "Pá",
+        navSchedule: "Rozvrh", navGrades: "Známky", navTasks: "Úkoly", navAbsence: "Absence",
+        avgLabel: "Vážený průměr", predictLabel: "Výsledná", addGradeTitle: "Přidat známku",
+        markLabel: "Známka", weightLabel: "Váha (1–10)", btnAddGradeBtn: "Přidat",
+        addTaskTitle: "Nový test nebo úkol", subjectLabel: "Předmět", typeLabel: "Typ", dateLabel: "Termín", btnAddTaskBtn: "Uložit",
+        modalTeacherLabel: "Vyučující / Učebna", modalAbsenceLabel: "Absence", modalTasksHeader: "Plánované úkoly:",
+        startsIn: "Začátek za", endsIn: "konec za", breakNext: "Přestávka · další:"
     },
     en: {
-        title: "Schedule C1a", subtitle: "SPŠE Ječná | Class C1a",
-        groupAll: "All", group1: "Group 1", group2: "Group 2",
-        liveTitle: "In Progress", mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri",
-        navSchedule: "Schedule", navGrades: "Grades", navTasks: "Tasks", navAbsence: "Attendance", navHolidays: "Holidays",
-        avgLabel: "Weighted Avg", predictLabel: "Prediction", addGradeTitle: "Simulate / Add Grade",
-        markLabel: "Grade", weightLabel: "Weight (1 - 10)", btnAddGradeBtn: "+ Add Grade",
-        addTaskTitle: "Add Test or Homework", subjectLabel: "Subject", typeLabel: "Type", descLabel: "Topic / Description", dateLabel: "Due Date", btnAddTaskBtn: "+ Add to Planner",
-        plannedHeader: "Planned Events", absenceDesc: "Subject Attendance Tracking (Max recommended: 20%)",
-        modalDetailTitle: "Lesson Details", modalTeacherLabel: "Teacher / Room", modalAbsenceLabel: "Your Attendance", modalTasksHeader: "Upcoming Tasks & Tests:",
-        holidaysTitle: "School Holidays", autumnHolidays: "Autumn Break", xmasHolidays: "Christmas Break", halfHolidays: "Midterm Break", springHolidays: "Spring Break",
-        schoolStartsPrefix: "School in: ", inProgress: "Lesson in progress", svatekPrefix: "Name day: ",
-        notifOn: "Pre-lesson notifications turned on", notifOff: "Notifications turned off", notifNotSupported: "Notifications are not supported in this browser."
+        title: "Timetable", groupAll: "All", group1: "Group 1", group2: "Group 2",
+        mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri",
+        navSchedule: "Schedule", navGrades: "Grades", navTasks: "Tasks", navAbsence: "Absence",
+        avgLabel: "Weighted Avg", predictLabel: "Final", addGradeTitle: "Add Grade",
+        markLabel: "Grade", weightLabel: "Weight (1–10)", btnAddGradeBtn: "Add",
+        addTaskTitle: "New Test or Task", subjectLabel: "Subject", typeLabel: "Type", dateLabel: "Date", btnAddTaskBtn: "Save",
+        modalTeacherLabel: "Teacher / Room", modalAbsenceLabel: "Absence", modalTasksHeader: "Upcoming tasks:",
+        startsIn: "Starts in", endsIn: "ends in", breakNext: "Break · next:"
     }
 };
 
 let currentLang = localStorage.getItem('c1a_lang') || 'cs';
 const langToggle = document.getElementById('langToggle');
-
-function updateLanguageUI() {
+function applyLang() {
     langToggle.innerText = currentLang === 'cs' ? 'EN' : 'CS';
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (translations[currentLang][key]) {
-            el.innerText = translations[currentLang][key];
-        }
+        if (translations[currentLang][key]) el.innerText = translations[currentLang][key];
     });
 }
-
 langToggle.addEventListener('click', () => {
     currentLang = currentLang === 'cs' ? 'en' : 'cs';
     localStorage.setItem('c1a_lang', currentLang);
-    updateLanguageUI();
-    showToast(currentLang === 'cs' ? 'Aplikace v češtině' : 'App switched to English');
+    applyLang();
+    updateClock();
 });
-updateLanguageUI();
+applyLang();
 
-document.getElementById('shareBtn').addEventListener('click', async () => {
-    if (navigator.share) {
-        try {
-            await navigator.share({
-                title: 'Bakaláři C1a',
-                text: 'Rozvrh a známky třídy C1a',
-                url: window.location.href
-            });
-        } catch (e) {}
-    } else {
-        try {
-            await navigator.clipboard.writeText(window.location.href);
-            showToast('Odkaz zkopírován do schránky!');
-        } catch (e) {
-            showToast('Nelze zkopírovat odkaz.');
-        }
-    }
-});
-
-const themeToggle = document.getElementById('themeToggle');
+/* THEME */
 const themeIcon = document.getElementById('themeIcon');
-const sunPath = '<path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06z"/>';
-const moonPath = '<path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4C12.92 3.04 12.46 3 12 3zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7c.18 0 .35.02.53.04C11.16 6.32 10 8.52 10 11c0 3.86 3.14 7 7 7 2.48 0 4.68-1.16 5.96-2.53.02.18.04.35.04.53 0 3.86-3.14 7-7 7z"/>';
+const sunSvg = '<path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06z"/>';
+const moonSvg = '<path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4C12.92 3.04 12.46 3 12 3z"/>';
 
-function updateThemeIcon() {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    themeIcon.innerHTML = isDark ? sunPath : moonPath;
+let theme = localStorage.getItem('c1a_theme') || 'light';
+function applyTheme() {
+    document.documentElement.setAttribute('data-theme', theme);
+    themeIcon.innerHTML = theme === 'dark' ? sunSvg : moonSvg;
 }
-let savedTheme = localStorage.getItem('c1a_theme') || 'light';
-document.documentElement.setAttribute('data-theme', savedTheme);
-updateThemeIcon();
-
-themeToggle.addEventListener('click', () => {
-    savedTheme = savedTheme === 'light' ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    localStorage.setItem('c1a_theme', savedTheme);
-    updateThemeIcon();
+document.getElementById('themeToggle').addEventListener('click', () => {
+    theme = theme === 'light' ? 'dark' : 'light';
+    localStorage.setItem('c1a_theme', theme);
+    applyTheme();
 });
+applyTheme();
 
-const tabs = {
-    btnNavRozvrh: document.getElementById('tabRozvrh'),
-    btnNavZnamky: document.getElementById('tabZnamky'),
-    btnNavUkoly: document.getElementById('tabUkoly'),
-    btnNavAbsence: document.getElementById('tabAbsence')
-};
-
-Object.keys(tabs).forEach(btnId => {
-    document.getElementById(btnId).addEventListener('click', () => {
-        Object.keys(tabs).forEach(b => {
-            document.getElementById(b).classList.remove('active');
-            tabs[b].classList.remove('active');
-        });
-        document.getElementById(btnId).classList.add('active');
-        tabs[btnId].classList.add('active');
+/* NAVIGATION */
+document.querySelectorAll('.dock-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.dock-item').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-view').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.getAttribute('data-tab')).classList.add('active');
     });
 });
 
-const btnShowCalendar = document.getElementById('btnShowCalendar');
-const calendarWidget = document.getElementById('calendarWidget');
-btnShowCalendar.addEventListener('click', (e) => {
-    e.stopPropagation();
-    calendarWidget.classList.toggle('show');
-    btnShowCalendar.classList.toggle('active');
-});
-document.addEventListener('click', (e) => {
-    if(!calendarWidget.contains(e.target) && !btnShowCalendar.contains(e.target)) {
-        calendarWidget.classList.remove('show');
-        btnShowCalendar.classList.remove('active');
-    }
-});
-
+/* GROUP FILTER */
 let savedGroup = localStorage.getItem('c1a_saved_group') || 'all';
-function applyGroupFilter(group) {
+function applyGroup(group) {
     savedGroup = group;
     localStorage.setItem('c1a_saved_group', group);
-    document.querySelectorAll('.filter-btn').forEach(b => {
-        b.classList.toggle('active', b.getAttribute('data-group') === group);
-    });
+    document.querySelectorAll('.seg-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-group') === group));
     document.querySelectorAll('.gr-1, .gr-2').forEach(el => {
         if (group === 'all') el.classList.remove('hide-group');
-        else if (group === '1') { if (el.classList.contains('gr-2')) el.classList.add('hide-group'); else el.classList.remove('hide-group'); }
-        else if (group === '2') { if (el.classList.contains('gr-1')) el.classList.add('hide-group'); else el.classList.remove('hide-group'); }
+        else if (group === '1') el.classList.toggle('hide-group', el.classList.contains('gr-2'));
+        else if (group === '2') el.classList.toggle('hide-group', el.classList.contains('gr-1'));
     });
 }
-document.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => applyGroupFilter(b.getAttribute('data-group'))));
-applyGroupFilter(savedGroup);
+document.querySelectorAll('.seg-btn').forEach(b => b.addEventListener('click', () => applyGroup(b.getAttribute('data-group'))));
+applyGroup(savedGroup);
 
-let notifEnabled = localStorage.getItem('c1a_notif') === 'true';
-const notifBtn = document.getElementById('notifBtn');
-
-function updateNotifBtn() { notifBtn.classList.toggle('active', notifEnabled); }
-notifBtn.addEventListener('click', () => {
-    if (!("Notification" in window)) {
-        showToast(translations[currentLang].notifNotSupported);
-        return;
-    }
-    if (Notification.permission === "granted") {
-        notifEnabled = !notifEnabled;
-        localStorage.setItem('c1a_notif', notifEnabled);
-        updateNotifBtn();
-        showToast(notifEnabled ? translations[currentLang].notifOn : translations[currentLang].notifOff);
-    } else {
-        Notification.requestPermission().then(perm => {
-            if (perm === "granted") {
-                notifEnabled = true;
-                localStorage.setItem('c1a_notif', true);
-                updateNotifBtn();
-                showToast(translations[currentLang].notifOn);
-            } else {
-                showToast('Notifikace byly zamítnuty.');
-            }
-        });
-    }
-});
-updateNotifBtn();
-
+/* GRADES */
 let activeSubject = 'M';
 let gradesData = JSON.parse(localStorage.getItem('c1a_grades_data')) || {};
 
-function saveGrades() { localStorage.setItem('c1a_grades_data', JSON.stringify(gradesData)); }
-
 function renderSubjectChips() {
-    const container = document.getElementById('subjectSelector');
-    container.innerHTML = '';
+    const box = document.getElementById('subjectSelector');
+    box.innerHTML = '';
     subjects.forEach(sub => {
-        const chip = document.createElement('div');
-        chip.className = `subject-chip ${sub === activeSubject ? 'active' : ''}`;
-        chip.innerText = sub;
-        chip.addEventListener('click', () => {
-            activeSubject = sub;
-            renderSubjectChips();
-            renderGrades();
-        });
-        container.appendChild(chip);
+        const btn = document.createElement('button');
+        btn.className = `chip ${sub === activeSubject ? 'active' : ''}`;
+        btn.innerText = sub;
+        btn.onclick = () => { activeSubject = sub; renderSubjectChips(); renderGrades(); };
+        box.appendChild(btn);
     });
 }
 
 function renderGrades() {
     const list = document.getElementById('gradesList');
     list.innerHTML = '';
-    const currentList = gradesData[activeSubject] || [];
-    let totalWeight = 0;
-    let totalScore = 0;
+    const arr = gradesData[activeSubject] || [];
+    let wSum = 0, sSum = 0;
 
-    currentList.forEach((g, idx) => {
-        totalWeight += Number(g.weight);
-        totalScore += Number(g.mark) * Number(g.weight);
-
-        const item = document.createElement('div');
-        item.className = 'list-item';
-        item.innerHTML = `
+    arr.forEach((g, idx) => {
+        wSum += Number(g.weight);
+        sSum += Number(g.mark) * Number(g.weight);
+        const row = document.createElement('div');
+        row.className = 'list-row';
+        row.innerHTML = `
             <div style="display:flex; align-items:center; gap:12px;">
-                <div class="grade-badge m${g.mark}">${g.mark}</div>
+                <div class="mark-dot m${g.mark}">${g.mark}</div>
                 <div>
-                    <span style="font-weight:700; font-size:0.9rem;">Známka</span>
-                    <span style="font-size:0.75rem; color:var(--text-muted); display:block;">Váha: ${g.weight}</span>
+                    <strong style="font-size:0.9rem;">${subjectNames[activeSubject]}</strong>
+                    <span style="display:block; font-size:0.75rem; color:var(--text-muted);">Váha ${g.weight}</span>
                 </div>
             </div>
-            <button onclick="deleteGrade(${idx})" style="background:transparent; border:none; color:#ff3b30; font-weight:700;">✕</button>
+            <button onclick="deleteGrade(${idx})" style="color:#ff3b30; font-weight:700; padding:6px;">✕</button>
         `;
-        list.appendChild(item);
+        list.appendChild(row);
     });
 
-    const currentAvgEl = document.getElementById('currentAvg');
-    const predictedBadge = document.getElementById('predictedGrade');
-
-    if (totalWeight > 0) {
-        const avg = (totalScore / totalWeight).toFixed(2);
-        currentAvgEl.innerText = avg;
-        const rounded = Math.round(avg);
-        predictedBadge.innerText = rounded;
-        predictedBadge.className = `predicted-badge m${Math.min(5, Math.max(1, rounded))}`;
+    const avgEl = document.getElementById('currentAvg');
+    const predEl = document.getElementById('predictedGrade');
+    if (wSum > 0) {
+        const avg = (sSum / wSum).toFixed(2);
+        const rounded = Math.min(5, Math.max(1, Math.round(avg)));
+        avgEl.innerText = avg;
+        predEl.innerText = rounded;
+        predEl.className = `pred-pill m${rounded}`;
     } else {
-        currentAvgEl.innerText = "-.--";
-        predictedBadge.innerText = "-";
-        predictedBadge.className = "predicted-badge";
+        avgEl.innerText = '-.--';
+        predEl.innerText = '-';
+        predEl.className = 'pred-pill';
     }
 }
 
 document.getElementById('btnAddGrade').addEventListener('click', () => {
     const mark = Number(document.getElementById('newMark').value);
-    const weight = Number(document.getElementById('newWeight').value) || 1;
+    const weight = Math.min(10, Math.max(1, Number(document.getElementById('newWeight').value) || 1));
     if (!gradesData[activeSubject]) gradesData[activeSubject] = [];
     gradesData[activeSubject].push({ mark, weight });
-    saveGrades();
+    localStorage.setItem('c1a_grades_data', JSON.stringify(gradesData));
     renderGrades();
 });
 
-window.deleteGrade = function(idx) {
-    if (gradesData[activeSubject]) {
-        gradesData[activeSubject].splice(idx, 1);
-        saveGrades();
-        renderGrades();
-    }
+window.deleteGrade = idx => {
+    gradesData[activeSubject].splice(idx, 1);
+    localStorage.setItem('c1a_grades_data', JSON.stringify(gradesData));
+    renderGrades();
 };
-
 renderSubjectChips();
 renderGrades();
 
+/* TASKS */
 let tasksData = JSON.parse(localStorage.getItem('c1a_tasks_data')) || [];
 function renderTasks() {
     const list = document.getElementById('tasksList');
     list.innerHTML = '';
     tasksData.forEach((t, i) => {
-        const item = document.createElement('div');
-        item.className = `list-item ${t.type === 'test' ? 'test-item' : 'task-item'}`;
-        item.innerHTML = `
+        const row = document.createElement('div');
+        row.className = 'list-row';
+        row.innerHTML = `
             <div>
-                <div style="font-weight:700; font-size:0.9rem;">[${t.subject}] ${t.text}</div>
-                <div style="font-size:0.75rem; color:var(--text-muted);">Termín: ${t.date || 'Neurčen'} | ${t.type === 'test' ? 'TEST' : 'ÚKOL'}</div>
+                <div style="font-weight:700; font-size:0.9rem;">
+                    <span style="color:${t.type === 'test' ? '#ff9500' : 'var(--accent)'};">[${t.subject}]</span> ${t.text}
+                </div>
+                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">
+                    ${t.type === 'test' ? 'Test' : 'Úkol'} · ${t.date || 'Bez termínu'}
+                </div>
             </div>
-            <button onclick="deleteTask(${i})" style="background:transparent; border:none; color:#ff3b30; font-weight:700;">✕</button>
+            <button onclick="deleteTask(${i})" style="color:#ff3b30; font-weight:700; padding:6px;">✕</button>
         `;
-        list.appendChild(item);
+        list.appendChild(row);
     });
     localStorage.setItem('c1a_tasks_data', JSON.stringify(tasksData));
 }
 
 document.getElementById('btnAddTask').addEventListener('click', () => {
-    const sub = document.getElementById('taskSubject').value;
-    const type = document.getElementById('taskType').value;
     const text = document.getElementById('taskText').value.trim();
-    const date = document.getElementById('taskDate').value;
     if (!text) return;
-    tasksData.push({ id: Date.now(), subject: sub, type, text, date });
+    tasksData.push({
+        subject: document.getElementById('taskSubject').value,
+        type: document.getElementById('taskType').value,
+        date: document.getElementById('taskDate').value,
+        text
+    });
     document.getElementById('taskText').value = '';
     renderTasks();
 });
-window.deleteTask = function(i) { tasksData.splice(i, 1); renderTasks(); };
+window.deleteTask = i => { tasksData.splice(i, 1); renderTasks(); };
 renderTasks();
 
+/* ABSENCE */
 let absenceData = JSON.parse(localStorage.getItem('c1a_absence_data')) || {
     'M': { missed: 0, total: 32 }, 'ČJ': { missed: 0, total: 24 }, 'AJ': { missed: 0, total: 20 },
     'F': { missed: 0, total: 16 }, 'EL': { missed: 0, total: 16 }, 'IT': { missed: 0, total: 24 },
-    'D': { missed: 0, total: 16 }, 'ZSV': { missed: 0, total: 16 }
+    'HW': { missed: 0, total: 16 }, 'TD': { missed: 0, total: 24 }, 'D': { missed: 0, total: 16 }, 'ZSV': { missed: 0, total: 16 }
 };
 
 function renderAbsence() {
     const list = document.getElementById('absenceList');
     list.innerHTML = '';
     subjects.forEach(sub => {
-        const data = absenceData[sub] || { missed: 0, total: 20 };
-        const percent = Math.round((data.missed / (data.total || 1)) * 100);
-        let colorClass = percent >= 20 ? 'danger' : (percent >= 15 ? 'warn' : 'ok');
+        const d = absenceData[sub] || { missed: 0, total: 20 };
+        const pct = Math.round((d.missed / (d.total || 1)) * 100);
+        const color = pct >= 20 ? '#ff3b30' : (pct >= 15 ? '#ff9500' : '#34c759');
 
         const card = document.createElement('div');
-        card.className = 'absence-card';
+        card.className = 'card';
+        card.style.padding = '16px 18px';
         card.innerHTML = `
-            <div class="absence-header">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
                 <div>
-                    <span style="font-weight:700; font-size:0.95rem;">${sub} - ${subjectNames[sub] || sub}</span>
-                    <span style="font-size:0.75rem; color:var(--text-muted); display:block;">Zameškáno: ${data.missed} h z ${data.total} h</span>
+                    <strong style="font-size:0.92rem;">${sub} · ${subjectNames[sub]}</strong>
+                    <span style="display:block; font-size:0.75rem; color:var(--text-muted);">${d.missed} / ${d.total} h</span>
                 </div>
                 <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-weight:700; font-size:1.05rem; color:${percent >= 20 ? '#ff3b30' : 'var(--ios-blue)'};">${percent} %</span>
-                    <button onclick="changeAbsence('${sub}', 1)" style="padding:4px 8px; border-radius:8px; border:1px solid var(--border); font-weight:700;">+</button>
-                    <button onclick="changeAbsence('${sub}', -1)" style="padding:4px 8px; border-radius:8px; border:1px solid var(--border); font-weight:700;">-</button>
+                    <strong style="font-size:0.95rem; color:${color}; margin-right:4px;">${pct} %</strong>
+                    <button onclick="modAbs('${sub}', -1)" style="width:28px; height:28px; border-radius:8px; background:var(--bg-subtle); font-weight:700;">−</button>
+                    <button onclick="modAbs('${sub}', 1)" style="width:28px; height:28px; border-radius:8px; background:var(--bg-subtle); font-weight:700;">+</button>
                 </div>
             </div>
-            <div class="absence-bar-bg"><div class="absence-bar-fill ${colorClass}" style="width: ${Math.min(percent, 100)}%;"></div></div>
+            <div class="bar-track"><div class="bar-fill" style="width:${Math.min(100, pct)}%; background:${color};"></div></div>
         `;
         list.appendChild(card);
     });
     localStorage.setItem('c1a_absence_data', JSON.stringify(absenceData));
 }
-
-window.changeAbsence = function(sub, val) {
+window.modAbs = (sub, delta) => {
     if (!absenceData[sub]) absenceData[sub] = { missed: 0, total: 20 };
-    absenceData[sub].missed = Math.max(0, absenceData[sub].missed + val);
+    absenceData[sub].missed = Math.max(0, absenceData[sub].missed + delta);
     renderAbsence();
 };
 renderAbsence();
 
-const subjectModal = document.getElementById('subjectModal');
-document.getElementById('modalCloseBtn').addEventListener('click', () => subjectModal.classList.remove('show'));
+/* LESSON MODAL */
+const modal = document.getElementById('subjectModal');
+document.getElementById('modalCloseBtn').onclick = () => modal.classList.remove('show');
+modal.onclick = e => { if (e.target === modal) modal.classList.remove('show'); };
 
 document.querySelectorAll('.hodina').forEach(cell => {
     cell.addEventListener('click', () => {
@@ -1148,104 +1142,92 @@ document.querySelectorAll('.hodina').forEach(cell => {
         if (!code) return;
         const teacher = cell.querySelector('.ucitel')?.innerText || '-';
         const room = cell.querySelector('.ucebna')?.innerText || '-';
-        
-        document.getElementById('modalSubjectFull').innerText = subjectNames[code] || code;
-        document.getElementById('modalTeacherRoom').innerText = `${teacher} | Učebna ${room}`;
-        
         const abs = absenceData[code] || { missed: 0, total: 20 };
+
+        document.getElementById('modalSubjectFull').innerText = subjectNames[code] || code;
+        document.getElementById('modalTeacherRoom').innerText = `${teacher} · ${room}`;
         document.getElementById('modalAbsenceVal').innerText = `${Math.round((abs.missed / (abs.total || 1)) * 100)} % (${abs.missed} h)`;
-        
+
         const subTasks = tasksData.filter(t => t.subject === code);
-        const tasksListEl = document.getElementById('modalTasksList');
-        if (subTasks.length > 0) {
-            tasksListEl.innerHTML = subTasks.map(t => `• ${t.text} (${t.date || 'bez data'})`).join('<br>');
-        } else {
-            tasksListEl.innerText = 'Žádné nadcházející úkoly';
-        }
-        subjectModal.classList.add('show');
+        document.getElementById('modalTasksList').innerHTML = subTasks.length
+            ? subTasks.map(t => `• ${t.text} (${t.date || 'bez data'})`).join('<br>')
+            : 'Žádné';
+        modal.classList.add('show');
     });
 });
 
-function loadNameDay() {
-    fetch('https://svatkyapi.cz/api/day')
-        .then(res => res.json())
-        .then(data => { 
-            const prefix = translations[currentLang].svatekPrefix;
-            document.getElementById('nameDayText').innerText = `${prefix}${data.name}`; 
-        })
-        .catch(() => { 
-            const prefix = translations[currentLang].svatekPrefix;
-            document.getElementById('nameDayText').innerText = `${prefix}-`; 
+/* LIVE CLOCK & LESSON HIGHLIGHT */
+const times = [
+    { start: "07:30", end: "08:15" }, { start: "08:25", end: "09:10" },
+    { start: "09:20", end: "10:05" }, { start: "10:20", end: "11:05" },
+    { start: "11:15", end: "12:00" }, { start: "12:10", end: "12:55" },
+    { start: "13:05", end: "13:50" }, { start: "14:00", end: "14:45" }
+];
+
+function updateClock() {
+    const now = new Date();
+    const mins = now.getHours() * 60 + now.getMinutes();
+    const day = now.getDay();
+    const statusText = document.getElementById('statusText');
+    const statusDot = document.getElementById('statusDot');
+    const t = translations[currentLang];
+
+    document.querySelectorAll('.current-lesson, .past-lesson, .next-lesson')
+        .forEach(el => el.classList.remove('current-lesson', 'past-lesson', 'next-lesson'));
+
+    if (day >= 1 && day <= 5 && mins >= 450 && mins <= 885) {
+        const tr = document.getElementById(`day-${day}`);
+        const tds = tr.querySelectorAll('td:not(.day-cell)');
+        let activeFound = false;
+        let nextFound = false;
+
+        times.forEach((slot, idx) => {
+            const cell = tds[idx];
+            if (!cell || !cell.textContent.trim()) return;
+            const [sh, sm] = slot.start.split(':').map(Number);
+            const [eh, em] = slot.end.split(':').map(Number);
+            const sM = sh * 60 + sm, eM = eh * 60 + em;
+
+            if (mins >= sM && mins <= eM) {
+                cell.classList.add('current-lesson');
+                const subj = cell.querySelector('.predmet')?.innerText || '';
+                const room = cell.querySelector('.ucebna')?.innerText || '';
+                statusDot.classList.remove('idle');
+                statusText.innerText = `${subj} (${room}) · ${t.endsIn} ${eM - mins} min`;
+                activeFound = true;
+            } else if (mins > eM) {
+                cell.classList.add('past-lesson');
+            } else if (mins < sM && !nextFound) {
+                cell.classList.add('next-lesson');
+                nextFound = true;
+                if (!activeFound) {
+                    const subj = cell.querySelector('.predmet')?.innerText || '';
+                    statusDot.classList.add('idle');
+                    statusText.innerText = `${t.breakNext} ${subj} (${sM - mins} min)`;
+                }
+            }
         });
-}
-loadNameDay();
-
-const times = [{ start: "07:30", end: "08:15" }, { start: "08:25", end: "09:10" }, { start: "09:20", end: "10:05" }, { start: "10:20", end: "11:05" }, { start: "11:15", end: "12:00" }, { start: "12:10", end: "12:55" }, { start: "13:05", end: "13:50" }, { start: "14:00", end: "14:45" }];
-
-function forceTimerUpdate() {
-    try {
-        const now = new Date();
-        const currentMins = now.getHours() * 60 + now.getMinutes();
-        const day = now.getDay();
-        const el = document.getElementById('countdownText');
-        const liveBanner = document.getElementById('liveBanner');
-
-        let target = new Date(now); target.setHours(7, 30, 0, 0);
-        if (day >= 1 && day <= 5 && currentMins >= 450 && currentMins <= 885) {
-            el.innerText = translations[currentLang].inProgress;
-        } else {
-            if (day === 6) target.setDate(target.getDate() + 2);
-            else if (day === 0) target.setDate(target.getDate() + 1);
-            else if (currentMins > 885) target.setDate(target.getDate() + (day === 5 ? 3 : 1));
-
-            const diff = target - now;
-            const h = Math.floor(diff / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            el.innerText = `${translations[currentLang].schoolStartsPrefix}${h}h ${m}m`;
-            if (liveBanner) liveBanner.style.display = 'none';
+        if (!activeFound && !nextFound) {
+            statusDot.classList.add('idle');
+            statusText.innerText = "Volno";
         }
+    } else {
+        let target = new Date(now);
+        target.setHours(7, 30, 0, 0);
+        if (day === 6) target.setDate(target.getDate() + 2);
+        else if (day === 0) target.setDate(target.getDate() + 1);
+        else if (mins > 885) target.setDate(target.getDate() + (day === 5 ? 3 : 1));
 
-        let tr = (day >= 1 && day <= 5) ? document.getElementById(`day-${day}`) : null;
-        document.querySelectorAll('.current-lesson, .past-lesson, .next-lesson').forEach(cell => cell.classList.remove('current-lesson', 'past-lesson', 'next-lesson'));
-
-        if (tr) {
-            const tds = tr.querySelectorAll('td:not(.day)');
-            let foundNext = false;
-            times.forEach((t, index) => {
-                if (index >= tds.length) return;
-                const cell = tds[index];
-                if (!cell.textContent.trim()) return;
-                const [sh, sm] = t.start.split(':').map(Number);
-                const [eh, em] = t.end.split(':').map(Number);
-                const startMins = sh * 60 + sm;
-                const endMins = eh * 60 + em;
-                
-                if (currentMins >= startMins && currentMins <= endMins) {
-                    cell.classList.add('current-lesson');
-                    if (liveBanner) {
-                        document.getElementById('liveDetail').innerText = `${cell.querySelector('.predmet')?.innerText || ""} (učebna ${cell.querySelector('.ucebna')?.innerText || ""})`;
-                        liveBanner.style.display = 'flex';
-                    }
-                } else if (currentMins > endMins) {
-                    cell.classList.add('past-lesson');
-                } else if (currentMins < startMins && !foundNext) {
-                    cell.classList.add('next-lesson');
-                    foundNext = true;
-                }
-
-                if (notifEnabled && currentMins === startMins - 5 && now.getSeconds() === 0) {
-                    const subj = cell.querySelector('.predmet')?.innerText || "";
-                    const room = cell.querySelector('.ucebna')?.innerText || "";
-                    new Notification("Začíná hodina!", { body: `Za 5 minut začíná ${subjectNames[subj] || subj} v učebně ${room}.` });
-                }
-            });
-        }
-    } catch (e) {}
+        const diff = target - now;
+        const h = Math.floor(diff / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        statusDot.classList.add('idle');
+        statusText.innerText = `${t.startsIn} ${h}h ${m}m`;
+    }
 }
 
-setInterval(forceTimerUpdate, 1000);
-forceTimerUpdate();
+setInterval(updateClock, 1000);
+updateClock();
 </script>
-
 </body>
 </html>
